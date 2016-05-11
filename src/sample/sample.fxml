@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+
+<BorderPane prefHeight="399.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <items>
+                <Button mnemonicParsing="false" text="Compare" />
+                <Button mnemonicParsing="false" text="Copy to Right" />
+                <Button mnemonicParsing="false" text="Copy to Left" textAlignment="CENTER" />
+            </items>
+        </ToolBar>
+    </top>
+    <center>
+        <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab text="FileName">
+                    <content>
+                        <SplitPane dividerPositions="0.5" prefHeight="299.0" prefWidth="605.0">
+                            <items>
+                                <TitledPane animated="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LeftFile">
+                                    <content>
+                                        <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                                            <top>
+                                                <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+                                                    <items>
+                                                        <Button mnemonicParsing="false" text="Load" />
+                                                        <Button mnemonicParsing="false" text="Edit" />
+                                                        <Button mnemonicParsing="false" text="Save" />
+                                                    </items>
+                                                </ToolBar>
+                                            </top>
+                                            <right>
+                                                <ScrollBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" BorderPane.alignment="CENTER" />
+                                            </right>
+                                            <bottom>
+                                                <ScrollBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER" />
+                                            </bottom>
+                                            <center>
+                                                <TextArea prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                                            </center>
+                                        </BorderPane>
+                                    </content>
+                                </TitledPane>
+                                <TitledPane animated="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="RigthFile">
+                                    <content>
+                                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                                            <top>
+                                                <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+                                                    <items>
+                                                        <Button mnemonicParsing="false" text="Load" />
+                                                        <Button mnemonicParsing="false" text="Edit" />
+                                                        <Button mnemonicParsing="false" text="Save" />
+                                                    </items>
+                                                </ToolBar>
+                                            </top>
+                                            <right>
+                                                <ScrollBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" BorderPane.alignment="CENTER" />
+                                            </right>
+                                            <bottom>
+                                                <ScrollBar BorderPane.alignment="CENTER" />
+                                            </bottom>
+                                            <center>
+                                                <TextArea prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                                            </center>
+                                        </BorderPane>
+                                    </content>
+                                </TitledPane>
+                            </items>
+                        </SplitPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>
