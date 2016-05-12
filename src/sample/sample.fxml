@@ -14,9 +14,9 @@
     <top>
         <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <items>
-                <Button id="compare_button" mnemonicParsing="false" text="Compare" />
-                <Button id="copy_to_right" mnemonicParsing="false" text="Copy to Right" />
-                <Button id="copy_to_left" mnemonicParsing="false" text="Copy to Left" textAlignment="CENTER" />
+                <Button id="compare_button" fx:id="compare_button" mnemonicParsing="false" onAction="#clickCompareButton" text="Compare" />
+                <Button id="copy_to_right" fx:id="copy_to_right_button" mnemonicParsing="false" onAction="#clickCopyToRightButton" text="Copy to Right" />
+                <Button id="copy_to_left" fx:id="copy_to_left_button" mnemonicParsing="false" onAction="#clickCopyToLeftButton" text="Copy to Left" textAlignment="CENTER" />
             </items>
         </ToolBar>
     </top>
@@ -45,7 +45,7 @@
                                         </BorderPane>
                            </center>
                            <top>
-                              <Label text="LeftFile" BorderPane.alignment="CENTER">
+                              <Label fx:id="left_file_label" text="LeftFile" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -70,7 +70,7 @@
                               </BorderPane>
                            </center>
                            <top>
-                              <Label text="RightFile" BorderPane.alignment="CENTER">
+                              <Label fx:id="right_file_label" text="RightFile" BorderPane.alignment="CENTER">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
