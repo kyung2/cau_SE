@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
@@ -9,71 +10,73 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<BorderPane prefHeight="399.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="399.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <top>
         <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <items>
-                <Button mnemonicParsing="false" text="Compare" />
-                <Button mnemonicParsing="false" text="Copy to Right" />
-                <Button mnemonicParsing="false" text="Copy to Left" textAlignment="CENTER" />
+                <Button id="compare_button" mnemonicParsing="false" text="Compare" />
+                <Button id="copy_to_right" mnemonicParsing="false" text="Copy to Right" />
+                <Button id="copy_to_left" mnemonicParsing="false" text="Copy to Left" textAlignment="CENTER" />
             </items>
         </ToolBar>
     </top>
     <center>
         <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
             <tabs>
-                <Tab text="FileName">
+                <Tab text="File">
                     <content>
                         <SplitPane dividerPositions="0.5" prefHeight="299.0" prefWidth="605.0">
                             <items>
-                                <TitledPane animated="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="LeftFile">
-                                    <content>
-                                        <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <center>
+                                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                                             <top>
                                                 <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
                                                     <items>
-                                                        <Button mnemonicParsing="false" text="Load" />
-                                                        <Button mnemonicParsing="false" text="Edit" />
-                                                        <Button mnemonicParsing="false" text="Save" />
+                                                        <Button id="left_load_button" fx:id="left_load_button" mnemonicParsing="false" onAction="#clickLeftLoadButton" text="Load" />
+                                                        <Button id="left_edit_button" fx:id="left_edit_button" mnemonicParsing="false" onAction="#clickLeftEditButton" text="Edit" />
+                                                        <Button id="left_save_button" fx:id="left_save_button" mnemonicParsing="false" onAction="#clickLeftSaveButton" text="Save" />
                                                     </items>
                                                 </ToolBar>
                                             </top>
-                                            <right>
-                                                <ScrollBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" BorderPane.alignment="CENTER" />
-                                            </right>
-                                            <bottom>
-                                                <ScrollBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER" />
-                                            </bottom>
                                             <center>
                                                 <TextArea prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                                             </center>
                                         </BorderPane>
-                                    </content>
-                                </TitledPane>
-                                <TitledPane animated="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="RigthFile">
-                                    <content>
-                                        <BorderPane prefHeight="200.0" prefWidth="200.0">
-                                            <top>
-                                                <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-                                                    <items>
-                                                        <Button mnemonicParsing="false" text="Load" />
-                                                        <Button mnemonicParsing="false" text="Edit" />
-                                                        <Button mnemonicParsing="false" text="Save" />
-                                                    </items>
-                                                </ToolBar>
-                                            </top>
-                                            <right>
-                                                <ScrollBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" orientation="VERTICAL" BorderPane.alignment="CENTER" />
-                                            </right>
-                                            <bottom>
-                                                <ScrollBar BorderPane.alignment="CENTER" />
-                                            </bottom>
-                                            <center>
-                                                <TextArea prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-                                            </center>
-                                        </BorderPane>
-                                    </content>
-                                </TitledPane>
+                           </center>
+                           <top>
+                              <Label text="LeftFile" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </top>
+                        </BorderPane>
+                        <BorderPane prefHeight="200.0" prefWidth="200.0">
+                           <center>
+                              <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                                 <center>
+                                    <TextArea prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                                 </center>
+                                 <top>
+                                    <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+                                       <items>
+                                          <Button id="right_load_button" fx:id="right_load_button" mnemonicParsing="false" onAction="#clickRightLoadButton" text="Load" />
+                                          <Button id="right_edit_button" fx:id="right_edit_button" mnemonicParsing="false" onAction="#clickRightEditButton" text="Edit" />
+                                          <Button id="right_save_button" fx:id="right_save_button" mnemonicParsing="false" onAction="#clickRightSaveButton" text="Save" />
+                                       </items>
+                                    </ToolBar>
+                                 </top>
+                              </BorderPane>
+                           </center>
+                           <top>
+                              <Label text="RightFile" BorderPane.alignment="CENTER">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Label>
+                           </top>
+                        </BorderPane>
                             </items>
                         </SplitPane>
                     </content>
