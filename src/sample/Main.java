@@ -9,11 +9,11 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage MainFrame) throws Exception{
+    public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        MainFrame.setTitle("Simple Merge Program");
-        MainFrame.setScene(new Scene(root, 600, 600));
-        MainFrame.show();
+        primaryStage.setTitle("Simple Merge Program");
+        primaryStage.setScene(new Scene(root, 600, 600));
+        primaryStage.show();
     }
 
 
