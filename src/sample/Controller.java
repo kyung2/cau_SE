@@ -4,12 +4,21 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.ValueAxis;
 import javafx.scene.control.Button;
+import javafx.stage.FileChooser;
+
+import java.io.File;
 
 public class Controller {
     @FXML
     private Button left_load_button;
     @FXML
     private void clickLeftLoadButton(ActionEvent event){
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("FileChooser");
+        File selectedFile = fileChooser.showOpenDialog(null);
+        System.out.println( selectedFile.getAbsolutePath() );
+
         left_load_button.setText("Click");
     }
     @FXML
