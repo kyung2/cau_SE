@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.ValueAxis;
 import javafx.scene.control.Button;
+import javafx.scene.control.TabPane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -13,12 +14,7 @@ public class Controller {
     private Button left_load_button;
     @FXML
     private void clickLeftLoadButton(ActionEvent event){
-
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("FileChooser");
-        File selectedFile = fileChooser.showOpenDialog(null);
-        System.out.println( selectedFile.getAbsolutePath() );
-
+        fileChooser();
         left_load_button.setText("Click");
     }
     @FXML
@@ -37,6 +33,7 @@ public class Controller {
     private Button right_load_button;
     @FXML
     private void clickRightLoadButton(){
+        fileChooser();
         right_load_button.setText("Click");
     }
     @FXML
@@ -61,4 +58,11 @@ public class Controller {
     private Button copy_to_right_button;
     @FXML
     private void clickCopyToRightButton() { copy_to_right_button.setText("Click"); }
+
+    private void fileChooser(){
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("FileChooser");
+        File selectedFile = fileChooser.showOpenDialog(null);
+        System.out.println( selectedFile.getAbsolutePath() );
+    }
 }
