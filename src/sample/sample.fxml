@@ -29,27 +29,27 @@
                             <items>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
                            <center>
-                                        <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-                                            <top>
-                                                <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-                                                    <items>
-                                                        <Button id="left_load_button" fx:id="left_load_button" mnemonicParsing="false" onAction="#clickLeftLoadButton" text="Load" />
-                                                        <Button id="left_edit_button" fx:id="left_edit_button" mnemonicParsing="false" onAction="#clickLeftEditButton" text="Edit" />
-                                                        <Button id="left_save_button" fx:id="left_save_button" mnemonicParsing="false" onAction="#clickLeftSaveButton" text="Save" />
-                                                    </items>
-                                                </ToolBar>
-                                            </top>
+                                        <BorderPane prefHeight="316.0" prefWidth="300.0" BorderPane.alignment="CENTER">
                                             <center>
                                                 <TextArea fx:id="left_text_area" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                                             </center>
+                                 <top>
+                                    <Label fx:id="left_file_label" prefHeight="36.0" prefWidth="53.0" text="LeftFile" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
+                                 </top>
                                         </BorderPane>
                            </center>
                            <top>
-                              <Label fx:id="left_file_label" text="LeftFile" BorderPane.alignment="CENTER">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
+                                          <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+                                              <items>
+                                                  <Button id="left_load_button" fx:id="left_load_button" mnemonicParsing="false" onAction="#clickLeftLoadButton" text="Load" />
+                                                  <Button id="left_edit_button" fx:id="left_edit_button" mnemonicParsing="false" onAction="#clickLeftEditButton" text="Edit" />
+                                                  <Button id="left_save_button" fx:id="left_save_button" mnemonicParsing="false" onAction="#clickLeftSaveButton" text="Save" />
+                                              </items>
+                                          </ToolBar>
                            </top>
                         </BorderPane>
                         <BorderPane prefHeight="200.0" prefWidth="200.0">
@@ -59,22 +59,22 @@
                                     <TextArea fx:id="right_text_area" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
                                  </center>
                                  <top>
-                                    <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-                                       <items>
-                                          <Button id="right_load_button" fx:id="right_load_button" mnemonicParsing="false" onAction="#clickRightLoadButton" text="Load" />
-                                          <Button id="right_edit_button" fx:id="right_edit_button" mnemonicParsing="false" onAction="#clickRightEditButton" text="Edit" />
-                                          <Button id="right_save_button" fx:id="right_save_button" mnemonicParsing="false" onAction="#clickRightSaveButton" text="Save" />
-                                       </items>
-                                    </ToolBar>
+                                    <Label fx:id="right_file_label" prefHeight="36.0" prefWidth="64.0" text="RightFile" BorderPane.alignment="CENTER">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                    </Label>
                                  </top>
                               </BorderPane>
                            </center>
                            <top>
-                              <Label fx:id="right_file_label" text="RightFile" BorderPane.alignment="CENTER">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </Label>
+                              <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
+                                 <items>
+                                    <Button id="right_load_button" fx:id="right_load_button" mnemonicParsing="false" onAction="#clickRightLoadButton" text="Load" />
+                                    <Button id="right_edit_button" fx:id="right_edit_button" mnemonicParsing="false" onAction="#clickRightEditButton" text="Edit" />
+                                    <Button id="right_save_button" fx:id="right_save_button" mnemonicParsing="false" onAction="#clickRightSaveButton" text="Save" />
+                                 </items>
+                              </ToolBar>
                            </top>
                         </BorderPane>
                             </items>
