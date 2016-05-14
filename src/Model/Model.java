@@ -90,6 +90,14 @@ abstract public class Model {
         codes = new SavedText[NUMOFTEXTS];
     }
 
+    public void open(String s, int i) throws IOException, IndexOutOfBoundsException
+    {
+        codes[i].ReadFromOuter(s);
+    }
+    public void save(String s, int i) throws IOException, IndexOutOfBoundsException
+    {
+        codes[i].WriteFromOuter(s);
+    }
     public void textLinking(SavedText[] s) throws IndexOutOfBoundsException
     {
         for(int i=0;i<NUMOFTEXTS;i++) codes[i]=s[i];
@@ -97,6 +105,14 @@ abstract public class Model {
     public ArrayList<Boolean>[] grouping()
     {
         return codes[0].LCSMethod(codes[1]);
+    }
+    public ArrayList<String> textSend(int i) throws IndexOutOfBoundsException
+    {
+        return codes[i].ReadAll();
+    }
+    public void textRecieve(int i, ArrayList<String> s) throws IndexOutOfBoundsException
+    {
+        codes[i].WriteAll(s);
     }
 
 

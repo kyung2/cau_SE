@@ -24,24 +24,40 @@ public class WorkDealer {
         this.v=v;
         this.c=c;
         queue = new  ArrayList<work>();
-        isWork=true;
+        isWork=false;
         lastDeal= System.currentTimeMillis();
     }
 
-    void enqueue(work me)
+    public void enqueue(work me)
     {
         queue.add(0,me);
         lastDeal += DEALTIMEGAP;
     }
-    void deal()
+    private void deal()
     {
         if(System.currentTimeMillis()-lastDeal>DEALTIMEGAP) {
             if (queue.size() != 0) {
-                queue.get(0).whatWillDo(this);
-                queue.remove(0);
+                try {
+                    queue.get(0).whatWillDo(this);
+                }
+                catch(Exception e)
+                {
+                    this.enqueue(new ExceptionDealingWork(queue.get(0).getClass(),e));
+                }
+                finally {
+                    queue.remove(0);
+                }
             }
         }
     }
+
+    public void stop()
+    {
+        isWork=false;
+    }
+
+
+
 
     public static void main(String args)
     {
@@ -55,9 +71,25 @@ public class WorkDealer {
 
         d=WorkDealer(m,v,c);
 
-        while(d.isWork)
-        {
+
+        d.isWork=true;
+        while (d.isWork) {
             d.deal();
         }
     }
 }
+
+/*
+{
+public void execute(string args[])
+{
+if(d.isWork==false)
+    {
+        d.isWork=true;
+        c.launch(args);
+        while (d.isWork) {
+            d.deal();
+        }
+    }
+}
+*/
