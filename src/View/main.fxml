@@ -15,8 +15,8 @@
         <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <items>
                 <Button id="compare_button" fx:id="compare_button" mnemonicParsing="false" onAction="#clickCompareButton" text="Compare" />
-                <Button id="copy_to_right" fx:id="copy_to_right_button" mnemonicParsing="false" onAction="#clickCopyToRightButton" text="Copy to Right" />
-                <Button id="copy_to_left" fx:id="copy_to_left_button" mnemonicParsing="false" onAction="#clickCopyToLeftButton" text="Copy to Left" textAlignment="CENTER" />
+                <Button id="copy_to_right_button" fx:id="copy_to_right_button" mnemonicParsing="false" onAction="#clickCopyToRightButton" text="Copy to Right" />
+                <Button id="copy_to_left_button" fx:id="copy_to_left_button" mnemonicParsing="false" onAction="#clickCopyToLeftButton" text="Copy to Left" textAlignment="CENTER" />
             <Button fx:id="copy_to_right_all_button" mnemonicParsing="false" onAction="#clickCopyToRightAllButton" text="Copy to Right All" />
             <Button fx:id="copy_to_left_all_button" mnemonicParsing="false" onAction="#clickCopyToLeftAllButton" text="Copy to Left All" />
             </items>
