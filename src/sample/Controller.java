@@ -58,7 +58,18 @@ public class Controller {
     private Button copy_to_right_button;
     @FXML
     private void clickCopyToRightButton() { copy_to_right_button.setText("Click"); }
-
+    @FXML
+    private Button copy_to_right_all_button;
+    @FXML
+    private void clickCopyToRightAllButton() {
+        copy_to_right_all_button.setText("Click");
+    }
+    @FXML
+    private Button copy_to_left_all_button;
+    @FXML
+    private void clickCopyToLeftAllButton(){
+        copy_to_left_all_button.setText("Click");
+    }
     private void fileChooser(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
