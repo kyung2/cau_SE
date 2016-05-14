@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.SplitPane?>
+
+
+<?import javafx.scene.control.Tab?>
+<Tab fx:id="tap" text="File" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+    <content>
+        <SplitPane fx:id="split_pane" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" >
+            <items>
+                <fx:include source = "FilePanel.fxml" ></fx:include>
+                <fx:include source = "FilePanel.fxml" ></fx:include>
+            </items>
+        </SplitPane>
+    </content>
+</Tab>
