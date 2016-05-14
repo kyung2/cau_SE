@@ -12,8 +12,8 @@ public class DataRequireWork implements work{
     {
         this.n=n;
     }
-    public void whatWillDo(WorkDealer d) throws Exception {
-        ArrayList<String> s = d.m.textSend(n);
+    public void whatWillDo() throws Exception {
+        ArrayList<String> s = WorkDealer.workdeals.m.textSend(n);
         // todo - make class DataSendToPanelWork implements work, and call d.enqueue(new DataSendToPanelWork(s,n)).
     }
 }

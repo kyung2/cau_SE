@@ -12,7 +12,7 @@ public class ExceptionDealingWork implements work{
         this.m=m;
         this.e=e;
     }
-    public void whatWillDo(WorkDealer d) throws Exception
+    public void whatWillDo() throws Exception
     {
         //Todo
     }

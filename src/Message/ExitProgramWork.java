@@ -9,9 +9,9 @@ public class ExitProgramWork implements work{
     {
 
     }
-    public void whatWillDo(WorkDealer d) throws Exception
+    public void whatWillDo() throws Exception
     {
-        d.stop();
+        WorkDealer.workdeals.stop();
         // todo - if GUI of d.v(view) is still visualable, then close.
     }
 }

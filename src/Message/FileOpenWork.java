@@ -1,5 +1,10 @@
 package Message;
 
+import javafx.fxml.Initializable;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+
 /**
  * Created by User on 2016-05-15.
  */
@@ -12,7 +17,8 @@ public class FileOpenWork implements work{
         this.s=s;
         this.i=i;
     }
-    public void whatWillDo(WorkDealer d) throws Exception {
-        d.m.open(s, i);
+    public void whatWillDo() throws Exception {
+        WorkDealer.workdeals.m.open(s, i);
     }
 }
+

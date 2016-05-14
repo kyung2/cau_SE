@@ -23,12 +23,10 @@ abstract public class Model {
         {
             return lines.size();
         }
-        public String Read(int i) throws IndexOutOfBoundsException
-        {
+        public String Read(int i) throws IndexOutOfBoundsException {
             return lines.get(i);
         }
-        public void Write(int i, String s) throws IndexOutOfBoundsException
-        {
+        public void Write(int i, String s) throws IndexOutOfBoundsException {
             lines.set(i,s);
         }
         public ArrayList<String> ReadAll()

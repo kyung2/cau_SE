@@ -12,8 +12,8 @@ public class FileCloseWork implements work{
         this.s=s;
         this.i=i;
     }
-    public void whatWillDo(WorkDealer d) throws Exception {
-        d.m.save(s, i);
+    public void whatWillDo() throws Exception {
+        WorkDealer.workdeals.m.save(s, i);
         // todo - if GUI of d.v(view) is still visualable, then close.
     }
 }

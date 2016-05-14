@@ -11,12 +11,13 @@ public class WorkDealer {
 
     ArrayList<work> queue;
 
-    Controller c;
-    Model m;
-    View v;
-    private boolean isWork;
+    public Controller c;
+    public Model m;
+    public View v;
+    private static boolean isWork;
     private long lastDeal;
     private final long DEALTIMEGAP=50;
+    public static WorkDealer workdeals;
 
     WorkDealer(Model m, View v, Controller c)
     {
@@ -69,10 +70,10 @@ public class WorkDealer {
 
         // m,v,c의 오브젝트 생성
 
-        d=WorkDealer(m,v,c);
-
+        d=WorkDealer(m,v,c); // include c.setWorkDealer(d);
 
         d.isWork=true;
+        WorkDealer.workdeals=d;
         while (d.isWork) {
             d.deal();
         }
@@ -86,6 +87,7 @@ public void execute(string args[])
 if(d.isWork==false)
     {
         d.isWork=true;
+        WorkDealer.workdeals=d;
         c.launch(args);
         while (d.isWork) {
             d.deal();
