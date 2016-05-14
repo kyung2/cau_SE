@@ -1,8 +1,4 @@
-package sample;
-
-import javafx.stage.FileChooser;
-
-import java.io.File;
+package View;
 
 /**
  * Created by woojin on 2016-05-13.
