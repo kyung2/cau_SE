@@ -18,12 +18,14 @@ abstract public class Model {
     }
 
     SavedText t[];
-    ArrayList<String> groupsStart[];
+    ArrayList[] groupsStart;
 
     Model()
     {
         t = new SavedText[2];
-        groupsStart = new ArrayList<String>[2];
+        groupsStart = new ArrayList[2];
+        groupsStart[0] = new ArrayList<String>();
+        groupsStart[1] = new ArrayList<String>();
     }
 
 }
