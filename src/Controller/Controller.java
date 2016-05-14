@@ -15,7 +15,7 @@ public class Controller {
     @FXML
     private void clickLeftLoadButton(ActionEvent event){
         fileChooser();
-        left_load_button.setText("Click");
+        left_load_button.setText("Test");
     }
     @FXML
     private Button left_edit_button;
