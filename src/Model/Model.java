@@ -9,40 +9,60 @@ abstract public class Model {
 
     abstract class SavedText
     {
-        ArrayList<String> texts;
+        ArrayList<String> lines;
 
         SavedText() {
-            texts = new ArrayList<String>();
+            lines = new ArrayList<String>();
         }
         abstract void ReadFromOuter(String s);
         abstract void WriteFromOuter(String s);
 
         public String Read(int i) throws IndexOutOfBoundsException
         {
-            return new String(texts.get(i));
+            return new String(lines.get(i));
         }
         public void Write(int i, String s) throws IndexOutOfBoundsException
         {
-            texts.set(i,new String(s));
+            lines.set(i,new String(s));
+        }
+        public ArrayList<String> ReadAll()
+        {
+            return new ArrayList<String>(lines);
+        }
+        public void WriteAll(ArrayList<String> s)
+        {
+            lines = new ArrayList<String>(s);
         }
     }
 
-    final int NUMOFTEXTS = 2;
+    public final int NUMOFTEXTS = 2;
     SavedText codes[];
     ArrayList[] groupsStart;
 
-    Model()
+    public Model()
     {
         codes = new SavedText[NUMOFTEXTS];
         groupsStart = new ArrayList[NUMOFTEXTS];
-        for(int i=0;i<NUMOFTEXTS;i++) groupsStart[i] = new ArrayList<String>();
+        for(int i=0;i<NUMOFTEXTS;i++)
+        {
+            groupsStart[i] = new ArrayList<String>();
+        }
+    }
+
+    public Model(SavedText[] s) throws IndexOutOfBoundsException
+    {
+        this();
+        for(int i=0;i<NUMOFTEXTS;i++) codes[i]=s[i];
     }
 
     public void textLinking(int i, SavedText s) throws IndexOutOfBoundsException
     {
-        if(i<0 || i>=NUMOFTEXTS) throw new IndexOutOfBoundsException();
         codes[i]=s;
     }
+
+
+
+
 
 
 }
