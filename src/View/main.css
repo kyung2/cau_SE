@@ -4,6 +4,9 @@
 }
 
 #load_button {
+    -fx-min-width: 35px;
+    -fx-min-height: 14px;
+    -fx-background-image: url("/View/folder_image.jpg");
     -fx-font: bold italic 10pt "Arial";
     -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
 }
