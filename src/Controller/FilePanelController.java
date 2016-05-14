@@ -18,7 +18,7 @@ public class FilePanelController {
     @FXML
     private void clickLoadButton(){
         fileChooser();
-        load_button.setText("Click");
+        System.out.println("Click");
     }
     @FXML
     private Button edit_button;
