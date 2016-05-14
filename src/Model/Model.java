@@ -4,29 +4,66 @@ import java.util.ArrayList;
 /**
  * Created by User on 2016-05-14.
  */
+
 abstract public class Model {
 
-    static abstract class SavedText
+    abstract class SavedText
     {
-        ArrayList<String> texts;
+        ArrayList<String> lines;
 
         SavedText() {
-            texts = new ArrayList<String>();
+            lines = new ArrayList<String>();
         }
-        abstract void Read(String s);
-        abstract void Write(String s);
+        abstract void ReadFromOuter(String s);
+        abstract void WriteFromOuter(String s);
+
+        public String Read(int i) throws IndexOutOfBoundsException
+        {
+            return new String(lines.get(i));
+        }
+        public void Write(int i, String s) throws IndexOutOfBoundsException
+        {
+            lines.set(i,new String(s));
+        }
+        public ArrayList<String> ReadAll()
+        {
+            return new ArrayList<String>(lines);
+        }
+        public void WriteAll(ArrayList<String> s)
+        {
+            lines = new ArrayList<String>(s);
+        }
     }
 
-    SavedText t[];
+    public final int NUMOFTEXTS = 2;
+    SavedText codes[];
     ArrayList[] groupsStart;
 
-    Model()
+    public Model()
     {
-        t = new SavedText[2];
-        groupsStart = new ArrayList[2];
-        groupsStart[0] = new ArrayList<String>();
-        groupsStart[1] = new ArrayList<String>();
+        codes = new SavedText[NUMOFTEXTS];
+        groupsStart = new ArrayList[NUMOFTEXTS];
+        for(int i=0;i<NUMOFTEXTS;i++)
+        {
+            groupsStart[i] = new ArrayList<String>();
+        }
     }
+
+    public Model(SavedText[] s) throws IndexOutOfBoundsException
+    {
+        this();
+        for(int i=0;i<NUMOFTEXTS;i++) codes[i]=s[i];
+    }
+
+    public void textLinking(int i, SavedText s) throws IndexOutOfBoundsException
+    {
+        codes[i]=s;
+    }
+
+
+
+
+
 
 }
 
