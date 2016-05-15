@@ -1,31 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
 <?import javafx.scene.text.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane fx:id="file_pane" prefHeight="200.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FilePanelController">
+<BorderPane fx:id="file_pane" prefHeight="285.0" prefWidth="294.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.FilePanelController">
     <center>
         <BorderPane prefHeight="316.0" prefWidth="300.0" BorderPane.alignment="CENTER">
             <center>
-                <TextArea fx:id="text_area" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+                <TextArea fx:id="text_area" prefHeight="146.0" prefWidth="224.0" BorderPane.alignment="CENTER" />
             </center>
-            <top>
-                <Label fx:id="file_label" prefHeight="36.0" prefWidth="53.0" text="File" BorderPane.alignment="CENTER">
+        </BorderPane>
+    </center>
+    <top>
+        <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="219.0" BorderPane.alignment="CENTER">
+            <items>
+                <Label fx:id="file_label" prefHeight="19.0" prefWidth="72.0" text="FileName">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Label>
-            </top>
-        </BorderPane>
-    </center>
-    <top>
-        <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-            <items>
-                <Button id="load_button" fx:id="load_button" mnemonicParsing="false" onAction="#clickLoadButton" text="Load"/>
+            <HBox prefHeight="23.0" prefWidth="66.0" />
+                <Button id="load_button" fx:id="load_button" mnemonicParsing="false" onAction="#clickLoadButton" text="Load" />
                 <Button id="edit_button" fx:id="edit_button" mnemonicParsing="false" onAction="#clickEditButton" text="Edit" />
-                <Button id="save_button" fx:id="save_button" mnemonicParsing="false" onAction="#clickSaveButton" text="Save" />
+                <Button id="save_button" fx:id="save_button" contentDisplay="TOP" mnemonicParsing="false" onAction="#clickSaveButton" text="Save">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets></Button>
             </items>
         </ToolBar>
     </top>
+   <bottom>
+      <TextArea prefHeight="18.0" prefWidth="435.0" text="기타정보&#10;" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

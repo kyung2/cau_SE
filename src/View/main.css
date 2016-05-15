@@ -1,41 +1,24 @@
 #edit_button {
-    -fx-font: bold italic 10pt "Arial";
-    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
+
 }
 
 #load_button {
-    -fx-min-width: 35px;
-    -fx-min-height: 14px;
-    -fx-font: bold italic 10pt "Arial";
-    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
 }
 
 #save_button {
-    -fx-font: bold italic 10pt "Arial";
-    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
 }
 
 #compare_button {
-    -fx-font: bold italic 10pt "Arial";
-    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
 }
 
 #copy_to_right_button {
-    -fx-font: bold italic 10pt "Arial";
-    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
 }
 
 #copy_to_left_button {
-    -fx-font: bold italic 10pt "Arial";
-    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
 }
 
 #copy_to_right_all_button {
-    -fx-font: bold italic 10pt "Arial";
-    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
 }
 
 #copy_to_left_all_button {
-    -fx-font: bold italic 10pt "Arial";
-    -fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );
 }
