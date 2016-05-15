@@ -22,7 +22,7 @@
     <top>
         <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
             <items>
-                <Button id="load_button" fx:id="load_button" mnemonicParsing="false" onAction="#clickLoadButton" />
+                <Button id="load_button" fx:id="load_button" mnemonicParsing="false" onAction="#clickLoadButton" text="Load"/>
                 <Button id="edit_button" fx:id="edit_button" mnemonicParsing="false" onAction="#clickEditButton" text="Edit" />
                 <Button id="save_button" fx:id="save_button" mnemonicParsing="false" onAction="#clickSaveButton" text="Save" />
             </items>

@@ -11,22 +11,59 @@
 <?import javafx.scene.control.Label?>
 
 <BorderPane fx:id="main_pane" prefHeight="399.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
-    <top>
-        <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+   <center>
+      <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <center>
+              <TabPane fx:id="tap_pane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                  <tabs>
+                      <fx:include source="TabPane.fxml" />
+                  </tabs>
+              </TabPane>
+         </center>
+         <top>
+              <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                  <items>
+                      <Button id="compare_button" fx:id="compare_button" mnemonicParsing="false" onAction="#clickCompareButton" text="Compare" />
+                      <Button id="copy_to_right_button" fx:id="copy_to_right_button" mnemonicParsing="false" onAction="#clickCopyToRightButton" text="Copy to Right" />
+                      <Button id="copy_to_left_button" fx:id="copy_to_left_button" mnemonicParsing="false" onAction="#clickCopyToLeftButton" text="Copy to Left" textAlignment="CENTER" />
+                  <Button fx:id="copy_to_right_all_button" mnemonicParsing="false" onAction="#clickCopyToRightAllButton" text="Copy to Right All" />
+                  <Button fx:id="copy_to_left_all_button" mnemonicParsing="false" onAction="#clickCopyToLeftAllButton" text="Copy to Left All" />
+                  </items>
+              </ToolBar>
+         </top>
+      </BorderPane>
+   </center>
+   <top>
+      <MenuBar BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
             <items>
-                <Button id="compare_button" fx:id="compare_button" mnemonicParsing="false" onAction="#clickCompareButton" text="Compare" />
-                <Button id="copy_to_right_button" fx:id="copy_to_right_button" mnemonicParsing="false" onAction="#clickCopyToRightButton" text="Copy to Right" />
-                <Button id="copy_to_left_button" fx:id="copy_to_left_button" mnemonicParsing="false" onAction="#clickCopyToLeftButton" text="Copy to Left" textAlignment="CENTER" />
-            <Button fx:id="copy_to_right_all_button" mnemonicParsing="false" onAction="#clickCopyToRightAllButton" text="Copy to Right All" />
-            <Button fx:id="copy_to_left_all_button" mnemonicParsing="false" onAction="#clickCopyToLeftAllButton" text="Copy to Left All" />
+              <MenuItem mnemonicParsing="false" text="Close" />
             </items>
-        </ToolBar>
-    </top>
-    <center>
-        <TabPane fx:id="tap_pane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-            <tabs>
-                <fx:include source = "TabPane.fxml" ></fx:include>
-            </tabs>
-        </TabPane>
-    </center>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Merge">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+            <Menu mnemonicParsing="false" text="Window">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+        </menus>
+         <contextMenu>
+            <ContextMenu>
+              <items>
+                <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+              </items>
+            </ContextMenu>
+         </contextMenu>
+      </MenuBar>
+   </top>
 </BorderPane>
