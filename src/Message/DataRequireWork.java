@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by User on 2016-05-15.
  */
+/*
 public class DataRequireWork implements work{
 
     int n;
@@ -17,3 +18,4 @@ public class DataRequireWork implements work{
         // todo - make class DataSendToPanelWork implements work, and call d.enqueue(new DataSendToPanelWork(s,n)).
     }
 }
+*/

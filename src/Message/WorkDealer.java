@@ -7,6 +7,7 @@ import Model.*;
 /**
  * Created by User on 2016-05-15.
  */
+/*
 public class WorkDealer {
 
     ArrayList<work> queue;
@@ -80,7 +81,7 @@ public class WorkDealer {
     }
 }
 
-/*
+
 {
 public void execute(string args[])
 {

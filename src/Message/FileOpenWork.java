@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 /**
  * Created by User on 2016-05-15.
  */
+/*
 public class FileOpenWork implements work{
 
     String s;
@@ -21,4 +22,4 @@ public class FileOpenWork implements work{
         WorkDealer.workdeals.m.open(s, i);
     }
 }
-
+*/

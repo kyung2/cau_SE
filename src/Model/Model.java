@@ -38,14 +38,14 @@ abstract public class Model {
             lines = new ArrayList<String>(s);
         }
 
-        public ArrayList<Boolean>[] LCSMethod(SavedText another) throws NullPointerException
+        public ArrayList<Integer>[] LCSMethod(SavedText another) throws NullPointerException
         {
             int x=this.NumOfLine()+1,y=another.NumOfLine()+1, comp;
             int LCS[][] = new int[x][y];
             boolean LCSBacktrack[][][] = new boolean[x][y][2];
-            ArrayList<Boolean> group[] = new ArrayList[2];
-            group[0] = new ArrayList<Boolean>();
-            group[1] = new ArrayList<Boolean>();
+            ArrayList<Integer> group[] = new ArrayList[2];
+            group[0] = new ArrayList<Integer>();
+            group[1] = new ArrayList<Integer>();
 
             for(int i=0;i<x;i++) {
                 LCS[i][y-1]=0; LCSBacktrack[i][y-1][0]=false; LCSBacktrack[i][y-1][1]=true;
@@ -67,14 +67,7 @@ abstract public class Model {
                     }
                 }
             }
-            for(int i=0,j=0;!(i==x-1 && j==y-1);) {
-                if(LCSBacktrack[i][j][0] || LCSBacktrack[i][j][1]) {
-                    group[0].add(true); i++;
-                }
-                if(LCSBacktrack[i][j][0] || !(LCSBacktrack[i][j][1])){
-                    group[1].add(false);j++;
-                }
-            }
+            
             return group;
         }
     }

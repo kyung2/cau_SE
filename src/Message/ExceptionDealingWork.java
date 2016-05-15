@@ -3,6 +3,7 @@ package Message;
 /**
  * Created by User on 2016-05-15.
  */
+/*
 public class ExceptionDealingWork implements work{
 
     Class m;
@@ -17,3 +18,4 @@ public class ExceptionDealingWork implements work{
         //Todo
     }
 }
+*/
