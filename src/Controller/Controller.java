@@ -1,4 +1,4 @@
-package Message;
+package Controller;
 
 import java.util.ArrayList;
 
@@ -8,27 +8,30 @@ import Model.*;
  * Created by User on 2016-05-15.
  */
 /*
-public class WorkDealer {
+public class Controller {
 
     ArrayList<work> queue;
 
-    public Controller c; //Todo make Controller class
+    public Controller c;
     public Model m;
     public View v; //Todo make View class
     private static boolean isWork;
     private long lastDeal;
     private final long DEALTIMEGAP=50;
-    public static WorkDealer workdeals;
-    private final WorkDealer thisis = this;
+    public static Controller workdeals;
 
-    WorkDealer(Model m, View v, Controller c)
+    Controller(Model m, View v)
     {
-        this.m=m;
-        this.v=v;
-        this.c=c;
+        this.m = m;
+        this.v = v;
+        this.c = this;
         queue = new  ArrayList<work>();
         isWork=false;
         lastDeal= System.currentTimeMillis();
+    }
+    ~Controller()
+    {
+        stop();
     }
 
     public void enqueue(work me)
@@ -41,7 +44,7 @@ public class WorkDealer {
         if(System.currentTimeMillis()-lastDeal>DEALTIMEGAP) {
             if (queue.size() != 0) {
                 try {
-                    queue.get(0).whatWillDo(this);
+                    queue.get(0).whatWillDo();
                 }
                 catch(Exception e)
                 {
@@ -65,7 +68,7 @@ public class WorkDealer {
             if(!isWork)
             {
                 isWork=true;
-                WorkDealer.workdeals=thisis;
+                Controller.workdeals=c;
                 v.launch(args); //Todo make method what do launch
                 while (workdeals.isWork) {
                     workdeals.deal();
@@ -99,18 +102,14 @@ public class WorkDealer {
         Model m;
         View v;
         Controller c;
-        WorkDealer d;
 
-        // m,v,c의 오브젝트 생성
+        // todo - m,v의 오브젝트 생성
 
-        d=WorkDealer(m,v,c); // include c.setWorkDealer(d);
+        c=Controller(m,v);
 
-        d.isWork=true;
-        WorkDealer.workdeals=d;
-        while (d.isWork) {
-            d.deal();
-        }
+        c.execute(args);
     }
 }
-
 */
+
+

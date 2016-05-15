@@ -1,5 +1,5 @@
-package Message;
-
+package Model.ModelWork;
+import Controller.*;
 /**
  * Created by User on 2016-05-15.
  */
@@ -14,7 +14,7 @@ public class FileCloseWork implements work{
         this.i=i;
     }
     public void whatWillDo() throws Exception {
-        WorkDealer.workdeals.m.save(s, i);
+        Controller.workdeals.m.save(s, i);
     }
 }
 */

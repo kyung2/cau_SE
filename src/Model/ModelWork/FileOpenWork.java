@@ -1,9 +1,5 @@
-package Message;
-
-import javafx.fxml.Initializable;
-
-import java.net.URL;
-import java.util.ResourceBundle;
+package Model.ModelWork;
+import Controller.*;
 
 /**
  * Created by User on 2016-05-15.
@@ -19,7 +15,7 @@ public class FileOpenWork implements work{
         this.i=i;
     }
     public void whatWillDo() throws Exception {
-        WorkDealer.workdeals.m.open(s, i);
+        Controller.workdeals.m.open(s, i);
     }
 }
 */
