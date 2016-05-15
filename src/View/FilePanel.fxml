@@ -22,17 +22,17 @@
                         <Font size="15.0" />
                     </font>
                 </Label>
-            <HBox prefHeight="23.0" prefWidth="66.0" />
+                <HBox prefHeight="23.0" prefWidth="66.0" />
                 <Button id="load_button" fx:id="load_button" mnemonicParsing="false" onAction="#clickLoadButton" text="Load" />
                 <Button id="edit_button" fx:id="edit_button" mnemonicParsing="false" onAction="#clickEditButton" text="Edit" />
                 <Button id="save_button" fx:id="save_button" contentDisplay="TOP" mnemonicParsing="false" onAction="#clickSaveButton" text="Save">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets></Button>
+                    <opaqueInsets>
+                        <Insets />
+                    </opaqueInsets></Button>
             </items>
         </ToolBar>
     </top>
    <bottom>
-      <TextArea prefHeight="18.0" prefWidth="435.0" text="기타정보&#10;" BorderPane.alignment="CENTER" />
+      <TextArea fx:id="file_panel_bottom_text_area" prefHeight="18.0" prefWidth="435.0" text="기타정보&#10;" BorderPane.alignment="CENTER" />
    </bottom>
 </BorderPane>
