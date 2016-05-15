@@ -16,6 +16,7 @@ public class DataRequireWork implements work{
     public void whatWillDo() throws Exception {
         ArrayList<String> s = WorkDealer.workdeals.m.textSend(n);
         // todo - make class DataSendToPanelWork implements work, and call d.enqueue(new DataSendToPanelWork(s,n)).
+        // todo - DataSendToPanelWork has ArrayList<String> data, and it give itself data to View's panel.
     }
 }
 */

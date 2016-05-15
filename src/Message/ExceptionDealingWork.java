@@ -15,7 +15,7 @@ public class ExceptionDealingWork implements work{
     }
     public void whatWillDo() throws Exception
     {
-        //Todo
+        //Todo - dealing many exception and work
     }
 }
 */

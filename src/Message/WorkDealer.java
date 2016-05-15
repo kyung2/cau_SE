@@ -12,13 +12,14 @@ public class WorkDealer {
 
     ArrayList<work> queue;
 
-    public Controller c;
+    public Controller c; //Todo make Controller class
     public Model m;
-    public View v;
+    public View v; //Todo make View class
     private static boolean isWork;
     private long lastDeal;
     private final long DEALTIMEGAP=50;
     public static WorkDealer workdeals;
+    private final WorkDealer thisis = this;
 
     WorkDealer(Model m, View v, Controller c)
     {
@@ -53,15 +54,46 @@ public class WorkDealer {
         }
     }
 
+    class ExecuteRunnable implements Runnable {
+
+        ExecuteRunnable(String args[])
+        {
+            this.args=args.clone();
+        }
+        String args[];
+        public void run() {
+            if(!isWork)
+            {
+                isWork=true;
+                WorkDealer.workdeals=thisis;
+                v.launch(args); //Todo make method what do launch
+                while (workdeals.isWork) {
+                    workdeals.deal();
+                }
+                whenExit();
+            }
+        }
+
+    }
+
+    private void whenExit()
+    {
+        //Todo make method when program exit
+    }
+}
+    public void execute(String args[])
+    {
+        Thread t = new Thread(new ExecuteRunnable(args));
+        t.start();
+    }
+
     public void stop()
     {
         isWork=false;
     }
 
 
-
-
-    public static void main(String args)
+    public static void main(String args[])
     {
 
         Model m;
@@ -81,18 +113,4 @@ public class WorkDealer {
     }
 }
 
-
-{
-public void execute(string args[])
-{
-if(d.isWork==false)
-    {
-        d.isWork=true;
-        WorkDealer.workdeals=d;
-        c.launch(args);
-        while (d.isWork) {
-            d.deal();
-        }
-    }
-}
 */
