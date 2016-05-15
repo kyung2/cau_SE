@@ -42,7 +42,7 @@ abstract public class Model {
         {
             int x=this.NumOfLine()+1,y=another.NumOfLine()+1, comp;
             int LCS[][] = new int[x][y];
-            boolean LCSBacktrack[][][] = new boolean[x][y][2];
+            boolean LCSBacktrack[][][] = new boolean[x][y][2]; boolean c;
             ArrayList<Integer> group[] = new ArrayList[2];
             group[0] = new ArrayList<Integer>();
             group[1] = new ArrayList<Integer>();
@@ -67,7 +67,22 @@ abstract public class Model {
                     }
                 }
             }
-            
+            c=true;
+            for(int i=0,j=0;i<x-1&&j<x-1;)
+            {
+                if(c!=LCSBacktrack[i][j][0])
+                {
+                    group[0].add(new Integer(i));
+                    group[0].add(new Integer(j));
+                }
+                c=LCSBacktrack[i][j][0];
+                if(LCSBacktrack[i][j][0])
+                {
+                    i++; j++;
+                }
+                else if(LCSBacktrack[i][j][1]) i++;
+                else j++;
+            }
             return group;
         }
     }
