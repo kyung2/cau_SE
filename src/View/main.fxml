@@ -10,7 +10,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 
-<BorderPane fx:id="main_pane" prefHeight="399.0" prefWidth="605.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
+<BorderPane fx:id="main_pane" prefHeight="399.0" prefWidth="637.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainController">
    <center>
       <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <center>
@@ -23,11 +23,16 @@
          <top>
               <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                   <items>
+                  <Button mnemonicParsing="false" text="Next Dif" />
+                  <Button mnemonicParsing="false" text="Post Dif" />
+                  <Button mnemonicParsing="false" text="First Dif" />
+                  <Button mnemonicParsing="false" text="Now Dif" />
+                  <Button mnemonicParsing="false" text="Last Dif" />
+                      <Button id="copy_to_right_button" fx:id="copy_to_right_button" mnemonicParsing="false" onAction="#clickCopyToRightButton" text="CtoR" />
+                      <Button id="copy_to_left_button" fx:id="copy_to_left_button" mnemonicParsing="false" onAction="#clickCopyToLeftButton" text="CtoL" textAlignment="CENTER" />
+                  <Button fx:id="copy_to_right_all_button" mnemonicParsing="false" onAction="#clickCopyToRightAllButton" text="CtoRAll" />
+                  <Button fx:id="copy_to_left_all_button" mnemonicParsing="false" onAction="#clickCopyToLeftAllButton" text="CtoLAll" />
                       <Button id="compare_button" fx:id="compare_button" mnemonicParsing="false" onAction="#clickCompareButton" text="Compare" />
-                      <Button id="copy_to_right_button" fx:id="copy_to_right_button" mnemonicParsing="false" onAction="#clickCopyToRightButton" text="Copy to Right" />
-                      <Button id="copy_to_left_button" fx:id="copy_to_left_button" mnemonicParsing="false" onAction="#clickCopyToLeftButton" text="Copy to Left" textAlignment="CENTER" />
-                  <Button fx:id="copy_to_right_all_button" mnemonicParsing="false" onAction="#clickCopyToRightAllButton" text="Copy to Right All" />
-                  <Button fx:id="copy_to_left_all_button" mnemonicParsing="false" onAction="#clickCopyToLeftAllButton" text="Copy to Left All" />
                   </items>
               </ToolBar>
          </top>
@@ -38,22 +43,38 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" text="Close" />
+                  <MenuItem mnemonicParsing="false" text="New tab" />
+              <MenuItem mnemonicParsing="false" text="Open" />
+                  <MenuItem mnemonicParsing="false" text="Save" />
+                  <MenuItem mnemonicParsing="false" text="Save Right File" />
+                  <MenuItem mnemonicParsing="false" text="Save Left File" />
+                  <MenuItem mnemonicParsing="false" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Merge">
             <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
+              <MenuItem mnemonicParsing="false" text="Next Difference" />
+                  <MenuItem mnemonicParsing="false" text="Post Difference" />
+                  <MenuItem mnemonicParsing="false" text="First Difference" />
+                  <MenuItem mnemonicParsing="false" text="Now Selected Difference" />
+                  <MenuItem mnemonicParsing="false" text="Last Difference" />
+                  <MenuItem mnemonicParsing="false" text="Copy to Right" />
+                  <MenuItem mnemonicParsing="false" text="Copy to Left" />
+                  <MenuItem mnemonicParsing="false" text="Copy to Right All" />
+                  <MenuItem mnemonicParsing="false" text="Copy to Left All" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-              <MenuItem mnemonicParsing="false" text="About" />
+              <MenuItem mnemonicParsing="false" text="Help" />
+                  <MenuItem mnemonicParsing="false" text="Program Info" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Window">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
+                <MenuItem mnemonicParsing="false" text="Close Tab" />
+                  <MenuItem mnemonicParsing="false" text="Close Tab All" />
+                  <MenuItem mnemonicParsing="false" text="Tab 1" />
               </items>
             </Menu>
         </menus>
