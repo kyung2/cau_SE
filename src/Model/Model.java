@@ -108,7 +108,7 @@ abstract public class Model {
     {
         for(int i=0;i<NUMOFTEXTS;i++) codes[i]=s[i];
     }
-    public ArrayList<Boolean>[] grouping()
+    public ArrayList<Integer>[] grouping()
     {
         return codes[0].LCSMethod(codes[1]);
     }
