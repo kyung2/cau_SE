@@ -2,7 +2,7 @@ package Model;
 import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;
-import java.lang.Boolean;
+
 /**
  * Created by User on 2016-05-14.
  */
@@ -12,12 +12,26 @@ abstract public class Model {
     static abstract class SavedText
     {
         protected ArrayList<String> lines;
+        Model m;
+        protected SavedText(Model m) {
 
-        protected SavedText() {
             lines = new ArrayList<String>();
+            textChange();
         }
-        abstract void ReadFromOuter(String s) throws IOException;
-        abstract void WriteFromOuter(String s) throws IOException;
+        abstract protected void ReadFromOuter(String s) throws IOException;
+        abstract protected void WriteFromOuter(String s) throws IOException;
+
+        public void ReadFrom(String s) throws IOException
+        {
+            ReadFromOuter(s);
+            textChange();
+        }
+
+        public void WriteFrom(String s) throws IOException
+        {
+            ReadFromOuter(s);
+            textChange();
+        }
 
         public int NumOfLine()
         {
@@ -28,6 +42,7 @@ abstract public class Model {
         }
         public void Write(int i, String s) throws IndexOutOfBoundsException {
             lines.set(i,s);
+            textChange();
         }
         public ArrayList<String> ReadAll()
         {
@@ -36,6 +51,7 @@ abstract public class Model {
         public void WriteAll(ArrayList<String> s)
         {
             lines = new ArrayList<String>(s);
+            textChange();
         }
 
         public ArrayList<Integer>[] LCSMethod(SavedText another) throws NullPointerException
@@ -85,15 +101,24 @@ abstract public class Model {
             }
             return group;
         }
+
+
+
+        private void textChange()
+        {
+            m.textChange();
+        }
     }
 
     public final int NUMOFTEXTS = 2;
     SavedText codes[];
+    ArrayList<Integer>[] group;
 
     public Model()
     {
         assert NUMOFTEXTS > 1;
-        codes = new SavedText[NUMOFTEXTS];
+        codes = null;
+        group = null;
     }
 
     public void open(String s, int i) throws IOException, IndexOutOfBoundsException
@@ -108,9 +133,10 @@ abstract public class Model {
     {
         for(int i=0;i<NUMOFTEXTS;i++) codes[i]=s[i];
     }
-    public ArrayList<Integer>[] grouping()
+    public void grouping()
     {
-        return codes[0].LCSMethod(codes[1]);
+        group = codes[0].LCSMethod(codes[1]);
+        groupChange();
     }
     public ArrayList<String> textSend(int i) throws IndexOutOfBoundsException
     {
@@ -120,6 +146,15 @@ abstract public class Model {
     {
         codes[i].WriteAll(s);
     }
+    protected void textChange()
+    {
+        //todo - give notice that text change
+    }
+    protected void groupChange()
+    {
+        //todo - give notice that text change
+    }
+
 
 
 }

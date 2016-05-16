@@ -6,19 +6,17 @@ import java.io.*;
 public class ModelUsingFile extends Model {
     static class SavedTextCanFileRR extends Model.SavedText
     {
-        void ReadFromOuter(String s) throws IOException
-        {
+        public void ReadFromOuter(String s) throws IOException {
             File aFile = new File(s);
             FileReader fileReader = new FileReader(aFile);
             BufferedReader reader = new BufferedReader(fileReader);
             String line;
-            while((line=reader.readLine())!=null) {
+            while ((line = reader.readLine()) != null) {
                 lines.add(line);
             }
             reader.close();
         }
-        void WriteFromOuter(String s) throws IOException
-        {
+        public void WriteFromOuter(String s) throws IOException {
             BufferedWriter writer = new BufferedWriter(new FileWriter(s));
             String line;
             for(int i=0;i<lines.size();i++) {
@@ -26,16 +24,18 @@ public class ModelUsingFile extends Model {
             }
             writer.close();
         }
-        SavedTextCanFileRR()
+
+        SavedTextCanFileRR(Model m)
         {
-            super();
+            super(m);
         }
     }
 
     public ModelUsingFile()
     {
         super();
-        SavedTextCanFileRR[] s = {new SavedTextCanFileRR(), new SavedTextCanFileRR()};
+        SavedTextCanFileRR[] s = {new SavedTextCanFileRR(this), new SavedTextCanFileRR(this)};
+        codes = s;
         textLinking(s);
     }
 }
