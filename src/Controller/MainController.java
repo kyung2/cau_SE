@@ -57,11 +57,7 @@ public class MainController {
     @FXML
     private void clickLastDifferenceButton() { last_difference_button.setText("Click"); }
     @FXML
-    private MenuItem new_tab_menu_item;
-    @FXML
     private void clickNewTabMenuItem() { System.out.println("Click"); }
-    @FXML
-    private MenuItem open_menu_item;
     @FXML
     /*
     * File 탭 중 Open 을 클릭하면 FileWindow 가 열린다
@@ -76,63 +72,33 @@ public class MainController {
         System.out.println("ClickOpen");
     }
     @FXML
-    private MenuItem save_menu_item;
-    @FXML
     private void clickSaveMenuItem() { System.out.println("Click"); }
-    @FXML
-    private MenuItem save_right_file_menu_item;
     @FXML
     private void clickSaveRightFileMenuItem() { System.out.println("Click"); }
     @FXML
-    private MenuItem save_left_file_menu_item;
-    @FXML
     private void clickSaveLeftFileMenuItem() { System.out.println("Click"); }
-    @FXML
-    private MenuItem close_menu_item;
     @FXML
     private void clickCloseMenuItem() { System.out.println("Click"); }
     @FXML
-    private MenuItem next_difference_menu_item;
-    @FXML
     private void clickNextDifferenceMenuItem() { System.out.println("Click"); }
-    @FXML
-    private MenuItem post_difference_menu_item;
     @FXML
     private void clickPostDifferenceMenuItem() { System.out.println("Click"); }
     @FXML
-    private MenuItem first_difference_menu_item;
-    @FXML
     private void clickFirstDifferenceMenuItem() { System.out.println("Click"); }
-    @FXML
-    private MenuItem now_difference_menu_item;
     @FXML
     private void clickNowDifferenceMenuItem() { System.out.println("Click"); }
     @FXML
-    private MenuItem last_difference_menu_item;
-    @FXML
     private void clickLastDifferenceMenuItem() { System.out.println("Click"); }
-    @FXML
-    private MenuItem copy_to_right_menu_item;
     @FXML
     private void clickCopyToRightMenuItem() { System.out.println("Click"); }
     @FXML
-    private MenuItem copy_to_left_menu_item;
-    @FXML
     private void clickCopyToLeftMenuItem() { System.out.println("Click"); }
-    @FXML
-    private MenuItem copy_to_right_all_menu_item;
     @FXML
     private void clickCopyToRightAllMenuItem() { System.out.println("Click"); }
     @FXML
-    private MenuItem copy_to_left_all_menu_item;
-    @FXML
     private void clickCopyToLeftAllMenuItem() { System.out.println("Click"); }
     @FXML
-    private MenuItem compare_menu_item;
-    @FXML
     private void clickCompareMenuItem() { System.out.println("Click"); }
-    @FXML
-    private MenuItem help_menu_item;
     @FXML
     private void clickHelpMenuItem() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/HelpWindow.fxml"));
@@ -150,8 +116,6 @@ public class MainController {
         System.out.println("ClickOpen");
     }
     @FXML
-    private MenuItem program_information_menu_item;
-    @FXML
     private void clickProgramInformationMenuItem() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/ProgramInfoWindow.fxml"));
         Parent root;
@@ -168,15 +132,9 @@ public class MainController {
         System.out.println("ClickOpen");
     }
     @FXML
-    private MenuItem close_tab_menu_item;
-    @FXML
     private void clickCloseTabMenuItem() { System.out.println("Click"); }
     @FXML
-    private MenuItem close_tab_all_menu_item;
-    @FXML
     private void clickCloseTabAllMenuItem() { System.out.println("Click"); }
-    @FXML
-    private MenuItem tab_1_menu_item;
     @FXML
     private void clickTab1MenuItem(){ System.out.println("Click"); }
 }

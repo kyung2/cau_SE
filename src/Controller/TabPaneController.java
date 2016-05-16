@@ -12,25 +12,41 @@ import java.io.File;
  * has Load, Save, Edit button action.
  * in Load button action, make file chooser.
  */
-public class FilePanelController {
+public class TabPaneController {
     @FXML
-    private Button load_button;
+    private Button left_load_button;
     @FXML
-    private void clickLoadButton(){
+    private void clickLeftLoadButton(){
         fileChooser();
         System.out.println("Click");
     }
     @FXML
-    private Button edit_button;
+    private Button left_edit_button;
     @FXML
-    private void clickEditButton() { edit_button.setText("Click"); }
+    private void clickLeftEditButton() { left_edit_button.setText("Click"); }
     @FXML
-    private Button save_button;
+    private Button left_save_button;
     @FXML
-    private void clickSaveButton(){
-        save_button.setText("Click");
+    private void clickLeftSaveButton(){
+        left_save_button.setText("Click");
     }
-
+    @FXML
+    private Button right_load_button;
+    @FXML
+    private void clickRightLoadButton(){
+        fileChooser();
+        System.out.println("Click");
+    }
+    @FXML
+    private Button right_edit_button;
+    @FXML
+    private void clickRightEditButton() { right_edit_button.setText("Click"); }
+    @FXML
+    private Button right_save_button;
+    @FXML
+    private void clickRightSaveButton(){
+        right_save_button.setText("Click");
+    }
     private void fileChooser(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");

@@ -1,15 +1,82 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.control.SplitPane?>
-
-
 <?import javafx.scene.control.Tab?>
-<Tab fx:id="tap" text="File" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+
+<Tab fx:id="tap" text="File" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TabPaneController">
     <content>
-        <SplitPane fx:id="split_pane" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0" >
+        <SplitPane fx:id="split_pane" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
             <items>
-                <fx:include source = "FilePanel.fxml" ></fx:include>
-                <fx:include source = "FilePanel.fxml" ></fx:include>
+                <BorderPane fx:id="left_file_pane" prefHeight="285.0" prefWidth="294.0">
+                    <center>
+                        <BorderPane prefHeight="316.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+                            <center>
+                                <TextArea fx:id="left_text_area" prefHeight="146.0" prefWidth="224.0" BorderPane.alignment="CENTER" />
+                            </center>
+                        </BorderPane>
+                    </center>
+                    <bottom>
+                        <TextArea fx:id="left_file_panel_bottom_text_area" prefHeight="18.0" prefWidth="435.0" text="기타정보&#10;" BorderPane.alignment="CENTER" />
+                    </bottom>
+                    <top>
+                        <AnchorPane prefHeight="20.0" prefWidth="294.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <Label fx:id="left_file_label" layoutX="26.0" layoutY="7.0" prefHeight="19.0" prefWidth="72.0" text="FileName" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                                <Button id="left_load_button" fx:id="left_load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#clickLeftLoadButton" prefHeight="23.0" prefWidth="45.0" text="Load" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="5.0" />
+                                <Button id="left_edit_button" fx:id="left_edit_button" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickLeftEditButton" prefHeight="23.0" prefWidth="45.0" text="Edit" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="5.0" />
+                                <Button id="left_save_button" fx:id="left_save_button" contentDisplay="TOP" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickLeftSaveButton" prefHeight="23.0" prefWidth="45.0" text="Save" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets></Button>
+                            </children>
+                        </AnchorPane>
+                    </top>
+                </BorderPane>
+                <BorderPane fx:id="right_file_pane" prefHeight="285.0" prefWidth="294.0">
+                    <center>
+                        <BorderPane prefHeight="316.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+                            <center>
+                                <TextArea fx:id="right_text_area" prefHeight="146.0" prefWidth="224.0" BorderPane.alignment="CENTER" />
+                            </center>
+                        </BorderPane>
+                    </center>
+                    <bottom>
+                        <TextArea fx:id="right_file_panel_bottom_text_area" prefHeight="18.0" prefWidth="435.0" text="기타정보&#10;" BorderPane.alignment="CENTER" />
+                    </bottom>
+                    <top>
+                        <AnchorPane prefHeight="20.0" prefWidth="294.0" BorderPane.alignment="CENTER">
+                            <children>
+                                <Label fx:id="right_file_label" layoutX="26.0" layoutY="7.0" prefHeight="19.0" prefWidth="72.0" text="FileName" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
+                                    <font>
+                                        <Font size="15.0" />
+                                    </font>
+                                </Label>
+                                <Button id="right_load_button" fx:id="right_load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#clickRightLoadButton" prefHeight="23.0" prefWidth="45.0" text="Load" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="5.0" />
+                                <Button id="right_edit_button" fx:id="right_edit_button" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickRightEditButton" prefHeight="23.0" prefWidth="45.0" text="Edit" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="5.0" />
+                                <Button id="right_save_button" fx:id="right_save_button" contentDisplay="TOP" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickRightSaveButton" prefHeight="23.0" prefWidth="45.0" text="Save" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets></Button>
+                            </children>
+                        </AnchorPane>
+                    </top>
+                </BorderPane>
             </items>
         </SplitPane>
     </content>
