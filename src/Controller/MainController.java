@@ -8,11 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
-import sun.rmi.runtime.Log;
 
 import java.io.IOException;
-
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 public class MainController {
     @FXML
@@ -138,7 +135,7 @@ public class MainController {
     private MenuItem help_menu_item;
     @FXML
     private void clickHelpMenuItem() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/HelpWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/HelpWindow.fxml"));
         Parent root;
         try {
             root = (Parent) loader.load();
@@ -156,7 +153,7 @@ public class MainController {
     private MenuItem program_information_menu_item;
     @FXML
     private void clickProgramInformationMenuItem() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ProgramInfoWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/ProgramInfoWindow.fxml"));
         Parent root;
         try {
             root = (Parent) loader.load();

@@ -14,7 +14,7 @@ import java.io.IOException;
 public class OpenFileWindow extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OpenFileWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/OpenFIleWindow.fxml"));
         Parent root;
         try {
             root = (Parent) loader.load();
