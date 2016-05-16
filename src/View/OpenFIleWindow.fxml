@@ -8,24 +8,24 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="273.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="273.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.OpenFileWindowController">
    <children>
       <Label layoutX="90.0" layoutY="106.0" text="RightFile" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="102.0" />
       <Label layoutX="93.0" layoutY="143.0" text="LeftFIle " AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="142.0" />
-      <TextField disable="true" editable="false" layoutX="14.0" layoutY="263.0" prefHeight="23.0" prefWidth="381.0" text="안내문구" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+      <TextField fx:id="warning_info_text_area" disable="true" editable="false" layoutX="14.0" layoutY="263.0" prefHeight="23.0" prefWidth="381.0" text="안내문구" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></TextField>
-      <TextField layoutX="154.0" layoutY="102.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="100.0" />
-      <TextField layoutX="154.0" layoutY="139.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="140.0" />
-      <Button layoutX="432.0" layoutY="102.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="55.0" text="Find" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="100.0" />
-      <Button layoutX="432.0" layoutY="139.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="55.0" text="Find" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="140.0" />
+      <TextField fx:id="rigth_file_text_area" layoutX="154.0" layoutY="102.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="100.0" />
+      <TextField fx:id="left_file_text_area" layoutX="154.0" layoutY="139.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="140.0" />
+      <Button fx:id="right_file_find_button" layoutX="432.0" layoutY="102.0" mnemonicParsing="false" onAction="#clickRightFileFindButton" prefHeight="23.0" prefWidth="55.0" text="Find" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="100.0" />
+      <Button fx:id="left_file_find_button" layoutX="432.0" layoutY="139.0" mnemonicParsing="false" onAction="#clickLeftFileFindButton" prefHeight="23.0" prefWidth="55.0" text="Find" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="140.0" />
       <Label layoutX="34.0" layoutY="52.0" text="Compare Directory / File " AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="30.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="405.0" layoutY="218.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="55.0" text="OK" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="90.0" />
-      <Button layoutX="468.0" layoutY="218.0" mnemonicParsing="false" text="Cancle" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="25.0" />
+      <Button fx:id="ok_button" layoutX="405.0" layoutY="218.0" mnemonicParsing="false" onAction="#clickOkButton" prefHeight="23.0" prefWidth="55.0" text="OK" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="90.0" />
+      <Button fx:id="cancel_button" layoutX="468.0" layoutY="218.0" mnemonicParsing="false" onAction="#clickCancelButton" text="Cancel" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="25.0" />
    </children>
 </AnchorPane>

@@ -2,18 +2,16 @@ package Controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
+import sun.rmi.runtime.Log;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
 
 public class MainController {
     @FXML
@@ -67,6 +65,9 @@ public class MainController {
     @FXML
     private MenuItem open_menu_item;
     @FXML
+    /*
+    * File 탭 중 Open 을 클릭하면 FileWindow 가 열린다
+    * */
     private void clickOpenMenuItem() {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OpenFileWindow.fxml"));
         Parent root;
@@ -78,8 +79,9 @@ public class MainController {
             stage.setTitle("OpenFileWindow");
             stage.show();
         } catch (IOException ex) {
+            System.out.println(ex);
         }
-        System.out.println("Click");
+        System.out.println("ClickOpen");
     }
     @FXML
     private MenuItem save_menu_item;
