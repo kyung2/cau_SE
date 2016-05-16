@@ -57,5 +57,6 @@ public class MainWindowTest extends GuiTest {
     {
         click("#compare_button");
         assertNodeExists("Click");
+
     }
 }

@@ -23,8 +23,8 @@
          <top>
               <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                   <items>
-                      <Button fx:id="next_difference_button" mnemonicParsing="false" onAction="#clickNextDifferenceButton" text="Next Dif" />
-                      <Button fx:id="post_difference_button" mnemonicParsing="false" onAction="#clickPostDifferenceButton" text="Post Dif" />
+                      <Button id="next_difference_button" fx:id="next_difference_button" mnemonicParsing="false" onAction="#clickNextDifferenceButton" text="Next Dif" />
+                      <Button id="post_difference_button" fx:id="post_difference_button" mnemonicParsing="false" onAction="#clickPostDifferenceButton" text="Post Dif" />
                       <Button fx:id="first_difference_button" mnemonicParsing="false" onAction="#clickFirstDifferenceButton" text="First Dif" />
                       <Button fx:id="now_difference_button" mnemonicParsing="false" onAction="#clickNowDifferenceButton" text="Now Dif" />
                       <Button fx:id="last_difference_button" mnemonicParsing="false" onAction="#clickLastDifferenceButton" text="Last Dif" />

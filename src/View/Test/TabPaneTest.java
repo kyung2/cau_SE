@@ -19,11 +19,11 @@ import static org.loadui.testfx.Assertions.assertNodeExists;
 /**
  * Created by woojin on 2016-05-17.
  */
-public class FilePaneTest extends GuiTest {
+public class TabPaneTest extends GuiTest {
     private static final SettableFuture<Stage> stageFuture = SettableFuture.create();
 
-    protected static class TestMainWindow extends MainWindow {
-        public TestMainWindow() {
+    protected static class TestTabPane extends MainWindow {
+        public TestTabPane() {
             super();
         }
 
@@ -39,7 +39,7 @@ public class FilePaneTest extends GuiTest {
     public void setupStage() throws Throwable {
         assumeTrue(!UserInputDetector.instance.hasDetectedUserInput());
 
-        FXTestUtils.launchApp(MainWindowTest.TestMainWindow.class); // You can add start parameters here
+        FXTestUtils.launchApp(TabPaneTest.TestTabPane.class); // You can add start parameters here
         try {
             stage = targetWindow(stageFuture.get(25, TimeUnit.SECONDS));
             FXTestUtils.bringToFront(stage);
@@ -55,9 +55,7 @@ public class FilePaneTest extends GuiTest {
     @Test
     public void testSaveButton()
     {
-        log.print("move ");
-        move(300,200);
-        click("#save_button1");
+        click("#left_save_button");
         assertNodeExists("Click");
     }
 }
