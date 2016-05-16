@@ -54,9 +54,27 @@ public class OpenFileWindowTest extends GuiTest {
         return stage.getScene().getRoot();
     }
     @Test
+    public void testLeftFileFindButton()
+    {
+        click("#left_file_find_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testRightFileFindButton()
+    {
+        click("#right_file_find_button");
+        assertNodeExists("Click");
+    }
+    @Test
     public void testOkButton()
     {
         click("#ok_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testCancelButton()
+    {
+        click("#cancel_button");
         assertNodeExists("Click");
     }
 
