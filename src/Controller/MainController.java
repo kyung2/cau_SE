@@ -3,12 +3,17 @@ package Controller;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class MainController {
     @FXML
@@ -62,7 +67,20 @@ public class MainController {
     @FXML
     private MenuItem open_menu_item;
     @FXML
-    private void clickOpenMenuItem() { System.out.println("Click"); }
+    private void clickOpenMenuItem() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OpenFileWindow.fxml"));
+        Parent root;
+        try {
+            root = (Parent) loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("OpenFileWindow");
+            stage.show();
+        } catch (IOException ex) {
+        }
+        System.out.println("Click");
+    }
     @FXML
     private MenuItem save_menu_item;
     @FXML

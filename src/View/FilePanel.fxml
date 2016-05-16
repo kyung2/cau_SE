@@ -14,25 +14,24 @@
             </center>
         </BorderPane>
     </center>
-    <top>
-        <ToolBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="219.0" BorderPane.alignment="CENTER">
-            <items>
-                <Label fx:id="file_label" prefHeight="19.0" prefWidth="72.0" text="FileName">
+   <bottom>
+      <TextArea fx:id="file_panel_bottom_text_area" prefHeight="18.0" prefWidth="435.0" text="기타정보&#10;" BorderPane.alignment="CENTER" />
+   </bottom>
+   <top>
+      <AnchorPane prefHeight="20.0" prefWidth="294.0" BorderPane.alignment="CENTER">
+         <children>
+                <Label fx:id="file_label" layoutX="26.0" layoutY="7.0" prefHeight="19.0" prefWidth="72.0" text="FileName" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
                     <font>
                         <Font size="15.0" />
                     </font>
                 </Label>
-                <HBox prefHeight="23.0" prefWidth="66.0" />
-                <Button id="load_button" fx:id="load_button" mnemonicParsing="false" onAction="#clickLoadButton" text="Load" />
-                <Button id="edit_button" fx:id="edit_button" mnemonicParsing="false" onAction="#clickEditButton" text="Edit" />
-                <Button id="save_button" fx:id="save_button" contentDisplay="TOP" mnemonicParsing="false" onAction="#clickSaveButton" text="Save">
+                <Button id="load_button" fx:id="load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#clickLoadButton" prefHeight="23.0" prefWidth="45.0" text="Load" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="5.0" />
+                <Button id="edit_button" fx:id="edit_button" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickEditButton" prefHeight="23.0" prefWidth="45.0" text="Edit" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="5.0" />
+                <Button id="save_button" fx:id="save_button" contentDisplay="TOP" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickSaveButton" prefHeight="23.0" prefWidth="45.0" text="Save" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
                     <opaqueInsets>
                         <Insets />
                     </opaqueInsets></Button>
-            </items>
-        </ToolBar>
-    </top>
-   <bottom>
-      <TextArea fx:id="file_panel_bottom_text_area" prefHeight="18.0" prefWidth="435.0" text="기타정보&#10;" BorderPane.alignment="CENTER" />
-   </bottom>
+         </children>
+      </AnchorPane>
+   </top>
 </BorderPane>
