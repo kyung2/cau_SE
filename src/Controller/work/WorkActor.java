@@ -41,6 +41,12 @@ public class WorkActor {
         nextWorkActors.add(n);
         return n;
     }
+    public WorkActor next(String s, Object o[]) throws ClassNotFoundException, IllegalAccessException, InstantiationException
+    {
+        WorkActor n = new WorkActor(ChangeStringToWork(s),o);
+        nextWorkActors.add(n);
+        return n;
+    }
     private work ChangeStringToWork(String s)  throws ClassNotFoundException, IllegalAccessException, InstantiationException
     {
         Object k = Class.forName(s).newInstance();
@@ -49,7 +55,7 @@ public class WorkActor {
     }
     private WorkActor giveRes(WorkHave res)
     {
-        if(res==null) this.res=res;
+        if(this.res==null) this.res=res;
         return this;
     }
     public void working() throws Exception {
