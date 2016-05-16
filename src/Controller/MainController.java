@@ -142,11 +142,39 @@ public class MainController {
     @FXML
     private MenuItem help_menu_item;
     @FXML
-    private void clickHelpMenuItem() { System.out.println("Click"); }
+    private void clickHelpMenuItem() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/HelpWindow.fxml"));
+        Parent root;
+        try {
+            root = (Parent) loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("HelpWindow");
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        System.out.println("ClickOpen");
+    }
     @FXML
     private MenuItem program_information_menu_item;
     @FXML
-    private void clickProgramInformationMenuItem() { System.out.println("Click"); }
+    private void clickProgramInformationMenuItem() {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/ProgramInfoWindow.fxml"));
+        Parent root;
+        try {
+            root = (Parent) loader.load();
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("ProgramInformationWindow");
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
+        System.out.println("ClickOpen");
+    }
     @FXML
     private MenuItem close_tab_menu_item;
     @FXML
