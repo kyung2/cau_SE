@@ -37,8 +37,9 @@ public class WorkActor {
     }
     public WorkActor next(String s) throws ClassNotFoundException, IllegalAccessException, InstantiationException
     {
-        nextWorkActors.add(new WorkActor(ChangeStringToWork(s)));
-        return this;
+        WorkActor n = new WorkActor(ChangeStringToWork(s));
+        nextWorkActors.add(n);
+        return n;
     }
     private work ChangeStringToWork(String s)  throws ClassNotFoundException, IllegalAccessException, InstantiationException
     {
