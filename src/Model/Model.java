@@ -1,4 +1,5 @@
 package Model;
+import java.beans.EventHandler;
 import java.io.IOException;
 import java.lang.String;
 import java.util.ArrayList;
@@ -54,14 +55,12 @@ abstract public class Model {
             textChange();
         }
 
-        public ArrayList<Integer>[] LCSMethod(SavedText another) throws NullPointerException
+        public ArrayList<ArrayList<String>[]> LCSMethod(SavedText another) throws NullPointerException
         {
             int x=this.NumOfLine()+1,y=another.NumOfLine()+1, comp;
             int LCS[][] = new int[x][y];
-            boolean LCSBacktrack[][][] = new boolean[x][y][2]; boolean c;
-            ArrayList<Integer> group[] = new ArrayList[2];
-            group[0] = new ArrayList<Integer>();
-            group[1] = new ArrayList<Integer>();
+            boolean LCSBacktrack[][][] = new boolean[x][y][2];
+            ArrayList<ArrayList<String>[]> group = new ArrayList<ArrayList<String>[]>();
 
             for(int i=0;i<x;i++) {
                 LCS[i][y-1]=0; LCSBacktrack[i][y-1][0]=false; LCSBacktrack[i][y-1][1]=true;
@@ -83,21 +82,41 @@ abstract public class Model {
                     }
                 }
             }
-            c=true;
-            for(int i=0,j=0;i<x-1&&j<x-1;)
+            boolean c = true;
+
+            ArrayList<String> st[] = new ArrayList[2];
+            st[0] = new ArrayList<String>();
+            st[1]= new ArrayList<String>();
+            group.add(st);
+
+            for(int i=0,j=0, k=0;i<x-1&&j<x-1;)
             {
+
+
                 if(c!=LCSBacktrack[i][j][0])
                 {
-                    group[0].add(new Integer(i));
-                    group[0].add(new Integer(j));
+                    st = new ArrayList[2];
+                    st[0] = new ArrayList<String>();
+                    st[1]= new ArrayList<String>();
+                    group.add(st);
+                    k++;
                 }
                 c=LCSBacktrack[i][j][0];
                 if(LCSBacktrack[i][j][0])
                 {
+                    group.get(k)[0].add(Read(i));
+                    group.get(k)[1].add(another.Read(j));
                     i++; j++;
                 }
-                else if(LCSBacktrack[i][j][1]) i++;
-                else j++;
+                else if(LCSBacktrack[i][j][1])
+                {
+                    group.get(k)[0].add(Read(i)); i++;
+                }
+                else
+                {
+                    group.get(k)[1].add(another.Read(j));
+                    j++;
+                }
             }
             return group;
         }
@@ -112,7 +131,7 @@ abstract public class Model {
 
     public final int NUMOFTEXTS = 2;
     SavedText codes[];
-    ArrayList<Integer>[] group;
+    ArrayList<ArrayList<String>[]> group;
 
     public Model()
     {
@@ -145,6 +164,25 @@ abstract public class Model {
     public void textRecieve(int i, ArrayList<String> s) throws IndexOutOfBoundsException
     {
         codes[i].WriteAll(s);
+    }
+    public void groupCopy(int index, int dir) throws NullPointerException, IndexOutOfBoundsException
+    {
+        if(dir!=0&&dir!=1) throw new IndexOutOfBoundsException();
+        if(group == null) throw new NullPointerException();
+        group.get(index)[1-dir]=(ArrayList<String>)(group.get(index)[dir].clone());
+        if(index>0)
+        {
+            group.get(index-1)[1-dir].addAll(group.get(index)[1-dir]);
+            group.get(index-1)[dir].addAll(group.get(index)[dir]);
+            if(index+1<=group.size())
+            {
+                group.get(index-1)[1-dir].addAll(group.get(index+1)[1-dir]);
+                group.get(index-1)[dir].addAll(group.get(index+1)[dir]);
+                group.remove(index+1);
+            }
+            group.remove(index);
+        }
+        groupChange();
     }
     protected void textChange()
     {
