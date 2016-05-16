@@ -1,5 +1,6 @@
 package Controller;
 
+import View.OpenFileWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -69,17 +70,11 @@ public class MainController {
     * File 탭 중 Open 을 클릭하면 FileWindow 가 열린다
     * */
     private void clickOpenMenuItem() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/OpenFileWindow.fxml"));
-        Parent root;
+        OpenFileWindow openFileWindow = new OpenFileWindow();
         try {
-            root = (Parent) loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("OpenFileWindow");
-            stage.show();
-        } catch (IOException ex) {
-            System.out.println(ex);
+            openFileWindow.start(new Stage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         System.out.println("ClickOpen");
     }
