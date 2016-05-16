@@ -1,22 +1,17 @@
 package Controller.ControllerWork;
 import Controller.*;
+import Controller.work.*;
 
 /**
  * Created by User on 2016-05-15.
  */
-/*
-public class ExceptionDealingWork implements work{
 
-    Class m;
-    Exception e;
-    ExceptionDealingWork(Class m, Exception e)
-    {
-        this.m=m;
-        this.e=e;
-    }
-    public void whatWillDo() throws Exception
-    {
-        //Todo - dealing many exception and work
+public class ExceptionDealingWork implements work {
+
+    public Object[] whatWillDo(WorkHave res) throws Exception {
+
+        //todo - deal Exceptions
+        return null;
     }
 }
-*/
+
