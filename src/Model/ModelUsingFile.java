@@ -32,7 +32,7 @@ public class ModelUsingFile extends Model {
         }
     }
 
-    ModelUsingFile()
+    public ModelUsingFile()
     {
         super();
         SavedTextCanFileRR[] s = {new SavedTextCanFileRR(), new SavedTextCanFileRR()};

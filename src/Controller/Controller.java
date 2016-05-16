@@ -2,15 +2,17 @@ package Controller;
 
 import java.util.ArrayList;
 
+import Controller.ControllerWork.*;
+import Controller.work.*;
 import Model.*;
 
 /**
  * Created by User on 2016-05-15.
  */
-/*
+
 public class Controller {
 
-    ArrayList<work> queue;
+    ArrayList<WorkActor> queue;
 
     public Controller c;
     public Model m;
@@ -25,16 +27,12 @@ public class Controller {
         this.m = m;
         this.v = v;
         this.c = this;
-        queue = new  ArrayList<work>();
+        queue = new  ArrayList<WorkActor>();
         isWork=false;
         lastDeal= System.currentTimeMillis();
     }
-    ~Controller()
-    {
-        stop();
-    }
 
-    public void enqueue(work me)
+    public void enqueue(WorkActor me)
     {
         queue.add(0,me);
         lastDeal += DEALTIMEGAP;
@@ -44,11 +42,12 @@ public class Controller {
         if(System.currentTimeMillis()-lastDeal>DEALTIMEGAP) {
             if (queue.size() != 0) {
                 try {
-                    queue.get(0).whatWillDo();
+                    queue.get(0).working();
                 }
                 catch(Exception e)
                 {
-                    this.enqueue(new ExceptionDealingWork(queue.get(0).getClass(),e));
+                    Object o[] = {e, queue.get(0).workClass()};
+                    this.enqueue(new WorkActor(new ExceptionDealingWork(),o));
                 }
                 finally {
                     queue.remove(0);
@@ -69,7 +68,7 @@ public class Controller {
             {
                 isWork=true;
                 Controller.workdeals=c;
-                v.launch(args); //Todo make method what do launch
+                v.launch(args);
                 while (workdeals.isWork) {
                     workdeals.deal();
                 }
@@ -83,7 +82,7 @@ public class Controller {
     {
         //Todo make method when program exit
     }
-}
+
     public void execute(String args[])
     {
         Thread t = new Thread(new ExecuteRunnable(args));
@@ -103,13 +102,14 @@ public class Controller {
         View v;
         Controller c;
 
-        // todo - m,v의 오브젝트 생성
+        m = new ModelUsingFile();
+        v = new View(); //todo - change your class extended View
 
-        c=Controller(m,v);
+        c= new Controller(m,v);
 
         c.execute(args);
     }
 }
-*/
+
 
 
