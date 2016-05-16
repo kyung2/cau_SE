@@ -57,6 +57,59 @@ public class MainWindowTest extends GuiTest {
     {
         click("#compare_button");
         assertNodeExists("Click");
-
+    }
+    @Test
+    public void testNextDifferenceButton()
+    {
+        click("#next_difference_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testPostDifferenceButton()
+    {
+        click("#post_difference_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testFirstDifferenceButton()
+    {
+        click("#first_difference_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testNowDifferenceButton()
+    {
+        click("#now_difference_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testLastDifferenceButton()
+    {
+        click("#last_difference_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testCopyToRightButton()
+    {
+        click("#copy_to_right_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testCopyToLeftButton()
+    {
+        click("#copy_to_left_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testCopyToRightAllButton()
+    {
+        click("#copy_to_right_all_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testCopyToLeftAllButton()
+    {
+        click("#copy_to_left_all_button");
+        assertNodeExists("Click");
     }
 }
