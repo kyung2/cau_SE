@@ -52,10 +52,41 @@ public class TabPaneTest extends GuiTest {
     protected Parent getRootNode() {
         return stage.getScene().getRoot();
     }
+
     @Test
-    public void testSaveButton()
+    public void testLeftLoadButton()
+    {
+        click("#left_load_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testLeftEditButton()
+    {
+        click("#left_edit_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testLeftSaveButton()
     {
         click("#left_save_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testRightLoadButton()
+    {
+        click("#right_load_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testRightEditButton()
+    {
+        click("#right_edit_button");
+        assertNodeExists("Click");
+    }
+    @Test
+    public void testRightSaveButton()
+    {
+        click("#right_save_button");
         assertNodeExists("Click");
     }
 }
