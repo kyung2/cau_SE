@@ -14,39 +14,28 @@ import java.io.File;
  */
 public class SpliteFilePaneController {
     @FXML
-    private Button left_load_button;
-    @FXML
     private void clickLeftLoadButton(){
         fileChooser();
         System.out.println("Click");
     }
     @FXML
-    private Button left_edit_button;
-    @FXML
-    private void clickLeftEditButton() { left_edit_button.setText("Click"); }
-    @FXML
-    private Button left_save_button;
+    private void clickLeftEditButton() { System.out.println("Click"); }
     @FXML
     private void clickLeftSaveButton(){
-        left_save_button.setText("Click");
+        System.out.println("Click");
     }
-    @FXML
-    private Button right_load_button;
     @FXML
     private void clickRightLoadButton(){
         fileChooser();
         System.out.println("Click");
     }
     @FXML
-    private Button right_edit_button;
-    @FXML
-    private void clickRightEditButton() { right_edit_button.setText("Click"); }
-    @FXML
-    private Button right_save_button;
+    private void clickRightEditButton() { System.out.println("Click"); }
     @FXML
     private void clickRightSaveButton(){
-        right_save_button.setText("Click");
+        System.out.println("Click");
     }
+
     private void fileChooser(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");

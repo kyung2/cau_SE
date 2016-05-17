@@ -19,19 +19,24 @@
     <items>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-                <AnchorPane prefHeight="20.0" prefWidth="294.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane prefHeight="33.0" prefWidth="260.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Label fx:id="left_file_label" layoutX="26.0" layoutY="7.0" prefHeight="19.0" prefWidth="72.0" text="FileName" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
-                            <font>
-                                <Font size="15.0" />
-                            </font>
-                        </Label>
-                        <Button id="left_load_button" fx:id="left_load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#clickLeftLoadButton" prefHeight="23.0" prefWidth="45.0" text="Load" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="5.0" />
-                        <Button id="left_edit_button" fx:id="left_edit_button" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickLeftEditButton" prefHeight="23.0" prefWidth="45.0" text="Edit" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="5.0" />
-                        <Button id="left_save_button" fx:id="left_save_button" contentDisplay="TOP" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickLeftSaveButton" prefHeight="23.0" prefWidth="45.0" text="Save" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                        <Label fx:id="left_file_label" layoutX="26.0" layoutY="7.0" prefHeight="23.0" prefWidth="72.0" text="FileName" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
+                        <Button id="left_load_button" fx:id="left_load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#clickLeftLoadButton" prefHeight="16.0" prefWidth="16.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="8.0">
+                     <font>
+                        <Font size="4.0" />
+                     </font></Button>
+                        <Button id="left_edit_button" fx:id="left_edit_button" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickLeftEditButton" prefHeight="16.0" prefWidth="16.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="8.0">
+                     <font>
+                        <Font size="4.0" />
+                     </font></Button>
+                        <Button id="left_save_button" fx:id="left_save_button" contentDisplay="TOP" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickLeftSaveButton" prefHeight="16.0" prefWidth="16.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="8.0">
                             <opaqueInsets>
                                 <Insets />
                             </opaqueInsets>
+                     <font>
+                        <Font size="4.0" />
+                     </font>
                   </Button>
                     </children>
                 </AnchorPane>
@@ -45,20 +50,25 @@
       </AnchorPane>
       <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-                <AnchorPane layoutX="-34.0" layoutY="35.0" prefHeight="20.0" prefWidth="294.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane layoutX="-34.0" layoutY="35.0" prefHeight="33.0" prefWidth="294.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Label fx:id="right_file_label" layoutX="26.0" layoutY="7.0" prefHeight="19.0" prefWidth="72.0" text="FileName" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0">
-                            <font>
-                                <Font size="15.0" />
-                            </font>
-                        </Label>
-                        <Button id="right_load_button" fx:id="right_load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#clickRightLoadButton" prefHeight="23.0" prefWidth="45.0" text="Load" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="110.0" AnchorPane.topAnchor="5.0" />
-                        <Button id="right_edit_button" fx:id="right_edit_button" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickRightEditButton" prefHeight="23.0" prefWidth="45.0" text="Edit" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="5.0" />
-                        <Button id="right_save_button" fx:id="right_save_button" contentDisplay="TOP" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickRightSaveButton" prefHeight="23.0" prefWidth="45.0" text="Save" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="5.0">
+                        <Button id="right_load_button" fx:id="right_load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#clickRightLoadButton" prefHeight="16.0" prefWidth="16.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="8.0">
+                     <font>
+                        <Font size="4.0" />
+                     </font></Button>
+                        <Button id="right_edit_button" fx:id="right_edit_button" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickRightEditButton" prefHeight="16.0" prefWidth="16.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="8.0">
+                     <font>
+                        <Font size="4.0" />
+                     </font></Button>
+                        <Button id="right_save_button" fx:id="right_save_button" contentDisplay="TOP" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickRightSaveButton" prefHeight="16.0" prefWidth="16.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="8.0">
                             <opaqueInsets>
                                 <Insets />
                             </opaqueInsets>
+                     <font>
+                        <Font size="4.0" />
+                     </font>
                   </Button>
+                  <Label fx:id="right_file_label" layoutX="22.0" layoutY="4.0" prefHeight="23.0" prefWidth="72.0" text="FileName" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
                     </children>
                 </AnchorPane>
             <SplitPane dividerPositions="0.98" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
