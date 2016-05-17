@@ -1,22 +1,18 @@
 #left_edit_button {
     -fx-background-image: url("/View/Image/edit.png");
 }
-
 #left_load_button {
     -fx-background-image: url("/View/Image/load.png");
 }
-
 #left_save_button {
     -fx-background-image: url("/View/Image/save.png");
 }
 #right_edit_button {
     -fx-background-image: url("/View/Image/edit.png");
 }
-
 #right_load_button {
     -fx-background-image: url("/View/Image/load.png");
 }
-
 #right_save_button {
     -fx-background-image: url("/View/Image/save.png");
 }

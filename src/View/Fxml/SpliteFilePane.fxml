@@ -42,8 +42,8 @@
                 </AnchorPane>
             <SplitPane dividerPositions="0.98" layoutX="50.0" layoutY="77.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
               <items>
-                        <TextArea fx:id="left_text_area" prefHeight="310.0" prefWidth="226.0" />
-                      <TextArea fx:id="left_file_panel_bottom_text_area" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" text="기타정보&#10;" />
+                        <TextArea fx:id="left_text_area" editable="false" prefHeight="310.0" prefWidth="226.0" />
+                      <TextArea fx:id="left_file_panel_bottom_text_area" editable="false" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" />
               </items>
             </SplitPane>
          </children>
@@ -73,8 +73,8 @@
                 </AnchorPane>
             <SplitPane dividerPositions="0.98" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
               <items>
-                        <TextArea fx:id="right_text_area" prefHeight="310.0" prefWidth="260.0" />
-                      <TextArea fx:id="right_file_panel_bottom_text_area" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" text="기타정보&#10;" />
+                        <TextArea fx:id="right_text_area" editable="false" prefHeight="310.0" prefWidth="260.0" />
+                      <TextArea fx:id="right_file_panel_bottom_text_area" editable="false" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" />
               </items>
             </SplitPane>
          </children>

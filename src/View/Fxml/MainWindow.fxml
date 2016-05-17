@@ -23,16 +23,16 @@
          <top>
               <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                   <items>
-                      <Button id="next_difference_button" fx:id="next_difference_button" mnemonicParsing="false" onAction="#clickNextDifferenceButton" prefHeight="32.0" prefWidth="32.0" text="Next Dif" />
-                      <Button id="post_difference_button" fx:id="post_difference_button" mnemonicParsing="false" onAction="#clickPostDifferenceButton" prefHeight="32.0" prefWidth="32.0" text="Post Dif" />
-                      <Button id="first_difference_button" fx:id="first_difference_button" mnemonicParsing="false" onAction="#clickFirstDifferenceButton" prefHeight="32.0" prefWidth="32.0" text="First Dif" />
-                      <Button id="now_difference_button" fx:id="now_difference_button" mnemonicParsing="false" onAction="#clickNowDifferenceButton" prefHeight="32.0" prefWidth="32.0" text="Now Dif" />
-                      <Button id="last_difference_button" fx:id="last_difference_button" mnemonicParsing="false" onAction="#clickLastDifferenceButton" prefHeight="32.0" prefWidth="32.0" text="Last Dif" />
-                      <Button id="copy_to_right_button" fx:id="copy_to_right_button" mnemonicParsing="false" onAction="#clickCopyToRightButton" prefHeight="32.0" prefWidth="32.0" text="CtoR" />
-                      <Button id="copy_to_left_button" fx:id="copy_to_left_button" mnemonicParsing="false" onAction="#clickCopyToLeftButton" prefHeight="32.0" prefWidth="32.0" text="CtoL" textAlignment="CENTER" />
-                      <Button id="copy_to_right_all_button" fx:id="copy_to_right_all_button" mnemonicParsing="false" onAction="#clickCopyToRightAllButton" prefHeight="32.0" prefWidth="32.0" text="CtoRAll" />
-                      <Button id="copy_to_left_all_button" fx:id="copy_to_left_all_button" mnemonicParsing="false" onAction="#clickCopyToLeftAllButton" prefHeight="32.0" prefWidth="32.0" text="CtoLAll" />
-                      <Button id="compare_button" fx:id="compare_button" mnemonicParsing="false" onAction="#clickCompareButton" prefHeight="32.0" prefWidth="32.0" text="Compare" />
+                      <Button id="next_difference_button" fx:id="next_difference_button" mnemonicParsing="false" onAction="#clickNextDifferenceButton" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="post_difference_button" fx:id="post_difference_button" mnemonicParsing="false" onAction="#clickPostDifferenceButton" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="first_difference_button" fx:id="first_difference_button" mnemonicParsing="false" onAction="#clickFirstDifferenceButton" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="now_difference_button" fx:id="now_difference_button" mnemonicParsing="false" onAction="#clickNowDifferenceButton" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="last_difference_button" fx:id="last_difference_button" mnemonicParsing="false" onAction="#clickLastDifferenceButton" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="copy_to_right_button" fx:id="copy_to_right_button" mnemonicParsing="false" onAction="#clickCopyToRightButton" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="copy_to_left_button" fx:id="copy_to_left_button" mnemonicParsing="false" onAction="#clickCopyToLeftButton" prefHeight="32.0" prefWidth="32.0" textAlignment="CENTER" />
+                      <Button id="copy_to_right_all_button" fx:id="copy_to_right_all_button" mnemonicParsing="false" onAction="#clickCopyToRightAllButton" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="copy_to_left_all_button" fx:id="copy_to_left_all_button" mnemonicParsing="false" onAction="#clickCopyToLeftAllButton" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="compare_button" fx:id="compare_button" mnemonicParsing="false" onAction="#clickCompareButton" prefHeight="32.0" prefWidth="32.0" />
                   </items>
               </ToolBar>
          </top>
