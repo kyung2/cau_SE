@@ -9,19 +9,19 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * Created by woojin on 2016-05-17.
+ * Created by woojin on 2016-05-18.
  */
-public class ProgramInformationWindow extends Application {
+public class SaveFileWindow extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/ProgramInfoWindow.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/SaveFileWindow.fxml"));
         Parent root;
         try {
             root = (Parent) loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setTitle("ProgramInformationWindow");
+            stage.setTitle("SaveFileWindow");
             stage.show();
         } catch (IOException ex) {
             System.out.println(ex);
