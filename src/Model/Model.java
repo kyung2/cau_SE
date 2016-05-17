@@ -1,6 +1,5 @@
 package Model;
-import java.beans.EventHandler;
-import java.io.IOException;
+import java.io.*;
 import java.lang.String;
 import java.util.ArrayList;
 
@@ -8,9 +7,11 @@ import java.util.ArrayList;
  * Created by User on 2016-05-14.
  */
 
-abstract public class Model {
+public class Model {
 
     static abstract class SavedText
+            // the texts what saved in model
+            // please close this method who only using this
     {
         protected ArrayList<String> lines;
         Model m;
@@ -22,13 +23,13 @@ abstract public class Model {
         abstract protected void ReadFromOuter(String s) throws IOException;
         abstract protected void WriteFromOuter(String s) throws IOException;
 
-        public void ReadFrom(String s) throws IOException
+        void ReadFrom(String s) throws IOException
         {
             ReadFromOuter(s);
             textChange();
         }
 
-        public void WriteFrom(String s) throws IOException
+        void WriteFrom(String s) throws IOException
         {
             ReadFromOuter(s);
             textChange();
@@ -55,7 +56,7 @@ abstract public class Model {
             textChange();
         }
 
-        public ArrayList<ArrayList<String>[]> LCSMethod(SavedText another) throws NullPointerException
+        public ArrayList<ArrayList<String>[]> LCSMethod(SavedText another) throws NullPointerException // please close this method who only using this
         {
             int x=this.NumOfLine()+1,y=another.NumOfLine()+1, comp;
             int LCS[][] = new int[x][y];
@@ -132,30 +133,45 @@ abstract public class Model {
     public final int NUMOFTEXTS = 2;
     SavedText codes[];
     ArrayList<ArrayList<String>[]> group;
+    ArrayList<String>[] fixedCodes;
+    ArrayList<Boolean>[] fixedCodesColor;
+
 
     public Model()
     {
         assert NUMOFTEXTS > 1;
         codes = null;
         group = null;
+        SavedTextCanFileRR[] s = {new SavedTextCanFileRR(this), new SavedTextCanFileRR(this)};
+        codes = s;
+        textLinking(s);
+
     }
 
-    public void open(String s, int i) throws IOException, IndexOutOfBoundsException
-    {
-        codes[i].ReadFromOuter(s);
-    }
-    public void save(String s, int i) throws IOException, IndexOutOfBoundsException
-    {
-        codes[i].WriteFromOuter(s);
-    }
-    public void textLinking(SavedText[] s) throws IndexOutOfBoundsException
+
+    protected void textLinking(SavedText[] s) throws IndexOutOfBoundsException
     {
         for(int i=0;i<NUMOFTEXTS;i++) codes[i]=s[i];
     }
-    public void grouping()
+    protected void regrouping() //
     {
         group = codes[0].LCSMethod(codes[1]);
         groupChange();
+    }
+
+
+
+
+
+
+
+    public void open(String s, int i) throws IOException, IndexOutOfBoundsException //open from string
+    {
+        codes[i].ReadFromOuter(s);
+    }
+    public void save(String s, int i) throws IOException, IndexOutOfBoundsException //close to string
+    {
+        codes[i].WriteFromOuter(s);
     }
     public ArrayList<String> textSend(int i) throws IndexOutOfBoundsException
     {
@@ -198,3 +214,29 @@ abstract public class Model {
 }
 
 
+class SavedTextCanFileRR extends Model.SavedText
+{
+    public void ReadFromOuter(String s) throws IOException {
+        File aFile = new File(s);
+        FileReader fileReader = new FileReader(aFile);
+        BufferedReader reader = new BufferedReader(fileReader);
+        String line;
+        while ((line = reader.readLine()) != null) {
+            lines.add(line);
+        }
+        reader.close();
+    }
+    public void WriteFromOuter(String s) throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(s));
+        String line;
+        for(int i=0;i<lines.size();i++) {
+            writer.write(lines.get(i));
+        }
+        writer.close();
+    }
+
+    SavedTextCanFileRR(Model m)
+    {
+        super(m);
+    }
+}
