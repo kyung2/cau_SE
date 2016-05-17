@@ -18,7 +18,6 @@ public class MainWindow extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.getScene().getStylesheets().add("/View/Css/main.css");
         primaryStage.show();
-
     }
 
     public static void main(String[] args) {
