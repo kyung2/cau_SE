@@ -1,5 +1,6 @@
 package Controller;
 
+import View.HelpWindow;
 import View.OpenFileWindow;
 import View.ProgramInformationWindow;
 import javafx.fxml.FXML;
@@ -102,19 +103,13 @@ public class MainController {
     private void clickCompareMenuItem() { System.out.println("Click"); }
     @FXML
     private void clickHelpMenuItem() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/HelpWindow.fxml"));
-        Parent root;
+        HelpWindow HelpWindow = new HelpWindow();
         try {
-            root = (Parent) loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("HelpWindow");
-            stage.show();
-        } catch (IOException ex) {
-            System.out.println(ex);
+            HelpWindow.start(new Stage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println("ClickOpen");
+        System.out.println("ClickHelp");
     }
     @FXML
     private void clickProgramInformationMenuItem() {
@@ -124,7 +119,7 @@ public class MainController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("ClickHelp");
+        System.out.println("ClickProgramInfo");
     }
     @FXML
     private void clickCloseTabMenuItem() { System.out.println("Click"); }
