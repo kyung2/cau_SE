@@ -12,7 +12,7 @@ import java.io.File;
  * has Load, Save, Edit button action.
  * in Load button action, make file chooser.
  */
-public class TabPaneController {
+public class SpliteFilePaneController {
     @FXML
     private Button left_load_button;
     @FXML
