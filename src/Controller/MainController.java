@@ -1,6 +1,7 @@
 package Controller;
 
 import View.OpenFileWindow;
+import View.ProgramInformationWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -117,19 +118,13 @@ public class MainController {
     }
     @FXML
     private void clickProgramInformationMenuItem() {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/ProgramInfoWindow.fxml"));
-        Parent root;
+        ProgramInformationWindow programInformationWindow = new ProgramInformationWindow();
         try {
-            root = (Parent) loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("ProgramInformationWindow");
-            stage.show();
-        } catch (IOException ex) {
-            System.out.println(ex);
+            programInformationWindow.start(new Stage());
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        System.out.println("ClickOpen");
+        System.out.println("ClickHelp");
     }
     @FXML
     private void clickCloseTabMenuItem() { System.out.println("Click"); }
