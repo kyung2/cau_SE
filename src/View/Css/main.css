@@ -23,15 +23,30 @@
 #compare_button {
     -fx-background-image: url("/View/Image/compare.png");
 }
-
+#next_difference_button{
+    -fx-background-image: url("/View/Image/next_difference.png");
+}
+#post_difference_button{
+    -fx-background-image: url("/View/Image/post_difference.png");
+}
+#first_difference_button{
+    -fx-background-image: url("/View/Image/first_difference.png");
+}
+#now_difference_button{
+    -fx-background-image: url("/View/Image/now_difference.png");
+}
+#last_difference_button{
+    -fx-background-image: url("/View/Image/last_difference.png");
+}
 #copy_to_right_button {
+    -fx-background-image: url("/View/Image/copy_to_right.png");
 }
-
 #copy_to_left_button {
+    -fx-background-image: url("/View/Image/copy_to_left.png");
 }
-
 #copy_to_right_all_button {
+    -fx-background-image: url("/View/Image/copy_to_right_all.png");
 }
-
 #copy_to_left_all_button {
+    -fx-background-image: url("/View/Image/copy_to_left_all.png");
 }
