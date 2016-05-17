@@ -32,7 +32,7 @@
                       <Button fx:id="copy_to_left_button" mnemonicParsing="false" onAction="#clickCopyToLeftButton" text="CtoL" textAlignment="CENTER" />
                       <Button fx:id="copy_to_right_all_button" mnemonicParsing="false" onAction="#clickCopyToRightAllButton" text="CtoRAll" />
                       <Button fx:id="copy_to_left_all_button" mnemonicParsing="false" onAction="#clickCopyToLeftAllButton" text="CtoLAll" />
-                      <Button id="compare_button" fx:id="compare_button" mnemonicParsing="false" onAction="#clickCompareButton" text="Compare" />
+                      <Button id="compare_button" fx:id="compare_button" mnemonicParsing="false" onAction="#clickCompareButton" prefHeight="32.0" prefWidth="32.0" />
                   </items>
               </ToolBar>
          </top>

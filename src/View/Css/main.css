@@ -1,14 +1,14 @@
-#edit_button {
-
+#left_edit_button {
 }
 
-#load_button {
+#left_load_button {
 }
 
-#save_button {
+#left_save_button {
 }
 
 #compare_button {
+    -fx-background-image: url("/View/Image/compare.png");
 }
 
 #copy_to_right_button {
