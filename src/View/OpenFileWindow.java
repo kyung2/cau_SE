@@ -5,7 +5,7 @@ import Controller.OpenFileWindowController;
 /**
  * Created by woojin on 2016-05-16.
  */
-public class OpenFileWindow extends abstractFileWindow {
+public class OpenFileWindow extends AbstractFileWindow {
 
 
     public OpenFileWindow() {

@@ -1,14 +1,11 @@
 package Controller;
 
+import View.AbstractAlarmWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
-import sun.plugin.javascript.navig.Anchor;
 
 import java.io.File;
 import java.net.URL;
@@ -46,7 +43,7 @@ public class SplitFilePaneController implements Initializable {
         left_load_button.setDisable(false);
         right_load_button.setDisable(false);
         left_edit_button.setDisable(true);
-        left_save_button.setDisable(true);
+        left_save_button.setDisable(false);
         right_edit_button.setDisable(true);
         right_save_button.setDisable(true);
     }
@@ -109,6 +106,12 @@ public class SplitFilePaneController implements Initializable {
     * */
     @FXML
     private void clickLeftSaveButton(){
+        AbstractAlarmWindow window = new AbstractAlarmWindow("Would you want to save this file?") {
+            @Override
+            public void initLabel() {
+                System.out.println("ㅎㅎ");
+            }
+        };
         left_load_button.setDisable(false);
         left_save_button.setDisable(false);
     }
