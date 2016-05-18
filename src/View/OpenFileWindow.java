@@ -1,30 +1,27 @@
 package View;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
+import Controller.OpenFileWindowController;
 
-import java.io.IOException;
+import javax.swing.*;
 
 /**
  * Created by woojin on 2016-05-16.
  */
-public class OpenFileWindow extends Application {
+public class OpenFileWindow extends AbstractFileWindow {
+
+
+    public OpenFileWindow() {
+        super("OpenFileWindow");
+        addButtonAction();
+    }
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/OpenFIleWindow.fxml"));
-        Parent root;
-        try {
-            root = (Parent) loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("OpenFileWindow");
-            stage.show();
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
+    protected void addButtonAction() {
+        OpenFileWindowController openFileWindowController = new OpenFileWindowController();
+
+        getOkButton().setOnAction(event -> openFileWindowController.clickOkButton());
+        getRightFileFindButton().setOnAction(event -> openFileWindowController.clickRightFileFindButton());
+        getLeftFileFindButton().setOnAction(event -> openFileWindowController.clickLeftFileFindButton());
+        getCancelButton().setOnAction(event -> openFileWindowController.clickCancelButton());
     }
 }

@@ -11,9 +11,9 @@ import java.io.IOException;
 /**
  * Created by woojin on 2016-05-17.
  */
-public class ProgramInformationWindow extends Application {
-    @Override
-    public void start(Stage primaryStage) throws Exception {
+public class ProgramInformationWindow {
+
+    public void PrograminformationWindow() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/ProgramInfoWindow.fxml"));
         Parent root;
         try {

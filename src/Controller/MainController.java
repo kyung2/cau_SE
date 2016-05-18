@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -62,15 +63,11 @@ public class MainController {
     private void clickNewTabMenuItem() { System.out.println("Click"); }
     @FXML
     /*
-    * File 탭 중 Open 을 클릭하면 FileWindow 가 열린다
+    * File 탭 중 Open 을 클릭하면 AbstractFileWindow 가 열린다
     * */
     private void clickOpenMenuItem() {
         OpenFileWindow openFileWindow = new OpenFileWindow();
-        try {
-            openFileWindow.start(new Stage());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         System.out.println("ClickOpen");
     }
     @FXML
@@ -105,7 +102,7 @@ public class MainController {
     private void clickHelpMenuItem() {
         HelpWindow HelpWindow = new HelpWindow();
         try {
-            HelpWindow.start(new Stage());
+            HelpWindow.HelpWindow();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,7 +112,7 @@ public class MainController {
     private void clickProgramInformationMenuItem() {
         ProgramInformationWindow programInformationWindow = new ProgramInformationWindow();
         try {
-            programInformationWindow.start(new Stage());
+            programInformationWindow.PrograminformationWindow();
         } catch (Exception e) {
             e.printStackTrace();
         }
