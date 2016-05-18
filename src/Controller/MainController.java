@@ -5,15 +5,9 @@ import View.OpenFileWindow;
 import View.ProgramInformationWindow;
 import View.SaveFileWindow;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
-import javafx.stage.Stage;
-
-import java.io.IOException;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Window;
 
 public class MainController {
     @FXML
@@ -63,12 +57,8 @@ public class MainController {
     @FXML
     private void clickNewTabMenuItem() { System.out.println("Click"); }
     @FXML
-    /*
-    * File 탭 중 Open 을 클릭하면 AbstractFileWindow 가 열린다
-    * */
     private void clickOpenMenuItem() {
         OpenFileWindow openFileWindow = new OpenFileWindow();
-
         System.out.println("ClickOpen");
     }
     @FXML
@@ -81,7 +71,18 @@ public class MainController {
     @FXML
     private void clickSaveLeftFileMenuItem() { System.out.println("Click"); }
     @FXML
-    private void clickCloseMenuItem() { System.out.println("Click"); }
+    BorderPane main_pane;// 어떤 윈도우를 없에는지 지정하기위해 만듬
+    @FXML
+    private void clickCloseMenuItem() {
+        /*
+        여러가지 조건 필요
+
+        EX> 저장되지 않은 상태라면 저장하고 종료를 묻는다.
+            Compare 중 이라면 merge 하지않고 종료할 것인지 묻는다.
+        * */
+        ((Window)(main_pane.getScene().getWindow())).hide();// 종료 method
+        System.out.println("Click");
+    }
     @FXML
     private void clickNextDifferenceMenuItem() { System.out.println("Click"); }
     @FXML
