@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import sun.plugin.javascript.navig.Anchor;
 
@@ -18,19 +19,27 @@ import java.io.File;
  */
 public class SpliteFilePaneController {
     @FXML
-    private AnchorPane left_file_pane;
+    private TextArea left_text_area;
+    @FXML
+    private TextArea right_text_area;
     @FXML
     private void clickLeftLoadButton(){
         fileChooser();
         System.out.println("Click");
     }
-    @FXML
     /*
     * 클릭하면 edit 이 가능하게 바꿈
     * */
+    @FXML
     private void clickLeftEditButton() {
-        ((TextArea)((SplitPane)(left_file_pane.getChildren().get(1))).getItems().get(0)).setEditable(true);
-        System.out.println("EditClick");
+        boolean edit_flag = left_text_area.isEditable();
+        if(edit_flag){
+            //수정이 가능할 때 - 누르면 수정이 불가능해짐. 파일은 저장?
+            left_text_area.setEditable(false);
+        }
+        else{
+            left_text_area.setEditable(true);
+        }
     }
     @FXML
     private void clickLeftSaveButton(){
@@ -42,7 +51,16 @@ public class SpliteFilePaneController {
         System.out.println("Click");
     }
     @FXML
-    private void clickRightEditButton() { System.out.println("Click"); }
+    private void clickRightEditButton() {
+        boolean edit_flag = right_text_area.isEditable();
+        if(edit_flag){
+            //수정이 가능할 때 - 누르면 수정이 불가능해짐. 파일은 저장?
+            right_text_area.setEditable(false);
+        }
+        else{
+            right_text_area.setEditable(true);
+        }
+    }
     @FXML
     private void clickRightSaveButton(){
         System.out.println("Click");

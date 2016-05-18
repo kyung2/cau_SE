@@ -19,7 +19,7 @@
     <items>
       <AnchorPane fx:id="left_file_pane"  prefHeight="200.0" prefWidth="200.0">
          <children>
-                <AnchorPane prefHeight="33.0" prefWidth="260.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane fx:id="left_file_button_tab" prefHeight="33.0" prefWidth="260.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <Label fx:id="left_file_label" layoutX="26.0" layoutY="7.0" prefHeight="23.0" prefWidth="72.0" text="FileName" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
                         <Button id="left_load_button" fx:id="left_load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#clickLeftLoadButton" prefHeight="16.0" prefWidth="16.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="8.0">
@@ -43,14 +43,14 @@
             <SplitPane dividerPositions="0.98" layoutX="50.0" layoutY="77.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
               <items>
                         <TextArea fx:id="left_text_area" editable="false" minWidth="20.0" prefHeight="310.0" prefWidth="226.0" />
-                      <TextArea fx:id="left_file_panel_bottom_text_area" editable="false" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" />
+                      <TextArea fx:id="left_file_bottom_text_area" editable="false" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" />
               </items>
             </SplitPane>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="right_file_pane" prefHeight="200.0" prefWidth="200.0">
          <children>
-                <AnchorPane layoutX="-34.0" layoutY="35.0" prefHeight="33.0" prefWidth="294.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <AnchorPane fx:id="right_file_button_tab" layoutX="-34.0" layoutY="35.0" prefHeight="33.0" prefWidth="294.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <Button id="right_load_button" fx:id="right_load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#clickRightLoadButton" prefHeight="16.0" prefWidth="16.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="8.0">
                      <font>
@@ -74,7 +74,7 @@
             <SplitPane dividerPositions="0.98" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
               <items>
                         <TextArea fx:id="right_text_area" editable="false" minWidth="20.0" prefHeight="310.0" prefWidth="260.0" />
-                      <TextArea fx:id="right_file_panel_bottom_text_area" editable="false" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" />
+                      <TextArea fx:id="right_file_bottom_text_area" editable="false" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" />
               </items>
             </SplitPane>
          </children>
