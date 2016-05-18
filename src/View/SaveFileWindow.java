@@ -1,30 +1,18 @@
 package View;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-
-import java.io.IOException;
+import Controller.SaveFileWindowController;
 
 /**
  * Created by woojin on 2016-05-18.
  */
-public class SaveFileWindow {
+public class SaveFileWindow extends abstractFileWindow {
 
-    public void SaveFileWindow() throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/SaveFileWindow.fxml"));
-        Parent root;
-        try {
-            root = (Parent) loader.load();
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("SaveFileWindow");
-            stage.show();
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
+    public SaveFileWindow() {
+        super("SaveFileWindow",new SaveFileWindowController());
+        initLabel();
+    }
+    @Override
+    protected void initLabel() {
+        getWindowLabel().setText("Select Directory / File Name");
     }
 }

@@ -7,28 +7,28 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
 
 /**
  * Created by woojin on 2016-05-18.
  */
-public abstract class AbstractFileWindow extends Stage {
-    public AbstractFileWindow(String s) {
+abstract public class abstractFileWindow extends Stage {
+    public abstractFileWindow(String title, Object controllerFile) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/FileWindow.fxml"));
-        Parent root;
+        loader.setController(controllerFile);
+
+        Parent root = null;
         try {
-            root = (Parent) loader.load();
-            Scene scene = new Scene(root);
-            this.setTitle(s);
-            this.setScene(scene);
-            this.show();
-        } catch (IOException ex) {
-            System.out.println(ex);
+            root = loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        Scene scene = new Scene(root);
+        this.setTitle(title);
+        this.setScene(scene);
+        this.show();
     }
     protected Label getWindowLabel(){
         return (Label)(((AnchorPane)this.getScene().getRoot()).getChildren().get(7));
@@ -61,5 +61,5 @@ public abstract class AbstractFileWindow extends Stage {
         return (Button)(((AnchorPane)this.getScene().getRoot()).getChildren().get(9));
     }
 
-    abstract protected void addButtonAction();
+    abstract protected void initLabel();
 }

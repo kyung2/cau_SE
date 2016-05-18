@@ -3,6 +3,7 @@ package Controller;
 import View.HelpWindow;
 import View.OpenFileWindow;
 import View.ProgramInformationWindow;
+import View.SaveFileWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -71,7 +72,10 @@ public class MainController {
         System.out.println("ClickOpen");
     }
     @FXML
-    private void clickSaveMenuItem() { System.out.println("Click"); }
+    private void clickSaveMenuItem() {
+        SaveFileWindow saveFileWindow = new SaveFileWindow();
+        System.out.println("ClickSave");
+    }
     @FXML
     private void clickSaveRightFileMenuItem() { System.out.println("Click"); }
     @FXML

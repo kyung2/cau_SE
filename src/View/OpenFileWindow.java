@@ -2,26 +2,19 @@ package View;
 
 import Controller.OpenFileWindowController;
 
-import javax.swing.*;
-
 /**
  * Created by woojin on 2016-05-16.
  */
-public class OpenFileWindow extends AbstractFileWindow {
+public class OpenFileWindow extends abstractFileWindow {
 
 
     public OpenFileWindow() {
-        super("OpenFileWindow");
-        addButtonAction();
+        super("OpenFileWindow",new OpenFileWindowController());
+        initLabel();
     }
 
     @Override
-    protected void addButtonAction() {
-        OpenFileWindowController openFileWindowController = new OpenFileWindowController();
-
-        getOkButton().setOnAction(event -> openFileWindowController.clickOkButton());
-        getRightFileFindButton().setOnAction(event -> openFileWindowController.clickRightFileFindButton());
-        getLeftFileFindButton().setOnAction(event -> openFileWindowController.clickLeftFileFindButton());
-        getCancelButton().setOnAction(event -> openFileWindowController.clickCancelButton());
+    protected void initLabel(){
+        getWindowLabel().setText("Compare Directory / File");
     }
 }

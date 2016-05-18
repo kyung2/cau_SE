@@ -11,7 +11,7 @@ public class SaveFileWindowController {
         private Button right_file_find_button;
         @FXML
         private void clickRightFileFindButton(){
-            right_file_find_button.setText("Save");
+            right_file_find_button.setText("Click");
         }
         @FXML
         private Button left_file_find_button;
