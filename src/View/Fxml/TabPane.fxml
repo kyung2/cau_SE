@@ -17,6 +17,6 @@
 
 <Tab fx:id="tap" text="File" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" >
     <content>
-        <fx:include source="SpliteFilePane.fxml"></fx:include>
+        <fx:include source="SplitFilePane.fxml"></fx:include>
     </content>
 </Tab>
