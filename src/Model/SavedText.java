@@ -51,7 +51,7 @@ abstract public class SavedText
         int x=this.NumOfLine()+1,y=another.NumOfLine()+1, comp;
         int LCS[][] = new int[x][y];
         boolean LCSBacktrack[][][] = new boolean[x][y][2];
-        ArrayList<ArrayList<>[]> group = new ArrayList<ArrayList<>[]>();
+        ArrayList<ArrayList[]> group = new ArrayList<ArrayList[]>();
 
         for(int i=0;i<x;i++) {
             LCS[i][y-1]=0; LCSBacktrack[i][y-1][0]=false; LCSBacktrack[i][y-1][1]=true;
