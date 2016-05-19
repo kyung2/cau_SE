@@ -1,6 +1,6 @@
 package Controller;
 
-import View.AbstractAlarmWindow;
+import View.AlarmWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -106,12 +106,8 @@ public class SplitFilePaneController implements Initializable {
     * */
     @FXML
     private void clickLeftSaveButton(){
-        AbstractAlarmWindow window = new AbstractAlarmWindow("Would you want to save this file?") {
-            @Override
-            public void initLabel() {
-                System.out.println("ㅎㅎ");
-            }
-        };
+        AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
+
         left_load_button.setDisable(false);
         left_save_button.setDisable(false);
     }
