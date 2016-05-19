@@ -114,7 +114,7 @@ public class SplitFilePaneController implements Initializable {
 
         if((boolean)saveAlarmWindow.getUserData()) {
             left_load_button.setDisable(false);
-            left_save_button.setDisable(false);
+            left_save_button.setDisable(true);
         }
     }
     @FXML
@@ -124,7 +124,7 @@ public class SplitFilePaneController implements Initializable {
 
         if((boolean)saveAlarmWindow.getUserData()) {
             right_load_button.setDisable(false);
-            right_save_button.setDisable(false);
+            right_save_button.setDisable(true);
         }
     }
 

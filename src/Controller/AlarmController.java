@@ -23,10 +23,10 @@ public class AlarmController {
     @FXML
     private void clickNoButton(){
         Window window = yes_button.getScene().getWindow();
-        System.out.println(window);
+
         boolean clicked_button = false;
         window.setUserData(clicked_button);
 
-        System.out.println("Click no");
+        window.hide();
     }
 }
