@@ -16,7 +16,7 @@ public class MainWindow extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/View/Fxml/MainWindow.fxml"));
         primaryStage.setTitle("Simple Merge Program");
         primaryStage.setScene(new Scene(root));
-        primaryStage.getScene().getStylesheets().add("/View/Css/main.css");
+        primaryStage.getScene().getStylesheets().add("/View/Css/mainWindow.css");
         primaryStage.show();
     }
 

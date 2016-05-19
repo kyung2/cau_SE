@@ -1,3 +1,10 @@
+/**
+ * Created by hyunkyung on 2016-05-18.
+ */
+.btn {
+    -fx-background-color: transparent;
+}
+
 #left_edit_button {
     -fx-background-image: url("/View/Image/edit.png");
 }
@@ -6,7 +13,9 @@
 }
 #left_save_button {
     -fx-background-image: url("/View/Image/save.png");
+
 }
+/*edit button !~ */
 #right_edit_button {
     -fx-background-image: url("/View/Image/edit.png");
 }
@@ -46,3 +55,4 @@
 #copy_to_left_all_button {
     -fx-background-image: url("/View/Image/copy_to_left_all.png");
 }
+
