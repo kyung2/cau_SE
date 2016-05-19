@@ -36,48 +36,51 @@ public class ModelRealize implements Model {
 
 
 
-    public void closeModel(int tapNum) {
+    public void closeModel(int tapNum) throws IllegalAccessException{
         u.remove(findTap(tapNum));
 
     }
 
-    public ArrayList<String> getText(int tapNum, int i) {
+    public ArrayList<String> getText(int tapNum, int i) throws IllegalAccessException {
         return u.get(findTap(tapNum)).m.textReceive(i);
     }
 
-    public void setText(int tapNum, ArrayList<String> text, int i) {
+    public void setText(int tapNum, ArrayList<String> text, int i) throws IllegalAccessException {
         u.get(findTap(tapNum)).m.textSend(i, text);
     }
 
-    public void getTextOuter(int tapNum, String filepath, int i) throws IOException {
+    public void getTextOuter(int tapNum, String filepath, int i) throws IOException,IllegalAccessException {
         u.get(findTap(tapNum)).m.open(filepath, i);
     }
 
-    public void setTextOuter(int tapNum, String filepath, int i) throws IOException {
-
+    public void setTextOuter(int tapNum, String filepath, int i) throws IOException,IllegalAccessException {
+        u.get(findTap(tapNum)).m.save(filepath, i);
     }
 
-    @Override
-    public void merge(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException {
-
+    public void merge(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException {
+        u.get(findTap(tapNum)).m.mergeByGroupNum(Index, direction);
     }
 
-    @Override
-    public ArrayList<ArrayList<String>[]> getGroup(int tapNum) {
-        return null;
+
+    public ArrayList<ArrayList<String>>[] getGroup(int tapNum)throws IllegalAccessException {
+        ArrayList[][] a = u.get(findTap(tapNum)).m.getGroup();
+        ArrayList<ArrayList<String>>[] ret = a[0];
+        return ret;
     }
 
-    @Override
-    public ArrayList<String> getGroupLine(int tapNum, int i) {
-        return null;
+    public ArrayList<String>[] getGroupLine(int tapNum, int i)throws IllegalAccessException {
+        ArrayList[][] a = u.get(findTap(tapNum)).m.getGroup();
+        ArrayList<String>[] ret = a[1];
+        return ret;
+    }
+    
+    public ArrayList<Integer>[] getGroupColor(int tapNum, int i)throws IllegalAccessException {
+        ArrayList[][] a = u.get(findTap(tapNum)).m.getGroup();
+        ArrayList<Integer>[] ret = a[2];
+        return ret;
     }
 
-    @Override
-    public ArrayList<Integer> getGroupColor(int tapNum, int i) {
-        return null;
-    }
-
-    private Integer findTap(int tapNum)
+    private Integer findTap(int tapNum) throws IllegalAccessException
     {
         for(int i=0;i<u.size();i++)
         {
@@ -86,7 +89,7 @@ public class ModelRealize implements Model {
                 return i;
             }
         }
-        return null;
+        throw new IllegalAccessException();
     }
 }
 

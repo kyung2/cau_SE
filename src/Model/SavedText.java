@@ -46,12 +46,12 @@ abstract public class SavedText
         lines = new ArrayList<String>(s);
     }
 
-    public ArrayList<ArrayList[]> LCSMethod(SavedText another) throws NullPointerException // todo
+    public ArrayList[][] LCSMethod(SavedText another) throws NullPointerException // todo
     {
         int x=this.NumOfLine()+1,y=another.NumOfLine()+1, comp;
         int LCS[][] = new int[x][y];
         boolean LCSBacktrack[][][] = new boolean[x][y][2];
-        ArrayList<ArrayList[]> group = new ArrayList<ArrayList[]>();
+        ArrayList[][] group = new ArrayList[6][2];
 
         for(int i=0;i<x;i++) {
             LCS[i][y-1]=0; LCSBacktrack[i][y-1][0]=false; LCSBacktrack[i][y-1][1]=true;
@@ -74,6 +74,7 @@ abstract public class SavedText
             }
         }
         boolean c = true;
+        /*
 
         ArrayList<String> st[] = new ArrayList[2];
         st[0] = new ArrayList<String>();
@@ -109,6 +110,8 @@ abstract public class SavedText
                 j++;
             }
         }
+        return group;
+        */ // todo
         return group;
     }
 

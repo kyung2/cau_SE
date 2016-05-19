@@ -14,7 +14,7 @@ class ModelUnit {
 
     public final int NUMOFTEXTS = 2;
     protected SavedText[] codes;
-    protected ArrayList<ArrayList[]> group;
+    protected ArrayList[][] group;
 
     public ModelUnit()
     {
@@ -71,28 +71,7 @@ class ModelUnit {
         codes[i].WriteAll(s);
         groupNull();
     }
-    public void groupCopy(int index, int dir) throws NullPointerException, IndexOutOfBoundsException
-    {
-        if(dir!=0&&dir!=1) throw new IndexOutOfBoundsException();
-        if(group == null)
-        {
-            regrouping();
-        }
-        group.get(index)[1-dir]=(ArrayList<String>)(group.get(index)[dir].clone());
-        if(index>0)
-        {
-            group.get(index-1)[1-dir].addAll(group.get(index)[1-dir]);
-            group.get(index-1)[dir].addAll(group.get(index)[dir]);
-            if(index+1<=group.size())
-            {
-                group.get(index-1)[1-dir].addAll(group.get(index+1)[1-dir]);
-                group.get(index-1)[dir].addAll(group.get(index+1)[dir]);
-                group.remove(index+1);
-            }
-            group.remove(index);
-        }
-        groupChange();
-    }
+
     protected void textChange()
     {
         //todo - give notice that text change
@@ -101,9 +80,20 @@ class ModelUnit {
     {
         //todo - give notice that text change
     }
-    public ArrayList<ArrayList[]> getGroup()
+    public ArrayList[][] getGroup()
     {
-       return group;
+        if(group==null) regrouping();
+       return (ArrayList[][])group.clone();
+    }
+
+    public void mergeByGroupNum(int groupNum, boolean direction) throws IndexOutOfBoundsException
+    {
+        //todo
+    }
+
+    public void mergeBylineNum(int LineNum, boolean direction) throws IndexOutOfBoundsException
+    {
+        //todo
     }
 
 
