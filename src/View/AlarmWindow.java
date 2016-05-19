@@ -14,9 +14,12 @@ import java.io.IOException;
  * 알람 창을 만들어 준다
  * 알람 창의 타이틀과 라벨을 받아서 해당하는 알람창을 만듬
  * 버튼은 Yes 와 No를 가지고 있다.
+ * 어떤 버튼이 눌렸는지 boolean 형으로 isYes 함수를 통해 알려준다.
  */
 public class AlarmWindow extends Stage {
+
     public AlarmWindow(String title, String label) {
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/AlarmWindow.fxml"));
 
         Parent root = null;
@@ -30,9 +33,9 @@ public class AlarmWindow extends Stage {
         this.setTitle(title);
         this.setScene(scene);
         getLabel().setText(label);
-        this.show();
     }
     private Label getLabel(){
         return (Label)((AnchorPane)this.getScene().getRoot()).getChildren().get(0);
     }
+
 }

@@ -43,24 +43,26 @@ public class SplitFilePaneController implements Initializable {
         left_load_button.setDisable(false);
         right_load_button.setDisable(false);
         left_edit_button.setDisable(true);
-        left_save_button.setDisable(false);
+        left_save_button.setDisable(false);// 원래 비 활성화여야 하지만 테스트를 위해 임시로 활성화로 바꿔놈
         right_edit_button.setDisable(true);
         right_save_button.setDisable(true);
     }
     /*
     * 파일을 읽어서 내용이 있을 경우 edit 버튼 활성화
     * load 버튼을 누를 경우 파일을 읽어서 text area 에 파일 내용을 적는다.
-    * 이미 파일이 있을 경우는 ...?
+    * 이미 파일이 있을 경우는 덮어쓰기
     * */
     @FXML
     private void clickLeftLoadButton(){
         fileChooser();
+
         left_edit_button.setDisable(false);
         System.out.println("Click");
     }
     @FXML
     private void clickRightLoadButton(){
         fileChooser();
+
         right_edit_button.setDisable(false);
         System.out.println("Click");
     }
@@ -69,6 +71,7 @@ public class SplitFilePaneController implements Initializable {
     * edit 버튼을 클릭하면 수정 가능하게 바꿈
     * edit 이 가능할 때는 edit 와 save 버튼 말고는 모두 비활성화
     * 수정 가능한 상황에서 한 번 더 버튼을 누르면 다시 수정 불가
+    * 그 후 비활성화 된 load 버튼을 활성화로
     * */
     @FXML
     private void clickLeftEditButton() {
@@ -107,14 +110,22 @@ public class SplitFilePaneController implements Initializable {
     @FXML
     private void clickLeftSaveButton(){
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
+        saveAlarmWindow.showAndWait();
 
-        left_load_button.setDisable(false);
-        left_save_button.setDisable(false);
+        if((boolean)saveAlarmWindow.getUserData()) {
+            left_load_button.setDisable(false);
+            left_save_button.setDisable(false);
+        }
     }
     @FXML
     private void clickRightSaveButton(){
-        right_load_button.setDisable(false);
-        right_save_button.setDisable(false);
+        AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
+        saveAlarmWindow.showAndWait();
+
+        if((boolean)saveAlarmWindow.getUserData()) {
+            right_load_button.setDisable(false);
+            right_save_button.setDisable(false);
+        }
     }
 
     private void fileChooser(){
