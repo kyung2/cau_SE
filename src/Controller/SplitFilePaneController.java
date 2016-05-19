@@ -40,12 +40,9 @@ public class SplitFilePaneController implements Initializable {
     * */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        left_load_button.setDisable(false);
-        right_load_button.setDisable(false);
-        left_edit_button.setDisable(true);
-        left_save_button.setDisable(false);// 원래 비 활성화여야 하지만 테스트를 위해 임시로 활성화로 바꿔놈
-        right_edit_button.setDisable(true);
-        right_save_button.setDisable(true);
+        boolean[] change = {true,true,true};
+        ableButtons("right","true","false","false");
+        ableButtons("left","true","false","false");
     }
     /*
     * 파일을 읽어서 내용이 있을 경우 edit 버튼 활성화
@@ -56,14 +53,14 @@ public class SplitFilePaneController implements Initializable {
     private void clickLeftLoadButton(){
         fileChooser();
 
-        left_edit_button.setDisable(false);
+        ableButtons("left","true","true","false");
         System.out.println("Click");
     }
     @FXML
     private void clickRightLoadButton(){
         fileChooser();
 
-        right_edit_button.setDisable(false);
+        ableButtons("right","true","true","false");
         System.out.println("Click");
     }
     /*
@@ -77,15 +74,16 @@ public class SplitFilePaneController implements Initializable {
     private void clickLeftEditButton() {
         boolean edit_flag = left_text_area.isEditable();
         if(edit_flag){
-            //수정이 가능할 때 - 누르면 수정이 불가능해짐. 로드는 가능해짐. 파일은 저장?
+            //수정이 가능할 때 - 누르면 수정이 불가능해짐. 로드는 가능해짐. 모델에 있는 정보를 바꿈
             left_text_area.setEditable(false);
-            left_load_button.setDisable(false);
+
+            ableButtons("left","true",null,null);
         }
         else{
             //수정이 불가능 할 때 = 누르면 수정이 가능. 로드 불가능, 저장 가능
             left_text_area.setEditable(true);
-            left_load_button.setDisable(true);
-            left_save_button.setDisable(false);
+
+            ableButtons("left","false",null,"true");
         }
     }
     @FXML
@@ -94,13 +92,14 @@ public class SplitFilePaneController implements Initializable {
         if(edit_flag){
             //수정이 가능할 때 - 누르면 수정이 불가능해짐, 로드 불가능, 파일은 저장?
             right_text_area.setEditable(false);
-            right_load_button.setDisable(false);
+
+            ableButtons("right","true",null,null);
         }
         else{
             //수정이 불가능 할 때 - 누르면 수정 가능, 로드 불가능, 저장 가능
             right_text_area.setEditable(true);
-            right_load_button.setDisable(true);
-            right_save_button.setDisable(false);
+
+            ableButtons("right","false",null,"true");
         }
     }
     /*
@@ -113,8 +112,9 @@ public class SplitFilePaneController implements Initializable {
         saveAlarmWindow.showAndWait();
 
         if((boolean)saveAlarmWindow.getUserData()) {
-            left_load_button.setDisable(false);
-            left_save_button.setDisable(true);
+            left_text_area.setEditable(false);
+
+            ableButtons("left","true",null,"false");
         }
     }
     @FXML
@@ -123,8 +123,9 @@ public class SplitFilePaneController implements Initializable {
         saveAlarmWindow.showAndWait();
 
         if((boolean)saveAlarmWindow.getUserData()) {
-            right_load_button.setDisable(false);
-            right_save_button.setDisable(true);
+            right_text_area.setEditable(false);
+
+            ableButtons("right","true",null,"false");
         }
     }
 
@@ -136,6 +137,29 @@ public class SplitFilePaneController implements Initializable {
             System.out.println( selectedFile.getAbsolutePath() );
         }catch (Exception NullPointException){
             System.out.println("No Select FIle");
+        }
+    }
+
+    private void ableButtons(String position, String load, String edit, String save){
+        boolean f_load, f_edit, f_save;
+        if(load == "true") f_load = true;
+        else f_load = false;
+
+        if(edit == "true") f_edit = true;
+        else f_edit = false;
+
+        if(save == "true") f_save = true;
+        else f_save = false;
+
+        if(position == "left"){
+            if(load != null) left_load_button.setDisable(!f_load);
+            if(edit != null) left_edit_button.setDisable(!f_edit);
+            if(save != null) left_save_button.setDisable(!f_save);
+        }
+        else{
+            if(load != null) right_load_button.setDisable(!f_load);
+            if(edit != null) right_edit_button.setDisable(!f_edit);
+            if(save != null) right_save_button.setDisable(!f_save);
         }
     }
 }
