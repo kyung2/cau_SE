@@ -8,26 +8,19 @@ import java.util.ArrayList;
  */
 
 
-public class ModelUnit {
+class ModelUnit {
 
 
 
     public final int NUMOFTEXTS = 2;
-    SavedText[] codes;
-    SavedText codeA;
-    ArrayList<ArrayList<String>[]> group;
-    ArrayList<String>[] fixedCodes;
-    ArrayList<Boolean>[] fixedCodesColor;
-
-
+    protected SavedText[] codes;
+    protected ArrayList<ArrayList[]> group;
 
     public ModelUnit()
     {
         assert NUMOFTEXTS > 1;
         codes = null;
         group = null;
-
-
     }
 
     public ModelUnit(SavedText ST1, SavedText ST2)
@@ -41,13 +34,18 @@ public class ModelUnit {
 
     }
 
-
-
     protected void regrouping() //
     {
         group = codes[0].LCSMethod(codes[1]);
         groupChange();
     }
+
+    protected void groupNull()
+    {
+        group = null;
+        groupChange();
+    }
+
 
 
 
@@ -58,23 +56,28 @@ public class ModelUnit {
     public void open(String s, int i) throws IOException, IndexOutOfBoundsException //open from string
     {
         codes[i].ReadFromOuter(s);
+        groupNull();
     }
     public void save(String s, int i) throws IOException, IndexOutOfBoundsException //close to string
     {
         codes[i].WriteFromOuter(s);
     }
-    public ArrayList<String> textSend(int i) throws IndexOutOfBoundsException
+    public ArrayList<String> textReceive(int i) throws IndexOutOfBoundsException
     {
         return codes[i].ReadAll();
     }
-    public void textReceive(int i, ArrayList<String> s) throws IndexOutOfBoundsException
+    public void textSend(int i, ArrayList<String> s) throws IndexOutOfBoundsException
     {
         codes[i].WriteAll(s);
+        groupNull();
     }
     public void groupCopy(int index, int dir) throws NullPointerException, IndexOutOfBoundsException
     {
         if(dir!=0&&dir!=1) throw new IndexOutOfBoundsException();
-        if(group == null) throw new NullPointerException();
+        if(group == null)
+        {
+            regrouping();
+        }
         group.get(index)[1-dir]=(ArrayList<String>)(group.get(index)[dir].clone());
         if(index>0)
         {
@@ -97,6 +100,10 @@ public class ModelUnit {
     protected void groupChange()
     {
         //todo - give notice that text change
+    }
+    public ArrayList<ArrayList[]> getGroup()
+    {
+       return group;
     }
 
 

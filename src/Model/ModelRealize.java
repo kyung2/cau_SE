@@ -34,33 +34,26 @@ public class ModelRealize implements Model {
         }
     }
 
+
+
     public void closeModel(int tapNum) {
-        for(int i=0;i<u.size();i++)
-        {
-            if(u.get(i).iterator==tapNum)
-            {
-                u.remove(i);i--;
-            }
-        }
+        u.remove(findTap(tapNum));
+
     }
 
-    @Override
     public ArrayList<String> getText(int tapNum, int i) {
-        return null;
+        return u.get(findTap(tapNum)).m.textReceive(i);
     }
 
-    @Override
     public void setText(int tapNum, ArrayList<String> text, int i) {
-
+        u.get(findTap(tapNum)).m.textSend(i, text);
     }
 
-    @Override
-    public void getTextOuter(int tapNum, String filepath) throws IOException {
-
+    public void getTextOuter(int tapNum, String filepath, int i) throws IOException {
+        u.get(findTap(tapNum)).m.open(filepath, i);
     }
 
-    @Override
-    public void setTextOuter(int tapNum, String filepath) throws IOException {
+    public void setTextOuter(int tapNum, String filepath, int i) throws IOException {
 
     }
 
@@ -81,6 +74,18 @@ public class ModelRealize implements Model {
 
     @Override
     public ArrayList<Integer> getGroupColor(int tapNum, int i) {
+        return null;
+    }
+
+    private Integer findTap(int tapNum)
+    {
+        for(int i=0;i<u.size();i++)
+        {
+            if(u.get(i).iterator==tapNum)
+            {
+                return i;
+            }
+        }
         return null;
     }
 }

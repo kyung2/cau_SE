@@ -46,12 +46,12 @@ abstract public class SavedText
         lines = new ArrayList<String>(s);
     }
 
-    public ArrayList<ArrayList<String>[]> LCSMethod(SavedText another) throws NullPointerException // please close this method who only using this
+    public ArrayList<ArrayList[]> LCSMethod(SavedText another) throws NullPointerException // todo
     {
         int x=this.NumOfLine()+1,y=another.NumOfLine()+1, comp;
         int LCS[][] = new int[x][y];
         boolean LCSBacktrack[][][] = new boolean[x][y][2];
-        ArrayList<ArrayList<String>[]> group = new ArrayList<ArrayList<String>[]>();
+        ArrayList<ArrayList<>[]> group = new ArrayList<ArrayList<>[]>();
 
         for(int i=0;i<x;i++) {
             LCS[i][y-1]=0; LCSBacktrack[i][y-1][0]=false; LCSBacktrack[i][y-1][1]=true;

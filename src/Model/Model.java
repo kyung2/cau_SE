@@ -10,10 +10,10 @@ public interface Model {
     void newModel(int tapNum);
     int newModel();
     void closeModel(int tapNum);
-    ArrayList<String> getText(int tapNum, int I);
+    ArrayList<String> getText(int tapNum, int i);
     void setText(int tapNum, ArrayList<String> text, int i);
-    void getTextOuter(int tapNum, String filepath) throws IOException;
-    void setTextOuter(int tapNum, String filepath) throws IOException;
+    void getTextOuter(int tapNum, String filepath, int i) throws IOException;
+    void setTextOuter(int tapNum, String filepath, int i) throws IOException;
     void merge(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException;
     ArrayList<ArrayList<String>[/*2*/]> getGroup(int tapNum);
     ArrayList<String> getGroupLine(int tapNum, int i);
