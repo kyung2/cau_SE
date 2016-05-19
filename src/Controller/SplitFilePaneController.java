@@ -2,14 +2,19 @@ package Controller;
 
 import View.AlarmWindow;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
 import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Root;
 
 /**
  * Created by woojin on 2016-05-15.
@@ -19,22 +24,15 @@ import java.util.ResourceBundle;
  */
 public class SplitFilePaneController implements Initializable {
     @FXML
-    private TextArea left_text_area;
+    private TextArea left_text_area, right_text_area;
     @FXML
-    private TextArea right_text_area;
+    private Button left_load_button, left_edit_button, left_save_button;
     @FXML
-    private Button left_load_button;
+    private Button right_load_button, right_edit_button, right_save_button;
     @FXML
-    private Button left_edit_button;
+    private SplitPane split_pane;
     @FXML
-    private Button left_save_button;
-    @FXML
-    private Button right_load_button;
-    @FXML
-    private Button right_edit_button;
-    @FXML
-    private Button right_save_button;
-
+    private Button compare_button;
     /*
     * 기본적으로 로드 가능. 수정 불가, 저장 불가
     * */
@@ -43,6 +41,7 @@ public class SplitFilePaneController implements Initializable {
         boolean[] change = {true,true,true};
         ableButtons("right","true","false","false");
         ableButtons("left","true","false","false");
+        System.out.println(split_pane);
     }
     /*
     * 파일을 읽어서 내용이 있을 경우 edit 버튼 활성화
@@ -140,6 +139,12 @@ public class SplitFilePaneController implements Initializable {
         }
     }
 
+    /*
+    * file pane 버튼의 able 과 disable 을 해준다.
+    * position 에 left 와 right 를 통해서 위치를 선택
+    * 각각 load, edit, save에 true || false 를 통해서 able 과 disable 을 한다.
+    * null 일 경우 그 버튼은 현상 유지
+    * */
     private void ableButtons(String position, String load, String edit, String save){
         boolean f_load, f_edit, f_save;
         if(load == "true") f_load = true;
