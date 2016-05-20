@@ -10,7 +10,7 @@ import java.util.ArrayList;
 abstract public class SavedText
 {
     protected ArrayList<String> lines;
-    protected SavedText(ModelUnit m) {
+    protected SavedText() {
 
         lines = new ArrayList<String>();
     }

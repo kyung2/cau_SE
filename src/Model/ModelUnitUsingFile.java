@@ -6,7 +6,7 @@ import java.io.*;
  * Created by User on 2016-05-19.
  */
 public class ModelUnitUsingFile extends ModelUnit {
-    class SavedTextCanFileRR extends SavedText
+    static class SavedTextCanFileRR extends SavedText
     {
         public void ReadFromOuter(String s) throws IOException {
             File aFile = new File(s);
@@ -27,15 +27,11 @@ public class ModelUnitUsingFile extends ModelUnit {
             writer.close();
         }
 
-        SavedTextCanFileRR(ModelUnit m)
-        {
-            super(m);
-        }
     }
     ModelUnitUsingFile()
     {
         super();
-        SavedTextCanFileRR[] s = {new SavedTextCanFileRR(this), new SavedTextCanFileRR(this)};
+        SavedTextCanFileRR[] s = {new SavedTextCanFileRR(), new SavedTextCanFileRR()};
         codes = s;
     }
 }
