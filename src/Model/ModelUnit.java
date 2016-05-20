@@ -12,9 +12,10 @@ class ModelUnit {
 
 
 
-    public final int NUMOFTEXTS = 2;
+    public static final int NUMOFTEXTS = 2;
     protected SavedText[] codes;
     protected ArrayList[][] group;
+    public static final int groupXSize = 4;
 
     public ModelUnit()
     {
