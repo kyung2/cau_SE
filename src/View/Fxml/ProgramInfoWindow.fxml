@@ -17,6 +17,6 @@
             <Image url="/View/Image/sampleLogo.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="program_info_ok_button" layoutX="369.0" layoutY="194.0" mnemonicParsing="false" onAction="#programInfoOkButtonOnAction" prefHeight="23.0" prefWidth="71.0" text="OK" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <Button id="info_btn" fx:id="program_info_ok_button" layoutX="369.0" layoutY="194.0" mnemonicParsing="false" onAction="#onAction_ok_btn" prefHeight="23.0" prefWidth="71.0" text="OK" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
    </children>
 </AnchorPane>

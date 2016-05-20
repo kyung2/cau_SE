@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.effect.DropShadow;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -26,22 +27,18 @@ public class SplitFilePaneController implements Initializable {
     @FXML
     private TextArea left_text_area, right_text_area;
     @FXML
-    private Button left_load_button, left_edit_button, left_save_button;
-    @FXML
-    private Button  right_load_button, right_edit_button, right_save_button;
-    @FXML
-    private SplitPane split_pane;
-    @FXML
-    private Button compare_button;
+    private Button left_load_button,left_edit_button,left_save_button,
+                    right_load_button,right_save_button,right_edit_button;
     /*
     * 기본적으로 로드 가능. 수정 불가, 저장 불가
     * */
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         boolean[] change = {true,true,true};
         ableButtonOnActions("right","true","false","false");
         ableButtonOnActions("left","true","false","false");
-        System.out.println(split_pane.getParent());
+        /*System.out.println(split_pane.getParent());*/
     }
     /*
     * 파일을 읽어서 내용이 있을 경우 edit 버튼 활성화

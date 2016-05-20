@@ -1,8 +1,21 @@
 /**
  * Created by hyunkyung on 2016-05-18.
  */
-.btn {
+/**@
+hover 적용 & 클릭시 이벤트 적용
+
+*/
+.btn,.tab_btn {
     -fx-background-color: transparent;
+}
+.btn:hover,.tab_btn:hover{
+    -fx-background-color: #cacaca;
+}
+.btn:pressed,.tab_btn:pressed {
+    -fx-border-color:black; /* 선 바꾸는 것 */
+}
+#program_info_ok_button {
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
 
 #left_edit_button {
