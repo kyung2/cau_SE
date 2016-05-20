@@ -5,57 +5,54 @@ import View.OpenFileWindow;
 import View.ProgramInformationWindow;
 import View.SaveFileWindow;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Window;
 
-public class MainController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class MainController implements Initializable {
     @FXML
-    private Button compare_button;
+    private Button compare_button, copy_to_left_button,copy_to_right_button, copy_to_left_all_button, copy_to_right_all_button,
+            next_difference_button, post_difference_button, first_difference_button, now_difference_button, last_difference_button;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
+    }
     @FXML
-    private void compareButtonOnAction() { compare_button.setText(""); }
+    private void compareButtonOnAction() {
+        System.out.println("Click");
+    }
     @FXML
-    private Button copy_to_left_button;
-    @FXML
-    private void copyToLeftButtonOnAction() { copy_to_left_button.setText(""); }
-    @FXML
-    private Button copy_to_right_button;
+    private void copyToLeftButtonOnAction() {
+        System.out.println("Click");
+    }
     @FXML
     private void copyToRightButtonOnAction() { copy_to_right_button.setText(""); }
-    @FXML
-    private Button copy_to_right_all_button;
     @FXML
     private void copyToRightAllButtonOnAction() {
         copy_to_right_all_button.setText("");
     }
     @FXML
-    private Button copy_to_left_all_button;
-    @FXML
     private void copyToLeftAllButtonOnAction(){
         copy_to_left_all_button.setText("");
     }
     @FXML
-    private Button next_difference_button;
-    @FXML
     private void nextDifferenceButtonOnAction() { next_difference_button.setText(""); }
-    @FXML
-    private Button post_difference_button;
     @FXML
     private void postDifferenceButtonOnAction() { post_difference_button.setText(""); }
     @FXML
-    private Button first_difference_button;
-    @FXML
     private void firstDifferenceButtonOnAction() { first_difference_button.setText(""); }
     @FXML
-    private Button now_difference_button;
-    @FXML
     private void nowDifferenceButtonOnAction() { now_difference_button.setText(""); }
-    @FXML
-    private Button last_difference_button;
     @FXML
     private void LastDifferenceButtonOnAction() { last_difference_button.setText(""); }
     @FXML
     private void newTabMenuItemOnAction() { System.out.println(""); }
+    
     @FXML
     private void openMenuItemOnAction() {
         OpenFileWindow openFileWindow = new OpenFileWindow();
@@ -129,4 +126,47 @@ public class MainController {
     private void closeTabAllMenuItemOnAction() { System.out.println(""); }
     @FXML
     private void tab1MenuItemOnAction(){ System.out.println(""); }
+
+    private void setClickabeButtons(String next, String post, String first, String now, String last, String ctor, String ctol, String ctora, String ctola, String compare){
+        if(next != null){
+            if(next == "true") next_difference_button.setDisable(false);
+            else next_difference_button.setDisable(true);
+        }
+        if(post != null){
+            if(post == "true") post_difference_button.setDisable(false);
+            else post_difference_button.setDisable(true);
+        }
+        if(first != null){
+            if(first == "true") first_difference_button.setDisable(false);
+            else first_difference_button.setDisable(true);
+        }
+        if(now != null){
+            if(now == "true") now_difference_button.setDisable(false);
+            else now_difference_button.setDisable(true);
+        }
+        if(last != null){
+            if(last == "true") last_difference_button.setDisable(false);
+            else last_difference_button.setDisable(true);
+        }
+        if(ctor != null){
+            if(ctor == "true") copy_to_right_button.setDisable(false);
+            else copy_to_right_button.setDisable(true);
+        }
+        if(ctol != null){
+            if(ctol == "true") copy_to_left_button.setDisable(false);
+            else copy_to_left_button.setDisable(true);
+        }
+        if(ctora != null){
+            if(ctora == "true") copy_to_right_all_button.setDisable(false);
+            else copy_to_right_all_button.setDisable(true);
+        }
+        if(ctola != null){
+            if(ctola == "true") copy_to_left_all_button.setDisable(false);
+            else copy_to_left_all_button.setDisable(true);
+        }
+        if(compare != null){
+            if(compare == "true") compare_button.setDisable(false);
+            else compare_button.setDisable(true);
+        }
+    }
 }

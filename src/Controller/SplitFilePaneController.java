@@ -8,7 +8,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.ToolBar;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
@@ -27,34 +29,51 @@ public class SplitFilePaneController implements Initializable {
     @FXML
     private Button left_load_button,left_edit_button,left_save_button,
                     right_load_button,right_save_button,right_edit_button;
+    @FXML
+    private SplitPane split_pane;
+    @FXML
+    private Button compare_button;
+
+    private boolean have_right_file, have_left_file;
     /*
-    * 기본적으로 로드 가능. 수정 불가, 저장 불가
+    * 기본적으로
+    * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
+    * toolbar 의 버튼은 모두 비활성화
     * */
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        ableButtonOnActions("right","true","false","false");
-        ableButtonOnActions("left","true","false","false");
-        /*System.out.println(split_pane.getParent());*/
+        setClickableButtons("right","true","false","false");
+        setClickableButtons("left","true","false","false");
+        compare_button = null;
+        have_left_file = false;
+        have_right_file = false;
     }
     /*
+    * compare 버튼을 할당되있지 않을 경우 할당
     * 파일을 읽어서 내용이 있을 경우 edit 버튼 활성화
     * load 버튼을 누를 경우 파일을 읽어서 text area 에 파일 내용을 적는다.
     * 이미 파일이 있을 경우는 덮어쓰기
     * */
     @FXML
     private void leftLoadButtonOnAction(){
-        fileChooser();
+        if(compare_button == null) {
+            compare_button = (Button)((ToolBar)((BorderPane)((BorderPane)split_pane.getScene().getRoot()).getCenter()).getTop()).getItems().get(9);
+        }
 
-        ableButtonOnActions("left","true","true","false");
-        System.out.println("Click");
+        fileChooser(left_load_button);
+        if(have_left_file) setClickableButtons("left","true","true","false");
+        if(have_left_file && have_right_file) checkCompareButton();
     }
     @FXML
     private void rightLoadButtonOnAction(){
-        fileChooser();
+        if(compare_button == null) {
+            compare_button = (Button)((ToolBar)((BorderPane)((BorderPane)split_pane.getScene().getRoot()).getCenter()).getTop()).getItems().get(9);
+        }
 
-        ableButtonOnActions("right","true","true","false");
-        System.out.println("Click");
+        fileChooser(right_load_button);
+        if(have_right_file) setClickableButtons("right","true","true","false");
+        if(have_left_file && have_right_file) checkCompareButton();
     }
     /*
     * 기본은 text area 수정 불가
@@ -67,32 +86,38 @@ public class SplitFilePaneController implements Initializable {
     private void leftEditButtonOnAction() {
         boolean edit_flag = left_text_area.isEditable();
         if(edit_flag){
-            //수정이 가능할 때 - 누르면 수정이 불가능해짐. 로드는 가능해짐. 모델에 있는 정보를 바꿈
+            /*
+            * 수정이 가능할 때 - 누르면 수정이 불가능해짐. 로드는 가능해짐. 모델에 있는 정보를 바꿈,
+            * 두 file pane 이 모두 수정 불가능 == save 가 비활성화 되있으면 compare 가능
+            */
             left_text_area.setEditable(false);
-
-            ableButtonOnActions("left","true",null,null);
+            checkCompareButton();
+            setClickableButtons("left","true",null,null);
         }
         else{
-            //수정이 불가능 할 때 = 누르면 수정이 가능. 로드 불가능, 저장 가능
+            //수정이 불가능 할 때 = 누르면 수정이 가능. 로드 불가능, 저장 가능, compare 불가능
             left_text_area.setEditable(true);
-
-            ableButtonOnActions("left","false",null,"true");
+            compare_button.setDisable(true);
+            setClickableButtons("left","false",null,"true");
         }
     }
     @FXML
     private void rightEditButtonOnAction() {
         boolean edit_flag = right_text_area.isEditable();
         if(edit_flag){
-            //수정이 가능할 때 - 누르면 수정이 불가능해짐, 로드 불가능, 파일은 저장?
+            /*
+            * 수정이 가능할 때 - 누르면 수정이 불가능해짐. 로드는 가능해짐. 모델에 있는 정보를 바꿈,
+            * 두 file pane 이 모두 수정 불가능 == save 가 비활성화 되있으면 compare 가능
+            */
             right_text_area.setEditable(false);
-
-            ableButtonOnActions("right","true",null,null);
+            checkCompareButton();
+            setClickableButtons("right","true",null,null);
         }
         else{
             //수정이 불가능 할 때 - 누르면 수정 가능, 로드 불가능, 저장 가능
             right_text_area.setEditable(true);
-
-            ableButtonOnActions("right","false",null,"true");
+            compare_button.setDisable(true);
+            setClickableButtons("right","false",null,"true");
         }
     }
     /*
@@ -106,8 +131,8 @@ public class SplitFilePaneController implements Initializable {
 
         if((boolean)saveAlarmWindow.getUserData()) {
             left_text_area.setEditable(false);
-
-            ableButtonOnActions("left","true",null,"false");
+            checkCompareButton();
+            setClickableButtons("left","true",null,"false");
         }
     }
     @FXML
@@ -117,17 +142,20 @@ public class SplitFilePaneController implements Initializable {
 
         if((boolean)saveAlarmWindow.getUserData()) {
             right_text_area.setEditable(false);
-
-            ableButtonOnActions("right","true",null,"false");
+            checkCompareButton();
+            setClickableButtons("right","true",null,"false");
         }
     }
 
-    private void fileChooser(){
+    private void fileChooser(Button position){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
         File selectedFile = fileChooser.showOpenDialog(null);
         try{
             System.out.println( selectedFile.getAbsolutePath() );
+        
+            if(position.getId().equals("left_load_button")) have_left_file = true;
+            else have_right_file = true;
         }catch (Exception NullPointException){
             System.out.println("No Select FIle");
         }
@@ -139,7 +167,7 @@ public class SplitFilePaneController implements Initializable {
     * 각각 load, edit, save에 true || false 를 통해서 able 과 disable 을 한다.
     * null 일 경우 그 버튼은 현상 유지
     * */
-    private void ableButtonOnActions(String position, String load, String edit, String save){
+    private void setClickableButtons(String position, String load, String edit, String save){
         boolean f_load, f_edit, f_save;
         if(load == "true") f_load = true;
         else f_load = false;
@@ -159,6 +187,16 @@ public class SplitFilePaneController implements Initializable {
             if(load != null) right_load_button.setDisable(!f_load);
             if(edit != null) right_edit_button.setDisable(!f_edit);
             if(save != null) right_save_button.setDisable(!f_save);
+        }
+    }
+    /*
+    * compare 버튼이 활성화 되도 되는지 체크
+    * edit 버튼이 눌렸을 때 두 text area 가 수정 불가능 한 경우 활성화
+    * save 버튼이 눌렸을 때 두 text area 가 수정 불가능 한 경우 활성화
+    * */
+    private void checkCompareButton(){
+        if(!right_text_area.isEditable() && !left_text_area.isEditable()){
+            compare_button.setDisable(false);
         }
     }
 }
