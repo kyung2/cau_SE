@@ -23,16 +23,16 @@
          <top>
               <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                   <items>
-                      <Button id="next_difference_button"  styleClass="btn" fx:id="next_difference_button" mnemonicParsing="false" onAction="#clickNextDifferenceButton" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="post_difference_button"  styleClass="btn" fx:id="post_difference_button" mnemonicParsing="false" onAction="#clickPostDifferenceButton" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="first_difference_button"  styleClass="btn" fx:id="first_difference_button" mnemonicParsing="false" onAction="#clickFirstDifferenceButton" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="now_difference_button"  styleClass="btn" fx:id="now_difference_button" mnemonicParsing="false" onAction="#clickNowDifferenceButton" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="last_difference_button"  styleClass="btn" fx:id="last_difference_button" mnemonicParsing="false" onAction="#clickLastDifferenceButton" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="copy_to_right_button"  styleClass="btn" fx:id="copy_to_right_button" mnemonicParsing="false" onAction="#clickCopyToRightButton" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="copy_to_left_button"  styleClass="btn" fx:id="copy_to_left_button" mnemonicParsing="false" onAction="#clickCopyToLeftButton" prefHeight="32.0" prefWidth="32.0" textAlignment="CENTER" />
-                      <Button id="copy_to_right_all_button"  styleClass="btn" fx:id="copy_to_right_all_button" mnemonicParsing="false" onAction="#clickCopyToRightAllButton" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="copy_to_left_all_button"  styleClass="btn" fx:id="copy_to_left_all_button" mnemonicParsing="false" onAction="#clickCopyToLeftAllButton" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="compare_button" styleClass="btn" fx:id="compare_button" mnemonicParsing="false" onAction="#clickCompareButton" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="next_difference_button"  styleClass="btn" fx:id="next_difference_button" mnemonicParsing="false" onAction="#nextDifferenceButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="post_difference_button"  styleClass="btn" fx:id="post_difference_button" mnemonicParsing="false" onAction="#postDifferenceButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="first_difference_button"  styleClass="btn" fx:id="first_difference_button" mnemonicParsing="false" onAction="#firstDifferenceButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="now_difference_button"  styleClass="btn" fx:id="now_difference_button" mnemonicParsing="false" onAction="#nowDifferenceButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="last_difference_button"  styleClass="btn" fx:id="last_difference_button" mnemonicParsing="false" onAction="#LastDifferenceButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="copy_to_right_button"  styleClass="btn" fx:id="copy_to_right_button" mnemonicParsing="false" onAction="#copyToRightButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="copy_to_left_button"  styleClass="btn" fx:id="copy_to_left_button" mnemonicParsing="false" onAction="#copyToLeftButtonOnAction" prefHeight="32.0" prefWidth="32.0" textAlignment="CENTER" />
+                      <Button id="copy_to_right_all_button"  styleClass="btn" fx:id="copy_to_right_all_button" mnemonicParsing="false" onAction="#copyToRightAllButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="copy_to_left_all_button"  styleClass="btn" fx:id="copy_to_left_all_button" mnemonicParsing="false" onAction="#copyToLeftAllButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="compare_button" styleClass="btn" fx:id="compare_button" mnemonicParsing="false" onAction="#compareButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
                   </items>
               </ToolBar>
          </top>
@@ -43,39 +43,39 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                <MenuItem fx:id="new_tab_menu_item" mnemonicParsing="false" onAction="#clickNewTabMenuItem" text="New tab" />
-                <MenuItem fx:id="open_menu_item" mnemonicParsing="false" onAction="#clickOpenMenuItem" text="Open" />
-                <MenuItem fx:id="save_menu_item" mnemonicParsing="false" onAction="#clickSaveMenuItem" text="Save" />
-                <MenuItem fx:id="save_right_file_menu_item" mnemonicParsing="false" onAction="#clickSaveRightFileMenuItem" text="Save Right File" />
-                <MenuItem fx:id="save_left_file_menu_item" mnemonicParsing="false" onAction="#clickSaveLeftFileMenuItem" text="Save Left File" />
-                <MenuItem fx:id="close_menu_item" mnemonicParsing="false" onAction="#clickCloseMenuItem" text="Close" />
+                <MenuItem fx:id="new_tab_menu_item" mnemonicParsing="false" onAction="#newTabMenuItemOnAction" text="New tab" />
+                <MenuItem fx:id="open_menu_item" mnemonicParsing="false" onAction="#openMenuItemOnAction" text="Open" />
+                <MenuItem fx:id="save_menu_item" mnemonicParsing="false" onAction="#saveMenuItemOnAction" text="Save" />
+                <MenuItem fx:id="save_right_file_menu_item" mnemonicParsing="false" onAction="#saveRightFileMenuItemOnAction" text="Save Right File" />
+                <MenuItem fx:id="save_left_file_menu_item" mnemonicParsing="false" onAction="#saveLeftFileMenuItemOnAction" text="Save Left File" />
+                <MenuItem fx:id="close_menu_item" mnemonicParsing="false" onAction="#closeMenuItemOnAction" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Merge">
             <items>
-              <MenuItem fx:id="next_difference_menu_item" mnemonicParsing="false" onAction="#clickNextDifferenceMenuItem" text="Next Difference" />
-                  <MenuItem fx:id="post_difference_menu_item" mnemonicParsing="false" onAction="#clickPostDifferenceMenuItem" text="Post Difference" />
-                  <MenuItem fx:id="first_difference_menu_item" mnemonicParsing="false" onAction="#clickFirstDifferenceMenuItem" text="First Difference" />
-                  <MenuItem fx:id="now_difference_menu_item" mnemonicParsing="false" onAction="#clickNowDifferenceMenuItem" text="Now Selected Difference" />
-                  <MenuItem fx:id="last_difference_menu_item" mnemonicParsing="false" onAction="#clickLastDifferenceMenuItem" text="Last Difference" />
-                  <MenuItem fx:id="copy_to_right_menu_item" mnemonicParsing="false" onAction="#clickCopyToRightMenuItem" text="Copy to Right" />
-                  <MenuItem fx:id="copy_to_left_menu_item" mnemonicParsing="false" onAction="#clickCopyToLeftMenuItem" text="Copy to Left" />
-                  <MenuItem fx:id="copy_to_right_all_menu_item" mnemonicParsing="false" onAction="#clickCopyToRightAllMenuItem" text="Copy to Right All" />
-                  <MenuItem fx:id="copy_to_left_all_menu_item" mnemonicParsing="false" onAction="#clickCopyToLeftAllMenuItem" text="Copy to Left All" />
-                  <MenuItem fx:id="compare_menu_item" mnemonicParsing="false" onAction="#clickCompareMenuItem" text="Compare" />
+              <MenuItem fx:id="next_difference_menu_item" mnemonicParsing="false" onAction="#nextDifferenceMenuItemOnAction" text="Next Difference" />
+                  <MenuItem fx:id="post_difference_menu_item" mnemonicParsing="false" onAction="#postDifferenceMenuItemOnAction" text="Post Difference" />
+                  <MenuItem fx:id="first_difference_menu_item" mnemonicParsing="false" onAction="#firstDifferenceMenuItemOnAction" text="First Difference" />
+                  <MenuItem fx:id="now_difference_menu_item" mnemonicParsing="false" onAction="#nowDifferenceMenuItemOnAction" text="Now Selected Difference" />
+                  <MenuItem fx:id="last_difference_menu_item" mnemonicParsing="false" onAction="#lastDifferenceMenuItemOnAction" text="Last Difference" />
+                  <MenuItem fx:id="copy_to_right_menu_item" mnemonicParsing="false" onAction="#copyToRightMenuItemOnAction" text="Copy to Right" />
+                  <MenuItem fx:id="copy_to_left_menu_item" mnemonicParsing="false" onAction="#copyToLeftMenuItemOnAction" text="Copy to Left" />
+                  <MenuItem fx:id="copy_to_right_all_menu_item" mnemonicParsing="false" onAction="#copyToRightAllMenuItemOnAction" text="Copy to Right All" />
+                  <MenuItem fx:id="copy_to_left_all_menu_item" mnemonicParsing="false" onAction="#copyToLeftAllMenuItemOnAction" text="Copy to Left All" />
+                  <MenuItem fx:id="compare_menu_item" mnemonicParsing="false" onAction="#compareMenuItemOnAction" text="Compare" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
-                <MenuItem fx:id="help_menu_item" mnemonicParsing="false" onAction="#clickHelpMenuItem" text="Help" />
-                <MenuItem fx:id="program_information_menu_item" mnemonicParsing="false" onAction="#clickProgramInformationMenuItem" text="Program Info" />
+                <MenuItem fx:id="help_menu_item" mnemonicParsing="false" onAction="#helpMenuItemOnAction" text="Help" />
+                <MenuItem fx:id="program_information_menu_item" mnemonicParsing="false" onAction="#programInformationMenuItemOnAction" text="Program Info" />
             </items>
           </Menu>
             <Menu mnemonicParsing="false" text="Window">
               <items>
-                  <MenuItem fx:id="close_tab_menu_item" mnemonicParsing="false" onAction="#clickCloseTabMenuItem" text="Close Tab" />
-                  <MenuItem fx:id="close_tab_all_menu_item" mnemonicParsing="false" onAction="#clickCloseTabAllMenuItem" text="Close Tab All" />
-                  <MenuItem fx:id="tab_1_menu_item" mnemonicParsing="false" onAction="#clickTab1MenuItem" text="Tab 1" />
+                  <MenuItem fx:id="close_tab_menu_item" mnemonicParsing="false" onAction="#closeTabMenuItemOnAction" text="Close Tab" />
+                  <MenuItem fx:id="close_tab_all_menu_item" mnemonicParsing="false" onAction="#closeTabAllMenuItemOnAction" text="Close Tab All" />
+                  <MenuItem fx:id="tab_1_menu_item" mnemonicParsing="false" onAction="#tab1MenuItemOnAction" text="Tab 1" />
               </items>
             </Menu>
         </menus>

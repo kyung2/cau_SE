@@ -13,67 +13,67 @@ public class MainController {
     @FXML
     private Button compare_button;
     @FXML
-    private void clickCompareButton() { compare_button.setText("Click"); }
+    private void compareButtonOnAction() { compare_button.setText(""); }
     @FXML
     private Button copy_to_left_button;
     @FXML
-    private void clickCopyToLeftButton() { copy_to_left_button.setText("Click"); }
+    private void copyToLeftButtonOnAction() { copy_to_left_button.setText(""); }
     @FXML
     private Button copy_to_right_button;
     @FXML
-    private void clickCopyToRightButton() { copy_to_right_button.setText("Click"); }
+    private void copyToRightButtonOnAction() { copy_to_right_button.setText(""); }
     @FXML
     private Button copy_to_right_all_button;
     @FXML
-    private void clickCopyToRightAllButton() {
-        copy_to_right_all_button.setText("Click");
+    private void copyToRightAllButtonOnAction() {
+        copy_to_right_all_button.setText("");
     }
     @FXML
     private Button copy_to_left_all_button;
     @FXML
-    private void clickCopyToLeftAllButton(){
-        copy_to_left_all_button.setText("Click");
+    private void copyToLeftAllButtonOnAction(){
+        copy_to_left_all_button.setText("");
     }
     @FXML
     private Button next_difference_button;
     @FXML
-    private void clickNextDifferenceButton() { next_difference_button.setText("Click"); }
+    private void nextDifferenceButtonOnAction() { next_difference_button.setText(""); }
     @FXML
     private Button post_difference_button;
     @FXML
-    private void clickPostDifferenceButton() { post_difference_button.setText("Click"); }
+    private void postDifferenceButtonOnAction() { post_difference_button.setText(""); }
     @FXML
     private Button first_difference_button;
     @FXML
-    private void clickFirstDifferenceButton() { first_difference_button.setText("Click"); }
+    private void firstDifferenceButtonOnAction() { first_difference_button.setText(""); }
     @FXML
     private Button now_difference_button;
     @FXML
-    private void clickNowDifferenceButton() { now_difference_button.setText("Click"); }
+    private void nowDifferenceButtonOnAction() { now_difference_button.setText(""); }
     @FXML
     private Button last_difference_button;
     @FXML
-    private void clickLastDifferenceButton() { last_difference_button.setText("Click"); }
+    private void LastDifferenceButtonOnAction() { last_difference_button.setText(""); }
     @FXML
-    private void clickNewTabMenuItem() { System.out.println("Click"); }
+    private void newTabMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void clickOpenMenuItem() {
+    private void openMenuItemOnAction() {
         OpenFileWindow openFileWindow = new OpenFileWindow();
-        System.out.println("ClickOpen");
+        System.out.println("Open");
     }
     @FXML
-    private void clickSaveMenuItem() {
+    private void saveMenuItemOnAction() {
         SaveFileWindow saveFileWindow = new SaveFileWindow();
-        System.out.println("ClickSave");
+        System.out.println("Save");
     }
     @FXML
-    private void clickSaveRightFileMenuItem() { System.out.println("Click"); }
+    private void saveRightFileMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void clickSaveLeftFileMenuItem() { System.out.println("Click"); }
+    private void saveLeftFileMenuItemOnAction() { System.out.println(""); }
     @FXML
     BorderPane main_pane;// 어떤 윈도우를 없에는지 지정하기위해 만듬
     @FXML
-    private void clickCloseMenuItem() {
+    private void closeMenuItemOnAction() {
         /*
         여러가지 조건 필요
 
@@ -81,52 +81,52 @@ public class MainController {
             Compare 중 이라면 merge 하지않고 종료할 것인지 묻는다.
         * */
         ((Window)(main_pane.getScene().getWindow())).hide();// 종료 method
-        System.out.println("Click");
+        System.out.println("");
     }
     @FXML
-    private void clickNextDifferenceMenuItem() { System.out.println("Click"); }
+    private void nextDifferenceMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void clickPostDifferenceMenuItem() { System.out.println("Click"); }
+    private void postDifferenceMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void clickFirstDifferenceMenuItem() { System.out.println("Click"); }
+    private void firstDifferenceMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void clickNowDifferenceMenuItem() { System.out.println("Click"); }
+    private void nowDifferenceMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void clickLastDifferenceMenuItem() { System.out.println("Click"); }
+    private void lastDifferenceMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void clickCopyToRightMenuItem() { System.out.println("Click"); }
+    private void copyToRightMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void clickCopyToLeftMenuItem() { System.out.println("Click"); }
+    private void copyToLeftMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void clickCopyToRightAllMenuItem() { System.out.println("Click"); }
+    private void copyToRightAllMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void clickCopyToLeftAllMenuItem() { System.out.println("Click"); }
+    private void copyToLeftAllMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void clickCompareMenuItem() { System.out.println("Click"); }
+    private void compareMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void clickHelpMenuItem() {
+    private void helpMenuItemOnAction() {
         HelpWindow HelpWindow = new HelpWindow();
         try {
             HelpWindow.HelpWindow();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("ClickHelp");
+        System.out.println("Help");
     }
     @FXML
-    private void clickProgramInformationMenuItem() {
+    private void programInformationMenuItemOnAction() {
         ProgramInformationWindow programInformationWindow = new ProgramInformationWindow();
         try {
             programInformationWindow.PrograminformationWindow();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("ClickProgramInfo");
+        System.out.println("ProgramInfo");
     }
     @FXML
-    private void clickCloseTabMenuItem() { System.out.println("Click"); }
+    private void closeTabMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void clickCloseTabAllMenuItem() { System.out.println("Click"); }
+    private void closeTabAllMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void clickTab1MenuItem(){ System.out.println("Click"); }
+    private void tab1MenuItemOnAction(){ System.out.println(""); }
 }
