@@ -41,7 +41,7 @@ public class SplitFilePaneController implements Initializable {
         boolean[] change = {true,true,true};
         ableButtons("right","true","false","false");
         ableButtons("left","true","false","false");
-        System.out.println(split_pane);
+        System.out.println(split_pane.getParent());
     }
     /*
     * 파일을 읽어서 내용이 있을 경우 edit 버튼 활성화
