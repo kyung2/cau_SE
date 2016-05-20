@@ -12,7 +12,7 @@ public class AlarmController {
     @FXML
     private Button yes_button;
     @FXML
-    private void clickYesButton(){
+    private void yesButtonOnAction(){
         Window window = yes_button.getScene().getWindow();
 
         boolean clicked_button = true;
@@ -21,7 +21,7 @@ public class AlarmController {
         window.hide();
     }
     @FXML
-    private void clickNoButton(){
+    private void noButtonOnAction(){
         Window window = yes_button.getScene().getWindow();
 
         boolean clicked_button = false;

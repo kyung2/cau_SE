@@ -10,7 +10,7 @@ public class ProgramInfoWindowController {
     @FXML
     private Button program_info_ok_button;
     @FXML
-    private void clickProgramInfoOkButton(){
+    private void programInfoOkButtonOnAction(){
         program_info_ok_button.setText("Click");
     }
 

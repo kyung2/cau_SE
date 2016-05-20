@@ -9,27 +9,19 @@ import javafx.scene.control.Button;
  */
 public class OpenFileWindowController {
     @FXML
-    private Button right_file_find_button;
-    @FXML
-    private void clickRightFileFindButton(){
-        right_file_find_button.setText("Click");
+    private void rightFileFindButtonOnAction(){
+        System.out.println("click");
     }
     @FXML
-    private Button left_file_find_button;
-    @FXML
-    private void clickLeftFileFindButton(){
-        left_file_find_button.setText("Click");
+    private void leftFileFindButtonOnAction(){
+        System.out.println("click");
     }
     @FXML
-    private Button ok_button;
-    @FXML
-    private void clickOkButton(){
-        ok_button.setText("Click");
+    private void okButtonOnAction(){
+        System.out.println("click");
     }
     @FXML
-    private Button cancel_button;
-    @FXML
-    private void clickCancelButton(){
-        cancel_button.setText("Click");
+    private void cancelButtonOnAction(){
+        System.out.println("click");
     }
 }

@@ -28,7 +28,7 @@ public class SplitFilePaneController implements Initializable {
     @FXML
     private Button left_load_button, left_edit_button, left_save_button;
     @FXML
-    private Button right_load_button, right_edit_button, right_save_button;
+    private Button  right_load_button, right_edit_button, right_save_button;
     @FXML
     private SplitPane split_pane;
     @FXML
@@ -39,8 +39,8 @@ public class SplitFilePaneController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         boolean[] change = {true,true,true};
-        ableButtons("right","true","false","false");
-        ableButtons("left","true","false","false");
+        ableButtonOnActions("right","true","false","false");
+        ableButtonOnActions("left","true","false","false");
         System.out.println(split_pane.getParent());
     }
     /*
@@ -49,17 +49,17 @@ public class SplitFilePaneController implements Initializable {
     * 이미 파일이 있을 경우는 덮어쓰기
     * */
     @FXML
-    private void clickLeftLoadButton(){
+    private void leftLoadButtonOnAction(){
         fileChooser();
 
-        ableButtons("left","true","true","false");
+        ableButtonOnActions("left","true","true","false");
         System.out.println("Click");
     }
     @FXML
-    private void clickRightLoadButton(){
+    private void rightLoadButtonOnAction(){
         fileChooser();
 
-        ableButtons("right","true","true","false");
+        ableButtonOnActions("right","true","true","false");
         System.out.println("Click");
     }
     /*
@@ -70,35 +70,35 @@ public class SplitFilePaneController implements Initializable {
     * 그 후 비활성화 된 load 버튼을 활성화로
     * */
     @FXML
-    private void clickLeftEditButton() {
+    private void leftEditButtonOnAction() {
         boolean edit_flag = left_text_area.isEditable();
         if(edit_flag){
             //수정이 가능할 때 - 누르면 수정이 불가능해짐. 로드는 가능해짐. 모델에 있는 정보를 바꿈
             left_text_area.setEditable(false);
 
-            ableButtons("left","true",null,null);
+            ableButtonOnActions("left","true",null,null);
         }
         else{
             //수정이 불가능 할 때 = 누르면 수정이 가능. 로드 불가능, 저장 가능
             left_text_area.setEditable(true);
 
-            ableButtons("left","false",null,"true");
+            ableButtonOnActions("left","false",null,"true");
         }
     }
     @FXML
-    private void clickRightEditButton() {
+    private void rightEditButtonOnAction() {
         boolean edit_flag = right_text_area.isEditable();
         if(edit_flag){
             //수정이 가능할 때 - 누르면 수정이 불가능해짐, 로드 불가능, 파일은 저장?
             right_text_area.setEditable(false);
 
-            ableButtons("right","true",null,null);
+            ableButtonOnActions("right","true",null,null);
         }
         else{
             //수정이 불가능 할 때 - 누르면 수정 가능, 로드 불가능, 저장 가능
             right_text_area.setEditable(true);
 
-            ableButtons("right","false",null,"true");
+            ableButtonOnActions("right","false",null,"true");
         }
     }
     /*
@@ -106,25 +106,25 @@ public class SplitFilePaneController implements Initializable {
     * 수정 사항을 저장한 후에는 로드 가능, 수정 가늗, 저장 불가능으로 된다.
     * */
     @FXML
-    private void clickLeftSaveButton(){
+    private void leftSaveButtonOnAction(){
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
 
         if((boolean)saveAlarmWindow.getUserData()) {
             left_text_area.setEditable(false);
 
-            ableButtons("left","true",null,"false");
+            ableButtonOnActions("left","true",null,"false");
         }
     }
     @FXML
-    private void clickRightSaveButton(){
+    private void rightSaveButtonOnAction(){
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
 
         if((boolean)saveAlarmWindow.getUserData()) {
             right_text_area.setEditable(false);
 
-            ableButtons("right","true",null,"false");
+            ableButtonOnActions("right","true",null,"false");
         }
     }
 
@@ -145,7 +145,7 @@ public class SplitFilePaneController implements Initializable {
     * 각각 load, edit, save에 true || false 를 통해서 able 과 disable 을 한다.
     * null 일 경우 그 버튼은 현상 유지
     * */
-    private void ableButtons(String position, String load, String edit, String save){
+    private void ableButtonOnActions(String position, String load, String edit, String save){
         boolean f_load, f_edit, f_save;
         if(load == "true") f_load = true;
         else f_load = false;
