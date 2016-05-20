@@ -73,7 +73,7 @@ public class ModelRealize implements Model {
         ArrayList<String>[] ret = a[1];
         return ret;
     }
-    
+
     public ArrayList<Integer>[] getGroupColor(int tapNum, int i)throws IllegalAccessException {
         ArrayList[][] a = u.get(findTap(tapNum)).m.getGroup();
         ArrayList<Integer>[] ret = a[2];
