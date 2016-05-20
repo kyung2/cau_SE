@@ -1,8 +1,8 @@
 package Model;
 
-import java.util.ArrayList;
+import Model.LCSsupport.LCSGrouping;
 
-import static Model.ModelUnitUsingFile.*;
+import java.util.ArrayList;
 
 /**
  * Created by User on 2016-05-20.
@@ -34,16 +34,17 @@ public class PseudoMain {
 
         aaa = s1.LCSMethod(s2);
 
-        for(int i=0;i<ModelUnit.groupXSize;i++)
+        for(int i = 0; i< LCSGrouping.groupXSize; i++)
         {
             System.out.println(i + "th\n\n");
             for(int j=0;j<2;j++)
             {
-                System.out.println(j + " text\n");
+                System.out.println(j + " text");
                 for(int k=0;k<aaa[i][j].size();k++)
                 {
                     System.out.println(aaa[i][j].get(k));
                 }
+                System.out.println("");
             }
         }
     }

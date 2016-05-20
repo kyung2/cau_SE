@@ -1,4 +1,6 @@
 package Model;
+import Model.LCSsupport.LCSClassEnum;
+
 import java.io.*;
 import java.lang.String;
 import java.util.ArrayList;
@@ -15,7 +17,7 @@ class ModelUnit {
     public static final int NUMOFTEXTS = 2;
     protected SavedText[] codes;
     protected ArrayList[][] group;
-    public static final int groupXSize = 4;
+
 
     public ModelUnit()
     {

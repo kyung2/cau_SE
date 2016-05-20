@@ -1,5 +1,7 @@
 package Model;
 
+import Model.LCSsupport.LCSGrouping;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -48,10 +50,9 @@ abstract public class SavedText
 
     public ArrayList<Integer>[][] LCSMethod(SavedText another) throws NullPointerException // todo
     {
-        int x=this.NumOfLine()+1,y=another.NumOfLine()+1, comp;
+        int x=this.NumOfLine()+1,y=another.NumOfLine()+1;
         int LCS[][] = new int[x][y];
         boolean LCSBacktrack[][][] = new boolean[x][y][2];
-        ArrayList<Integer>[][] group = new ArrayList[ModelUnit.groupXSize][2];
 
         for(int i=0;i<x;i++) {
             LCS[i][y-1]=0; LCSBacktrack[i][y-1][0]=false; LCSBacktrack[i][y-1][1]=true;
@@ -70,60 +71,19 @@ abstract public class SavedText
                     LCS[i][j]=Math.max(LCS[i+1][j],LCS[i][j+1]);
                     LCSBacktrack[i][j][0]=false;
                     LCSBacktrack[i][j][1]=(LCS[i+1][j]>LCS[i][j+1]);
+                    if(LCS[i + 1][j + 1]==Math.max(LCS[i+1][j],LCS[i][j+1]))
+                    {
+                        LCSBacktrack[i][j][0]=true;
+                        LCSBacktrack[i][j][1]=false;
+                    }
                 }
             }
         }
-        int groupNum = 0;
-        for(int i=0;i<ModelUnit.groupXSize;i++)
-        {
-            group[i][0] = new ArrayList<Integer>();
-            group[i][1] = new ArrayList<Integer>();
-        }
-
-        group[3][0].add(0);
-        group[3][1].add(0);
 
 
-        for(int i=0,j=0, k=0;!(i>=x&&j>=y);)
-        {
-            if((groupNum%2==0)!=LCSBacktrack[i][j][0])
-            {
-                groupNum++;
-                group[3][0].add(i);
-                group[3][1].add(j);
+        LCSGrouping p = new LCSGrouping();
 
-            }
-            if(LCSBacktrack[i][j][0])
-            {
-                group[0][0].add(i);
-                group[0][1].add(j);
-                group[1][0].add(groupNum);
-                group[1][1].add(groupNum);
-                group[2][0].add(groupNum);
-                group[2][1].add(groupNum);
-                i++; j++;
-            }
-            else if(LCSBacktrack[i][j][1])
-            {
-                group[0][0].add(i);
-                group[0][1].add(-1);
-                group[1][0].add(groupNum);
-                group[1][1].add(groupNum);
-                group[2][0].add(groupNum);
-                i++;
-
-            }
-            else
-            {
-                group[0][0].add(-1);
-                group[0][1].add(j);
-                group[1][0].add(groupNum);
-                group[1][1].add(groupNum);
-                group[2][1].add(groupNum);
-                i++;
-            }
-        }
-        return group;
+        return p.start(LCSBacktrack,x,y);
     }
 
 }
