@@ -22,15 +22,15 @@
                 <AnchorPane fx:id="left_file_button_tab" prefHeight="33.0" prefWidth="260.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <Label fx:id="left_file_label" layoutX="26.0" layoutY="7.0" prefHeight="23.0" prefWidth="72.0" text="FileName" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
-                        <Button id="left_load_button" fx:id="left_load_button" layoutX="154.0" layoutY="6.0" mnemonicParsing="false" onAction="#clickLeftLoadButton" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="4.0">
+                        <Button styleClass = "tab_btn" id="left_load_button" fx:id="left_load_button" layoutX="154.0" layoutY="6.0" mnemonicParsing="false" onAction="#clickLeftLoadButton" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="4.0">
                      <font>
                         <Font size="4.0" />
                      </font></Button>
-                        <Button id="left_edit_button" fx:id="left_edit_button" layoutX="178.0" layoutY="4.0" mnemonicParsing="false" onAction="#clickLeftEditButton" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="4.0">
+                        <Button styleClass = "tab_btn" id="left_edit_button" fx:id="left_edit_button" layoutX="178.0" layoutY="4.0" mnemonicParsing="false" onAction="#clickLeftEditButton" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="4.0">
                      <font>
                         <Font size="4.0" />
                      </font></Button>
-                        <Button id="left_save_button" fx:id="left_save_button" contentDisplay="TOP" layoutX="202.0" layoutY="5.0" mnemonicParsing="false" onAction="#clickLeftSaveButton" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0">
+                        <Button styleClass = "tab_btn" id="left_save_button" fx:id="left_save_button" contentDisplay="TOP" layoutX="202.0" layoutY="5.0" mnemonicParsing="false" onAction="#clickLeftSaveButton" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0">
                             <opaqueInsets>
                                 <Insets />
                             </opaqueInsets>
@@ -52,15 +52,15 @@
          <children>
                 <AnchorPane fx:id="right_file_button_tab" layoutX="-34.0" layoutY="35.0" prefHeight="33.0" prefWidth="294.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Button id="right_load_button" fx:id="right_load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#clickRightLoadButton" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="4.0">
+                        <Button styleClass = "tab_btn" id="right_load_button" fx:id="right_load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#clickRightLoadButton" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="4.0">
                      <font>
                         <Font size="4.0" />
                      </font></Button>
-                        <Button id="right_edit_button" fx:id="right_edit_button" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickRightEditButton" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="4.0">
+                        <Button styleClass = "tab_btn" id="right_edit_button" fx:id="right_edit_button" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#clickRightEditButton" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="4.0">
                      <font>
                         <Font size="4.0" />
                      </font></Button>
-                        <Button id="right_save_button" fx:id="right_save_button" contentDisplay="TOP" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickRightSaveButton" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0">
+                        <Button styleClass = "tab_btn" id="right_save_button" fx:id="right_save_button" contentDisplay="TOP" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#clickRightSaveButton" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0">
                             <opaqueInsets>
                                 <Insets />
                             </opaqueInsets>
