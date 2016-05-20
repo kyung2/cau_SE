@@ -14,8 +14,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Root;
-
 /**
  * Created by woojin on 2016-05-15.
  * FilePanel Controller.
@@ -38,7 +36,6 @@ public class SplitFilePaneController implements Initializable {
     * */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        boolean[] change = {true,true,true};
         ableButtonOnActions("right","true","false","false");
         ableButtonOnActions("left","true","false","false");
         System.out.println(split_pane.getParent());
