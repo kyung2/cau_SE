@@ -46,12 +46,12 @@ abstract public class SavedText
         lines = new ArrayList<String>(s);
     }
 
-    public ArrayList[][] LCSMethod(SavedText another) throws NullPointerException // todo
+    public ArrayList<Integer>[][] LCSMethod(SavedText another) throws NullPointerException // todo
     {
         int x=this.NumOfLine()+1,y=another.NumOfLine()+1, comp;
         int LCS[][] = new int[x][y];
         boolean LCSBacktrack[][][] = new boolean[x][y][2];
-        ArrayList[][] group = new ArrayList[6][2];
+        ArrayList<Integer>[][] group = new ArrayList[ModelUnit.groupXSize][2];
 
         for(int i=0;i<x;i++) {
             LCS[i][y-1]=0; LCSBacktrack[i][y-1][0]=false; LCSBacktrack[i][y-1][1]=true;
@@ -73,45 +73,56 @@ abstract public class SavedText
                 }
             }
         }
-        boolean c = true;
-        /*
-
-        ArrayList<String> st[] = new ArrayList[2];
-        st[0] = new ArrayList<String>();
-        st[1]= new ArrayList<String>();
-        group.add(st);
-
-        for(int i=0,j=0, k=0;i<x-1&&j<x-1;)
+        int groupNum = 0;
+        for(int i=0;i<ModelUnit.groupXSize;i++)
         {
+            group[i][0] = new ArrayList<Integer>();
+            group[i][1] = new ArrayList<Integer>();
+        }
+
+        group[3][0].add(0);
+        group[3][1].add(0);
 
 
-            if(c!=LCSBacktrack[i][j][0])
+        for(int i=0,j=0, k=0;!(i>=x&&j>=y);)
+        {
+            if((groupNum%2==0)!=LCSBacktrack[i][j][0])
             {
-                st = new ArrayList[2];
-                st[0] = new ArrayList<String>();
-                st[1]= new ArrayList<String>();
-                group.add(st);
-                k++;
+                groupNum++;
+                group[3][0].add(i);
+                group[3][1].add(j);
+
             }
-            c=LCSBacktrack[i][j][0];
             if(LCSBacktrack[i][j][0])
             {
-                group.get(k)[0].add(Read(i));
-                group.get(k)[1].add(another.Read(j));
+                group[0][0].add(i);
+                group[0][1].add(j);
+                group[1][0].add(groupNum);
+                group[1][1].add(groupNum);
+                group[2][0].add(groupNum);
+                group[2][1].add(groupNum);
                 i++; j++;
             }
             else if(LCSBacktrack[i][j][1])
             {
-                group.get(k)[0].add(Read(i)); i++;
+                group[0][0].add(i);
+                group[0][1].add(-1);
+                group[1][0].add(groupNum);
+                group[1][1].add(groupNum);
+                group[2][0].add(groupNum);
+                i++;
+
             }
             else
             {
-                group.get(k)[1].add(another.Read(j));
-                j++;
+                group[0][0].add(-1);
+                group[0][1].add(j);
+                group[1][0].add(groupNum);
+                group[1][1].add(groupNum);
+                group[2][1].add(groupNum);
+                i++;
             }
         }
-        return group;
-        */ // todo
         return group;
     }
 
