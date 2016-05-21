@@ -35,7 +35,6 @@ public class MyListView extends ListView<String> {
             for(int j = 0, m=lines.size(); j<m;j++){
                 one_block += lines.get(j);
             }
-            System.out.println(i);
             list.add(i,one_block);
         }
         super.setItems(list);
@@ -47,7 +46,6 @@ public class MyListView extends ListView<String> {
             for(int j = 0, m=lines.size(); j<m;j++){
                 one_block += lines.get(j);
             }
-            System.out.println(i);
             list.add(i,one_block);
         }
         super.setItems(list);

@@ -4,6 +4,10 @@ import View.HelpWindow;
 import View.OpenFileWindow;
 import View.ProgramInformationWindow;
 import View.SaveFileWindow;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -15,7 +19,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Window;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import static javafx.scene.control.Tab.SELECTION_CHANGED_EVENT;
 
 public class MainController implements Initializable {
     @FXML
@@ -25,8 +32,11 @@ public class MainController implements Initializable {
     private TabPane tab_pane;
     @FXML
     private Tab tab;
+    @FXML
+    BorderPane main_pane;
 
-    private int tab_num;
+    private ArrayList<String[]> toolbar_stage = new ArrayList<String []>();
+    private int tab_num, now_tab_num;
     @Override
     /*
     * tab은 user data 를 통해 구별한다.
@@ -37,6 +47,22 @@ public class MainController implements Initializable {
         tab_num = 0;
         tab.setUserData(tab_num);
         setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
+        toolbar_stage.add(new String[]{"false","false","false","false","false","false","false","false","false","false"});
+        
+        tab_pane.getSelectionModel().selectedItemProperty().addListener(
+                new ChangeListener<Tab>() {
+                    @Override
+                    public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
+                        String[] stage = makeToolbarStage();
+
+                        toolbar_stage.set(now_tab_num,stage);
+                        now_tab_num = (int)t1.getUserData();
+                        setClickabeButtons(toolbar_stage.get(now_tab_num)[0],toolbar_stage.get(now_tab_num)[1],toolbar_stage.get(now_tab_num)[2],
+                                toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4],toolbar_stage.get(now_tab_num)[5],
+                                toolbar_stage.get(now_tab_num)[6],toolbar_stage.get(now_tab_num)[7],toolbar_stage.get(now_tab_num)[8],toolbar_stage.get(now_tab_num)[9]);
+                    }
+                }
+        );
     }
     @FXML
     /*
@@ -86,14 +112,14 @@ public class MainController implements Initializable {
             Tab new_tab = new Tab("File");
             new_tab.setContent(root);
             new_tab.setUserData(++tab_num);
-
+            toolbar_stage.add(new String[]{"false","false","false","false","false","false","false","false","false","false"});
             tab_pane.getTabs().add(new_tab);
         }catch (Exception e){
             System.out.println(e);// 적절한 예외처리로 바꿔야함
         }
 
     }
-    
+
     @FXML
     private void openMenuItemOnAction() {
         OpenFileWindow openFileWindow = new OpenFileWindow();
@@ -108,8 +134,7 @@ public class MainController implements Initializable {
     private void saveRightFileMenuItemOnAction() { System.out.println(""); }
     @FXML
     private void saveLeftFileMenuItemOnAction() { System.out.println(""); }
-    @FXML
-    BorderPane main_pane;// 어떤 윈도우를 없에는지 지정하기위해 만듬
+
     @FXML
     private void closeMenuItemOnAction() {
         /*
@@ -212,5 +237,30 @@ public class MainController implements Initializable {
             if(compare == "true") compare_button.setDisable(false);
             else compare_button.setDisable(true);
         }
+    }
+
+    private String[] makeToolbarStage(){
+        String[] stage = new String[10];
+        if(!next_difference_button.isDisable()) { stage[0] = "true"; }
+        else { stage[0] = "false"; }
+        if(!post_difference_button.isDisable()) { stage[1] = "true"; }
+        else { stage[1] = "false"; }
+        if(!first_difference_button.isDisable()) { stage[2] = "true"; }
+        else { stage[2] = "false"; }
+        if(!now_difference_button.isDisable()) { stage[3] = "true"; }
+        else { stage[3] = "false"; }
+        if(!last_difference_button.isDisable()) { stage[4] = "true"; }
+        else { stage[4] = "false"; }
+        if(!copy_to_right_button.isDisable()) { stage[5] = "true"; }
+        else { stage[5] = "false"; }
+        if(!copy_to_left_button.isDisable()) { stage[6] = "true"; }
+        else { stage[6] = "false"; }
+        if(!copy_to_right_all_button.isDisable()) { stage[7] = "true"; }
+        else { stage[7] = "false"; }
+        if(!copy_to_left_all_button.isDisable()){ stage[8] = "true"; }
+        else { stage[8] = "false"; }
+        if(!compare_button.isDisable()) { stage[9] = "true"; }
+        else { stage[9] = "false"; }
+        return stage;
     }
 }
