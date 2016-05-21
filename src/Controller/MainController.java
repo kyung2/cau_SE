@@ -28,8 +28,14 @@ public class MainController implements Initializable {
 
     private int tab_num;
     @Override
+    /*
+    * tab은 user data 를 통해 구별한다.
+    * 현재 tab에 user data 를 저장한다.
+    * tool bar의 버튼들을 모두 비활성화로 한다.
+    * */
     public void initialize(URL location, ResourceBundle resources) {
-        tab_num = 1;
+        tab_num = 0;
+        tab.setUserData(tab_num);
         setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
     }
     @FXML
@@ -67,12 +73,14 @@ public class MainController implements Initializable {
     private void nowDifferenceButtonOnAction() { now_difference_button.setText(""); }
     @FXML
     private void LastDifferenceButtonOnAction() { last_difference_button.setText(""); }
+
     @FXML
+    /*
+    * new tab 을 누르면 fxml 로 부터 정보를 읽어온 후
+    * tab을 하나 만들고 그 정보를 입력한다.
+    * user data는 현재 tab num 에서 1을 더한 값을 저장한다.
+    * */
     private void newTabMenuItemOnAction() {
-        if(tab == null) {
-            tab = tab_pane.getTabs().get(0);
-            tab.setUserData(tab_num);
-        }
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/View/Fxml/SplitFilePane.fxml"));
             Tab new_tab = new Tab("File");
@@ -159,7 +167,10 @@ public class MainController implements Initializable {
     private void closeTabAllMenuItemOnAction() { System.out.println(""); }
     @FXML
     private void tab1MenuItemOnAction(){ System.out.println(""); }
-
+    /*
+    * Toolbar 에 있는 버튼들의 활성화와 비활성화를 조절한다.
+    * 아무 행동도 하지 않으려면 null 을 입력하면 된다.
+    * */
     private void setClickabeButtons(String next, String post, String first, String now, String last, String ctor, String ctol, String ctora, String ctola, String compare){
         if(next != null){
             if(next == "true") next_difference_button.setDisable(false);

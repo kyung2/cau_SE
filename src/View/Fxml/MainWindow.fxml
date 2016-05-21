@@ -16,7 +16,11 @@
          <center>
               <TabPane fx:id="tab_pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                   <tabs>
-                      <fx:include source="TabPane.fxml" />
+                      <Tab fx:id="tab" text="File" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+                          <content>
+                              <fx:include source="SplitFilePane.fxml"></fx:include>
+                          </content>
+                      </Tab>
                   </tabs>
               </TabPane>
          </center>
