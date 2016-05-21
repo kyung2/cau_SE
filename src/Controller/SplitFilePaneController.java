@@ -51,7 +51,7 @@ public class SplitFilePaneController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setClickableButtons("right","true","false","false");
         setClickableButtons("left","true","false","false");
-
+        //practice code
         ArrayList<ArrayList<String >> groups = new ArrayList<ArrayList<String>>();
         ArrayList<String> onelines = new ArrayList<String>();
         onelines.add("click\n");
@@ -178,10 +178,15 @@ public class SplitFilePaneController implements Initializable {
         fileChooser.setTitle("FileChooser");
         File selectedFile = fileChooser.showOpenDialog(null);
         try{
-            System.out.println( selectedFile.getAbsolutePath() );
+            String path = selectedFile.getAbsolutePath();
 
-            if(position.getId().equals("left_load_button")) have_left_file = true;
-            else have_right_file = true;
+            if(position.getId().equals("left_load_button")) {
+                have_left_file = true;
+
+            }
+            else {
+                have_right_file = true;
+            }
         }catch (Exception NullPointException){
             System.out.println("No Select FIle");
         }

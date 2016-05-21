@@ -12,7 +12,7 @@ public class MainWindow extends Application {
     public void start(Stage primaryStage) throws Exception{
         //FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("MainWindow.fxml"));
         //fxmlLoader.setController("Controller/Controller.java");
-
+        System.out.println(getClass());
         Parent root = FXMLLoader.load(getClass().getResource("/View/Fxml/MainWindow.fxml"));
         primaryStage.setTitle("Simple Merge Program");
         primaryStage.setScene(new Scene(root));

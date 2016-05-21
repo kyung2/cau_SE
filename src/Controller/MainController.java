@@ -5,8 +5,12 @@ import View.OpenFileWindow;
 import View.ProgramInformationWindow;
 import View.SaveFileWindow;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Window;
 
@@ -17,9 +21,15 @@ public class MainController implements Initializable {
     @FXML
     private Button compare_button, copy_to_left_button,copy_to_right_button, copy_to_left_all_button, copy_to_right_all_button,
             next_difference_button, post_difference_button, first_difference_button, now_difference_button, last_difference_button;
+    @FXML
+    private TabPane tab_pane;
+    @FXML
+    private Tab tab;
 
+    private int tab_num;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        tab_num = 1;
         setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
     }
     @FXML
@@ -58,7 +68,23 @@ public class MainController implements Initializable {
     @FXML
     private void LastDifferenceButtonOnAction() { last_difference_button.setText(""); }
     @FXML
-    private void newTabMenuItemOnAction() { System.out.println(""); }
+    private void newTabMenuItemOnAction() {
+        if(tab == null) {
+            tab = tab_pane.getTabs().get(0);
+            tab.setUserData(tab_num);
+        }
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/View/Fxml/SplitFilePane.fxml"));
+            Tab new_tab = new Tab("File");
+            new_tab.setContent(root);
+            new_tab.setUserData(++tab_num);
+
+            tab_pane.getTabs().add(new_tab);
+        }catch (Exception e){
+            System.out.println(e);// 적절한 예외처리로 바꿔야함
+        }
+
+    }
     
     @FXML
     private void openMenuItemOnAction() {
