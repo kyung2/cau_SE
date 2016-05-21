@@ -23,8 +23,15 @@ public class MainController implements Initializable {
         setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
     }
     @FXML
+    /*
+    * 조건에 따라 달라져야 함.
+    * 다른 부분이 하나도 없다면 모든 버튼 비활성화
+    * 현재 차이점이 선택되 있지 않다면 다음 차이점과 이전 차이점, 모든 copy 버튼은 비활성화
+    * 차이점이 선택 되었을 때 그 차이점이 처음 차이점과 같다면 처음 차이점 비활성화
+    * 차이점이 선택 되었을 때 그 차이점이 마지막 차이점과 같다면 마지막 차이점 비활성화
+    * */
     private void compareButtonOnAction() {
-        System.out.println("Click");
+        setClickabeButtons("true","true","true","true","true","true","true","true","true","true");
     }
     @FXML
     private void copyToLeftButtonOnAction() {

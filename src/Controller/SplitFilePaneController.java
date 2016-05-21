@@ -89,7 +89,7 @@ public class SplitFilePaneController implements Initializable {
 
         fileChooser(left_load_button);
         if(have_left_file) setClickableButtons("left","true","true","false");
-        if(have_left_file && have_right_file) checkCompareButton();
+        checkCompareButton();
     }
     @FXML
     private void rightLoadButtonOnAction(){
@@ -99,7 +99,7 @@ public class SplitFilePaneController implements Initializable {
 
         fileChooser(right_load_button);
         if(have_right_file) setClickableButtons("right","true","true","false");
-        if(have_left_file && have_right_file) checkCompareButton();
+        checkCompareButton();
     }
     /*
     * 기본은 text area 수정 불가
@@ -123,7 +123,7 @@ public class SplitFilePaneController implements Initializable {
         else{
             //수정이 불가능 할 때 = 누르면 수정이 가능. 로드 불가능, 저장 가능, compare 불가능
             left_text_area.setEditable(true);
-            compare_button.setDisable(true);
+            disableAllButtonInToolBar();
             setClickableButtons("left","false",null,"true");
         }
     }
@@ -142,7 +142,7 @@ public class SplitFilePaneController implements Initializable {
         else{
             //수정이 불가능 할 때 - 누르면 수정 가능, 로드 불가능, 저장 가능
             right_text_area.setEditable(true);
-            compare_button.setDisable(true);
+            disableAllButtonInToolBar();
             setClickableButtons("right","false",null,"true");
         }
     }
@@ -221,8 +221,21 @@ public class SplitFilePaneController implements Initializable {
     * save 버튼이 눌렸을 때 두 text area 가 수정 불가능 한 경우 활성화
     * */
     private void checkCompareButton(){
-        if(!right_text_area.isEditable() && !left_text_area.isEditable()){
-            compare_button.setDisable(false);
+        if(have_right_file&&have_left_file) {
+            if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
+                compare_button.setDisable(false);
+            }
+        }
+    }
+    /*
+    * Toolbar 에 있는 모든 버튼을 비활성화 시킨다.
+    * file 을 수정할 경우 compare 를 다시 해야하기에 모든 버튼을 비활성화
+    * */
+    private void disableAllButtonInToolBar(){
+        ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
+
+        for(int i=0, n=toolBar.getItems().size(); i<n; i++){
+            ((Button)toolBar.getItems().get(i)).setDisable(true);
         }
     }
 }
