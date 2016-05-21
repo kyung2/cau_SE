@@ -1,18 +1,17 @@
 package Controller;
 
 import View.AlarmWindow;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.ToolBar;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 
+import java.awt.*;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,11 +29,14 @@ public class SplitFilePaneController implements Initializable {
     private Button left_load_button,left_edit_button,left_save_button,
                     right_load_button,right_save_button,right_edit_button;
     @FXML
+    private ListView<String> left_text_list, right_text_list;
+    @FXML
     private SplitPane split_pane;
     @FXML
     private Button compare_button;
 
     private boolean have_right_file, have_left_file;
+
     /*
     * 기본적으로
     * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
@@ -45,6 +47,15 @@ public class SplitFilePaneController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         setClickableButtons("right","true","false","false");
         setClickableButtons("left","true","false","false");
+
+        ObservableList<String> lines = FXCollections.observableArrayList(" ");
+        left_text_list.setItems(lines);
+        left_text_list.setDisable(true);
+        right_text_list.setItems(lines);
+        right_text_list.setDisable(true);
+
+        left_text_area.setEditable(false);
+        right_text_area.setEditable(false);
         compare_button = null;
         have_left_file = false;
         have_right_file = false;
@@ -153,7 +164,7 @@ public class SplitFilePaneController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(null);
         try{
             System.out.println( selectedFile.getAbsolutePath() );
-        
+
             if(position.getId().equals("left_load_button")) have_left_file = true;
             else have_right_file = true;
         }catch (Exception NullPointException){

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.effect.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -22,15 +23,15 @@
                 <AnchorPane fx:id="left_file_button_tab" prefHeight="33.0" prefWidth="260.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
                         <Label fx:id="left_file_label" layoutX="26.0" layoutY="7.0" prefHeight="23.0" prefWidth="72.0" text="FileName" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
-                        <Button styleClass = "tab_btn" id="left_load_button" fx:id="left_load_button" layoutX="154.0" layoutY="6.0" mnemonicParsing="false" onAction="#leftLoadButtonOnAction" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="4.0">
+                        <Button id="left_load_button" fx:id="left_load_button" layoutX="154.0" layoutY="6.0" mnemonicParsing="false" onAction="#leftLoadButtonOnAction" prefHeight="24.0" prefWidth="24.0" styleClass="tab_btn" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="4.0">
                      <font>
                         <Font size="4.0" />
                      </font></Button>
-                        <Button styleClass = "tab_btn" id="left_edit_button" fx:id="left_edit_button" layoutX="178.0" layoutY="4.0" mnemonicParsing="false" onAction="#leftEditButtonOnAction" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="4.0">
+                        <Button id="left_edit_button" fx:id="left_edit_button" layoutX="178.0" layoutY="4.0" mnemonicParsing="false" onAction="#leftEditButtonOnAction" prefHeight="24.0" prefWidth="24.0" styleClass="tab_btn" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="4.0">
                      <font>
                         <Font size="4.0" />
                      </font></Button>
-                        <Button styleClass = "tab_btn" id="left_save_button" fx:id="left_save_button" contentDisplay="TOP" layoutX="202.0" layoutY="5.0" mnemonicParsing="false" onAction="#leftSaveButtonOnAction" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0">
+                        <Button id="left_save_button" fx:id="left_save_button" contentDisplay="TOP" layoutX="202.0" layoutY="5.0" mnemonicParsing="false" onAction="#leftSaveButtonOnAction" prefHeight="24.0" prefWidth="24.0" styleClass="tab_btn" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0">
                             <opaqueInsets>
                                 <Insets />
                             </opaqueInsets>
@@ -42,7 +43,15 @@
                 </AnchorPane>
             <SplitPane dividerPositions="0.98" layoutX="50.0" layoutY="77.0" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
               <items>
-                        <TextArea fx:id="left_text_area" editable="false" minWidth="20.0" prefHeight="310.0" prefWidth="226.0" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                              <TextArea id="left_text_area" fx:id="left_text_area" editable="false" minWidth="20.0" prefHeight="310.0" prefWidth="226.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ListView fx:id="left_text_list" disable="true" layoutX="44.0" layoutY="38.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                     <effect>
+                        <ColorAdjust />
+                     </effect>
+                  </AnchorPane>
                       <TextArea fx:id="left_file_bottom_text_area" editable="false" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" />
               </items>
             </SplitPane>
@@ -52,15 +61,17 @@
          <children>
                 <AnchorPane fx:id="right_file_button_tab" layoutX="-34.0" layoutY="35.0" prefHeight="33.0" prefWidth="294.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <Button styleClass = "tab_btn" id="right_load_button" fx:id="right_load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#rightLoadButtonOnAction" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="4.0">
+                        <Button id="right_load_button" fx:id="right_load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#rightLoadButtonOnAction" prefHeight="24.0" prefWidth="24.0" styleClass="tab_btn" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="4.0">
                      <font>
                         <Font size="4.0" />
-                     </font></Button>
-                        <Button styleClass = "tab_btn" id="right_edit_button" fx:id="right_edit_button" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#rightEditButtonOnAction" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="4.0">
+                     </font>
+                  </Button>
+                        <Button id="right_edit_button" fx:id="right_edit_button" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#rightEditButtonOnAction" prefHeight="24.0" prefWidth="24.0" styleClass="tab_btn" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="4.0">
                      <font>
                         <Font size="4.0" />
-                     </font></Button>
-                        <Button styleClass = "tab_btn" id="right_save_button" fx:id="right_save_button" contentDisplay="TOP" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#rightSaveButtonOnAction" prefHeight="24.0" prefWidth="24.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0">
+                     </font>
+                  </Button>
+                        <Button id="right_save_button" fx:id="right_save_button" contentDisplay="TOP" layoutX="250.0" layoutY="10.0" mnemonicParsing="false" onAction="#rightSaveButtonOnAction" prefHeight="24.0" prefWidth="24.0" styleClass="tab_btn" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0">
                             <opaqueInsets>
                                 <Insets />
                             </opaqueInsets>
@@ -73,7 +84,12 @@
                 </AnchorPane>
             <SplitPane dividerPositions="0.98" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
               <items>
-                        <TextArea fx:id="right_text_area" editable="false" minWidth="20.0" prefHeight="310.0" prefWidth="260.0" />
+                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                              <TextArea fx:id="right_text_area" editable="false" minWidth="20.0" prefHeight="310.0" prefWidth="260.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                        <ListView fx:id="right_text_list" disable="true" layoutX="29.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
                       <TextArea fx:id="right_file_bottom_text_area" editable="false" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" />
               </items>
             </SplitPane>
