@@ -1,20 +1,14 @@
 package Controller;
 
-import View.HelpWindow;
-import View.OpenFileWindow;
-import View.ProgramInformationWindow;
-import View.SaveFileWindow;
+import View.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Window;
 
@@ -34,6 +28,8 @@ public class MainController implements Initializable {
     private Tab tab;
     @FXML
     BorderPane main_pane;
+    @FXML
+    private MyListView left_text_list, right_text_list;
 
     private ArrayList<String[]> toolbar_stage = new ArrayList<String []>();
     private int tab_num, now_tab_num;
@@ -48,7 +44,7 @@ public class MainController implements Initializable {
         tab.setUserData(tab_num);
         setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
         toolbar_stage.add(new String[]{"false","false","false","false","false","false","false","false","false","false"});
-        
+
         tab_pane.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Tab>() {
                     @Override
@@ -60,6 +56,11 @@ public class MainController implements Initializable {
                         setClickabeButtons(toolbar_stage.get(now_tab_num)[0],toolbar_stage.get(now_tab_num)[1],toolbar_stage.get(now_tab_num)[2],
                                 toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4],toolbar_stage.get(now_tab_num)[5],
                                 toolbar_stage.get(now_tab_num)[6],toolbar_stage.get(now_tab_num)[7],toolbar_stage.get(now_tab_num)[8],toolbar_stage.get(now_tab_num)[9]);
+
+                        AnchorPane left_anchor_pane = (AnchorPane)((SplitPane)t1.getContent()).getItems().get(0);
+                        AnchorPane right_anchor_pane = (AnchorPane)((SplitPane)t1.getContent()).getItems().get(1);
+                        left_text_list = (MyListView)((AnchorPane)((SplitPane)((SplitPane)left_anchor_pane.getChildren().get(1))).getItems().get(0)).getChildren().get(1);
+                        right_text_list = (MyListView)((AnchorPane)((SplitPane)((SplitPane)right_anchor_pane.getChildren().get(1))).getItems().get(0)).getChildren().get(1);
                     }
                 }
         );

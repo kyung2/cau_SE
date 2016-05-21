@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.ModelRealize;
 import View.AlarmWindow;
 import View.MyListView;
 import javafx.collections.FXCollections;
@@ -46,28 +47,16 @@ public class SplitFilePaneController implements Initializable {
     * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
     * toolbar 의 버튼은 모두 비활성화
     * */
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         setClickableButtons("right","true","false","false");
         setClickableButtons("left","true","false","false");
-        //practice code
-        ArrayList<ArrayList<String >> groups = new ArrayList<ArrayList<String>>();
-        ArrayList<String> onelines = new ArrayList<String>();
-        onelines.add("click\n");
-        onelines.add("add\n");
-        ArrayList<String> twolines = new ArrayList<String>();
-        twolines.add("click2\n");
-        twolines.add("add2\n");
-        groups.add(onelines);
-        groups.add(twolines);
-        groups.add(onelines);
-        //practice code
-        left_text_list.setBlocks(groups);
-        left_text_list.setDisable(false);
+
+
+        left_text_list.setDisable(true);
         left_text_list.setVisible(false);
-        //right_text_list.setItems(lines);
         right_text_list.setDisable(true);
+        right_text_list.setVisible(false);
 
         left_text_area.setEditable(false);
         right_text_area.setEditable(false);
