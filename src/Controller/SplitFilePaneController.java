@@ -1,6 +1,7 @@
 package Controller;
 
 import View.AlarmWindow;
+import View.MyListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -9,11 +10,14 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.*;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 
 import java.awt.*;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 /**
@@ -29,7 +33,7 @@ public class SplitFilePaneController implements Initializable {
     private Button left_load_button,left_edit_button,left_save_button,
                     right_load_button,right_save_button,right_edit_button;
     @FXML
-    private ListView<String> left_text_list, right_text_list;
+    private MyListView left_text_list, right_text_list;
     @FXML
     private SplitPane split_pane;
     @FXML
@@ -48,10 +52,21 @@ public class SplitFilePaneController implements Initializable {
         setClickableButtons("right","true","false","false");
         setClickableButtons("left","true","false","false");
 
-        ObservableList<String> lines = FXCollections.observableArrayList(" ");
-        left_text_list.setItems(lines);
-        left_text_list.setDisable(true);
-        right_text_list.setItems(lines);
+        ArrayList<ArrayList<String >> groups = new ArrayList<ArrayList<String>>();
+        ArrayList<String> onelines = new ArrayList<String>();
+        onelines.add("click\n");
+        onelines.add("add\n");
+        ArrayList<String> twolines = new ArrayList<String>();
+        twolines.add("click2\n");
+        twolines.add("add2\n");
+        groups.add(onelines);
+        groups.add(twolines);
+        groups.add(onelines);
+        //practice code
+        left_text_list.setBlocks(groups);
+        left_text_list.setDisable(false);
+        left_text_list.setVisible(false);
+        //right_text_list.setItems(lines);
         right_text_list.setDisable(true);
 
         left_text_area.setEditable(false);
