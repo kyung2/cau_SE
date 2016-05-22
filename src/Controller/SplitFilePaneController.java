@@ -176,9 +176,15 @@ public class SplitFilePaneController implements Initializable {
         saveAlarmWindow.showAndWait();
 
         if((boolean)saveAlarmWindow.getUserData()) {
-            right_text_area.setEditable(false);
-            checkCompareButton();
-            setClickableButtons("right","true",null,"false");
+            try {
+                Model model = ModelRealize.getInstance();
+                model.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
+                right_text_area.setEditable(false);
+                checkCompareButton();
+                setClickableButtons("right", "true", null, "false");
+            }catch (IllegalAccessException e){
+                e.printStackTrace();
+            }
         }
     }
     /*
@@ -254,7 +260,7 @@ public class SplitFilePaneController implements Initializable {
             }
         }catch (IllegalAccessException e){
                 e.printStackTrace();
-            }
+        }
     }
     /*
     * Tab num 값을 확인한다.
@@ -298,5 +304,14 @@ public class SplitFilePaneController implements Initializable {
             s += s1 + "\n";
         }
         return s;
+    }
+
+    private ArrayList<String> stringToArrayList(String s){
+        ArrayList<String> arrayList = new ArrayList<String>();
+        String[] strings = s.split("\n");
+        for(int i = 0, n = strings.length; i < n - 1; i++){
+            arrayList.add(strings[i]);
+        }
+        return arrayList;
     }
 }
