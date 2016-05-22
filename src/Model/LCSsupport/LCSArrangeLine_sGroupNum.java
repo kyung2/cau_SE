@@ -29,7 +29,33 @@ public class LCSArrangeLine_sGroupNum implements LCSSupport {
     }
 
     @Override
-    public ArrayList<Integer>[] whenMerge(ArrayList<Integer>[][] aaa, int index) {
-        return null;
+    public ArrayList<Integer>[] whenMerge(ArrayList<Integer>[][] aaa, int index, boolean dir) {
+        int aToNonA = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum);
+        int aToGNum = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum);
+        int thisNum = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum);
+        int groupNum = aaa[aToGNum][0].get(index);
+        int groupMinus = groupNum>0?2:1;
+        int in = dir?0:1;
+        int para=0;
+
+        ArrayList<Integer>[] newAL = new ArrayList[2];
+        newAL[0] = new ArrayList<Integer>(); newAL[1] = new ArrayList<Integer>();
+        for(int i=0;i<aaa[aToGNum][0].size();i++) {
+            if ((Integer) aaa[aToGNum][0].get(i) < groupNum) {
+                newAL[0].add(aaa[thisNum][0].get(i));
+                newAL[1].add(aaa[thisNum][1].get(i));
+            }
+            else if ((Integer) aaa[aToGNum][0].get(i) == groupNum) {
+                if((Integer) aaa[aToNonA][in].get(i) != -1) {
+                    newAL[0].add(aaa[thisNum][in].get(i) - groupMinus + 1);
+                    newAL[1].add(aaa[thisNum][in].get(i) - groupMinus + 1);
+                }
+            }
+             else if ((Integer) aaa[aToGNum][0].get(i) > groupNum) {
+                newAL[0].add(aaa[thisNum][0].get(i)-groupMinus);
+                newAL[1].add(aaa[thisNum][1].get(i)-groupMinus);
+            }
+        }
+        return newAL;
     }
 }

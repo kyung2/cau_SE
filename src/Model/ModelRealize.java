@@ -1,5 +1,7 @@
 package Model;
 
+import Model.LCSsupport.LCSClassEnum;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -45,40 +47,36 @@ public class ModelRealize implements Model {
         return u.get(findTap(tapNum)).m.textReceive(i);
     }
 
-    public void setText(int tapNum, ArrayList<String> text, int i) throws IllegalAccessException {
+    @Override
+    public ArrayList<String> getArrangedText(int tapNum, int i) throws IndexOutOfBoundsException, IllegalAccessException {
+        //todo
+        return u.get(findTap(tapNum)).m.getArrangedText(i);
+    }
+
+    @Override
+    public ArrayList<Integer> getArrangedGroupNum(int tapNum) throws IndexOutOfBoundsException, IllegalAccessException {
+
+        return u.get(findTap(tapNum)).m.getArrangedGroup();
+
+    }
+
+    public void setText(int tapNum, ArrayList<String> text, int i) throws IndexOutOfBoundsException, IllegalAccessException {
         u.get(findTap(tapNum)).m.textSend(i, text);
     }
 
-    public void getTextOuter(int tapNum, String filepath, int i) throws IOException,IllegalAccessException {
+    public void readTextOuter(int tapNum, String filepath, int i) throws IndexOutOfBoundsException, IOException,IllegalAccessException {
         u.get(findTap(tapNum)).m.open(filepath, i);
     }
 
-    public void setTextOuter(int tapNum, String filepath, int i) throws IOException,IllegalAccessException {
+    public void writeTextOuter(int tapNum, String filepath, int i) throws IndexOutOfBoundsException, IOException,IllegalAccessException {
         u.get(findTap(tapNum)).m.save(filepath, i);
     }
 
     public void merge(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException {
-        u.get(findTap(tapNum)).m.mergeByGroupNum(Index, direction);
+        u.get(findTap(tapNum)).m.mergeBylineNum(Index, direction);
     }
 
 
-    public ArrayList<ArrayList<String>>[] getGroup(int tapNum)throws IllegalAccessException {
-        ArrayList[][] a = u.get(findTap(tapNum)).m.getGroup();
-        ArrayList<ArrayList<String>>[] ret = a[0];
-        return ret;
-    }
-
-    public ArrayList<String>[] getGroupLine(int tapNum, int i)throws IllegalAccessException {
-        ArrayList[][] a = u.get(findTap(tapNum)).m.getGroup();
-        ArrayList<String>[] ret = a[1];
-        return ret;
-    }
-
-    public ArrayList<Integer>[] getGroupColor(int tapNum, int i)throws IllegalAccessException {
-        ArrayList[][] a = u.get(findTap(tapNum)).m.getGroup();
-        ArrayList<Integer>[] ret = a[2];
-        return ret;
-    }
 
     private Integer findTap(int tapNum) throws IllegalAccessException
     {

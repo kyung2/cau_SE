@@ -46,6 +46,7 @@ public class PseudoMain {
                 }
                 System.out.println("");
             }
+            System.out.println("\n\n");
         }
     }
 }
