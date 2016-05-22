@@ -27,11 +27,10 @@ public class LCSArrangeLine_sNonArrangeLineNum implements LCSSupport {
     }
 
     @Override
-    public ArrayList<Integer>[] whenMerge(ArrayList<Integer>[][] aaa, int index, boolean dir) {
+    public ArrayList<Integer>[] whenMerge(ArrayList<Integer>[][] aaa, int groupNum, boolean dir) {
         int aToNonA = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum);
         int aToGNum = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum);
         int thisNum = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum);
-        int groupNum = aaa[aToGNum][0].get(index);
         int in = dir?0:1;
         int newCount = 0;
         int para=0;

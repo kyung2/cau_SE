@@ -53,13 +53,13 @@ public class LCSGrouping {
         return group;
 
     }
-    public ArrayList<Integer>[][] merge(ArrayList<Integer>[][] aaa, int index, boolean dir)
+    public ArrayList<Integer>[][] merge(ArrayList<Integer>[][] aaa, int groupNum, boolean dir)
     {
 
         ArrayList<Integer>[][] newAaa = new ArrayList[groupXSize][2];
         for(int k=0;k<groupXSize;k++)
         {
-            newAaa[k] = lcs[k].whenMerge(aaa,index,dir);
+            newAaa[k] = lcs[k].whenMerge(aaa,groupNum,dir);
         }
         return newAaa;
     }

@@ -80,8 +80,12 @@ public class ModelRealize implements Model {
         u.get(findTap(tapNum)).m.save(filepath, i);
     }
 
-    public void merge(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException {
+    public void mergeByLine(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException {
         u.get(findTap(tapNum)).m.mergeBylineNum(Index, direction);
+    }
+
+    public void mergeByGroup(int tapNum, int groupNum, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException {
+        u.get(findTap(tapNum)).m.mergeByGroupNum(groupNum, direction);
     }
 
 

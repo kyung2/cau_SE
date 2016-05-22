@@ -80,26 +80,15 @@ class ModelUnit {
     {
         LCSGrouping g = new LCSGrouping();
         if(group==null) regrouping();
-        if((Integer)(group[LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum)][0].get(lineNum))%2 == 1) {
-            mergeTextFirst(lineNum, direction);
+        mergeByGroupNum((Integer)(group[LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum)][0].get(lineNum)), direction);
 
 
-            group = g.merge(group, lineNum, direction);
-            changeArrangedString();
-            groupChange();
-            textChange();
-        }
-        else
-        {
-            throw new MergeLineIllegalException();
-        }
     }
-    protected void mergeTextFirst(int lineNum, boolean direction) //
+    protected void mergeTextFirst(int groupNum, boolean direction) //
     {
         int aToNonA = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum);
         int aToGNum = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum);
         int thisNum = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum);
-        int groupNum = (Integer)group[aToGNum][0].get(lineNum);
 
         int in = direction?0:1;
         ArrayList<String>[] oldS, newS;
@@ -191,6 +180,23 @@ class ModelUnit {
         //todo - give notice that text change
     }
 
+    public void mergeByGroupNum(int groupNum, boolean direction) throws MergeLineIllegalException{
+        LCSGrouping g = new LCSGrouping();
+        if (group == null) regrouping();
+        if (groupNum % 2 == 1) {
+            mergeTextFirst(groupNum, direction);
+
+
+            group = g.merge(group, groupNum, direction);
+            changeArrangedString();
+            groupChange();
+            textChange();
+        }
+        else
+        {
+            throw new MergeLineIllegalException();
+        }
+    }
 }
 
 

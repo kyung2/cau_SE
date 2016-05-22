@@ -88,7 +88,7 @@ public class PseudoMain2 {
             System.out.println("-");
 
             System.out.println("0000");
-            m.merge(2,3,false);
+            m.mergeByGroup(2,3,false);
             System.out.println("0000");
             aaa = m.getArrangedGroupNum(2);
             for(int k=0;k<aaa.size();k++)
@@ -106,7 +106,7 @@ public class PseudoMain2 {
             System.out.println("-");
 
             System.out.println("0000");
-            m.merge(2,0,true);
+            m.mergeByGroup(2,1,true);
             System.out.println("0000");
             a3 =  m.getArrangedText(2,0);
             System.out.println("-");
