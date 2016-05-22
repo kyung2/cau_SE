@@ -68,7 +68,7 @@ class ModelUnit {
         }
         return (ArrayList<String>) arrangedString[i].clone();
     }
-    public ArrayList<Integer> getArrangedGroup() throws IndexOutOfBoundsException
+    public ArrayList<Integer> getArrangedGroup() throws IndexOutOfBoundsException //
     {
         if(group==null) {
             regrouping();
@@ -76,7 +76,7 @@ class ModelUnit {
         }
         return (ArrayList<Integer>) group[LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum)][0].clone();
     }
-    public void mergeBylineNum(int lineNum, boolean direction) throws IndexOutOfBoundsException, MergeLineIllegalException
+    public void mergeBylineNum(int lineNum, boolean direction) throws IndexOutOfBoundsException, MergeLineIllegalException //
     {
         LCSGrouping g = new LCSGrouping();
         if(group==null) regrouping();
@@ -94,7 +94,7 @@ class ModelUnit {
             throw new MergeLineIllegalException();
         }
     }
-    protected void mergeTextFirst(int lineNum, boolean direction)
+    protected void mergeTextFirst(int lineNum, boolean direction) //
     {
         int aToNonA = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum);
         int aToGNum = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum);
@@ -111,8 +111,7 @@ class ModelUnit {
         newS[1] = new ArrayList<String>();
 
 
-        ArrayList<Integer>[] newAL = new ArrayList[2];
-        newAL[0] = new ArrayList<Integer>(); newAL[1] = new ArrayList<Integer>();
+
         for(int i=0;i<group[aToGNum][0].size();i++) {
             if ((Integer) group[aToGNum][0].get(i) != groupNum) {
                 if((Integer)group[aToNonA][0].get(i) != -1) {
@@ -154,7 +153,7 @@ class ModelUnit {
         arrangedString = null;
         groupChange();
     }
-    protected void changeArrangedString()
+    protected void changeArrangedString() //
     {
         arrangedString = new ArrayList[2];
         arrangedString[0] = new ArrayList<String>();
