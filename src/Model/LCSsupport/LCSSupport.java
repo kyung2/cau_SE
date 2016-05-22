@@ -12,5 +12,5 @@ public interface LCSSupport {
     public void groupChangingAction(ArrayList<Integer>[] aa, LCSGrouping p);
     public void groupEndingAction(ArrayList<Integer>[] aa, LCSGrouping p);
 
-    public ArrayList<Integer>[] whenMerge(ArrayList<Integer>[][] aaa, int index);
+    public ArrayList<Integer>[] whenMerge(ArrayList<Integer>[][] aaa, int index, boolean dir);
 }

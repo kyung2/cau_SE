@@ -1,5 +1,6 @@
 package Model;
 import Model.LCSsupport.LCSClassEnum;
+import Model.LCSsupport.LCSGrouping;
 
 import java.io.*;
 import java.lang.String;
@@ -138,9 +139,40 @@ class ModelUnit {
         //todo
     }
 
-    public void mergeBylineNum(int LineNum, boolean direction) throws IndexOutOfBoundsException
+    public void mergeBylineNum(int lineNum, boolean direction) throws IndexOutOfBoundsException
     {
-        //todo
+        int aToGNum;
+        try{
+
+        }
+        catch(Exception e)
+        {
+
+        }
+    }
+
+    protected void mergeTexts(int groupNum, boolean dir)
+    {
+        int groupMinus = groupNum>0?2:1;
+        int iminus=0;
+        int in = dir?1:0;
+        int aToNonA = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum);
+        int aToGNum = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum);
+        for(int i=0;i<arrangedString[0].size();i++)
+        {
+            if((Integer)group[aToGNum][0].get(i)==groupNum)
+            {
+                if((Integer)group[aToNonA][0].get(i)==-1)
+                {
+
+
+                }
+            }
+            else if((Integer)group[aToGNum][0].get(i)>groupNum)
+            {
+
+            }
+        }
     }
 
 

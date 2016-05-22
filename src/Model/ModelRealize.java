@@ -78,7 +78,7 @@ public class ModelRealize implements Model {
     }
 
     public void merge(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException {
-        u.get(findTap(tapNum)).m.mergeByGroupNum(Index, direction);
+        u.get(findTap(tapNum)).m.mergeBylineNum(Index, direction);
     }
 
 
