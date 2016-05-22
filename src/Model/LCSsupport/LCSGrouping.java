@@ -40,7 +40,6 @@ public class LCSGrouping {
 
         while( (i<x-1||j<y-1))
         {
-            System.out.print("("+i+"," + j + ") ");
             if((groupNum%2==0)!=(LCSBacktrack[i][j][0]&&LCSBacktrack[i][j][1]))
             {
 
