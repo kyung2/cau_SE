@@ -322,6 +322,7 @@ public class SplitFilePaneController implements Initializable {
         for (String s1 : arrayList) {
             s += s1 + "\n";
         }
+
         return s;
     }
     /*
@@ -330,8 +331,8 @@ public class SplitFilePaneController implements Initializable {
     private ArrayList<String> stringToArrayList(String s){
         ArrayList<String> arrayList = new ArrayList<String>();
         String[] strings = s.split("\n");
-        for(int i = 0, n = strings.length; i < n ; i++){
-            arrayList.add(strings[i]);
+        for(int i = 0, n = strings.length; i < n; i++){
+            arrayList.add(strings[i]+"\n");
         }
         return arrayList;
     }
