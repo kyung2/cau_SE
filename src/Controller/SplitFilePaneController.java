@@ -21,6 +21,7 @@ import java.awt.*;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 /**
@@ -192,12 +193,12 @@ public class SplitFilePaneController implements Initializable {
             if(position.getId().equals("left_load_button")) {
                 have_left_file = true;
                 model.readTextOuter(tab_num,path,0);
-                left_text_area.setText(model.getText(tab_num,0).toString());
+                left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
             }
             else {
                 have_right_file = true;
-                model.readTextOuter(tab_num,path,0);
-                right_text_area.setText(model.getText(tab_num,1).toString());
+                model.readTextOuter(tab_num,path,1);
+                right_text_area.setText(arrayListToString(model.getText(tab_num,1)));
             }
         }catch (Exception NullPointException){
             System.out.println("No Select FIle");
@@ -269,5 +270,12 @@ public class SplitFilePaneController implements Initializable {
             }
         }
         return tab;
+    }
+    private String arrayListToString(ArrayList<String> arrayList){
+        String s = new String();
+        for (String s1 : arrayList) {
+            s += s1 + "\n";
+        }
+        return s;
     }
 }
