@@ -1,8 +1,10 @@
 package Controller;
 
+import Model.Model;
 import Model.ModelRealize;
 import View.AlarmWindow;
 import View.MyListView;
+import com.sun.javafx.scene.control.skin.TabPaneSkin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -41,7 +43,7 @@ public class SplitFilePaneController implements Initializable {
     private Button compare_button;
 
     private boolean have_right_file, have_left_file;
-
+    private int tab_num;
     /*
     * 기본적으로
     * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
@@ -49,9 +51,10 @@ public class SplitFilePaneController implements Initializable {
     * */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        tab_num = -1;
+
         setClickableButtons("right","true","false","false");
         setClickableButtons("left","true","false","false");
-
 
         left_text_list.setDisable(true);
         left_text_list.setVisible(false);
@@ -60,6 +63,7 @@ public class SplitFilePaneController implements Initializable {
 
         left_text_area.setEditable(false);
         right_text_area.setEditable(false);
+
         compare_button = null;
         have_left_file = false;
         have_right_file = false;
@@ -76,7 +80,7 @@ public class SplitFilePaneController implements Initializable {
             compare_button = (Button)((ToolBar)((BorderPane)((BorderPane)split_pane.getScene().getRoot()).getCenter()).getTop()).getItems().get(9);
         }
 
-        fileChooser(left_load_button);
+        loadFileChooser(left_load_button);
         if(have_left_file) setClickableButtons("left","true","true","false");
         checkCompareButton();
     }
@@ -86,7 +90,7 @@ public class SplitFilePaneController implements Initializable {
             compare_button = (Button)((ToolBar)((BorderPane)((BorderPane)split_pane.getScene().getRoot()).getCenter()).getTop()).getItems().get(9);
         }
 
-        fileChooser(right_load_button);
+        loadFileChooser(right_load_button);
         if(have_right_file) setClickableButtons("right","true","true","false");
         checkCompareButton();
     }
@@ -170,20 +174,30 @@ public class SplitFilePaneController implements Initializable {
             setClickableButtons("right","true",null,"false");
         }
     }
-
-    private void fileChooser(Button position){
+    /*
+    *  file chooser 를 열어서 파일의 path 를 가져온다.
+    *  tab num 이
+    * */
+    private void loadFileChooser(Button position){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
         File selectedFile = fileChooser.showOpenDialog(null);
+        if(tab_num == -1){
+            tab_num = (int)getSelectedTab().getUserData();
+        }
         try{
             String path = selectedFile.getAbsolutePath();
+            Model model = ModelRealize.getInstance();
 
             if(position.getId().equals("left_load_button")) {
                 have_left_file = true;
-
+                model.readTextOuter(tab_num,path,0);
+                left_text_area.setText(model.getText(tab_num,0).toString());
             }
             else {
                 have_right_file = true;
+                model.readTextOuter(tab_num,path,0);
+                right_text_area.setText(model.getText(tab_num,1).toString());
             }
         }catch (Exception NullPointException){
             System.out.println("No Select FIle");
@@ -245,5 +259,15 @@ public class SplitFilePaneController implements Initializable {
         for(int i=0, n=toolBar.getItems().size(); i<n; i++){
             ((Button)toolBar.getItems().get(i)).setDisable(true);
         }
+    }
+    private Tab getSelectedTab(){
+        Tab tab = null;
+        TabPane tabPane = (TabPane)split_pane.getParent().getParent();
+        for(int i=0,n=tabPane.getTabs().size(); i<n;i++){
+            if(tabPane.getTabs().get(i).isSelected()){
+                tab = tabPane.getTabs().get(i);
+            }
+        }
+        return tab;
     }
 }

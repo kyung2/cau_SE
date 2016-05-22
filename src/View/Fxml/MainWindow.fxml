@@ -27,16 +27,16 @@
          <top>
               <ToolBar prefHeight="40.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                   <items>
-                      <Button id="next_difference_button"  styleClass="btn" fx:id="next_difference_button" mnemonicParsing="false" onAction="#nextDifferenceButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="post_difference_button"  styleClass="btn" fx:id="post_difference_button" mnemonicParsing="false" onAction="#postDifferenceButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="first_difference_button"  styleClass="btn" fx:id="first_difference_button" mnemonicParsing="false" onAction="#firstDifferenceButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="now_difference_button"  styleClass="btn" fx:id="now_difference_button" mnemonicParsing="false" onAction="#nowDifferenceButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="last_difference_button"  styleClass="btn" fx:id="last_difference_button" mnemonicParsing="false" onAction="#LastDifferenceButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="copy_to_right_button"  styleClass="btn" fx:id="copy_to_right_button" mnemonicParsing="false" onAction="#copyToRightButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="copy_to_left_button"  styleClass="btn" fx:id="copy_to_left_button" mnemonicParsing="false" onAction="#copyToLeftButtonOnAction" prefHeight="32.0" prefWidth="32.0" textAlignment="CENTER" />
-                      <Button id="copy_to_right_all_button"  styleClass="btn" fx:id="copy_to_right_all_button" mnemonicParsing="false" onAction="#copyToRightAllButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="copy_to_left_all_button"  styleClass="btn" fx:id="copy_to_left_all_button" mnemonicParsing="false" onAction="#copyToLeftAllButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
-                      <Button id="compare_button" styleClass="btn" fx:id="compare_button" mnemonicParsing="false" onAction="#compareButtonOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="next_difference_button"  styleClass="btn" fx:id="next_difference_button" mnemonicParsing="false" onAction="#nextDifferenceOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="post_difference_button"  styleClass="btn" fx:id="post_difference_button" mnemonicParsing="false" onAction="#postDifferenceOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="first_difference_button"  styleClass="btn" fx:id="first_difference_button" mnemonicParsing="false" onAction="#firstDifferenceOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="now_difference_button"  styleClass="btn" fx:id="now_difference_button" mnemonicParsing="false" onAction="#nowDifferenceOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="last_difference_button"  styleClass="btn" fx:id="last_difference_button" mnemonicParsing="false" onAction="#lastDifferenceOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="copy_to_right_button"  styleClass="btn" fx:id="copy_to_right_button" mnemonicParsing="false" onAction="#copyToRightOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="copy_to_left_button"  styleClass="btn" fx:id="copy_to_left_button" mnemonicParsing="false" onAction="#copyToLeftOnAction" prefHeight="32.0" prefWidth="32.0" textAlignment="CENTER" />
+                      <Button id="copy_to_right_all_button"  styleClass="btn" fx:id="copy_to_right_all_button" mnemonicParsing="false" onAction="#copyToRightAllOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="copy_to_left_all_button"  styleClass="btn" fx:id="copy_to_left_all_button" mnemonicParsing="false" onAction="#copyToLeftAllOnAction" prefHeight="32.0" prefWidth="32.0" />
+                      <Button id="compare_button" styleClass="btn" fx:id="compare_button" mnemonicParsing="false" onAction="#compareOnAction" prefHeight="32.0" prefWidth="32.0" />
                   </items>
               </ToolBar>
          </top>
@@ -57,16 +57,16 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Merge">
             <items>
-              <MenuItem fx:id="next_difference_menu_item" mnemonicParsing="false" onAction="#nextDifferenceMenuItemOnAction" text="Next Difference" />
-                  <MenuItem fx:id="post_difference_menu_item" mnemonicParsing="false" onAction="#postDifferenceMenuItemOnAction" text="Post Difference" />
-                  <MenuItem fx:id="first_difference_menu_item" mnemonicParsing="false" onAction="#firstDifferenceMenuItemOnAction" text="First Difference" />
-                  <MenuItem fx:id="now_difference_menu_item" mnemonicParsing="false" onAction="#nowDifferenceMenuItemOnAction" text="Now Selected Difference" />
-                  <MenuItem fx:id="last_difference_menu_item" mnemonicParsing="false" onAction="#lastDifferenceMenuItemOnAction" text="Last Difference" />
-                  <MenuItem fx:id="copy_to_right_menu_item" mnemonicParsing="false" onAction="#copyToRightMenuItemOnAction" text="Copy to Right" />
-                  <MenuItem fx:id="copy_to_left_menu_item" mnemonicParsing="false" onAction="#copyToLeftMenuItemOnAction" text="Copy to Left" />
-                  <MenuItem fx:id="copy_to_right_all_menu_item" mnemonicParsing="false" onAction="#copyToRightAllMenuItemOnAction" text="Copy to Right All" />
-                  <MenuItem fx:id="copy_to_left_all_menu_item" mnemonicParsing="false" onAction="#copyToLeftAllMenuItemOnAction" text="Copy to Left All" />
-                  <MenuItem fx:id="compare_menu_item" mnemonicParsing="false" onAction="#compareMenuItemOnAction" text="Compare" />
+              <MenuItem fx:id="next_difference_menu_item" mnemonicParsing="false" onAction="#nextDifferenceOnAction" text="Next Difference" />
+                  <MenuItem fx:id="post_difference_menu_item" mnemonicParsing="false" onAction="#postDifferenceOnAction" text="Post Difference" />
+                  <MenuItem fx:id="first_difference_menu_item" mnemonicParsing="false" onAction="#firstDifferenceOnAction" text="First Difference" />
+                  <MenuItem fx:id="now_difference_menu_item" mnemonicParsing="false" onAction="#nowDifferenceOnAction" text="Now Selected Difference" />
+                  <MenuItem fx:id="last_difference_menu_item" mnemonicParsing="false" onAction="#lastDifferenceOnAction" text="Last Difference" />
+                  <MenuItem fx:id="copy_to_right_menu_item" mnemonicParsing="false" onAction="#copyToRightOnAction" text="Copy to Right" />
+                  <MenuItem fx:id="copy_to_left_menu_item" mnemonicParsing="false" onAction="#copyToLeftOnAction" text="Copy to Left" />
+                  <MenuItem fx:id="copy_to_right_all_menu_item" mnemonicParsing="false" onAction="#copyToRightAllOnAction" text="Copy to Right All" />
+                  <MenuItem fx:id="copy_to_left_all_menu_item" mnemonicParsing="false" onAction="#copyToLeftAllOnAction" text="Copy to Left All" />
+                  <MenuItem fx:id="compare_menu_item" mnemonicParsing="false" onAction="#compareOnAction" text="Compare" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

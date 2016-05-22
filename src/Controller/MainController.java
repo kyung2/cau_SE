@@ -1,5 +1,8 @@
 package Controller;
 
+import Model.Model;
+import Model.ModelRealize;
+
 import View.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -45,6 +48,8 @@ public class MainController implements Initializable {
         setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
         toolbar_stage.add(new String[]{"false","false","false","false","false","false","false","false","false","false"});
 
+        Model model = ModelRealize.getInstance();
+        model.newModel(tab_num);
         tab_pane.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Tab>() {
                     @Override
@@ -73,39 +78,40 @@ public class MainController implements Initializable {
     * 차이점이 선택 되었을 때 그 차이점이 처음 차이점과 같다면 처음 차이점 비활성화
     * 차이점이 선택 되었을 때 그 차이점이 마지막 차이점과 같다면 마지막 차이점 비활성화
     * */
-    private void compareButtonOnAction() {
+    private void compareOnAction() {
         setClickabeButtons("true","true","true","true","true","true","true","true","true","true");
     }
     @FXML
-    private void copyToLeftButtonOnAction() {
+    private void copyToLeftOnAction() {
         System.out.println("Click");
     }
     @FXML
-    private void copyToRightButtonOnAction() { copy_to_right_button.setText(""); }
+    private void copyToRightOnAction() { copy_to_right_button.setText(""); }
     @FXML
-    private void copyToRightAllButtonOnAction() {
+    private void copyToRightAllOnAction() {
         copy_to_right_all_button.setText("");
     }
     @FXML
-    private void copyToLeftAllButtonOnAction(){
+    private void copyToLeftAllOnAction(){
         copy_to_left_all_button.setText("");
     }
     @FXML
-    private void nextDifferenceButtonOnAction() { next_difference_button.setText(""); }
+    private void nextDifferenceOnAction() { next_difference_button.setText(""); }
     @FXML
-    private void postDifferenceButtonOnAction() { post_difference_button.setText(""); }
+    private void postDifferenceOnAction() { post_difference_button.setText(""); }
     @FXML
-    private void firstDifferenceButtonOnAction() { first_difference_button.setText(""); }
+    private void firstDifferenceOnAction() { first_difference_button.setText(""); }
     @FXML
-    private void nowDifferenceButtonOnAction() { now_difference_button.setText(""); }
+    private void nowDifferenceOnAction() { now_difference_button.setText(""); }
     @FXML
-    private void LastDifferenceButtonOnAction() { last_difference_button.setText(""); }
+    private void lastDifferenceOnAction() { last_difference_button.setText(""); }
 
     @FXML
     /*
     * new tab 을 누르면 fxml 로 부터 정보를 읽어온 후
     * tab을 하나 만들고 그 정보를 입력한다.
     * user data는 현재 tab num 에서 1을 더한 값을 저장한다.
+    * tab 에 해당하는 새로운 모델을 하나 만든다
     * */
     private void newTabMenuItemOnAction() {
         try {
@@ -115,6 +121,9 @@ public class MainController implements Initializable {
             new_tab.setUserData(++tab_num);
             toolbar_stage.add(new String[]{"false","false","false","false","false","false","false","false","false","false"});
             tab_pane.getTabs().add(new_tab);
+
+            Model model = ModelRealize.getInstance();
+            model.newModel(tab_num);
         }catch (Exception e){
             System.out.println(e);// 적절한 예외처리로 바꿔야함
         }
@@ -147,26 +156,6 @@ public class MainController implements Initializable {
         ((Window)(main_pane.getScene().getWindow())).hide();// 종료 method
         System.out.println("");
     }
-    @FXML
-    private void nextDifferenceMenuItemOnAction() { System.out.println(""); }
-    @FXML
-    private void postDifferenceMenuItemOnAction() { System.out.println(""); }
-    @FXML
-    private void firstDifferenceMenuItemOnAction() { System.out.println(""); }
-    @FXML
-    private void nowDifferenceMenuItemOnAction() { System.out.println(""); }
-    @FXML
-    private void lastDifferenceMenuItemOnAction() { System.out.println(""); }
-    @FXML
-    private void copyToRightMenuItemOnAction() { System.out.println(""); }
-    @FXML
-    private void copyToLeftMenuItemOnAction() { System.out.println(""); }
-    @FXML
-    private void copyToRightAllMenuItemOnAction() { System.out.println(""); }
-    @FXML
-    private void copyToLeftAllMenuItemOnAction() { System.out.println(""); }
-    @FXML
-    private void compareMenuItemOnAction() { System.out.println(""); }
     @FXML
     private void helpMenuItemOnAction() {
         HelpWindow HelpWindow = new HelpWindow();
