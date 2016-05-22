@@ -5,7 +5,8 @@ package Model.LCSsupport;
  */
 public enum LCSClassEnum {
     LCSArrangeLine_sNonArrangeLineNum,
-    LCSArrangeLine_sGroupNum;
+    LCSArrangeLine_sGroupNum,
+    LCSGroup_sIncludingArrangedLineNum;
 
     public static int find(LCSClassEnum e)
     {

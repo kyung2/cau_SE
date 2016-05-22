@@ -51,6 +51,11 @@ public class ModelRealize implements Model {
 
     }
 
+    @Override
+    public boolean isOpen(int tapNum, int i) throws IllegalAccessException {
+        return false;   //todo
+    }
+
     public ArrayList<String> getText(int tapNum, int i) throws IllegalAccessException {
         return u.get(findTap(tapNum)).m.textReceive(i);
     }

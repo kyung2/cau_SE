@@ -27,7 +27,7 @@ public class ModelUnitUsingFile extends ModelUnit {
         }
         public void WriteFromOuter(String s) throws IOException {
             FileOutputStream fileOutputStream = new FileOutputStream(s);
-            OutputStreamWriter OutputStreamWriter = new OutputStreamWriter(fileOutputStream, "UTF-8");
+            OutputStreamWriter OutputStreamWriter = new OutputStreamWriter(fileOutputStream, "EUC-KR");
             BufferedWriter writer = new BufferedWriter(OutputStreamWriter);
             String line;
             for(int i=0;i<lines.size();i++) {

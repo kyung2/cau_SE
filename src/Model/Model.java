@@ -16,8 +16,11 @@ public interface Model {
     // 모델 유닛을 하나 만들고 그 유닛의 식별자를 반환한다.
     void closeModel(int tapNum) throws IllegalAccessException;
     // 식별자 tapNum을 가지는 모델 유닛을 닫는다.
+
+    boolean isOpen(int tapNum, int i) throws IllegalAccessException;
     ArrayList<String> getText(int tapNum, int i) throws IndexOutOfBoundsException, IllegalAccessException;
-    // 식별자 tapNum의 i번째 창(i=0 or 1)의 텍스트 전체를 가져온다.
+    // 식별자 tapNum의 i번째 텍스트(i=0 or 1)전체를 가져온다.
+    // tapNum이 적합하지 않을 시 IllegalAccessException이, i가 적합하지 않을 시 IndexOutOfBoundsException이 발생된다.
     ArrayList<String> getArrangedText(int tapNum, int i) throws IndexOutOfBoundsException, IllegalAccessException;
     // 식별자 tapNum의 i번째 창(i=0 or 1)의 정리된 텍스트 전체를 가져온다.
     ArrayList<Integer> getArrangedGroupNum(int tapNum) throws IndexOutOfBoundsException, IllegalAccessException;
