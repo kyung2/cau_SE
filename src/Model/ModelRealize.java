@@ -11,13 +11,20 @@ import java.util.Comparator;
  */
 public class ModelRealize implements Model {
 
+    private static ModelRealize instance = null;
+    private ArrayList<ModelUnitGroup> u;
 
-    ArrayList<ModelUnitGroup> u;
-
-    ModelRealize()
+    private ModelRealize()
     {
         u = new ArrayList<ModelUnitGroup>();
     }
+
+    public static ModelRealize getInstance()
+    {
+        if(instance == null) instance = new ModelRealize();
+        return instance;
+    }
+    
     public void newModel(int tapNum) {
         u.add(new ModelUnitGroup(tapNum));
     }
