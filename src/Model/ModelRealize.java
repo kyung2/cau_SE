@@ -26,8 +26,8 @@ public class ModelRealize implements Model {
         return instance;
     }
 
-    public void newModel(int tapNum) {
-        u.add(new ModelUnitGroup(tapNum));
+    public void newModel(int tabNum) {
+        u.add(new ModelUnitGroup(tabNum));
     }
 
     public int newModel() {
@@ -46,70 +46,70 @@ public class ModelRealize implements Model {
 
 
 
-    public void closeModel(int tapNum) throws IllegalAccessException{
-        u.remove(findTap(tapNum));
+    public void closeModel(int tabNum) throws IllegalAccessException{
+        u.remove(findTap(tabNum));
 
     }
 
     @Override
-    public boolean isOpen(int tapNum, int i) throws IllegalAccessException {
-       return (u.get(findTap(tapNum)).m.codes[i].filepath)!=(null);
+    public boolean isOpen(int tabNum, int i) throws IllegalAccessException {
+       return (u.get(findTap(tabNum)).m.codes[i].filepath)!=(null);
     }
 
-    public ArrayList<String> getText(int tapNum, int i) throws IllegalAccessException {
-        return u.get(findTap(tapNum)).m.textReceive(i);
+    public ArrayList<String> getText(int tabNum, int i) throws IllegalAccessException {
+        return u.get(findTap(tabNum)).m.textReceive(i);
     }
 
     @Override
-    public ArrayList<String> getArrangedText(int tapNum, int i) throws IndexOutOfBoundsException, IllegalAccessException {
+    public ArrayList<String> getArrangedText(int tabNum, int i) throws IndexOutOfBoundsException, IllegalAccessException {
         //todo
-        return u.get(findTap(tapNum)).m.getArrangedText(i);
+        return u.get(findTap(tabNum)).m.getArrangedText(i);
     }
 
     @Override
-    public ArrayList<Integer> getArrangedGroupNum(int tapNum) throws IndexOutOfBoundsException, IllegalAccessException {
+    public ArrayList<Integer> getArrangedGroupNum(int tabNum) throws IndexOutOfBoundsException, IllegalAccessException {
 
-        return u.get(findTap(tapNum)).m.getArrangedGroup();
+        return u.get(findTap(tabNum)).m.getArrangedGroup();
 
     }
 
     @Override
-    public ArrayList<Integer> getArrangedGroupSpace(int tapNum) throws IllegalAccessException {
-        return u.get(findTap(tapNum)).m.getArrangedGroupSpace();
+    public ArrayList<Integer> getArrangedGroupSpace(int tabNum) throws IllegalAccessException {
+        return u.get(findTap(tabNum)).m.getArrangedGroupSpace();
     }
 
-    public void setText(int tapNum, ArrayList<String> text, int i) throws IndexOutOfBoundsException, IllegalAccessException {
-        u.get(findTap(tapNum)).m.textSend(i, text);
+    public void setText(int tabNum, ArrayList<String> text, int i) throws IndexOutOfBoundsException, IllegalAccessException {
+        u.get(findTap(tabNum)).m.textSend(i, text);
     }
 
-    public void readTextOuter(int tapNum, String filepath, int i) throws IndexOutOfBoundsException, IOException,IllegalAccessException {
-        u.get(findTap(tapNum)).m.open(filepath, i);
+    public void readTextOuter(int tabNum, String filepath, int i) throws IndexOutOfBoundsException, IOException,IllegalAccessException {
+        u.get(findTap(tabNum)).m.open(filepath, i);
     }
 
-    public void writeTextOuter(int tapNum, String filepath, int i) throws IndexOutOfBoundsException, IOException,IllegalAccessException {
-        u.get(findTap(tapNum)).m.save(filepath, i);
+    public void writeTextOuter(int tabNum, String filepath, int i) throws IndexOutOfBoundsException, IOException,IllegalAccessException {
+        u.get(findTap(tabNum)).m.save(filepath, i);
     }
 
     @Override
-    public void writeTextOuter(int tapNum, int i) throws IndexOutOfBoundsException, IOException, IllegalAccessException {
-        u.get(findTap(tapNum)).m.save(i);
+    public void writeTextOuter(int tabNum, int i) throws IndexOutOfBoundsException, IOException, IllegalAccessException {
+        u.get(findTap(tabNum)).m.save(i);
     }
 
-    public void mergeByLine(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException {
-        u.get(findTap(tapNum)).m.mergeBylineNum(Index, direction);
+    public void mergeByLine(int tabNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException {
+        u.get(findTap(tabNum)).m.mergeBylineNum(Index, direction);
     }
 
-    public void mergeByGroup(int tapNum, int groupNum, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException {
-        u.get(findTap(tapNum)).m.mergeByGroupNum(groupNum, direction);
+    public void mergeByGroup(int tabNum, int groupNum, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException {
+        u.get(findTap(tabNum)).m.mergeByGroupNum(groupNum, direction);
     }
 
 
 
-    private Integer findTap(int tapNum) throws IllegalAccessException
+    private Integer findTap(int tabNum) throws IllegalAccessException
     {
         for(int i=0;i<u.size();i++)
         {
-            if(u.get(i).iterator==tapNum)
+            if(u.get(i).iterator==tabNum)
             {
                 return i;
             }

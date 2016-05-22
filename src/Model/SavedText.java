@@ -29,12 +29,12 @@ abstract public class SavedText
 
     void WriteFrom(String s) throws IOException
     {
-        ReadFromOuter(s);
+        WriteFromOuter(s);
     }
 
     void Writefrom() throws IOException
     {
-        ReadFromOuter(filepath);
+        WriteFromOuter(filepath);
     }
 
     String filepath()
