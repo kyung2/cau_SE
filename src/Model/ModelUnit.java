@@ -206,7 +206,7 @@ class ModelUnit {
     }
 
     public void save(int i) throws IOException {
-        this.save(codes[i].filepath(),i);
+        codes[i].WriteFrom();
     }
 }
 
