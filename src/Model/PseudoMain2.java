@@ -59,7 +59,7 @@ public class PseudoMain2 {
             m.setText(c,a2,0);
             m.setText(c,a1,1);
 
-            aaa = m.getArrangedGroupNum(2);
+            aaa = m.getArrangedGroupSpace(2);
             for(int k=0;k<aaa.size();k++)
             {
                 System.out.println(aaa.get(k));
@@ -67,14 +67,14 @@ public class PseudoMain2 {
             System.out.println("00000");
 
 
-            aaa = m.getArrangedGroupNum(c);
+            aaa = m.getArrangedGroupSpace(c);
             for(int k=0;k<aaa.size();k++)
             {
                 System.out.println(aaa.get(k));
             }
             System.out.println("00000");
 
-            aaa = m.getArrangedGroupNum(4);
+            aaa = m.getArrangedGroupSpace(4);
             for(int k=0;k<aaa.size();k++)
             {
                 System.out.println(aaa.get(k));
@@ -90,7 +90,7 @@ public class PseudoMain2 {
             System.out.println("0000");
             m.mergeByGroup(2,3,false);
             System.out.println("0000");
-            aaa = m.getArrangedGroupNum(2);
+            aaa = m.getArrangedGroupSpace(2);
             for(int k=0;k<aaa.size();k++)
             {
                 System.out.println(aaa.get(k));
@@ -116,7 +116,7 @@ public class PseudoMain2 {
             System.out.println("-");
             for(int i=0;i<a3.size();i++) System.out.println(a3.get(i));
             System.out.println("-");
-            aaa = m.getArrangedGroupNum(2);
+            aaa = m.getArrangedGroupSpace(2);
             for(int k=0;k<aaa.size();k++)
             {
                 System.out.println(aaa.get(k));

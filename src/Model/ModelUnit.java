@@ -6,7 +6,6 @@ import Model.ModelException.MergeLineIllegalException;
 import java.io.*;
 import java.lang.String;
 import java.util.ArrayList;
-import java.util.Collection;
 
 /**
  * Created by User on 2016-05-14.
@@ -75,6 +74,14 @@ class ModelUnit {
             groupChange();
         }
         return (ArrayList<Integer>) group[LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum)][0].clone();
+    }
+    public ArrayList<Integer> getArrangedGroupSpace() throws IndexOutOfBoundsException //
+    {
+        if(group==null) {
+            regrouping();
+            groupChange();
+        }
+        return (ArrayList<Integer>) group[LCSClassEnum.find(LCSClassEnum.LCSGroup_sIncludingArrangedLineNum)][0].clone();
     }
     public void mergeBylineNum(int lineNum, boolean direction) throws IndexOutOfBoundsException, MergeLineIllegalException //
     {
@@ -196,6 +203,10 @@ class ModelUnit {
         {
             throw new MergeLineIllegalException();
         }
+    }
+
+    public void save(int i) throws IOException {
+        this.save(codes[i].filepath(),i);
     }
 }
 

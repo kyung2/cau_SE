@@ -25,12 +25,16 @@ public interface Model {
     // 식별자 tapNum의 i번째 창(i=0 or 1)의 정리된 텍스트 전체를 가져온다.
     ArrayList<Integer> getArrangedGroupNum(int tapNum) throws IndexOutOfBoundsException, IllegalAccessException;
     // 식별자 tapNum의 정리된 텍스트 각 줄의 그룹을 가져온다.
+    ArrayList<Integer> getArrangedGroupSpace(int tapNum) throws IllegalAccessException;
+    // 식별자 tapNum의 정리된 텍스트 각 줄의 그룹이 차지하는 줄 수를 가져온다.
     void setText(int tapNum, ArrayList<String> text, int i) throws IndexOutOfBoundsException, IllegalAccessException;
     // 식별자 tapNum의 i번째 창(i=0 or 1)의 텍스트 전체를 text로 설정한다.
     void readTextOuter(int tapNum, String filepath, int i) throws IndexOutOfBoundsException, IOException, IllegalAccessException;
     // 식별자 tapNum의 i번째 창(i=0 or 1)의 텍스트 전체를 filepath에서 가져온다.
     void writeTextOuter(int tapNum, String filepath, int i) throws IndexOutOfBoundsException, IOException, IllegalAccessException;
     // 식별자 tapNum의 i번째 창(i=0 or 1)의 텍스트 전체를 filepath에 쓴다.
+    void writeTextOuter(int tapNum, int i) throws IndexOutOfBoundsException, IOException, IllegalAccessException;
+    // 식별자 tapNum의 i번째 창(i=0 or 1)의 텍스트 전체를 그 창이 연 파일에 쓴다.
     void mergeByLine(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException;
     // 식별자 tapNum의, 정리된 텍스트의 Index번째 줄이 포함된 그룹을 앞뒤 그룹과 결합한다. direction=true라면 0->1, false라면 0<-1.
     void mergeByGroup(int tapNum, int groupNum, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException;

@@ -35,24 +35,37 @@ public class LCSGroup_sIncludingArrangedLineNum implements LCSSupport {
         int aToGNum = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum);
         int thisNum = LCSClassEnum.find(LCSClassEnum.LCSGroup_sIncludingArrangedLineNum);
         int groupMinus = groupNum>0?2:1;
+        int groupCount=0;
+        int privGroup = 0;
         int in = dir?0:1;
         int para=0;
 
         ArrayList<Integer>[] newAL = new ArrayList[2];
         newAL[0] = new ArrayList<Integer>(); newAL[1] = new ArrayList<Integer>();
-        for(int i=0;i<aaa[thisNum][0].size();i++) {
-
-            if (i == groupNum || i == groupNum+1) {
-                newAL[0].add(newAL[0].remove(newAL[0].size()-1)+aaa[thisNum][0].get(i));
-                newAL[1].add(newAL[1].remove(newAL[1].size()-1)+aaa[thisNum][1].get(i));
+        for(int i=0;i<aaa[aToGNum][0].size();i++) {
+            para=aaa[aToGNum][0].get(i);
+            if (para < groupNum) {
             }
-            else{
-                    newAL[0].add(aaa[thisNum][0].get(i));
-            newAL[1].add(aaa[thisNum][1].get(i));
+            else if (para == groupNum) {
+                if(aaa[aToNonA][in].get(i)==-1) {
+                    continue;
+                }
+                para = para-groupMinus+1;
             }
-
+            else if (para > groupNum) {
+                para = para-groupMinus;
+            }
+            while(!(privGroup==para))
+            {
+                newAL[0].add(groupCount);
+                newAL[1].add(groupCount);
+                groupCount = 0;
+                privGroup++;
+            }
+            groupCount++;
         }
-
+        newAL[0].add(groupCount);
+        newAL[1].add(groupCount);
         return newAL;
     }
 }
