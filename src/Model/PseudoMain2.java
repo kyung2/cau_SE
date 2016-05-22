@@ -81,6 +81,9 @@ public class PseudoMain2 {
             System.out.println("-");
 
 
+            //m.merge(2,);
+
+
             m.closeModel(2);
             m.closeModel(c);
 

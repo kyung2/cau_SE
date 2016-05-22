@@ -55,14 +55,9 @@ public class ModelRealize implements Model {
 
     @Override
     public ArrayList<Integer> getArrangedGroupNum(int tapNum, int i) throws IndexOutOfBoundsException, IllegalAccessException {
-        ArrayList[][] a = u.get(findTap(tapNum)).m.getGroup();
-        try {
-            return a[LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum)][i];
-        }
-        catch(Exception e)
-        {
-            return null;
-        }
+
+        return u.get(findTap(tapNum)).m.getGroup()[LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum)][i];
+
     }
 
     public void setText(int tapNum, ArrayList<String> text, int i) throws IndexOutOfBoundsException, IllegalAccessException {

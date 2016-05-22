@@ -45,7 +45,7 @@ class ModelUnit {
     protected void regrouping() //
     {
         group = codes[0].LCSMethod(codes[1]);
-        constArrangedString();
+        changeArrangedString();
         groupChange();
 
     }
@@ -57,7 +57,7 @@ class ModelUnit {
         groupChange();
     }
 
-    protected void constArrangedString()
+    protected void changeArrangedString()
     {
         System.out.println("----");
         arrangedString = new ArrayList[2];
@@ -86,7 +86,6 @@ class ModelUnit {
                 arrangedString[1].add(codes[1].Read((Integer)group[aToNonA][1].get(i)));
             }
         }
-        System.out.println("----");
     }
 
 
@@ -134,48 +133,16 @@ class ModelUnit {
        return (ArrayList[][])group.clone();
     }
 
-    public void mergeByGroupNum(int groupNum, boolean direction) throws IndexOutOfBoundsException
-    {
-        //todo
-    }
 
     public void mergeBylineNum(int lineNum, boolean direction) throws IndexOutOfBoundsException
     {
-        int aToGNum;
-        try{
-
-        }
-        catch(Exception e)
-        {
-
-        }
+        LCSGrouping g = new LCSGrouping();
+        group = g.merge(group, lineNum, direction);
+        changeArrangedString();
+        // todo -> SavedText
+        groupChange();
+        textChange();
     }
-
-    protected void mergeTexts(int groupNum, boolean dir)
-    {
-        int groupMinus = groupNum>0?2:1;
-        int iminus=0;
-        int in = dir?1:0;
-        int aToNonA = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum);
-        int aToGNum = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum);
-        for(int i=0;i<arrangedString[0].size();i++)
-        {
-            if((Integer)group[aToGNum][0].get(i)==groupNum)
-            {
-                if((Integer)group[aToNonA][0].get(i)==-1)
-                {
-
-
-                }
-            }
-            else if((Integer)group[aToGNum][0].get(i)>groupNum)
-            {
-
-            }
-        }
-    }
-
-
 
 }
 
