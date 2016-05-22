@@ -46,7 +46,7 @@ public class PseudoMain2 {
         b2.add("g");
         b2.add("d");
 
-        Model m = new ModelRealize();
+        Model m = ModelRealize.getInstance();
         m.newModel(2);
         m.newModel(4);
         c = m.newModel();
