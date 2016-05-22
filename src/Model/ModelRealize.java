@@ -1,5 +1,7 @@
 package Model;
 
+import Model.LCSsupport.LCSClassEnum;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -47,7 +49,8 @@ public class ModelRealize implements Model {
 
     @Override
     public ArrayList<String> getArrangedText(int tapNum, int i) throws IndexOutOfBoundsException, IllegalAccessException {
-        return u.get(findTap(tapNum)).m.textReceive(i); //todo
+        //todo
+        return u.get(findTap(tapNum)).m.textReceive(i);
     }
 
     @Override
