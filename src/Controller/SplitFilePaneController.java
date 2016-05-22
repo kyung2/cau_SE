@@ -67,19 +67,19 @@ public class SplitFilePaneController implements Initializable {
     * 이미 파일이 있을 경우는 덮어쓰기
     * */
     @FXML
-    private void leftLoadButtonOnAction (){
+    private void leftLoadButtonOnAction() {
         checkTabNum();
         String path = loadFileChooser(left_load_button);
+        Model model = ModelRealize.getInstance();
         if(path != null){
-            Model model = ModelRealize.getInstance();
             try {
                 model.readTextOuter(tab_num, path, 0);
                 left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
+                setClickableButtons("left","true","true","false");
             }catch(Exception e){
                 e.printStackTrace();
             }
         }
-        if() setClickableButtons("left","true","true","false");
         checkCompareButton();
     }
     @FXML
@@ -91,11 +91,11 @@ public class SplitFilePaneController implements Initializable {
             try {
                 model.readTextOuter(tab_num, path, 1);
                 right_text_area.setText(arrayListToString(model.getText(tab_num,1)));
+                setClickableButtons("right","true","true","false");
             }catch(Exception e){
                 e.printStackTrace();
             }
         }
-        if((int)right_text_area.getUserData() == 1) setClickableButtons("right","true","true","false");
         checkCompareButton();
     }
     /*
@@ -202,7 +202,6 @@ public class SplitFilePaneController implements Initializable {
         }
         return path;
     }
-
     /*
     * file pane 버튼의 able 과 disable 을 해준다.
     * position 에 left 와 right 를 통해서 위치를 선택
@@ -245,12 +244,17 @@ public class SplitFilePaneController implements Initializable {
         if(compare_button == null) {
             compare_button = (Button)((ToolBar)((BorderPane)((BorderPane)split_pane.getScene().getRoot()).getCenter()).getTop()).getItems().get(9);
         }
-
-        if((int)right_text_area.getUserData() == 1 && (int)left_text_area.getUserData() == 1) {
-            if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
-                compare_button.setDisable(false);
+        Model model = ModelRealize.getInstance();
+        try{
+            System.out.println(model.isOpen(tab_num,0));
+            if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
+                if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
+                    compare_button.setDisable(false);
+                }
             }
-        }
+        }catch (IllegalAccessException e){
+                e.printStackTrace();
+            }
     }
     /*
     * Tab num 값을 확인한다.
