@@ -1,6 +1,7 @@
 package Model;
 
 import Model.LCSsupport.LCSClassEnum;
+import Model.ModelException.MergeLineIllegalException;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -79,7 +80,7 @@ public class ModelRealize implements Model {
         u.get(findTap(tapNum)).m.save(filepath, i);
     }
 
-    public void merge(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException {
+    public void merge(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException {
         u.get(findTap(tapNum)).m.mergeBylineNum(Index, direction);
     }
 

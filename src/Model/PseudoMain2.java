@@ -4,8 +4,6 @@ import Model.LCSsupport.*;
 
 import java.util.ArrayList;
 
-import static Model.ModelUnitUsingFile.SavedTextCanFileRR;
-
 /**
  * Created by User on 2016-05-20.
  */
@@ -15,6 +13,7 @@ public class PseudoMain2 {
         ArrayList<String> a1 = new  ArrayList<String>(), a2 = new  ArrayList<String>(), a3;
         ArrayList<String> b1 = new  ArrayList<String>(), b2 = new  ArrayList<String>();
         ArrayList<Integer> aaa;
+        String fp1 = new String("C:\\Users\\User\\Desktop\\a.txt"), fp2 = new String("C:\\Users\\User\\Desktop\\b.txt");
         int c;
 
         a1.add("a");
@@ -47,13 +46,14 @@ public class PseudoMain2 {
         b2.add("d");
 
         Model m = ModelRealize.getInstance();
+
         m.newModel(2);
         m.newModel(4);
         c = m.newModel();
         try
         {
-            m.setText(2,a1,0);
-            m.setText(2,a2,1);
+            m.readTextOuter(2,fp1,0);
+            m.readTextOuter(2,fp2,1);
             m.setText(4,b1,0);
             m.setText(4,b2,1);
             m.setText(c,a2,0);

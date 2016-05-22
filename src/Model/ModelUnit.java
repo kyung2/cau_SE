@@ -1,6 +1,7 @@
 package Model;
 import Model.LCSsupport.LCSClassEnum;
 import Model.LCSsupport.LCSGrouping;
+import Model.ModelException.MergeLineIllegalException;
 
 import java.io.*;
 import java.lang.String;
@@ -75,13 +76,7 @@ class ModelUnit {
         }
         return (ArrayList<Integer>) group[LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum)][0].clone();
     }
- /*   public ArrayList[][] getGroup()
-    {
-        if(group==null) regrouping();
-
-       return (ArrayList[][])group.clone();
-    }*/
-    public void mergeBylineNum(int lineNum, boolean direction) throws IndexOutOfBoundsException
+    public void mergeBylineNum(int lineNum, boolean direction) throws IndexOutOfBoundsException, MergeLineIllegalException
     {
         LCSGrouping g = new LCSGrouping();
         if(group==null) regrouping();
@@ -93,6 +88,10 @@ class ModelUnit {
             changeArrangedString();
             groupChange();
             textChange();
+        }
+        else
+        {
+            throw new MergeLineIllegalException();
         }
     }
     protected void mergeTextFirst(int lineNum, boolean direction)
