@@ -116,15 +116,20 @@ public class SplitFilePaneController implements Initializable {
             * 수정이 가능할 때 - 누르면 수정이 불가능해짐. 로드는 가능해짐. 모델에 있는 정보를 바꿈,
             * 두 file pane 이 모두 수정 불가능 == save 가 비활성화 되있으면 compare 가능
             */
+
             left_text_area.setEditable(false);
             checkCompareButton();
             setClickableButtons("left","true",null,null);
+            // hk - edit 비활성화 되시 원상태로 복귀
+            left_edit_button.setStyle("-fx-background-color:transparent");
         }
         else{
             //수정이 불가능 할 때 = 누르면 수정이 가능. 로드 불가능, 저장 가능, compare 불가능
             left_text_area.setEditable(true);
             disableAllButtonInToolBar();
             setClickableButtons("left","false",null,"true");
+            // hk - edit이 활성화 될 시 하이라이팅 (이미지바꿀려면 저 setStyle메소드 이용하면됨)
+            left_edit_button.setStyle("-fx-background-color: #a6a6a6");
         }
     }
     @FXML
@@ -138,12 +143,16 @@ public class SplitFilePaneController implements Initializable {
             right_text_area.setEditable(false);
             checkCompareButton();
             setClickableButtons("right","true",null,null);
+            // hk - edit 비활성화 되시 원상태로 복귀
+            right_edit_button.setStyle("-fx-background-color:transparent");
         }
         else{
             //수정이 불가능 할 때 - 누르면 수정 가능, 로드 불가능, 저장 가능
             right_text_area.setEditable(true);
             disableAllButtonInToolBar();
             setClickableButtons("right","false",null,"true");
+            // hk - edit이 활성화 될 시 하이라이팅 (이미지바꿀려면 저 setStyle메소드 이용하면됨)
+            right_edit_button.setStyle("-fx-background-color: #a6a6a6");
         }
     }
     /*
@@ -203,7 +212,10 @@ public class SplitFilePaneController implements Initializable {
         if(load == "true") f_load = true;
         else f_load = false;
 
-        if(edit == "true") f_edit = true;
+        if(edit == "true") {
+            f_edit = true;
+
+        }
         else f_edit = false;
 
         if(save == "true") f_save = true;
@@ -213,6 +225,8 @@ public class SplitFilePaneController implements Initializable {
             if(load != null) left_load_button.setDisable(!f_load);
             if(edit != null) left_edit_button.setDisable(!f_edit);
             if(save != null) left_save_button.setDisable(!f_save);
+
+
         }
         else{
             if(load != null) right_load_button.setDisable(!f_load);
