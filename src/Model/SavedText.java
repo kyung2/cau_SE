@@ -41,7 +41,7 @@ abstract public class SavedText
     }
     public ArrayList<String> ReadAll()
     {
-        return new ArrayList<String>(lines);
+        return (ArrayList<String>)lines.clone();
     }
     public void WriteAll(ArrayList<String> s)
     {

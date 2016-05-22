@@ -54,9 +54,9 @@ public class ModelRealize implements Model {
     }
 
     @Override
-    public ArrayList<Integer> getArrangedGroupNum(int tapNum, int i) throws IndexOutOfBoundsException, IllegalAccessException {
+    public ArrayList<Integer> getArrangedGroupNum(int tapNum) throws IndexOutOfBoundsException, IllegalAccessException {
 
-        return u.get(findTap(tapNum)).m.getGroup()[LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum)][i];
+        return u.get(findTap(tapNum)).m.getArrangedGroup();
 
     }
 
@@ -76,11 +76,6 @@ public class ModelRealize implements Model {
         u.get(findTap(tapNum)).m.mergeBylineNum(Index, direction);
     }
 
-
-    public ArrayList<Integer>[][] getGroupInfo(int tapNum)throws IllegalAccessException {
-        ArrayList[][] a = u.get(findTap(tapNum)).m.getGroup();
-        return a;
-    }
 
 
     private Integer findTap(int tapNum) throws IllegalAccessException
