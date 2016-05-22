@@ -53,7 +53,7 @@ public class ModelRealize implements Model {
 
     @Override
     public boolean isOpen(int tapNum, int i) throws IllegalAccessException {
-       return u.get(findTap(tapNum)).m.codes[i].filepath!=null;
+       return (u.get(findTap(tapNum)).m.codes[i].filepath)!=(null);
     }
 
     public ArrayList<String> getText(int tapNum, int i) throws IllegalAccessException {

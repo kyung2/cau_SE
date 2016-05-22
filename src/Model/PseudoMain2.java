@@ -59,6 +59,8 @@ public class PseudoMain2 {
             m.setText(c,a2,0);
             m.setText(c,a1,1);
 
+            System.out.println(m.isOpen(2,0));
+
             aaa = m.getArrangedGroupSpace(2);
             for(int k=0;k<aaa.size();k++)
             {

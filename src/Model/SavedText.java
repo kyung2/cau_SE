@@ -16,8 +16,8 @@ abstract public class SavedText
     protected SavedText() {
 
         lines = new ArrayList<String>();
-        filepath = null;
-    }
+    filepath = null;
+}
     abstract void ReadFromOuter(String s) throws IOException;
     abstract void WriteFromOuter(String s) throws IOException;
 

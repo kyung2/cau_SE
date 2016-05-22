@@ -43,12 +43,12 @@ class ModelUnit {
 
     public void open(String s, int i) throws IOException, IndexOutOfBoundsException //open from string
     {
-        codes[i].ReadFromOuter(s);
+        codes[i].ReadFrom(s);
         groupNull();
     }
     public void save(String s, int i) throws IOException, IndexOutOfBoundsException //close to string
     {
-        codes[i].WriteFromOuter(s);
+        codes[i].WriteFrom(s);
     }
     public ArrayList<String> textReceive(int i) throws IndexOutOfBoundsException
     {
