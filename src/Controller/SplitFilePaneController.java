@@ -177,7 +177,8 @@ public class SplitFilePaneController implements Initializable {
     }
     /*
     *  file chooser 를 열어서 파일의 path 를 가져온다.
-    *  tab num 이
+    *  tab num 이 -1 즉 초기값일 경우 tab num 을 할당해준다.
+    *  모델 객체를 받아온 뒤 해당하는 model 에 absoulte path를 넘겨주어 파일 입출력을 한다.
     * */
     private void loadFileChooser(Button position){
         FileChooser fileChooser = new FileChooser();
