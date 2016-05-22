@@ -30,26 +30,31 @@ public class LCSArrangeLine_sNonArrangeLineNum implements LCSSupport {
     public ArrayList<Integer>[] whenMerge(ArrayList<Integer>[][] aaa, int index, boolean dir) {
         int aToNonA = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum);
         int aToGNum = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum);
+        int thisNum = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum);
         int groupNum = aaa[aToGNum][0].get(index);
-        int groupMinus = groupNum>0?2:1;
-        int iminus=0;
         int in = dir?1:0;
+        int para=0;
 
         ArrayList<Integer>[] newAL = new ArrayList[2];
         newAL[0] = new ArrayList<Integer>(); newAL[1] = new ArrayList<Integer>();
-        for(int i=0;i<aaa[aToNonA][0].size();i++)
-        {
-            if((Integer)aaa[aToGNum][0].get(i)==groupNum)
-            {
-                if((Integer)aaa[aToNonA][0].get(i)==-1)
-                {
-
-
-                }
+        for(int i=0;i<aaa[aToGNum][0].size();i++) {
+            if ((Integer) aaa[aToGNum][0].get(i) < groupNum) {
+                newAL[0].add(aaa[thisNum][0].get(i));
+                newAL[1].add(aaa[thisNum][1].get(i));
             }
-            else if((Integer)aaa[aToGNum][0].get(i)>groupNum)
-            {
-
+            if ((Integer) aaa[aToGNum][0].get(i) == groupNum) {
+                if ((Integer) aaa[aToNonA][1 - in].get(i) == -1) {
+                    para--;
+                } else {
+                    if ((Integer) aaa[aToNonA][in].get(i) == -1) {
+                        para++;
+                    }
+                    newAL[0].add(aaa[thisNum][1 - in].get(i));
+                    newAL[1].add(aaa[thisNum][1 - in].get(i));
+                }
+            } else if ((Integer) aaa[aToGNum][0].get(i) > groupNum) {
+                newAL[0].add(aaa[thisNum][0].get(i) - para);
+                newAL[1].add(aaa[thisNum][1].get(i));
             }
         }
         return newAL;

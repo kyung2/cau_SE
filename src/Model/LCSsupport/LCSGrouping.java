@@ -52,9 +52,18 @@ public class LCSGrouping {
         for(int k=0;k<groupXSize;k++) lcs[k].groupEndingAction(group[k], this);
         return group;
 
-
     }
-    public void groupTrackingAction(boolean dir1, boolean dir2)
+    public ArrayList<Integer>[][] merge(ArrayList<Integer>[][] aaa, int index, boolean dir)
+    {
+
+        ArrayList<Integer>[][] newAaa = new ArrayList[groupXSize][2];
+        for(int k=0;k<groupXSize;k++)
+        {
+            newAaa[k] = lcs[k].whenMerge(aaa,index,dir);
+        }
+        return newAaa;
+    }
+    protected void groupTrackingAction(boolean dir1, boolean dir2)
     {
         if(dir1)
         {
@@ -69,7 +78,7 @@ public class LCSGrouping {
             iBlank++; j++; jGroupNow++;
         }
     }
-    public void groupChangingAction()
+    protected void groupChangingAction()
     {
         iGroupNow = jGroupNow = 0;
         groupNum++;
