@@ -128,6 +128,7 @@ public class PseudoMain2 {
 
             m.closeModel(2);
             m.closeModel(c);
+            m.writeTextOuter(2,"C:\\Users\\User\\Desktop\\c.txt",1);
 
             System.out.println(LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum));
 
