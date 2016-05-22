@@ -51,6 +51,11 @@ public class ModelRealize implements Model {
 
     }
 
+    @Override
+    public boolean isOpen(int tapNum, int i) throws IllegalAccessException {
+       return u.get(findTap(tapNum)).m.codes[i].filepath!=null;
+    }
+
     public ArrayList<String> getText(int tapNum, int i) throws IllegalAccessException {
         return u.get(findTap(tapNum)).m.textReceive(i);
     }
@@ -68,6 +73,11 @@ public class ModelRealize implements Model {
 
     }
 
+    @Override
+    public ArrayList<Integer> getArrangedGroupSpace(int tapNum) throws IllegalAccessException {
+        return u.get(findTap(tapNum)).m.getArrangedGroupSpace();
+    }
+
     public void setText(int tapNum, ArrayList<String> text, int i) throws IndexOutOfBoundsException, IllegalAccessException {
         u.get(findTap(tapNum)).m.textSend(i, text);
     }
@@ -80,8 +90,17 @@ public class ModelRealize implements Model {
         u.get(findTap(tapNum)).m.save(filepath, i);
     }
 
-    public void merge(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException {
+    @Override
+    public void writeTextOuter(int tapNum, int i) throws IndexOutOfBoundsException, IOException, IllegalAccessException {
+        u.get(findTap(tapNum)).m.save(i);
+    }
+
+    public void mergeByLine(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException {
         u.get(findTap(tapNum)).m.mergeBylineNum(Index, direction);
+    }
+
+    public void mergeByGroup(int tapNum, int groupNum, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException {
+        u.get(findTap(tapNum)).m.mergeByGroupNum(groupNum, direction);
     }
 
 

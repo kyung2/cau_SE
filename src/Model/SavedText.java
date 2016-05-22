@@ -12,21 +12,34 @@ import java.util.ArrayList;
 abstract public class SavedText
 {
     protected ArrayList<String> lines;
+    protected String filepath;
     protected SavedText() {
 
         lines = new ArrayList<String>();
+        filepath = null;
     }
     abstract void ReadFromOuter(String s) throws IOException;
     abstract void WriteFromOuter(String s) throws IOException;
 
     void ReadFrom(String s) throws IOException
     {
+        filepath = s;
         ReadFromOuter(s);
     }
 
     void WriteFrom(String s) throws IOException
     {
         ReadFromOuter(s);
+    }
+
+    void Writefrom() throws IOException
+    {
+        ReadFromOuter(filepath);
+    }
+
+    String filepath()
+    {
+        return filepath;
     }
 
     public int NumOfLine()
