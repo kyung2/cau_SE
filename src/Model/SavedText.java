@@ -32,7 +32,7 @@ abstract public class SavedText
         WriteFromOuter(s);
     }
 
-    void Writefrom() throws IOException
+    void WriteFrom() throws IOException
     {
         WriteFromOuter(filepath);
     }

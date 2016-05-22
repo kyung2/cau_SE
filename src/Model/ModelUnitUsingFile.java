@@ -32,6 +32,7 @@ public class ModelUnitUsingFile extends ModelUnit {
             String line;
             for(int i=0;i<lines.size();i++) {
                 writer.write(lines.get(i));
+                writer.write("\n");
             }
             writer.close();
         }
