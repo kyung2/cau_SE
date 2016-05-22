@@ -24,7 +24,7 @@ public class ModelRealize implements Model {
         if(instance == null) instance = new ModelRealize();
         return instance;
     }
-    
+
     public void newModel(int tapNum) {
         u.add(new ModelUnitGroup(tapNum));
     }
