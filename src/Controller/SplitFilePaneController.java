@@ -332,7 +332,7 @@ public class SplitFilePaneController implements Initializable {
         ArrayList<String> arrayList = new ArrayList<String>();
         String[] strings = s.split("\n");
         for(int i = 0, n = strings.length; i < n; i++){
-            arrayList.add(strings[i]+"\n");
+            arrayList.add(strings[i]);
         }
         return arrayList;
     }
