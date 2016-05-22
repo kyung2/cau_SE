@@ -115,6 +115,12 @@ public class SplitFilePaneController implements Initializable {
             * 두 file pane 이 모두 수정 불가능 == save 가 비활성화 되있으면 compare 가능
             */
             left_text_area.setEditable(false);
+            try {
+                Model model = ModelRealize.getInstance();
+                model.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             checkCompareButton();
             setClickableButtons("left","true",null,null);
             // hk - edit 비활성화 되시 원상태로 복귀
@@ -138,6 +144,12 @@ public class SplitFilePaneController implements Initializable {
             * 수정이 가능할 때 - 누르면 수정이 불가능해짐. 로드는 가능해짐. 모델에 있는 정보를 바꿈,
             * 두 file pane 이 모두 수정 불가능 == save 가 비활성화 되있으면 compare 가능
             */
+            try {
+                Model model = ModelRealize.getInstance();
+                model.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
+            }catch (Exception e){
+                e.printStackTrace();
+            }
             right_text_area.setEditable(false);
             checkCompareButton();
             setClickableButtons("right","true",null,null);
@@ -164,9 +176,16 @@ public class SplitFilePaneController implements Initializable {
         saveAlarmWindow.showAndWait();
 
         if((boolean)saveAlarmWindow.getUserData()) {
-            left_text_area.setEditable(false);
-            checkCompareButton();
-            setClickableButtons("left","true",null,"false");
+            try {
+                Model model = ModelRealize.getInstance();
+                model.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
+                model.writeTextOuter(tab_num, 0);
+                left_text_area.setEditable(false);
+                checkCompareButton();
+                setClickableButtons("left", "true", null, "false");
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         }
     }
     @FXML
@@ -179,10 +198,11 @@ public class SplitFilePaneController implements Initializable {
             try {
                 Model model = ModelRealize.getInstance();
                 model.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
+                model.writeTextOuter(tab_num, 1);
                 right_text_area.setEditable(false);
                 checkCompareButton();
                 setClickableButtons("right", "true", null, "false");
-            }catch (IllegalAccessException e){
+            }catch (Exception e){
                 e.printStackTrace();
             }
         }
@@ -252,7 +272,6 @@ public class SplitFilePaneController implements Initializable {
         }
         Model model = ModelRealize.getInstance();
         try{
-            System.out.println(model.isOpen(tab_num,0));
             if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
                 if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
                     compare_button.setDisable(false);
@@ -305,11 +324,13 @@ public class SplitFilePaneController implements Initializable {
         }
         return s;
     }
-
+    /*
+    * String 을 받아와서 \n 로 split 한 후 ArrayList 에 저장한다.
+    * */
     private ArrayList<String> stringToArrayList(String s){
         ArrayList<String> arrayList = new ArrayList<String>();
         String[] strings = s.split("\n");
-        for(int i = 0, n = strings.length; i < n - 1; i++){
+        for(int i = 0, n = strings.length; i < n ; i++){
             arrayList.add(strings[i]);
         }
         return arrayList;
