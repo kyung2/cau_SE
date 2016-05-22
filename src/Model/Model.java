@@ -1,5 +1,7 @@
 package Model;
 
+import Model.ModelException.MergeLineIllegalException;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -25,7 +27,7 @@ public interface Model {
     // 식별자 tapNum의 i번째 창(i=0 or 1)의 텍스트 전체를 filepath에서 가져온다.
     void writeTextOuter(int tapNum, String filepath, int i) throws IndexOutOfBoundsException, IOException, IllegalAccessException;
     // 식별자 tapNum의 i번째 창(i=0 or 1)의 텍스트 전체를 filepath에 쓴다.
-    void merge(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException;
+    void merge(int tapNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException;
     // 식별자 tapNum의, 정리된 텍스트의 Index번째 줄이 포함된 그룹을 앞뒤 그룹과 결합한다. direction=true라면 0->1, false라면 0<-1.
 }
 
