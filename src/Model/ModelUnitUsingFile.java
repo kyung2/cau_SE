@@ -20,7 +20,7 @@ public class ModelUnitUsingFile extends ModelUnit {
             lines = new ArrayList<String>();
             String line;
             while ((line = reader.readLine()) != null) {
-                if(line.compareTo(this.retEmptyString(line.length()))!=0)
+             //   if(line.compareTo(this.retEmptyString(line.length()))!=0)
                    lines.add(line);
             }
             reader.close();
