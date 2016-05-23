@@ -82,6 +82,7 @@ public class SplitFilePaneController implements Initializable {
                 e.printStackTrace();
             }
         }
+        invisibleListViewVisibleTextArea();
         checkCompareButton();
     }
     @FXML
@@ -99,6 +100,7 @@ public class SplitFilePaneController implements Initializable {
                 e.printStackTrace();
             }
         }
+        invisibleListViewVisibleTextArea();
         checkCompareButton();
     }
     /*
@@ -327,7 +329,6 @@ public class SplitFilePaneController implements Initializable {
         for (String s1 : arrayList) {
             s += s1 + "\n";
         }
-
         return s;
     }
     /*
