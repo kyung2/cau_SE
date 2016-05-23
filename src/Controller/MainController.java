@@ -33,6 +33,7 @@ public class MainController implements Initializable {
     @FXML
     BorderPane main_pane;
 
+    private Tab now_tab;
     private MyListView left_text_list, right_text_list;
     private TextArea left_text_area, right_text_area;
 
@@ -46,7 +47,8 @@ public class MainController implements Initializable {
     * */
     public void initialize(URL location, ResourceBundle resources) {
         tab_num = 0;
-        tab.setUserData(tab_num);
+        now_tab = tab;
+        now_tab.setUserData(tab_num);
         setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
         toolbar_stage.add(new String[]{"false","false","false","false","false","false","false","false","false","false"});
 
@@ -62,22 +64,14 @@ public class MainController implements Initializable {
                     @Override
                     public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
                         String[] stage = makeToolbarStage();
-
+                        now_tab = t1;
                         toolbar_stage.set(now_tab_num,stage);
-                        now_tab_num = (int)t1.getUserData();
+                        now_tab_num = (int)now_tab.getUserData();
                         setClickabeButtons(toolbar_stage.get(now_tab_num)[0],toolbar_stage.get(now_tab_num)[1],toolbar_stage.get(now_tab_num)[2],
                                 toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4],toolbar_stage.get(now_tab_num)[5],
                                 toolbar_stage.get(now_tab_num)[6],toolbar_stage.get(now_tab_num)[7],toolbar_stage.get(now_tab_num)[8],toolbar_stage.get(now_tab_num)[9]);
 
-                        AnchorPane left_anchor_pane = (AnchorPane)((SplitPane)t1.getContent()).getItems().get(0);
-                        AnchorPane right_anchor_pane = (AnchorPane)((SplitPane)t1.getContent()).getItems().get(1);
-                        SplitPane left_split_pane = (SplitPane)((SplitPane)left_anchor_pane.getChildren().get(1));
-                        SplitPane right_split_pane = (SplitPane)((SplitPane)right_anchor_pane.getChildren().get(1));
-
-                        left_text_area = (TextArea) ((AnchorPane)left_split_pane.getItems().get(0)).getChildren().get(0);
-                        right_text_area = (TextArea) ((AnchorPane)right_split_pane.getItems().get(0)).getChildren().get(0);
-                        left_text_list = (MyListView)((AnchorPane)left_split_pane.getItems().get(0)).getChildren().get(1);
-                        right_text_list = (MyListView)((AnchorPane)right_split_pane.getItems().get(0)).getChildren().get(1);
+                        initTextAreaAndListOnTab();
                     }
                 }
         );
@@ -91,6 +85,14 @@ public class MainController implements Initializable {
     * 차이점이 선택 되었을 때 그 차이점이 마지막 차이점과 같다면 마지막 차이점 비활성화
     * */
     private void compareOnAction() {
+        if(left_text_area == null || right_text_area == null || left_text_list == null || right_text_list == null){
+           initTextAreaAndListOnTab();
+        }
+        left_text_area.setVisible(false);
+        right_text_area.setVisible(false);
+
+        left_text_list.setVisible(true);
+        right_text_list.setVisible(true);
         setClickabeButtons("true","true","true","true","true","true","true","true","true","true");
     }
     @FXML
@@ -266,7 +268,15 @@ public class MainController implements Initializable {
         return stage;
     }
 
-    private void initTextAreaAndListOnTab(Tab tab){
+    private void initTextAreaAndListOnTab(){
+        AnchorPane left_anchor_pane = (AnchorPane)((SplitPane)now_tab.getContent()).getItems().get(0);
+        AnchorPane right_anchor_pane = (AnchorPane)((SplitPane)now_tab.getContent()).getItems().get(1);
+        SplitPane left_split_pane = (SplitPane)((SplitPane)left_anchor_pane.getChildren().get(1));
+        SplitPane right_split_pane = (SplitPane)((SplitPane)right_anchor_pane.getChildren().get(1));
 
+        left_text_area = (TextArea) ((AnchorPane)left_split_pane.getItems().get(0)).getChildren().get(0);
+        right_text_area = (TextArea) ((AnchorPane)right_split_pane.getItems().get(0)).getChildren().get(0);
+        left_text_list = (MyListView)((AnchorPane)left_split_pane.getItems().get(0)).getChildren().get(1);
+        right_text_list = (MyListView)((AnchorPane)right_split_pane.getItems().get(0)).getChildren().get(1);
     }
 }
