@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by User on 2016-05-19.
  */
 public interface Model {
-    void newModel(int tabNum);
+    void newModel(int tabNum) throws IllegalArgumentException;
     // 식별자 tabNum을 가지는 창에 대응되는 모델 유닛을 하나 만든다.
     //각 모델 유닛은 i=0 또는 i=1, 이렇게 두 개의 텍스트를 저장하는 구조를 가진다.
     int newModel();

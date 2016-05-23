@@ -20,7 +20,8 @@ public class ModelUnitUsingFile extends ModelUnit {
             lines = new ArrayList<String>();
             String line;
             while ((line = reader.readLine()) != null) {
-                lines.add(line);
+                if(line.compareTo(this.retEmptyString(line.length()))!=0)
+                   lines.add(line);
             }
             reader.close();
 
@@ -35,6 +36,8 @@ public class ModelUnitUsingFile extends ModelUnit {
                 writer.newLine();
             }
             writer.close();
+
+
         }
 
         static private String EncodingType(FileInputStream f) throws IOException {
@@ -56,6 +59,15 @@ public class ModelUnitUsingFile extends ModelUnit {
             else
                 return new String("EUC-KR");
         }
+        private String retEmptyString(int length)
+        {
+            String a;
+            if((length/3)==0) a = new String("");
+            else a = retEmptyString(length/3);
+            if(length%3==0) return a+a+a;
+            else if(length%3==1) return a+a+a+" ";
+            else return a+a+a+"  ";
+        }
 
     }
     ModelUnitUsingFile()
@@ -64,5 +76,7 @@ public class ModelUnitUsingFile extends ModelUnit {
         SavedTextCanFileRR[] s = {new SavedTextCanFileRR(), new SavedTextCanFileRR()};
         codes = s;
     }
+
+
 
 }
