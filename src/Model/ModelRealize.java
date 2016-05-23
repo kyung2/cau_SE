@@ -33,6 +33,7 @@ public class ModelRealize implements Model {
         catch(IllegalAccessException e)
         {
             u.add(new ModelUnitGroup(tabNum));
+            return;
         }
         throw new IllegalArgumentException();
     }
