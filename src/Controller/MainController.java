@@ -307,7 +307,6 @@ public class MainController implements Initializable {
                 array++;
             }
         }
-        System.out.println(strings[0]);
         return strings;
     }
 }
