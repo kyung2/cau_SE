@@ -16,7 +16,7 @@
          <center>
               <TabPane fx:id="tab_pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                   <tabs>
-                      <Tab fx:id="tab" text="File" >
+                      <Tab fx:id="tab" text="File" onClosed="#tabCloseAction">
                           <content>
                               <fx:include source="SplitFilePane.fxml"></fx:include>
                           </content>
