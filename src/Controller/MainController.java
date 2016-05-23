@@ -6,6 +6,9 @@ import Model.ModelRealize;
 import View.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableArray;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -91,8 +94,22 @@ public class MainController implements Initializable {
         left_text_area.setVisible(false);
         right_text_area.setVisible(false);
 
+        Model model = ModelRealize.getInstance();
+        try {
+            ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
+            ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
+            ArrayList<Integer> text_index = model.getArrangedGroupSpace(0);
+            ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
+            ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
+            left_text_list.setItems(left_list_item);
+            right_text_list.setItems(right_list_item);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         left_text_list.setVisible(true);
+        left_text_list.setDisable(false);
         right_text_list.setVisible(true);
+        right_text_list.setDisable(false);
         setClickabeButtons("true","true","true","true","true","true","true","true","true","true");
     }
     @FXML
@@ -278,5 +295,19 @@ public class MainController implements Initializable {
         right_text_area = (TextArea) ((AnchorPane)right_split_pane.getItems().get(0)).getChildren().get(0);
         left_text_list = (MyListView)((AnchorPane)left_split_pane.getItems().get(0)).getChildren().get(1);
         right_text_list = (MyListView)((AnchorPane)right_split_pane.getItems().get(0)).getChildren().get(1);
+    }
+
+    private String[] makeStinrgsForList(ArrayList<String> arrayList, ArrayList<Integer> index){
+        String[] strings = new String[index.size()];
+
+        for (int i = 0, array = 0, n = strings.length; i < n; i++) {
+            strings[i] = "";
+            for(int j=0, m = index.get(i); j < m; j++){
+                strings[i] += arrayList.get(array) + "\n";
+                array++;
+            }
+        }
+        System.out.println(strings[0]);
+        return strings;
     }
 }
