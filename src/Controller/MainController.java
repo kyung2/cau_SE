@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import javafx.stage.Window;
 
 import java.net.URL;
@@ -31,8 +32,9 @@ public class MainController implements Initializable {
     private Tab tab;
     @FXML
     BorderPane main_pane;
-    @FXML
+
     private MyListView left_text_list, right_text_list;
+    private TextArea left_text_area, right_text_area;
 
     private ArrayList<String[]> toolbar_stage = new ArrayList<String []>();
     private int tab_num, now_tab_num;
@@ -47,6 +49,11 @@ public class MainController implements Initializable {
         tab.setUserData(tab_num);
         setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
         toolbar_stage.add(new String[]{"false","false","false","false","false","false","false","false","false","false"});
+
+        left_text_list = null;
+        right_text_list = null;
+        left_text_area = null;
+        right_text_area = null;
 
         Model model = ModelRealize.getInstance();
         model.newModel(tab_num);
@@ -64,8 +71,13 @@ public class MainController implements Initializable {
 
                         AnchorPane left_anchor_pane = (AnchorPane)((SplitPane)t1.getContent()).getItems().get(0);
                         AnchorPane right_anchor_pane = (AnchorPane)((SplitPane)t1.getContent()).getItems().get(1);
-                        left_text_list = (MyListView)((AnchorPane)((SplitPane)((SplitPane)left_anchor_pane.getChildren().get(1))).getItems().get(0)).getChildren().get(1);
-                        right_text_list = (MyListView)((AnchorPane)((SplitPane)((SplitPane)right_anchor_pane.getChildren().get(1))).getItems().get(0)).getChildren().get(1);
+                        SplitPane left_split_pane = (SplitPane)((SplitPane)left_anchor_pane.getChildren().get(1));
+                        SplitPane right_split_pane = (SplitPane)((SplitPane)right_anchor_pane.getChildren().get(1));
+
+                        left_text_area = (TextArea) ((AnchorPane)left_split_pane.getItems().get(0)).getChildren().get(0);
+                        right_text_area = (TextArea) ((AnchorPane)right_split_pane.getItems().get(0)).getChildren().get(0);
+                        left_text_list = (MyListView)((AnchorPane)left_split_pane.getItems().get(0)).getChildren().get(1);
+                        right_text_list = (MyListView)((AnchorPane)right_split_pane.getItems().get(0)).getChildren().get(1);
                     }
                 }
         );
@@ -252,5 +264,9 @@ public class MainController implements Initializable {
         if(!compare_button.isDisable()) { stage[9] = "true"; }
         else { stage[9] = "false"; }
         return stage;
+    }
+
+    private void initTextAreaAndListOnTab(Tab tab){
+
     }
 }
