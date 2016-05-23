@@ -155,8 +155,6 @@ public class SplitFilePaneController implements Initializable {
             }catch (Exception e){
                 e.printStackTrace();
             }
-            right_text_area.setVisible(true);
-            right_text_area.setVisible(true);
             right_text_area.setEditable(false);
             checkCompareButton();
             setClickableButtons("right","true",null,null);
@@ -166,6 +164,7 @@ public class SplitFilePaneController implements Initializable {
         else{
             //수정이 불가능 할 때 - 누르면 수정 가능, 로드 불가능, 저장 가능
             right_text_area.setEditable(true);
+            right_text_area.setVisible(true);
             right_text_list.setVisible(false);
             disableAllButtonInToolBar();
             setClickableButtons("right","false",null,"true");
