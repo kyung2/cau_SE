@@ -64,6 +64,7 @@ public class SplitFilePaneController implements Initializable {
     * compare 버튼을 할당되있지 않을 경우 할당
     * 파일을 읽어서 내용이 있을 경우 edit 버튼 활성화
     * load 버튼을 누를 경우 파일을 읽어서 text area 에 파일 내용을 적는다.
+    * text area 를 visible 하게 바꾼다.
     * 이미 파일이 있을 경우는 덮어쓰기
     * */
     @FXML
@@ -74,6 +75,7 @@ public class SplitFilePaneController implements Initializable {
         if(path != null){
             try {
                 model.readTextOuter(tab_num, path, 0);
+                left_text_area.setVisible(true);
                 left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
                 setClickableButtons("left","true","true","false");
             }catch(Exception e){
@@ -90,6 +92,7 @@ public class SplitFilePaneController implements Initializable {
             Model model = ModelRealize.getInstance();
             try {
                 model.readTextOuter(tab_num, path, 1);
+                right_text_area.setVisible(true);
                 right_text_area.setText(arrayListToString(model.getText(tab_num,1)));
                 setClickableButtons("right","true","true","false");
             }catch(Exception e){
@@ -100,7 +103,7 @@ public class SplitFilePaneController implements Initializable {
     }
     /*
     * 기본은 text area 수정 불가
-    * edit 버튼을 클릭하면 수정 가능하게 바꿈
+    * edit 버튼을 클릭하면 수정 가능하게 바꾸고 text area 를 visible 하게 바꾼다.
     * edit 이 가능할 때는 edit 와 save 버튼 말고는 모두 비활성화
     * 수정 가능한 상황에서 한 번 더 버튼을 누르면 다시 수정 불가
     * 그 후 비활성화 된 load 버튼을 활성화로
@@ -128,6 +131,7 @@ public class SplitFilePaneController implements Initializable {
         }
         else{
             //수정이 불가능 할 때 = 누르면 수정이 가능. 로드 불가능, 저장 가능, compare 불가능
+            left_text_area.setVisible(true);
             left_text_area.setEditable(true);
             left_text_list.setVisible(false);
             disableAllButtonInToolBar();
@@ -151,6 +155,8 @@ public class SplitFilePaneController implements Initializable {
             }catch (Exception e){
                 e.printStackTrace();
             }
+            right_text_area.setVisible(true);
+            right_text_area.setVisible(true);
             right_text_area.setEditable(false);
             checkCompareButton();
             setClickableButtons("right","true",null,null);
