@@ -6,7 +6,7 @@ import java.util.ArrayList;
 /**
  * Created by User on 2016-05-19.
  */
-public class ModelUnitUsingFile extends ModelUnit {
+public class ModelUnitRealizeUsingFile extends ModelUnitRealize {
     static class SavedTextCanFileRR extends SavedText
     {
         public void ReadFromOuter(String s) throws IOException {
@@ -26,7 +26,7 @@ public class ModelUnitUsingFile extends ModelUnit {
             reader.close();
 
         }
-        public void WriteFromOuter(String s) throws IOException {
+        public void WriteFromOuter(String s) throws IOException { ///////////////////////
             FileOutputStream fileOutputStream = new FileOutputStream(s);
             OutputStreamWriter OutputStreamWriter = new OutputStreamWriter(fileOutputStream, "EUC-KR");
             BufferedWriter writer = new BufferedWriter(OutputStreamWriter);
@@ -70,11 +70,29 @@ public class ModelUnitUsingFile extends ModelUnit {
         }
 
     }
-    ModelUnitUsingFile()
+    ModelUnitRealizeUsingFile()
     {
         super();
         SavedTextCanFileRR[] s = {new SavedTextCanFileRR(), new SavedTextCanFileRR()};
         codes = s;
+    }
+
+
+    public void open(String s, int i) throws IOException, IndexOutOfBoundsException //open from string
+    {
+        codes[i].ReadFrom(s);
+        groupNull();
+    }
+    public void save(String s, int i) throws IOException, IndexOutOfBoundsException //close to string
+    {
+        codes[i].WriteFrom(s);
+    }
+    public void save(int i) throws IOException {
+        codes[i].WriteFrom();
+    }
+
+    public String filepath(int i) {
+        return codes[i].filepath();
     }
 
 
