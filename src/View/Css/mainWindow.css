@@ -10,14 +10,18 @@ hover 적용 & 클릭시 이벤트 적용
 }
 .btn:hover,.tab_btn:hover{
     -fx-background-color: #cacaca;
+    -f-tooltip-visible:true;
 }
 .btn:pressed,.tab_btn:pressed {
     -fx-border-color:black; /* 선 바꾸는 것 */
 }
 
-#right_edit_button:hover {
-    -fx-tooltip-visible: true;
 
+.page-corner {
+    -fx-padding: 4.5 4.5 4.5 4.5;
+    -fx-background-color: linear-gradient( from 0% 0% to 50% 50%, #fcf7b6, #a59c31);
+    -fx-shape: "M0,0H9L0,9Z";
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 4 , 0.0 , 0 , 0 );
 }
 
 .tooltip {
@@ -25,11 +29,8 @@ hover 적용 & 클릭시 이벤트 적용
     -fx-border : 2px solid black;
     -fx-background-radius: 3px;
     -fx-background-color: white;
-    -fx-effect : null;
-    -fx-border-width: 100px;
-
-
 }
+
 #program_info_ok_button {
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
 }
