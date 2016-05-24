@@ -85,6 +85,7 @@ public class SplitFilePaneController implements Initializable {
                 e.printStackTrace();
             }
         }
+        invisibleListViewVisibleTextArea();
         checkCompareButton();
     }
     @FXML
@@ -102,6 +103,7 @@ public class SplitFilePaneController implements Initializable {
                 e.printStackTrace();
             }
         }
+        invisibleListViewVisibleTextArea();
         checkCompareButton();
     }
     /*
@@ -330,7 +332,6 @@ public class SplitFilePaneController implements Initializable {
         for (String s1 : arrayList) {
             s += s1 + "\n";
         }
-
         return s;
     }
     /*
@@ -344,7 +345,10 @@ public class SplitFilePaneController implements Initializable {
         }
         return arrayList;
     }
-
+    /*
+    * 모든 List view 를 invisible 하게
+    * 모든 Text view 를 visible 하게 바꾼다.
+    * */
     private void invisibleListViewVisibleTextArea(){
         right_text_area.setVisible(true);
         right_text_list.setVisible(false);

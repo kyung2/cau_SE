@@ -26,8 +26,16 @@ public class ModelRealize implements Model {
         return instance;
     }
 
-    public void newModel(int tabNum) {
-        u.add(new ModelUnitGroup(tabNum));
+    public void newModel(int tabNum) throws IllegalArgumentException{
+        try {
+            findTap(tabNum);
+        }
+        catch(IllegalAccessException e)
+        {
+            u.add(new ModelUnitGroup(tabNum));
+            return;
+        }
+        throw new IllegalArgumentException();
     }
 
     public int newModel() {

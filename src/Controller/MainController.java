@@ -59,22 +59,30 @@ public class MainController implements Initializable {
         right_text_list = null;
         left_text_area = null;
         right_text_area = null;
-
-        Model model = ModelRealize.getInstance();
-        model.newModel(tab_num);
+        try {
+            Model model = ModelRealize.getInstance();
+            model.newModel(tab_num);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         tab_pane.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Tab>() {
                     @Override
                     public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
-                        String[] stage = makeToolbarStage();
-                        now_tab = t1;
-                        toolbar_stage.set(now_tab_num,stage);
-                        now_tab_num = (int)now_tab.getUserData();
-                        setClickabeButtons(toolbar_stage.get(now_tab_num)[0],toolbar_stage.get(now_tab_num)[1],toolbar_stage.get(now_tab_num)[2],
-                                toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4],toolbar_stage.get(now_tab_num)[5],
-                                toolbar_stage.get(now_tab_num)[6],toolbar_stage.get(now_tab_num)[7],toolbar_stage.get(now_tab_num)[8],toolbar_stage.get(now_tab_num)[9]);
+                        if(t1 != null) {
+                            String[] stage = makeToolbarStage();
+                            now_tab = t1;
+                            toolbar_stage.set(now_tab_num, stage);
+                            now_tab_num = (int) now_tab.getUserData();
+                            setClickabeButtons(toolbar_stage.get(now_tab_num)[0], toolbar_stage.get(now_tab_num)[1], toolbar_stage.get(now_tab_num)[2],
+                                    toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4], toolbar_stage.get(now_tab_num)[5],
+                                    toolbar_stage.get(now_tab_num)[6], toolbar_stage.get(now_tab_num)[7], toolbar_stage.get(now_tab_num)[8], toolbar_stage.get(now_tab_num)[9]);
 
-                        initTextAreaAndListOnTab();
+                            initTextAreaAndListOnTab();
+                        }
+                        else {
+                            setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
+                        }
                     }
                 }
         );
@@ -93,12 +101,12 @@ public class MainController implements Initializable {
         }
         left_text_area.setVisible(false);
         right_text_area.setVisible(false);
-
         Model model = ModelRealize.getInstance();
         try {
             ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
             ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
-            ArrayList<Integer> text_index = model.getArrangedGroupSpace(0);
+            ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
+
             ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
             ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
             left_text_list.setItems(left_list_item);
@@ -136,7 +144,6 @@ public class MainController implements Initializable {
     private void nowDifferenceOnAction() { now_difference_button.setText(""); }
     @FXML
     private void lastDifferenceOnAction() { last_difference_button.setText(""); }
-
     @FXML
     /*
     * new tab 을 누르면 fxml 로 부터 정보를 읽어온 후
@@ -160,7 +167,6 @@ public class MainController implements Initializable {
         }
 
     }
-
     @FXML
     private void openMenuItemOnAction() {
         OpenFileWindow openFileWindow = new OpenFileWindow();
@@ -175,7 +181,6 @@ public class MainController implements Initializable {
     private void saveRightFileMenuItemOnAction() { System.out.println(""); }
     @FXML
     private void saveLeftFileMenuItemOnAction() { System.out.println(""); }
-
     @FXML
     private void closeMenuItemOnAction() {
         /*
@@ -206,6 +211,13 @@ public class MainController implements Initializable {
             e.printStackTrace();
         }
         System.out.println("ProgramInfo");
+    }
+    @FXML
+    /*
+    * tab 이 꺼지면 그에 해당하는 toolbar stage 의 값을 null 로 바꾼다.
+    * */
+    private void tabCloseAction(){
+        toolbar_stage.set(now_tab_num,null);
     }
     @FXML
     private void closeTabMenuItemOnAction() { System.out.println(""); }
@@ -259,7 +271,9 @@ public class MainController implements Initializable {
             else compare_button.setDisable(true);
         }
     }
-
+    /*
+    * 버튼들의 상태를 봐서 tool bar stage 를 만든다.
+    * */
     private String[] makeToolbarStage(){
         String[] stage = new String[10];
         if(!next_difference_button.isDisable()) { stage[0] = "true"; }
@@ -284,7 +298,9 @@ public class MainController implements Initializable {
         else { stage[9] = "false"; }
         return stage;
     }
-
+    /*
+    * 현재 tab 을 통해서 현재 선택된 tab 의 text area 와 list view 를 가져온다.
+    * */
     private void initTextAreaAndListOnTab(){
         AnchorPane left_anchor_pane = (AnchorPane)((SplitPane)now_tab.getContent()).getItems().get(0);
         AnchorPane right_anchor_pane = (AnchorPane)((SplitPane)now_tab.getContent()).getItems().get(1);
@@ -296,7 +312,9 @@ public class MainController implements Initializable {
         left_text_list = (MyListView)((AnchorPane)left_split_pane.getItems().get(0)).getChildren().get(1);
         right_text_list = (MyListView)((AnchorPane)right_split_pane.getItems().get(0)).getChildren().get(1);
     }
-
+    /*
+    * String 을 저장한 array list 와 index를 저장한 array list 를 통해 list view 에 넣을 string 배열을 만든다.
+    * */
     private String[] makeStinrgsForList(ArrayList<String> arrayList, ArrayList<Integer> index){
         String[] strings = new String[index.size()];
 
