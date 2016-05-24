@@ -16,7 +16,7 @@
          <opaqueInsets>
             <Insets />
          </opaqueInsets></TextField>
-      <TextField fx:id="rigth_file_text_area" layoutX="154.0" layoutY="102.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="100.0" />
+      <TextField fx:id="right_file_text_area" layoutX="154.0" layoutY="102.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="100.0" />
       <TextField fx:id="left_file_text_area" layoutX="154.0" layoutY="139.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="140.0" />
       <Button fx:id="right_file_find_button" layoutX="432.0" layoutY="102.0" mnemonicParsing="false" onAction="#rightFileFindButtonOnAction" prefHeight="23.0" prefWidth="55.0" text="Find" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="100.0" />
       <Button fx:id="left_file_find_button" layoutX="432.0" layoutY="139.0" mnemonicParsing="false" onAction="#leftFileFindButtonOnAction" prefHeight="23.0" prefWidth="55.0" text="Find" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="140.0" />

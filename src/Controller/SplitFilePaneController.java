@@ -279,7 +279,7 @@ public class SplitFilePaneController implements Initializable {
     * */
     private void checkCompareButton(){
         if(compare_button == null) {
-            compare_button = (Button)((ToolBar)((BorderPane)((BorderPane)split_pane.getScene().getRoot()).getCenter()).getTop()).getItems().get(9);
+            compare_button = (Button)((ToolBar)((BorderPane)((BorderPane)split_pane.getScene().getRoot()).getCenter()).getTop()).getItems().get(11);
         }
         Model model = ModelRealize.getInstance();
         try{
@@ -309,7 +309,9 @@ public class SplitFilePaneController implements Initializable {
         ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
 
         for(int i=0, n=toolBar.getItems().size(); i<n; i++){
-            ((Button)toolBar.getItems().get(i)).setDisable(true);
+            if( i != 5 && i != 10) {
+                ((Button) toolBar.getItems().get(i)).setDisable(true);
+            }
         }
     }
     /*
