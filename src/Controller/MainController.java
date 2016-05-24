@@ -316,11 +316,19 @@ public class MainController implements Initializable {
     * String 을 저장한 array list 와 index를 저장한 array list 를 통해 list view 에 넣을 string 배열을 만든다.
     * */
     private String[] makeStinrgsForList(ArrayList<String> arrayList, ArrayList<Integer> index){
-        String[] strings = new String[index.size()];
+        String[] strings;
+        int flag = 0;
+
+        if(index.get(0) == 0){
+            flag = 1;
+        }
+        
+        strings = new String[index.size() - flag];
 
         for (int i = 0, array = 0, n = strings.length; i < n; i++) {
             strings[i] = "";
-            for(int j=0, m = index.get(i); j < m; j++){
+
+            for(int j=0, m = index.get(i + flag); j < m; j++){
                 strings[i] += arrayList.get(array) + "\n";
                 array++;
             }
