@@ -22,8 +22,8 @@ interface ModelUnit {
     public void mergeBylineNum(int lineNum, boolean direction) throws IndexOutOfBoundsException, MergeLineIllegalException;
     public void mergeByGroupNum(int groupNum, boolean direction) throws MergeLineIllegalException;
 
-    public void open(String s, int i) throws IOException, IndexOutOfBoundsException;
-    public void save(String s, int i) throws IOException, IndexOutOfBoundsException;
+    public void open(String filepath, int i) throws IOException, IndexOutOfBoundsException;
+    public void save(String filepath, int i) throws IOException, IndexOutOfBoundsException;
     public void save(int i) throws IOException;
     public String filepath(int i);
 

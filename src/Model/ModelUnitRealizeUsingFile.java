@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class ModelUnitRealizeUsingFile extends ModelUnitRealize {
     static class SavedTextCanFileRR extends SavedText
     {
-        public void ReadFromOuter(String s) throws IOException {
+        protected void ReadFromOuter(String s) throws IOException {
             FileInputStream fileInputStream = new FileInputStream(s);
             String type = EncodingType(fileInputStream);
             System.out.println(type);
@@ -17,22 +17,23 @@ public class ModelUnitRealizeUsingFile extends ModelUnitRealize {
             fileInputStream = new FileInputStream(s);
             InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, type);
             BufferedReader reader = new BufferedReader(inputStreamReader);
-            lines = new ArrayList<String>();
+            ArrayList<String> newLines = new ArrayList<String>();
             String line;
             while ((line = reader.readLine()) != null) {
              //   if(line.compareTo(this.retEmptyString(line.length()))!=0)
-                   lines.add(line);
+                newLines.add(line);
             }
+            this.WriteAll(newLines);
             reader.close();
 
         }
-        public void WriteFromOuter(String s) throws IOException { ///////////////////////
+        protected void WriteFromOuter(String s) throws IOException { ///////////////////////
             FileOutputStream fileOutputStream = new FileOutputStream(s);
             OutputStreamWriter OutputStreamWriter = new OutputStreamWriter(fileOutputStream, "EUC-KR");
             BufferedWriter writer = new BufferedWriter(OutputStreamWriter);
-            String line;
-            for(int i=0;i<lines.size();i++) {
-                writer.write(lines.get(i));
+            ArrayList<String> newLines = this.ReadAll();
+            for(int i=0;i<newLines.size();i++) {
+                writer.write(newLines.get(i));
                 writer.newLine();
             }
             writer.close();
