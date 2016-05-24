@@ -62,9 +62,14 @@ public class PseudoMain2 {
             System.out.println(m.isOpen(2,0));
 
             a3 = m.getText(2,0);
-            System.out.println("-");
+            System.out.println("2,0 texts");
             for(int i=0;i<a3.size();i++) System.out.println(a3.get(i));
-            System.out.println("-");
+            System.out.println("-\n\n");
+
+            a3 = m.getText(2,1);
+            System.out.println("2,1 texts");
+            for(int i=0;i<a3.size();i++) System.out.println(a3.get(i));
+            System.out.println("-\n\n");
 
             aaa = m.getArrangedGroupSpace(2);
             for(int k=0;k<aaa.size();k++)

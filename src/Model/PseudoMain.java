@@ -10,7 +10,7 @@ import java.util.ArrayList;
 public class PseudoMain {
     public static void main(String args[])
     {
-        SavedText s1 = new ModelUnitUsingFile.SavedTextCanFileRR(), s2 = new ModelUnitUsingFile.SavedTextCanFileRR();
+        SavedText s1 = new ModelUnitRealizeUsingFile.SavedTextCanFileRR(), s2 = new ModelUnitRealizeUsingFile.SavedTextCanFileRR();
         ArrayList<String> a1 = new  ArrayList<String>(), a2 = new  ArrayList<String>();
         ArrayList<Integer>[][] aaa;
 

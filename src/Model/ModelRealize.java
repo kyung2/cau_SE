@@ -1,6 +1,5 @@
 package Model;
 
-import Model.LCSsupport.LCSClassEnum;
 import Model.ModelException.MergeLineIllegalException;
 
 import java.io.IOException;
@@ -61,7 +60,7 @@ public class ModelRealize implements Model {
 
     @Override
     public boolean isOpen(int tabNum, int i) throws IllegalAccessException {
-       return (u.get(findTap(tabNum)).m.codes[i].filepath)!=(null);
+       return (u.get(findTap(tabNum)).m.filepath(i))!=(null);
     }
 
     public ArrayList<String> getText(int tabNum, int i) throws IllegalAccessException {
@@ -128,11 +127,11 @@ public class ModelRealize implements Model {
 
 class ModelUnitGroup implements Comparator<ModelUnitGroup>
 {
-    ModelUnitUsingFile m;
+    ModelUnit m;
     int iterator;
     ModelUnitGroup(int iterator)
     {
-        m=new ModelUnitUsingFile();
+        m=new ModelUnitRealizeUsingFile();
         this.iterator=iterator;
     }
 
