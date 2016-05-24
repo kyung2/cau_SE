@@ -92,7 +92,7 @@ public class SaveFileWindowController {
     /*
     * file chooser 를 연다.
     * */
-    private File loadFileChooser(Button position){
+    private File loadFileChooser(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
         File selectedFile = fileChooser.showOpenDialog(null);

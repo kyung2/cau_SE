@@ -72,7 +72,7 @@ public class SplitFilePaneController implements Initializable {
     @FXML
     private void leftLoadButtonOnAction() {
         checkTabNum();
-        File file = loadFileChooser(left_load_button);
+        File file = loadFileChooser();
         Model model = ModelRealize.getInstance();
         if(file != null){
             try {
@@ -91,7 +91,7 @@ public class SplitFilePaneController implements Initializable {
     @FXML
     private void rightLoadButtonOnAction(){
         checkTabNum();
-        File file = loadFileChooser(right_load_button);
+        File file = loadFileChooser();
         if(file != null){
             Model model = ModelRealize.getInstance();
             try {
@@ -225,7 +225,7 @@ public class SplitFilePaneController implements Initializable {
     *  tab num 이 -1 즉 초기값일 경우 tab num 을 할당해준다.
     *  모델 객체를 받아온 뒤 해당하는 model 에 absoulte path를 넘겨주어 파일 입출력을 한다.
     * */
-    private File loadFileChooser(Button position){
+    private File loadFileChooser(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
         File selectedFile = fileChooser.showOpenDialog(null);
