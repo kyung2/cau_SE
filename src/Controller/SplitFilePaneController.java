@@ -39,8 +39,7 @@ public class SplitFilePaneController implements Initializable {
     private Button compare_button;
 
     private int tab_num;
-
-
+    
     /*
     * 기본적으로
     * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
