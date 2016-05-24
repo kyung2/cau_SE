@@ -193,6 +193,7 @@ public class SplitFilePaneController implements Initializable {
                 left_text_area.setEditable(false);
                 checkCompareButton();
                 setClickableButtons("left", "true", null, "false");
+                left_edit_button.setStyle("-fx-background-color:transparent");
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -212,6 +213,7 @@ public class SplitFilePaneController implements Initializable {
                 right_text_area.setEditable(false);
                 checkCompareButton();
                 setClickableButtons("right", "true", null, "false");
+                right_edit_button.setStyle("-fx-background-color:transparent");
             }catch (Exception e){
                 e.printStackTrace();
             }
