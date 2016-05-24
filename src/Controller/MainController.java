@@ -218,6 +218,12 @@ public class MainController implements Initializable {
     * */
     private void tabCloseAction(){
         toolbar_stage.set(now_tab_num,null);
+        Model model = ModelRealize.getInstance();
+        try {
+            model.closeModel(now_tab_num);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
     @FXML
     private void closeTabMenuItemOnAction() { System.out.println(""); }
