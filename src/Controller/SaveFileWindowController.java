@@ -95,7 +95,7 @@ public class SaveFileWindowController {
     private File loadFileChooser(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
-        File selectedFile = fileChooser.showOpenDialog(null);
+        File selectedFile = fileChooser.showSaveDialog(null);
 
         if(selectedFile == null) {
             System.out.println("No Select FIle");

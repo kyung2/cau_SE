@@ -228,8 +228,12 @@ public class SplitFilePaneController implements Initializable {
     private File loadFileChooser(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Java Files", "*.java"),
+                new FileChooser.ExtensionFilter("C Files", "*.c","*.cpp"),
+                new FileChooser.ExtensionFilter("Text Files", "*.txt")
+        );
         File selectedFile = fileChooser.showOpenDialog(null);
-
         if(selectedFile == null) {
             System.out.println("No Select FIle");
         }
