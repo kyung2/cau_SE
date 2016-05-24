@@ -1,14 +1,16 @@
 package View;
 
 import Controller.SaveFileWindowController;
+import javafx.scene.control.Tab;
 
 /**
  * Created by woojin on 2016-05-18.
  */
 public class SaveFileWindow extends AbstractFileWindow {
 
-    public SaveFileWindow() {
+    public SaveFileWindow(Tab tab) {
         super("SaveFileWindow",new SaveFileWindowController());
+        this.getScene().setUserData(tab);
         initLabel();
     }
     @Override

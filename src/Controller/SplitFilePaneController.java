@@ -40,7 +40,6 @@ public class SplitFilePaneController implements Initializable {
 
     private int tab_num;
 
-
     /*
     * 기본적으로
     * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
@@ -73,14 +72,15 @@ public class SplitFilePaneController implements Initializable {
     @FXML
     private void leftLoadButtonOnAction() {
         checkTabNum();
-        String path = loadFileChooser(left_load_button);
+        File file = loadFileChooser(left_load_button);
         Model model = ModelRealize.getInstance();
-        if(path != null){
+        if(file != null){
             try {
-                model.readTextOuter(tab_num, path, 0);
+                model.readTextOuter(tab_num, file.getAbsolutePath(), 0);
                 left_text_area.setVisible(true);
                 left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
                 setClickableButtons("left","true","true","false");
+                changeTabName(file.getName(),"left");
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -91,14 +91,15 @@ public class SplitFilePaneController implements Initializable {
     @FXML
     private void rightLoadButtonOnAction(){
         checkTabNum();
-        String path = loadFileChooser(right_load_button);
-        if(path != null){
+        File file = loadFileChooser(right_load_button);
+        if(file != null){
             Model model = ModelRealize.getInstance();
             try {
-                model.readTextOuter(tab_num, path, 1);
+                model.readTextOuter(tab_num, file.getAbsolutePath(), 1);
                 right_text_area.setVisible(true);
                 right_text_area.setText(arrayListToString(model.getText(tab_num,1)));
                 setClickableButtons("right","true","true","false");
+                changeTabName(file.getName(),"right");
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -224,21 +225,15 @@ public class SplitFilePaneController implements Initializable {
     *  tab num 이 -1 즉 초기값일 경우 tab num 을 할당해준다.
     *  모델 객체를 받아온 뒤 해당하는 model 에 absoulte path를 넘겨주어 파일 입출력을 한다.
     * */
-    private String loadFileChooser(Button position){
+    private File loadFileChooser(Button position){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
         File selectedFile = fileChooser.showOpenDialog(null);
-        checkTabNum();
-        String path = null;
-        try{
-            path = selectedFile.getAbsolutePath();
-            Model model = ModelRealize.getInstance();
 
-            return path;
-        }catch (Exception NullPointException){
+        if(selectedFile == null) {
             System.out.println("No Select FIle");
         }
-        return path;
+        return selectedFile;
     }
     /*
     * file pane 버튼의 able 과 disable 을 해준다.
@@ -289,7 +284,7 @@ public class SplitFilePaneController implements Initializable {
                     compare_button.setDisable(false);
                 }
             }
-        }catch (IllegalAccessException e){
+        }catch (Exception e){
                 e.printStackTrace();
         }
     }
@@ -356,5 +351,31 @@ public class SplitFilePaneController implements Initializable {
         right_text_list.setVisible(false);
         left_text_area.setVisible(true);
         left_text_list.setVisible(false);
+    }
+    /*
+    * 파일 이름을 받아서 tab name 을 바꿔준다.
+    * */
+    private void changeTabName(String name, String position){
+        String tab_name = getSelectedTab().getText();
+        if(position.equals("left")) {
+            if (tab_name.equals("File")) {
+                tab_name = name + " - ";
+                getSelectedTab().setText(tab_name);
+            }
+            else{
+                tab_name = name + " -" + tab_name.split("-")[1];
+                getSelectedTab().setText(tab_name);
+            }
+        }
+        else {
+            if (tab_name.equals("File")) {
+                tab_name = " - " + name;
+                getSelectedTab().setText(tab_name);
+            }
+            else{
+                tab_name = tab_name.split("-")[0] + "- " + name;
+                getSelectedTab().setText(tab_name);
+            }
+        }
     }
 }

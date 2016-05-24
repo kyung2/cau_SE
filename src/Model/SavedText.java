@@ -11,30 +11,31 @@ import java.util.ArrayList;
 
 abstract public class SavedText
 {
-    protected ArrayList<String> lines;
-    protected String filepath;
+    private ArrayList<String> lines;
+    private String filepath;
     protected SavedText() {
 
         lines = new ArrayList<String>();
     filepath = null;
 }
-    abstract void ReadFromOuter(String s) throws IOException;
-    abstract void WriteFromOuter(String s) throws IOException;
+    abstract protected void ReadFromOuter(String filepath) throws IOException;
+    abstract protected void WriteFromOuter(String filepath) throws IOException;
 
-    void ReadFrom(String s) throws IOException
+    void ReadFrom(String filepath) throws IOException
     {
-        filepath = s;
-        ReadFromOuter(s);
+        this.filepath = filepath;
+        ReadFromOuter(filepath);
     }
 
-    void WriteFrom(String s) throws IOException
+    void WriteFrom(String filepath) throws IOException
     {
-        WriteFromOuter(s);
+        WriteFromOuter(filepath);
+        this.filepath = filepath;
     }
 
     void WriteFrom() throws IOException
     {
-        WriteFromOuter(filepath);
+        WriteFrom(filepath);
     }
 
     String filepath()
@@ -42,26 +43,26 @@ abstract public class SavedText
         return filepath;
     }
 
-    public int NumOfLine()
+    int NumOfLine()
     {
         return lines.size();
     }
-    public String Read(int i) throws IndexOutOfBoundsException {
+    String Read(int i) throws IndexOutOfBoundsException {
         return lines.get(i);
     }
     public void Write(int i, String s) throws IndexOutOfBoundsException {
         lines.set(i,s);
     }
-    public ArrayList<String> ReadAll()
+    ArrayList<String> ReadAll()
     {
         return (ArrayList<String>)lines.clone();
     }
-    public void WriteAll(ArrayList<String> s)
+    void WriteAll(ArrayList<String> s)
     {
         lines = new ArrayList<String>(s);
     }
 
-    public ArrayList<Integer>[][] LCSMethod(SavedText another) throws NullPointerException // todo
+    ArrayList<Integer>[][] LCSMethod(SavedText another) throws NullPointerException // todo
     {
         int x=this.NumOfLine()+1,y=another.NumOfLine()+1;
         int LCS[][] = new int[x][y];
