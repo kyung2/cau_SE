@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.ModelRealize;
+import View.AlarmWindow;
 import View.MyListView;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -100,9 +101,17 @@ public class SaveFileWindowController {
     }
     @FXML
     private void cancelButtonOnAction(){
-        file_anchor_pane.getScene().getWindow().hide();
+        if(right_flag || left_flag) {
+            AlarmWindow exitAlarmWindow = new AlarmWindow("Save File Alarm", "Wouldn't you Save this file?");
+            exitAlarmWindow.showAndWait();
+            if ((boolean) exitAlarmWindow.getUserData()) {
+                file_anchor_pane.getScene().getWindow().hide();
+            }
+        }
+        else{
+            file_anchor_pane.getScene().getWindow().hide();
+        }
     }
-
     /*
     *  tab 에 포함된 내용물들을 가져온다
     * */
