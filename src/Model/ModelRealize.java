@@ -29,7 +29,7 @@ public class ModelRealize implements Model {
         try {
             findTap(tabNum);
         }
-        catch(IllegalAccessException e)
+        catch(IllegalArgumentException e)
         {
             u.add(new ModelUnitGroup(tabNum));
             return;
@@ -53,66 +53,66 @@ public class ModelRealize implements Model {
 
 
 
-    public void closeModel(int tabNum) throws IllegalAccessException{
-        u.remove(findTap(tabNum));
+    public void closeModel(int tabNum) throws IllegalArgumentException{
+        u.remove((int)findTap(tabNum));
 
     }
 
     @Override
-    public boolean isOpen(int tabNum, int i) throws IllegalAccessException {
+    public boolean isOpen(int tabNum, int i) throws IllegalArgumentException {
        return (u.get(findTap(tabNum)).m.filepath(i))!=(null);
     }
 
-    public ArrayList<String> getText(int tabNum, int i) throws IllegalAccessException {
+    public ArrayList<String> getText(int tabNum, int i) throws IllegalArgumentException {
         return u.get(findTap(tabNum)).m.textReceive(i);
     }
 
     @Override
-    public ArrayList<String> getArrangedText(int tabNum, int i) throws IndexOutOfBoundsException, IllegalAccessException {
+    public ArrayList<String> getArrangedText(int tabNum, int i) throws IndexOutOfBoundsException, IllegalArgumentException {
         //todo
         return u.get(findTap(tabNum)).m.getArrangedText(i);
     }
 
     @Override
-    public ArrayList<Integer> getArrangedGroupNum(int tabNum) throws IndexOutOfBoundsException, IllegalAccessException {
+    public ArrayList<Integer> getArrangedGroupNum(int tabNum) throws IndexOutOfBoundsException, IllegalArgumentException {
 
         return u.get(findTap(tabNum)).m.getArrangedGroup();
 
     }
 
     @Override
-    public ArrayList<Integer> getArrangedGroupSpace(int tabNum) throws IllegalAccessException {
+    public ArrayList<Integer> getArrangedGroupSpace(int tabNum) throws IllegalArgumentException {
         return u.get(findTap(tabNum)).m.getArrangedGroupSpace();
     }
 
-    public void setText(int tabNum, ArrayList<String> text, int i) throws IndexOutOfBoundsException, IllegalAccessException {
+    public void setText(int tabNum, ArrayList<String> text, int i) throws IndexOutOfBoundsException, IllegalArgumentException {
         u.get(findTap(tabNum)).m.textSend(i, text);
     }
 
-    public void readTextOuter(int tabNum, String filepath, int i) throws IndexOutOfBoundsException, IOException,IllegalAccessException {
+    public void readTextOuter(int tabNum, String filepath, int i) throws IndexOutOfBoundsException, IOException,IllegalArgumentException {
         u.get(findTap(tabNum)).m.open(filepath, i);
     }
 
-    public void writeTextOuter(int tabNum, String filepath, int i) throws IndexOutOfBoundsException, IOException,IllegalAccessException {
+    public void writeTextOuter(int tabNum, String filepath, int i) throws IndexOutOfBoundsException, IOException,IllegalArgumentException {
         u.get(findTap(tabNum)).m.save(filepath, i);
     }
 
     @Override
-    public void writeTextOuter(int tabNum, int i) throws IndexOutOfBoundsException, IOException, IllegalAccessException {
+    public void writeTextOuter(int tabNum, int i) throws IndexOutOfBoundsException, IOException, IllegalArgumentException {
         u.get(findTap(tabNum)).m.save(i);
     }
 
-    public void mergeByLine(int tabNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException {
+    public void mergeByLine(int tabNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalArgumentException, MergeLineIllegalException {
         u.get(findTap(tabNum)).m.mergeBylineNum(Index, direction);
     }
 
-    public void mergeByGroup(int tabNum, int groupNum, boolean direction) throws IndexOutOfBoundsException, IllegalAccessException, MergeLineIllegalException {
+    public void mergeByGroup(int tabNum, int groupNum, boolean direction) throws IndexOutOfBoundsException, IllegalArgumentException, MergeLineIllegalException {
         u.get(findTap(tabNum)).m.mergeByGroupNum(groupNum, direction);
     }
 
 
 
-    private Integer findTap(int tabNum) throws IllegalAccessException
+    private Integer findTap(int tabNum) throws IllegalArgumentException
     {
         for(int i=0;i<u.size();i++)
         {
@@ -121,7 +121,13 @@ public class ModelRealize implements Model {
                 return i;
             }
         }
-        throw new IllegalAccessException();
+        throw new IllegalArgumentException();
+    }
+    public ArrayList<Integer> getTabNums()
+    {
+        ArrayList<Integer> c = new ArrayList<Integer>();
+        for(int i=0;i<u.size();i++) c.add(u.get(i).iterator);
+            return c;
     }
 }
 
@@ -138,4 +144,6 @@ class ModelUnitGroup implements Comparator<ModelUnitGroup>
     public int compare(ModelUnitGroup o1, ModelUnitGroup o2) {
         return o1.iterator-o2.iterator;
     }
+
+
 }
