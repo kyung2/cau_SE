@@ -174,7 +174,7 @@ public class MainController implements Initializable {
     }
     @FXML
     private void saveMenuItemOnAction() {
-        SaveFileWindow saveFileWindow = new SaveFileWindow();
+        SaveFileWindow saveFileWindow = new SaveFileWindow(now_tab);
         System.out.println("Save");
     }
     @FXML
@@ -322,7 +322,7 @@ public class MainController implements Initializable {
         if(index.get(0) == 0){
             flag = 1;
         }
-        
+
         strings = new String[index.size() - flag];
 
         for (int i = 0, array = 0, n = strings.length; i < n; i++) {

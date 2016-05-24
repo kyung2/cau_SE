@@ -39,7 +39,7 @@ public class SplitFilePaneController implements Initializable {
     private Button compare_button;
 
     private int tab_num;
-    
+
     /*
     * 기본적으로
     * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
@@ -229,7 +229,7 @@ public class SplitFilePaneController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
         File selectedFile = fileChooser.showOpenDialog(null);
-        checkTabNum();
+
         if(selectedFile == null) {
             System.out.println("No Select FIle");
         }
@@ -284,7 +284,7 @@ public class SplitFilePaneController implements Initializable {
                     compare_button.setDisable(false);
                 }
             }
-        }catch (IllegalAccessException e){
+        }catch (Exception e){
                 e.printStackTrace();
         }
     }
