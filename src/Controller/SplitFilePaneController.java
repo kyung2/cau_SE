@@ -229,6 +229,7 @@ public class SplitFilePaneController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
         fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Files", "*.java", "*.c", "*.cpp", "*.txt"),
                 new FileChooser.ExtensionFilter("Java Files", "*.java"),
                 new FileChooser.ExtensionFilter("C Files", "*.c","*.cpp"),
                 new FileChooser.ExtensionFilter("Text Files", "*.txt")
