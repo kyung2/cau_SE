@@ -60,7 +60,6 @@ public class OpenFileWindowController {
 
     @FXML
     private void leftFileFindButtonOnAction(){
-        System.out.println("Lclick");
         int tab_num;
     	getTabContent();
         File file = loadFileChooser(left_load);
@@ -71,30 +70,29 @@ public class OpenFileWindowController {
         //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
     	if(file != null){
             try {
-               modelLeft.readTextOuter(tab_num, file.getAbsolutePath(), 0); 
-               left_file_text_area.setText(file.getName()); 
+               modelLeft.readTextOuter(tab_num, file.getAbsolutePath(), 0);
+               left_file_text_area.setText(file.getName());
                fileLeftname = file.getName();
             }catch(Exception e){
                 e.printStackTrace();
             }
         }
-        
+
     }
-    
+
     @FXML
     private void rightFileFindButtonOnAction(){
-        System.out.println("Rclick");
-    	int tab_num;
+        int tab_num;
     	getTabContent();
         File file = loadFileChooser(right_load);
-        
+
     	tab_num = (int)tab.getUserData();
         modelRight = ModelRealize.getInstance();
-        
+
         //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
     	if(file != null){
             try {
-               modelRight.readTextOuter(tab_num, file.getAbsolutePath(), 1); 
+               modelRight.readTextOuter(tab_num, file.getAbsolutePath(), 1);
                right_file_text_area.setText(file.getName());
                fileRightname = file.getName();
             }catch(Exception e){
@@ -102,10 +100,9 @@ public class OpenFileWindowController {
             }
         }
     }
-    
+
     @FXML
     private void okButtonOnAction() throws IndexOutOfBoundsException, IllegalAccessException, IOException{
-       
         System.out.println("파일불러오기");
         if(!fileRightname.equals("") && !fileLeftname.equals("")){
         //Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
@@ -121,32 +118,36 @@ public class OpenFileWindowController {
         right_text_area.setVisible(true);
         left_text_area.setText(arrayListToString(modelLeft.getText(tab_num,0)));
         right_text_area.setText(arrayListToString(modelRight.getText(tab_num,1)));
-        
+
         //스플릿 패널 활성화 설정
         left_load.setDisable(false);
         left_edit.setDisable(false);
         left_save.setDisable(true);
-        
+
         right_load.setDisable(false);
         right_edit.setDisable(false);
         right_save.setDisable(true);
 
         //탭의 패널 이름 변경
-        changeTabName(fileLeftname,"left"); 
+        changeTabName(fileLeftname,"left");
         changeTabName(fileRightname,"right");
         left_file_label.setText(fileLeftname);
         right_file_label.setText(fileRightname);
-        
+
         //compare_button_file.setDisable(false);
+        }
+        if(!left_edit.isDisable() && !right_edit.isDisable()) {
+            BorderPane main_center_pane = (BorderPane)((BorderPane)tab.getTabPane().getScene().getRoot()).getCenter();
+            Button compare = (Button)((ToolBar)(main_center_pane.getTop())).getItems().get(11);
+            compare.setDisable(false);
         }
         //창 종료
         Stage stage = (Stage) ok_button.getScene().getWindow();
         stage.close();
     }
-    
+
     @FXML
     private void cancelButtonOnAction(){
-        System.out.println("click");
         //창 닫기
         Stage stage = (Stage) cancel_button.getScene().getWindow();
         stage.close();
@@ -162,7 +163,7 @@ public class OpenFileWindowController {
         }
         return selectedFile;
     }
-   
+
     private void getTabContent(){
     	//현재 탭의 버튼 요소들
         tab = (Tab)file_anchor_pane.getScene().getUserData();
