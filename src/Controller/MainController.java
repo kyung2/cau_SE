@@ -349,15 +349,14 @@ public class MainController implements Initializable {
     private void setHighlight(ArrayList<Integer> index){
         int count = 0;
         for (int i = 0, n = index.size(); i < n; i++) {
-            int end = index.get(i);
-            if(i%2 == 1) {
-                left_text_list.setColorsOnBlock(count, count + end, MyListView.Red);
+            if(i %2 != 0) {
+                left_text_list.setColorsOnBlock(i, MyListView.Red);
+                right_text_list.setColorsOnBlock(i, MyListView.Red);
             }
-            else{
-                left_text_list.setColorsOnBlock(count, count + end, MyListView.Yellow);
+            else {
+                left_text_list.setColorsOnBlock(i, MyListView.Yellow);
+                right_text_list.setColorsOnBlock(i, MyListView.Yellow);
             }
-            count += end;
         }
-        System.out.println(index);
     }
 }
