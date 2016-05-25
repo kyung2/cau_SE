@@ -67,12 +67,12 @@ public class OpenFileWindowController {
 
     	tab_num = (int)tab.getUserData();
         modelLeft = ModelRealize.getInstance();
-        
-        //�뙆�씪 �뿴由щ㈃
+
+        //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
     	if(file != null){
             try {
-               modelLeft.readTextOuter(tab_num, file.getAbsolutePath(), 0); //�꺆�꽆踰� �꽔湲�
-               left_file_text_area.setText(file.getName()); // �뙣�뒪�씠由� �닔�젙�븯怨� �뿴�뼱留� �몺
+               modelLeft.readTextOuter(tab_num, file.getAbsolutePath(), 0); 
+               left_file_text_area.setText(file.getName()); 
                fileLeftname = file.getName();
             }catch(Exception e){
                 e.printStackTrace();
@@ -90,11 +90,12 @@ public class OpenFileWindowController {
         
     	tab_num = (int)tab.getUserData();
         modelRight = ModelRealize.getInstance();
-        //�뙆�씪 �뿴由щ㈃
+        
+        //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
     	if(file != null){
             try {
-               modelRight.readTextOuter(tab_num, file.getAbsolutePath(), 1); //�꺆�꽆踰� �꽔湲�
-               right_file_text_area.setText(file.getName()); // �뙣�뒪�씠由� �닔�젙�븯怨� �뿴�뼱留� �몺
+               modelRight.readTextOuter(tab_num, file.getAbsolutePath(), 1); 
+               right_file_text_area.setText(file.getName());
                fileRightname = file.getName();
             }catch(Exception e){
                 e.printStackTrace();
@@ -105,20 +106,23 @@ public class OpenFileWindowController {
     @FXML
     private void okButtonOnAction() throws IndexOutOfBoundsException, IllegalAccessException, IOException{
        
-        System.out.println("�뙆�씪遺덈윭�삤湲�");
+        System.out.println("파일불러오기");
         if(!fileRightname.equals("") && !fileLeftname.equals("")){
         //Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
         //compare_button_file = (Button) root.lookup("#compare_button");
     	getTabContent();
-        //�늻瑜대㈃ 硫붿씤 �쐢�룄�슦 踰꾪듉�쓽 �솢�룞�솕 �맂 遺�遺꾩쓣 蹂��솚�떆耳� 二쇨퀬 �뙆�씪�쓣 遺덈윭�삩�떎
+
+    	/* 현재 탭의 구성요소들을 사용 가능하게 해 두고
+    	 * 버튼들을 활성화시킨다
+    	 */
         int tab_num = (int)tab.getUserData();
-        //�뼇履� �뀓�뒪�듃 �쁺�뿭 蹂�寃�
+        //textarea
         left_text_area.setVisible(true);
         right_text_area.setVisible(true);
         left_text_area.setText(arrayListToString(modelLeft.getText(tab_num,0)));
         right_text_area.setText(arrayListToString(modelRight.getText(tab_num,1)));
         
-        //踰꾪듉 �솢�꽦�솕 議곗젅 tab.setClickableButtons("left","true","true","false"); 
+        //스플릿 패널 활성화 설정
         left_load.setDisable(false);
         left_edit.setDisable(false);
         left_save.setDisable(true);
@@ -127,6 +131,7 @@ public class OpenFileWindowController {
         right_edit.setDisable(false);
         right_save.setDisable(true);
 
+        //탭의 패널 이름 변경
         changeTabName(fileLeftname,"left"); 
         changeTabName(fileRightname,"right");
         left_file_label.setText(fileLeftname);
@@ -134,16 +139,16 @@ public class OpenFileWindowController {
         
         //compare_button_file.setDisable(false);
         }
+        //창 종료
         Stage stage = (Stage) ok_button.getScene().getWindow();
-        // do what you have to do
         stage.close();
     }
     
     @FXML
     private void cancelButtonOnAction(){
         System.out.println("click");
+        //창 닫기
         Stage stage = (Stage) cancel_button.getScene().getWindow();
-        // do what you have to do
         stage.close();
     }
 
@@ -151,7 +156,7 @@ public class OpenFileWindowController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
         File selectedFile = fileChooser.showOpenDialog(null);
-        //�꺆�꽆踰� 泥댄겕
+        // 선택된 파일이 없으면
         if(selectedFile == null) {
             System.out.println("No Select File");
         }
@@ -159,6 +164,7 @@ public class OpenFileWindowController {
     }
    
     private void getTabContent(){
+    	//현재 탭의 버튼 요소들
         tab = (Tab)file_anchor_pane.getScene().getUserData();
         System.out.println(file_anchor_pane.getScene());
         System.out.println(tab);
