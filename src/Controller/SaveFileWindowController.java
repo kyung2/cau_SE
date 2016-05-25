@@ -19,8 +19,8 @@ import java.util.ResourceBundle;
  * Created by woojin on 2016-05-18.
  */
 public class SaveFileWindowController {
-    private boolean item_flag = false, right_flag = false, left_flag = false;
-    private String left_file_name, right_file_name;
+    private boolean item_flag = false;
+    private File left_file, right_file;
     private Tab tab;
     private Label left_file_label, right_file_label;
     private Button left_load, left_edit, left_save, right_load, right_edit, right_save;
@@ -39,16 +39,13 @@ public class SaveFileWindowController {
             getTabContent();
             item_flag = true;
         }
-        File file = loadFileChooser();
-        if(file != null){
-            left_file_text_area.setText(file.toString());
-            left_file_name = file.getName();
-            left_flag = true;
+        left_file = loadFileChooser();
+        if(left_file != null){
+            left_file_text_area.setText(left_file.getAbsolutePath());
         }
         else{
             warning_info_text_area.setText("Select no Right File");
         }
-        System.out.println("click");
     }
     @FXML
     private void rightFileFindButtonOnAction(){
@@ -56,17 +53,14 @@ public class SaveFileWindowController {
             getTabContent();
             item_flag = true;
         }
-        File file = loadFileChooser();
+        right_file = loadFileChooser();
 
-        if(file != null){
-            right_file_text_area.setText(file.getAbsolutePath());
-            right_file_name = file.getName();
-            right_flag = true;
+        if(right_file != null){
+            right_file_text_area.setText(right_file.getAbsolutePath());
         }
         else{
             warning_info_text_area.setText("Select no Left File");
         }
-        System.out.println("click");
     }
     @FXML
     private void okButtonOnAction(){
@@ -77,17 +71,19 @@ public class SaveFileWindowController {
         Model model = ModelRealize.getInstance();
         try{
             int tab_num = (int)tab.getUserData();
-            if(left_flag) {
+            if(left_file != null) {
                 model.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
-                model.writeTextOuter(tab_num, 0);
-                changeTabName(left_file_name,"left");
+                model.writeTextOuter(tab_num,left_file.getAbsolutePath(), 0);
+                changeTabName(left_file.getName(),"left");
                 doActionBySave("left");
+                System.out.println("left");
             }
-            if(right_flag) {
+            if(right_file != null) {
                 model.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
-                model.writeTextOuter(tab_num, 1);
-                changeTabName(right_file_name,"right");
+                model.writeTextOuter(tab_num,right_file.getAbsolutePath(), 1);
+                changeTabName(right_file.getName(),"right");
                 doActionBySave("right");
+                System.out.println("right");
             }
             if(!left_edit.isDisable() && !right_edit.isDisable()) {
                 BorderPane main_center_pane = (BorderPane)((BorderPane)tab.getTabPane().getScene().getRoot()).getCenter();
@@ -101,7 +97,7 @@ public class SaveFileWindowController {
     }
     @FXML
     private void cancelButtonOnAction(){
-        if(right_flag || left_flag) {
+        if(left_file != null && right_file != null) {
             AlarmWindow exitAlarmWindow = new AlarmWindow("Save File Alarm", "Wouldn't you Save this file?");
             exitAlarmWindow.showAndWait();
             if ((boolean) exitAlarmWindow.getUserData()) {
