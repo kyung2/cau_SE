@@ -37,7 +37,8 @@ public class SplitFilePaneController implements Initializable {
     private SplitPane split_pane;
     @FXML
     private Button compare_button;
-
+    @FXML
+    private Label left_file_label, right_file_label;
     private int tab_num;
 
     /*
