@@ -111,6 +111,8 @@ public class MainController implements Initializable {
             ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
             left_text_list.setItems(left_list_item);
             right_text_list.setItems(right_list_item);
+            setHighlight(text_index);
+
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -340,5 +342,20 @@ public class MainController implements Initializable {
             }
         }
         return strings;
+    }
+    /**/
+    private void setHighlight(ArrayList<Integer> index){
+        int count = 0;
+        for (int i = 0, n = index.size(); i < n; i++) {
+            int end = index.get(i);
+            if(i%2 == 1) {
+                left_text_list.setColorsOnBlock(count, count + end, MyListView.Red);
+            }
+            else{
+                left_text_list.setColorsOnBlock(count, count + end, MyListView.Yellow);
+            }
+            count += end;
+        }
+        System.out.println(index);
     }
 }
