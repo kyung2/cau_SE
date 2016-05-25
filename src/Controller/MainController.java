@@ -111,8 +111,6 @@ public class MainController implements Initializable {
             ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
             left_text_list.setItems(left_list_item);
             right_text_list.setItems(right_list_item);
-            setHighlight(text_index);
-
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -171,12 +169,12 @@ public class MainController implements Initializable {
     }
     @FXML
     private void openMenuItemOnAction() {
-        OpenFileWindow openFileWindow = new OpenFileWindow();
+        OpenFileWindow openFileWindow = new OpenFileWindow(now_tab);
         System.out.println("Open");
     }
     @FXML
     private void saveMenuItemOnAction() {
-        SaveFileWindow saveFileWindow = new SaveFileWindow(now_tab);
+        SaveFileWindow saveFileWindow = new SaveFileWindow();
         System.out.println("Save");
     }
     @FXML
@@ -220,12 +218,6 @@ public class MainController implements Initializable {
     * */
     private void tabCloseAction(){
         toolbar_stage.set(now_tab_num,null);
-        Model model = ModelRealize.getInstance();
-        try {
-            model.closeModel(now_tab_num);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
     }
     @FXML
     private void closeTabMenuItemOnAction() { System.out.println(""); }
@@ -324,38 +316,17 @@ public class MainController implements Initializable {
     * String 을 저장한 array list 와 index를 저장한 array list 를 통해 list view 에 넣을 string 배열을 만든다.
     * */
     private String[] makeStinrgsForList(ArrayList<String> arrayList, ArrayList<Integer> index){
-        String[] strings;
-        int flag = 0;
-
-        if(index.get(0) == 0){
-            flag = 1;
-        }
-
-        strings = new String[index.size() - flag];
+        String[] strings = new String[index.size()];
 
         for (int i = 0, array = 0, n = strings.length; i < n; i++) {
             strings[i] = "";
-
-            for(int j=0, m = index.get(i + flag); j < m; j++){
+            for(int j=0, m = index.get(i); j < m; j++){
                 strings[i] += arrayList.get(array) + "\n";
                 array++;
             }
         }
         return strings;
     }
-    /**/
-    private void setHighlight(ArrayList<Integer> index){
-        int count = 0;
-        for (int i = 0, n = index.size(); i < n; i++) {
-            int end = index.get(i);
-            if(i%2 == 1) {
-                left_text_list.setColorsOnBlock(count, count + end, MyListView.Red);
-            }
-            else{
-                left_text_list.setColorsOnBlock(count, count + end, MyListView.Yellow);
-            }
-            count += end;
-        }
-        System.out.println(index);
-    }
+    
+
 }
