@@ -81,6 +81,7 @@ public class SplitFilePaneController implements Initializable {
                 left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
                 setClickableButtons("left","true","true","false");
                 changeTabName(file.getName(),"left");
+                left_file_label.setText(file.getName());
             }catch(Exception e){
                 e.printStackTrace();
             }
@@ -100,6 +101,7 @@ public class SplitFilePaneController implements Initializable {
                 right_text_area.setText(arrayListToString(model.getText(tab_num,1)));
                 setClickableButtons("right","true","true","false");
                 changeTabName(file.getName(),"right");
+                right_file_label.setText(file.getName());
             }catch(Exception e){
                 e.printStackTrace();
             }
