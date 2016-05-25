@@ -353,8 +353,8 @@ public class MainController implements Initializable {
                 right_text_list.setColorsOnBlock(i, MyListView.Red);
             }
             else {
-                left_text_list.setColorsOnBlock(i, MyListView.Yellow);
-                right_text_list.setColorsOnBlock(i, MyListView.Yellow);
+                left_text_list.setColorsOnBlock(i, MyListView.Green);
+                right_text_list.setColorsOnBlock(i, MyListView.Green);
             }
         }
     }

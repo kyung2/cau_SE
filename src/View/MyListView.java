@@ -18,7 +18,7 @@ import java.util.Iterator;
  * Created by woojin on 2016-05-21.
  */
 public class MyListView extends ListView<String> {
-    public static String Red = "red", Yellow = "yellow";
+    public static String Red = "red", Yellow = "yellow", Green = "green";
 
     public MyListView(){
         super();
@@ -29,6 +29,7 @@ public class MyListView extends ListView<String> {
             ((VirtualFlow) this.getChildren().get(0)).getCell(index).setStyle("-fx-background-color: " + color);
         }
     }
+
     public void setColorsOnBlock(int index, String color){
         ((VirtualFlow) this.getChildren().get(0)).getCell(index).setStyle("-fx-background-color: "+color);
     }
