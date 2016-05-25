@@ -9,6 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import Model.Model;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -93,7 +94,7 @@ public class SaveFileWindowController {
         }catch (Exception e){
             e.printStackTrace();
         }
-        file_anchor_pane.getScene().getWindow().hide();
+        ((Stage)file_anchor_pane.getScene().getWindow()).close();
     }
     @FXML
     private void cancelButtonOnAction(){
@@ -101,11 +102,11 @@ public class SaveFileWindowController {
             AlarmWindow exitAlarmWindow = new AlarmWindow("Save File Alarm", "Wouldn't you Save this file?");
             exitAlarmWindow.showAndWait();
             if ((boolean) exitAlarmWindow.getUserData()) {
-                file_anchor_pane.getScene().getWindow().hide();
+                ((Stage)file_anchor_pane.getScene().getWindow()).close();
             }
         }
         else{
-            file_anchor_pane.getScene().getWindow().hide();
+            ((Stage)file_anchor_pane.getScene().getWindow()).close();
         }
     }
     /*

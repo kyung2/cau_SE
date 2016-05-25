@@ -189,6 +189,7 @@ public class MainController implements Initializable {
     private void closeMenuItemOnAction() {
         /*
         여러가지 조건 필요
+
         EX> 저장되지 않은 상태라면 저장하고 종료를 묻는다.
             Compare 중 이라면 merge 하지않고 종료할 것인지 묻는다.
         * */
