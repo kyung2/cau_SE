@@ -9,9 +9,9 @@ import javafx.scene.layout.AnchorPane;
  */
 public class ProgramInfoWindowController {
     @FXML
-    private AnchorPane window;
+    private AnchorPane info_window;
     @FXML
     private void onAction_ok_btn(){
-        window.getScene().getWindow().hide();
+        info_window.getScene().getWindow().hide();
     }
 }
