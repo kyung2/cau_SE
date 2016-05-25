@@ -116,13 +116,13 @@ public class OpenFileWindowController {
     	 * 버튼들을 활성화시킨다
     	 */
         int tab_num = (int)tab.getUserData();
-        //�뼇履� �뀓�뒪�듃 �쁺�뿭 蹂�寃�
+        //textarea
         left_text_area.setVisible(true);
         right_text_area.setVisible(true);
         left_text_area.setText(arrayListToString(modelLeft.getText(tab_num,0)));
         right_text_area.setText(arrayListToString(modelRight.getText(tab_num,1)));
         
-        //踰꾪듉 �솢�꽦�솕 議곗젅 tab.setClickableButtons("left","true","true","false"); 
+        //스플릿 패널 활성화 설정
         left_load.setDisable(false);
         left_edit.setDisable(false);
         left_save.setDisable(true);
@@ -131,6 +131,7 @@ public class OpenFileWindowController {
         right_edit.setDisable(false);
         right_save.setDisable(true);
 
+        //탭의 패널 이름 변경
         changeTabName(fileLeftname,"left"); 
         changeTabName(fileRightname,"right");
         left_file_label.setText(fileLeftname);
