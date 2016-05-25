@@ -41,7 +41,6 @@
                             <tooltip>
                                 <Tooltip contentDisplay="BOTTOM" text="Save"/>
                             </tooltip>
-
                         </Button>
                     </children>
                 </AnchorPane>
