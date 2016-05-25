@@ -1,6 +1,7 @@
 package View;
 
 import Controller.OpenFileWindowController;
+import javafx.scene.control.Tab;
 
 /**
  * Created by woojin on 2016-05-16.
@@ -8,8 +9,9 @@ import Controller.OpenFileWindowController;
 public class OpenFileWindow extends AbstractFileWindow {
 
 
-    public OpenFileWindow() {
+    public OpenFileWindow(Tab tab) {
         super("OpenFileWindow",new OpenFileWindowController());
+        this.getScene().setUserData(tab);
         initLabel();
     }
 

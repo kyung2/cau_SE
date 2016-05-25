@@ -160,6 +160,8 @@ public class OpenFileWindowController {
    
     private void getTabContent(){
         tab = (Tab)file_anchor_pane.getScene().getUserData();
+        System.out.println(file_anchor_pane.getScene());
+        System.out.println(tab);
         AnchorPane left_pane = (AnchorPane)((SplitPane)tab.getContent()).getItems().get(0);
         AnchorPane right_pane = (AnchorPane)((SplitPane)tab.getContent()).getItems().get(1);
         
