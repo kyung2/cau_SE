@@ -406,7 +406,7 @@ public class MainController implements Initializable {
         int count = 0;
         for (int i = 0, n = index.size(); i < n; i++) {
             if(i %2 != 0) {
-                left_text_list.setColorsOnBlock(i, MyListView.Red);
+                left_text_list.setColorsOnBlock(i, MyListView.Example);
                 right_text_list.setColorsOnBlock(i, MyListView.Red);
             }
             else {
