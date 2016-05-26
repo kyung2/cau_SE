@@ -177,6 +177,7 @@ public class MainController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        right_text_area.setText(arrayListToString(model.getText(now_tab_num,0)));
         compareOnAction();
     }
 
@@ -537,6 +538,17 @@ public class MainController implements Initializable {
                 }
             }
         }
+    }
+
+    /*
+    * ArrayList 로 들어온 문자를 \n 을 붙여 String 하나로 만든다.
+    * */
+    private String arrayListToString(ArrayList<String> arrayList){
+        String s = new String();
+        for (String s1 : arrayList) {
+            s += s1 + "\n";
+        }
+        return s;
     }
 }
     /*
