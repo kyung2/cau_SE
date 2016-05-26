@@ -91,6 +91,7 @@ public class MainController implements Initializable {
                             now_tab = t1;
                             toolbar_stage.set(now_tab_num, stage);
                             now_tab_num = (int) now_tab.getUserData();
+                            System.out.println("chagne tab num " +now_tab_num);
                             setClickabeButtons(toolbar_stage.get(now_tab_num)[0], toolbar_stage.get(now_tab_num)[1], toolbar_stage.get(now_tab_num)[2],
                                     toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4], toolbar_stage.get(now_tab_num)[5],
                                     toolbar_stage.get(now_tab_num)[6], toolbar_stage.get(now_tab_num)[7], toolbar_stage.get(now_tab_num)[8], toolbar_stage.get(now_tab_num)[9]);
@@ -173,6 +174,7 @@ public class MainController implements Initializable {
     * */
     private void newTabMenuItemOnAction() {
         try {
+            System.out.println(tab_num);
             Parent root = FXMLLoader.load(getClass().getResource("/View/Fxml/SplitFilePane.fxml"));
             Tab new_tab = new Tab("File");
             new_tab.setContent(root);
@@ -241,11 +243,14 @@ public class MainController implements Initializable {
     * tab 이 꺼지면 그에 해당하는 toolbar stage 의 값을 null 로 바꾼다.
     * */
     private void tabCloseAction(){
-        toolbar_stage.set(now_tab_num,null);
+        System.out.println("Close tab num " + (now_tab_num + 1) );
+        System.out.println(toolbar_stage);
+        toolbar_stage.set(now_tab_num + 1,null);
         tab_menu.getItems().remove(tab_menu_item_num + 1);
+        tab_menu_item_num--;
         Model model = ModelRealize.getInstance();
         try {
-            model.closeModel(now_tab_num);
+            model.closeModel(now_tab_num + 1);
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -263,12 +268,9 @@ public class MainController implements Initializable {
     private void closeTabAllMenuItemOnAction() {
         ((TabPane)now_tab.getTabPane()).getTabs().remove(0, tab_pane.getTabs().size());
         tab_menu.getItems().remove(2, tab_menu_item_num + 2);
-        tab_menu_item_num = 1;
+        tab_menu_item_num = 0;
         Model model = ModelRealize.getInstance();
-        for(int i = 0; i<tab_num;i++){
-            toolbar_stage.set(i,null);
-            model.closeModel(i);
-        }
+        
     }
     @FXML
     private void tabMenuItemOnAction(int index){
