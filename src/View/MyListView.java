@@ -19,7 +19,7 @@ import java.util.Iterator;
  * Created by woojin on 2016-05-21.
  */
 public class MyListView extends ListView<String> {
-    public static String Red = "red", Yellow = "yellow", Green = "green", Example = "#5dffd9";
+    public static String Red = "red", Yellow = "eedc00", Green = "green", Example = "#49c5b1";
 
     public MyListView(){
         super();

@@ -103,7 +103,6 @@ public class OpenFileWindowController {
 
     @FXML
     private void okButtonOnAction() throws IndexOutOfBoundsException, IllegalAccessException, IOException{
-        System.out.println("파일불러오기");
         if(!fileRightname.equals("") && !fileLeftname.equals("")){
         //Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
         //compare_button_file = (Button) root.lookup("#compare_button");
@@ -167,8 +166,6 @@ public class OpenFileWindowController {
     private void getTabContent(){
     	//현재 탭의 버튼 요소들
         tab = (Tab)file_anchor_pane.getScene().getUserData();
-        System.out.println(file_anchor_pane.getScene());
-        System.out.println(tab);
         AnchorPane left_pane = (AnchorPane)((SplitPane)tab.getContent()).getItems().get(0);
         AnchorPane right_pane = (AnchorPane)((SplitPane)tab.getContent()).getItems().get(1);
         

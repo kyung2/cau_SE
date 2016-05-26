@@ -7,7 +7,6 @@ import View.*;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventDispatchChain;
@@ -22,15 +21,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Callback;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -134,21 +130,20 @@ public class MainController implements Initializable {
             right_text_list.setVisible(true);
             left_text_list.setDisable(false);
             right_text_list.setDisable(false);
-
+            /*
             left_text_list.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
                 @Override
                 public ListCell<String> call(ListView<String> param){
-                    return new trueFalseCell();//(param.getItems());
+                    return new trueFalseCell(param.getItems());//(param.getItems());
                 }
-            });
+            });*/
 
-            //setHighlight(text_index);
+            setHighlight(text_index);
         }catch (Exception e){
             e.printStackTrace();
         }
         setClickabeButtons("true","true","true","true","true","true","true","true","true","true");
     }
-
 
     @FXML
     private void copyToLeftOnAction() {
@@ -449,35 +444,36 @@ public class MainController implements Initializable {
     * */
     private void setHighlight(ArrayList<Integer> index){
         int count = 0;
-        System.out.print("step 2");
         for (int i = 0, n = index.size(); i < n; i++) {
-            if(i %2 != 0) {
-                left_text_list.setColorsOnBlock(i, MyListView.Example);
-                right_text_list.setColorsOnBlock(i, MyListView.Red);
-            }
-            else {
-                left_text_list.setColorsOnBlock(i, MyListView.Green);
-                right_text_list.setColorsOnBlock(i, MyListView.Green);
+            if(index.get(i) != 0) {
+                if (i % 2 != 1) {
+                    left_text_list.setColorsOnBlock(i, MyListView.Example);
+                    right_text_list.setColorsOnBlock(i, MyListView.Example);
+                } else {
+                    left_text_list.setColorsOnBlock(i, MyListView.Yellow);
+                    right_text_list.setColorsOnBlock(i, MyListView.Yellow);
+                }
             }
         }
     }
-
+    /*
     class trueFalseCell extends ListCell<String> {
-        //public trueFalseCell(ObservableList<String> item){
-        //    super();
-        //}
+        public trueFalseCell(ObservableList<String> item){
+            super();
+            this.setText(item.get());
+        }
         @Override
         public void updateItem(String item, boolean empty){
             super.updateItem(item,empty);
             System.out.println(item);
             if(true_false_flag == 0) {
-                //this.setStyle("-fx-background-color: green");
+                this.setStyle("-fx-background-color: green");
                 true_false_flag = 1;
             }
             else{
-                //this.setStyle("-fx-background-color: red");
+                this.setStyle("-fx-background-color: red");
                 true_false_flag = 0;
             }
         }
-    }
+    }*/
 }
