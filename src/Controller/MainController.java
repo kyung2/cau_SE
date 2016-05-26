@@ -258,18 +258,27 @@ public class MainController implements Initializable {
     }
 
     @FXML
+    /*
+    * open file window 를 연다.
+    * */
     private void openMenuItemOnAction() {
         OpenFileWindow openFileWindow = new OpenFileWindow(now_tab);
         System.out.println("Open");
     }
 
     @FXML
+    /*
+    * save file window 를 연다.
+    * */
     private void saveMenuItemOnAction() {
         SaveFileWindow saveFileWindow = new SaveFileWindow(now_tab);
         System.out.println("Save");
     }
 
     @FXML
+    /*
+    * 오늘쪽 파일을 저장한다.
+    * */
     private void saveRightFileMenuItemOnAction() {
         if (left_text_area == null || right_text_area == null || left_text_list == null || right_text_list == null) {
             initTextAreaAndListOnTab();
@@ -307,6 +316,9 @@ public class MainController implements Initializable {
     }
 
     @FXML
+    /*
+    * 왼쪽 파일을 저장한다.
+    * */
     private void saveLeftFileMenuItemOnAction() {
         if (left_text_area == null || right_text_area == null || left_text_list == null || right_text_list == null) {
             initTextAreaAndListOnTab();
