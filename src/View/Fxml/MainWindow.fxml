@@ -126,11 +126,11 @@
                 <MenuItem fx:id="program_information_menu_item" mnemonicParsing="false" onAction="#programInformationMenuItemOnAction" text="Program Info" />
             </items>
           </Menu>
-            <Menu mnemonicParsing="false" text="Window">
+            <Menu fx:id="tab_menu" mnemonicParsing="false" text="Window">
               <items>
                   <MenuItem fx:id="close_tab_menu_item" mnemonicParsing="false" onAction="#closeTabMenuItemOnAction" text="Close Tab" />
                   <MenuItem fx:id="close_tab_all_menu_item" mnemonicParsing="false" onAction="#closeTabAllMenuItemOnAction" text="Close Tab All" />
-                  <MenuItem fx:id="tab_1_menu_item" mnemonicParsing="false" onAction="#tab1MenuItemOnAction" text="Tab 1" />
+                  <MenuItem fx:id="tab_menu_item" mnemonicParsing="false" text="Tab 1" />
               </items>
             </Menu>
         </menus>

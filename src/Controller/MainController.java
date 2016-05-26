@@ -9,17 +9,25 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
+import javafx.event.WeakEventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -35,6 +43,10 @@ public class MainController implements Initializable {
     @FXML
     private Tab tab;
     @FXML
+    private Menu tab_menu;
+    @FXML
+    private MenuItem tab_menu_item;
+    @FXML
     BorderPane main_pane;
 
     private Tab now_tab;
@@ -42,7 +54,7 @@ public class MainController implements Initializable {
     private TextArea left_text_area, right_text_area;
 
     private ArrayList<String[]> toolbar_stage = new ArrayList<String []>();
-    private int tab_num, now_tab_num;
+    private int tab_num, now_tab_num, tab_menu_item_num;
     @Override
     /*
     * tab은 user data 를 통해 구별한다.
@@ -53,6 +65,9 @@ public class MainController implements Initializable {
         tab_num = 0;
         now_tab = tab;
         now_tab.setUserData(tab_num);
+        tab_menu_item.setUserData(tab_num);
+        tab_menu_item_num = 1;
+        tab_menu_item.setOnAction( e -> tabMenuItemOnAction(0));
         setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
         toolbar_stage.add(new String[]{"false","false","false","false","false","false","false","false","false","false"});
 
@@ -161,9 +176,15 @@ public class MainController implements Initializable {
             Tab new_tab = new Tab("File");
             new_tab.setContent(root);
             new_tab.setUserData(++tab_num);
+            new_tab.setOnClosed(e -> tabCloseAction());
             toolbar_stage.add(new String[]{"false","false","false","false","false","false","false","false","false","false"});
             tab_pane.getTabs().add(new_tab);
-
+            MenuItem tab_menuitem = new MenuItem("Tab " + ++tab_menu_item_num);
+            tab_menuitem.setUserData(tab_num);
+            tab_menu.getItems().add(tab_menuitem);
+            tab_menuitem.setOnAction(( e )  -> {
+                tabMenuItemOnAction(Integer.parseInt(tab_menuitem.getText().split(" ")[1]) - 1);
+            });
             Model model = ModelRealize.getInstance();
             model.newModel(tab_num);
         }catch (Exception e){
@@ -221,6 +242,9 @@ public class MainController implements Initializable {
     * */
     private void tabCloseAction(){
         toolbar_stage.set(now_tab_num,null);
+        System.out.println(tab_menu.getItems());
+        tab_menu.getItems().remove(tab_menu_item_num + 1);
+        System.out.println(tab_menu_item_num--);
         Model model = ModelRealize.getInstance();
         try {
             model.closeModel(now_tab_num);
@@ -233,7 +257,9 @@ public class MainController implements Initializable {
     @FXML
     private void closeTabAllMenuItemOnAction() { System.out.println(""); }
     @FXML
-    private void tab1MenuItemOnAction(){ System.out.println(""); }
+    private void tabMenuItemOnAction(int index){
+        tab_pane.getSelectionModel().select(index);
+    }
     /*
     * Toolbar 에 있는 버튼들의 활성화와 비활성화를 조절한다.
     * 아무 행동도 하지 않으려면 null 을 입력하면 된다.
