@@ -255,17 +255,19 @@ public class MainController implements Initializable {
         ((TabPane)now_tab.getTabPane()).getTabs().remove(now_tab);
         tabCloseAction();
     }
-    private void closeTabMenuItemOnAction(int index) {
-        ((TabPane)now_tab.getTabPane()).getTabs().remove(index);
-        tabCloseAction();
-    }
     @FXML
+    /*
+    * 모든 tab 을 닫는다.
+    * 모든 tab menu item 을 없에고 모든 toolbar stage 를 null 로 한다.
+    * */
     private void closeTabAllMenuItemOnAction() {
-        System.out.println(tab_menu_item_num);
-        for(int i = 0, n = tab_menu_item_num;i < n - 1;i++){
-            System.out.println(i);
-            closeTabMenuItemOnAction(i);
-
+        ((TabPane)now_tab.getTabPane()).getTabs().remove(0, tab_pane.getTabs().size());
+        tab_menu.getItems().remove(2, tab_menu_item_num + 2);
+        tab_menu_item_num = 1;
+        Model model = ModelRealize.getInstance();
+        for(int i = 0; i<tab_num;i++){
+            toolbar_stage.set(i,null);
+            model.closeModel(i);
         }
     }
     @FXML
