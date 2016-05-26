@@ -154,15 +154,17 @@ public class MainController implements Initializable {
     @FXML
     private void copyToRightAllOnAction() {
         Model model = ModelRealize.getInstance();
-        ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
-        ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
-
-        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
-        ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
-
-        model.setText(now_tab_num,left_text,1);
-        right_text_list.setItems(left_list_item);
+        try {
+            for (int i = 0, n = text_index.size(); i < n; i++) {
+                if(i % 2 != 0) {
+                    model.mergeByGroup(now_tab_num, i, true);
+                }
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        compareOnAction();
     }
     @FXML
     private void copyToLeftAllOnAction(){
@@ -444,14 +446,17 @@ public class MainController implements Initializable {
     * */
     private void setHighlight(ArrayList<Integer> index){
         int count = 0;
+        System.out.println(index);
         for (int i = 0, n = index.size(); i < n; i++) {
             if(index.get(i) != 0) {
                 if (i % 2 != 1) {
-                    left_text_list.setColorsOnBlock(i, MyListView.Example);
-                    right_text_list.setColorsOnBlock(i, MyListView.Example);
+                    left_text_list.setColorsOnBlock(count, MyListView.Example);
+                    right_text_list.setColorsOnBlock(count, MyListView.Example);
+                    count++;
                 } else {
-                    left_text_list.setColorsOnBlock(i, MyListView.Yellow);
-                    right_text_list.setColorsOnBlock(i, MyListView.Yellow);
+                    left_text_list.setColorsOnBlock(count, MyListView.Yellow);
+                    right_text_list.setColorsOnBlock(count, MyListView.Yellow);
+                    count++;
                 }
             }
         }
