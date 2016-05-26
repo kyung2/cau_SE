@@ -9,6 +9,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
+import javafx.event.Event;
+import javafx.event.EventDispatchChain;
 import javafx.event.EventHandler;
 import javafx.event.WeakEventHandler;
 import javafx.fxml.FXML;
@@ -65,7 +67,6 @@ public class MainController implements Initializable {
         tab_num = 0;
         now_tab = tab;
         now_tab.setUserData(tab_num);
-        tab_menu_item.setUserData(tab_num);
         tab_menu_item_num = 1;
         tab_menu_item.setOnAction( e -> tabMenuItemOnAction(0));
         setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
@@ -180,7 +181,6 @@ public class MainController implements Initializable {
             toolbar_stage.add(new String[]{"false","false","false","false","false","false","false","false","false","false"});
             tab_pane.getTabs().add(new_tab);
             MenuItem tab_menuitem = new MenuItem("Tab " + ++tab_menu_item_num);
-            tab_menuitem.setUserData(tab_num);
             tab_menu.getItems().add(tab_menuitem);
             tab_menuitem.setOnAction(( e )  -> {
                 tabMenuItemOnAction(Integer.parseInt(tab_menuitem.getText().split(" ")[1]) - 1);
@@ -242,9 +242,7 @@ public class MainController implements Initializable {
     * */
     private void tabCloseAction(){
         toolbar_stage.set(now_tab_num,null);
-        System.out.println(tab_menu.getItems());
         tab_menu.getItems().remove(tab_menu_item_num + 1);
-        System.out.println(tab_menu_item_num--);
         Model model = ModelRealize.getInstance();
         try {
             model.closeModel(now_tab_num);
@@ -253,9 +251,23 @@ public class MainController implements Initializable {
         }
     }
     @FXML
-    private void closeTabMenuItemOnAction() { System.out.println(""); }
+    private void closeTabMenuItemOnAction() {
+        ((TabPane)now_tab.getTabPane()).getTabs().remove(now_tab);
+        tabCloseAction();
+    }
+    private void closeTabMenuItemOnAction(int index) {
+        ((TabPane)now_tab.getTabPane()).getTabs().remove(index);
+        tabCloseAction();
+    }
     @FXML
-    private void closeTabAllMenuItemOnAction() { System.out.println(""); }
+    private void closeTabAllMenuItemOnAction() {
+        System.out.println(tab_menu_item_num);
+        for(int i = 0, n = tab_menu_item_num;i < n - 1;i++){
+            System.out.println(i);
+            closeTabMenuItemOnAction(i);
+
+        }
+    }
     @FXML
     private void tabMenuItemOnAction(int index){
         tab_pane.getSelectionModel().select(index);
