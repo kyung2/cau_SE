@@ -9,8 +9,6 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventDispatchChain;
 import javafx.event.EventHandler;
 import javafx.event.WeakEventHandler;
 import javafx.fxml.FXML;
@@ -67,6 +65,7 @@ public class MainController implements Initializable {
         tab_num = 0;
         now_tab = tab;
         now_tab.setUserData(tab_num);
+        tab_menu_item.setUserData(tab_num);
         tab_menu_item_num = 1;
         tab_menu_item.setOnAction( e -> tabMenuItemOnAction(0));
         setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
@@ -91,7 +90,6 @@ public class MainController implements Initializable {
                             now_tab = t1;
                             toolbar_stage.set(now_tab_num, stage);
                             now_tab_num = (int) now_tab.getUserData();
-                            System.out.println("chagne tab num " +now_tab_num);
                             setClickabeButtons(toolbar_stage.get(now_tab_num)[0], toolbar_stage.get(now_tab_num)[1], toolbar_stage.get(now_tab_num)[2],
                                     toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4], toolbar_stage.get(now_tab_num)[5],
                                     toolbar_stage.get(now_tab_num)[6], toolbar_stage.get(now_tab_num)[7], toolbar_stage.get(now_tab_num)[8], toolbar_stage.get(now_tab_num)[9]);
@@ -144,21 +142,52 @@ public class MainController implements Initializable {
     @FXML
     private void copyToLeftOnAction() {
         System.out.println("Click");
+
     }
     @FXML
     private void copyToRightOnAction() { copy_to_right_button.setText(""); }
     @FXML
     private void copyToRightAllOnAction() {
-        copy_to_right_all_button.setText("");
+        Model model = ModelRealize.getInstance();
+        ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
+        ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
+        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
+
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
+        ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
+
+        model.setText(now_tab_num,left_text,1);
+        right_text_list.setItems(left_list_item);
     }
     @FXML
     private void copyToLeftAllOnAction(){
-        copy_to_left_all_button.setText("");
+        Model model = ModelRealize.getInstance();
+        ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
+        ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
+        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
+
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
+        ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
+
+        left_text = model.getArrangedText(now_tab_num, 1);
+        left_text_list.setItems(right_list_item);
+        model.setText(now_tab_num,right_text,0);
+        right_text_list.setItems(left_list_item);
     }
     @FXML
-    private void nextDifferenceOnAction() { next_difference_button.setText(""); }
+    private void nextDifferenceOnAction() {
+        next_difference_button.setText("");
+        Model model = ModelRealize.getInstance();
+        left_text_area.setScrollTop(left_text_list.getMaxHeight());
+        right_text_area.setScrollLeft(Double.MAX_VALUE);
+        left_text_area.positionCaret(left_text_area.getLength());
+        //맨 마지막이면 비활성화 되어야함
+    }
     @FXML
-    private void postDifferenceOnAction() { post_difference_button.setText(""); }
+    private void postDifferenceOnAction() {
+        post_difference_button.setText("");
+        //맨 처음이면 비활성화 되어야함
+    }
     @FXML
     private void firstDifferenceOnAction() { first_difference_button.setText(""); }
     @FXML
@@ -174,7 +203,6 @@ public class MainController implements Initializable {
     * */
     private void newTabMenuItemOnAction() {
         try {
-            System.out.println(tab_num);
             Parent root = FXMLLoader.load(getClass().getResource("/View/Fxml/SplitFilePane.fxml"));
             Tab new_tab = new Tab("File");
             new_tab.setContent(root);
@@ -183,6 +211,7 @@ public class MainController implements Initializable {
             toolbar_stage.add(new String[]{"false","false","false","false","false","false","false","false","false","false"});
             tab_pane.getTabs().add(new_tab);
             MenuItem tab_menuitem = new MenuItem("Tab " + ++tab_menu_item_num);
+            tab_menuitem.setUserData(tab_num);
             tab_menu.getItems().add(tab_menuitem);
             tab_menuitem.setOnAction(( e )  -> {
                 tabMenuItemOnAction(Integer.parseInt(tab_menuitem.getText().split(" ")[1]) - 1);
@@ -243,35 +272,21 @@ public class MainController implements Initializable {
     * tab 이 꺼지면 그에 해당하는 toolbar stage 의 값을 null 로 바꾼다.
     * */
     private void tabCloseAction(){
-        System.out.println("Close tab num " + (now_tab_num + 1) );
-        System.out.println(toolbar_stage);
-        toolbar_stage.set(now_tab_num + 1,null);
+        toolbar_stage.set(now_tab_num,null);
+        System.out.println(tab_menu.getItems());
         tab_menu.getItems().remove(tab_menu_item_num + 1);
-        tab_menu_item_num--;
+        System.out.println(tab_menu_item_num--);
         Model model = ModelRealize.getInstance();
         try {
-            model.closeModel(now_tab_num + 1);
+            model.closeModel(now_tab_num);
         }catch (Exception e){
             e.printStackTrace();
         }
     }
     @FXML
-    private void closeTabMenuItemOnAction() {
-        ((TabPane)now_tab.getTabPane()).getTabs().remove(now_tab);
-        tabCloseAction();
-    }
+    private void closeTabMenuItemOnAction() { System.out.println(""); }
     @FXML
-    /*
-    * 모든 tab 을 닫는다.
-    * 모든 tab menu item 을 없에고 모든 toolbar stage 를 null 로 한다.
-    * */
-    private void closeTabAllMenuItemOnAction() {
-        ((TabPane)now_tab.getTabPane()).getTabs().remove(0, tab_pane.getTabs().size());
-        tab_menu.getItems().remove(2, tab_menu_item_num + 2);
-        tab_menu_item_num = 0;
-        Model model = ModelRealize.getInstance();
-        
-    }
+    private void closeTabAllMenuItemOnAction() { System.out.println(""); }
     @FXML
     private void tabMenuItemOnAction(int index){
         tab_pane.getSelectionModel().select(index);
