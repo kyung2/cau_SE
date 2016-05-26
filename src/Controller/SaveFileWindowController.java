@@ -124,10 +124,10 @@ public class SaveFileWindowController {
         left_edit = (Button)left_file_button_tab.getChildren().get(2);
         left_save = (Button)left_file_button_tab.getChildren().get(3);
 
-        right_file_label = (Label)right_file_button_tab.getChildren().get(3);
-        right_load = (Button)right_file_button_tab.getChildren().get(0);
-        right_edit = (Button)right_file_button_tab.getChildren().get(1);
-        right_save = (Button)right_file_button_tab.getChildren().get(2);
+        right_file_label = (Label)right_file_button_tab.getChildren().get(0);
+        right_load = (Button)right_file_button_tab.getChildren().get(1);
+        right_edit = (Button)right_file_button_tab.getChildren().get(2);
+        right_save = (Button)right_file_button_tab.getChildren().get(3);
 
         left_file_bottom_text_area = (TextArea)((SplitPane)left_pane.getChildren().get(1)).getItems().get(1);
         right_file_bottom_text_area = (TextArea)((SplitPane)right_pane.getChildren().get(1)).getItems().get(1);

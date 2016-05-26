@@ -103,10 +103,10 @@ public class OpenFileWindowController {
 
     @FXML
     private void okButtonOnAction() throws IndexOutOfBoundsException, IllegalAccessException, IOException{
+        getTabContent();
         if(!fileRightname.equals("") && !fileLeftname.equals("")){
         //Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
         //compare_button_file = (Button) root.lookup("#compare_button");
-    	getTabContent();
 
     	/* 현재 탭의 구성요소들을 사용 가능하게 해 두고
     	 * 버튼들을 활성화시킨다
@@ -178,10 +178,10 @@ public class OpenFileWindowController {
         left_edit = (Button)left_file_button_tab.getChildren().get(2);
         left_save = (Button)left_file_button_tab.getChildren().get(3);
 
-        right_file_label = (Label)right_file_button_tab.getChildren().get(3);
-        right_load = (Button)right_file_button_tab.getChildren().get(0);
-        right_edit = (Button)right_file_button_tab.getChildren().get(1);
-        right_save = (Button)right_file_button_tab.getChildren().get(2);
+        right_file_label = (Label)right_file_button_tab.getChildren().get(0);
+        right_load = (Button)right_file_button_tab.getChildren().get(1);
+        right_edit = (Button)right_file_button_tab.getChildren().get(2);
+        right_save = (Button)right_file_button_tab.getChildren().get(3);
 
         left_file_bottom_text_area = (TextArea)((SplitPane)left_pane.getChildren().get(1)).getItems().get(1);
         right_file_bottom_text_area = (TextArea)((SplitPane)right_pane.getChildren().get(1)).getItems().get(1);

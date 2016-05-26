@@ -102,8 +102,8 @@
                 <MenuItem fx:id="new_tab_menu_item" accelerator="Ctrl+N" mnemonicParsing="false" onAction="#newTabMenuItemOnAction" text="New tab" />
                 <MenuItem fx:id="open_menu_item" accelerator="Ctrl+L" mnemonicParsing="false" onAction="#openMenuItemOnAction" text="Open" />
                 <MenuItem fx:id="save_menu_item" accelerator="Ctrl+S" mnemonicParsing="false" onAction="#saveMenuItemOnAction" text="Save" />
-                <MenuItem fx:id="save_right_file_menu_item" mnemonicParsing="false" onAction="#saveRightFileMenuItemOnAction" text="Save Right File" />
-                <MenuItem fx:id="save_left_file_menu_item" mnemonicParsing="false" onAction="#saveLeftFileMenuItemOnAction" text="Save Left File" />
+                <MenuItem fx:id="save_right_file_menu_item" accelerator="Ctrl+Alt+R" mnemonicParsing="false" onAction="#saveRightFileMenuItemOnAction" text="Save Right File" />
+                <MenuItem fx:id="save_left_file_menu_item" accelerator="Ctrl+Alt+L" mnemonicParsing="false" onAction="#saveLeftFileMenuItemOnAction" text="Save Left File" />
                 <MenuItem fx:id="close_menu_item" accelerator="Ctrl+E" mnemonicParsing="false" onAction="#closeMenuItemOnAction" text="Close" />
             </items>
           </Menu>

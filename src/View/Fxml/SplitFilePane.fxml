@@ -64,6 +64,7 @@
             <children>
                 <AnchorPane fx:id="right_file_button_tab" layoutX="-34.0" layoutY="35.0" prefHeight="33.0" prefWidth="294.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
+                        <Label fx:id="right_file_label" layoutX="22.0" layoutY="4.0" prefHeight="23.0" prefWidth="200.0" text="FileName" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
                         <Button id="right_load_button" fx:id="right_load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#rightLoadButtonOnAction" prefHeight="24.0" prefWidth="24.0" styleClass="tab_btn" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="4.0">
                             <tooltip>
                                 <Tooltip contentDisplay="BOTTOM" text="Load"/>
@@ -81,9 +82,7 @@
                             <tooltip>
                                 <Tooltip contentDisplay="BOTTOM" text="Save"/>
                             </tooltip>
-
                         </Button>
-                        <Label fx:id="right_file_label" layoutX="22.0" layoutY="4.0" prefHeight="23.0" prefWidth="200.0" text="FileName" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
                     </children>
                 </AnchorPane>
                 <SplitPane dividerPositions="0.98" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="33.0">
