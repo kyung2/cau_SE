@@ -22,7 +22,7 @@ hover 적용 & 클릭시 이벤트 적용
     -fx-text-fill:black;
     -fx-border : 2px solid black;
     -fx-background-radius: 3px;
-    -fx-background-color: #5dffd9;
+    -fx-background-color: #f8cacc;
 }
 
 #program_info_ok_button {
@@ -79,4 +79,5 @@ hover 적용 & 클릭시 이벤트 적용
 #copy_to_left_all_button {
     -fx-background-image: url("/View/Image/copy_all_Left.png");
 }
+
 

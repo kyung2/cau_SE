@@ -27,6 +27,8 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import javafx.util.Callback;
 
+import javax.swing.*;
+import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -55,6 +57,11 @@ public class MainController implements Initializable {
     private int true_false_flag;
     private ArrayList<String[]> toolbar_stage = new ArrayList<String []>();
     private int tab_num, now_tab_num, tab_menu_item_num;
+
+    ImageIcon img = new ImageIcon("/View/Image/sampleIcon.jpg");
+
+
+
     @Override
     /*
     * tab은 user data 를 통해 구별한다.
@@ -472,13 +479,63 @@ public class MainController implements Initializable {
             super.updateItem(item,empty);
             System.out.println(item);
             if(true_false_flag == 0) {
-                this.setStyle("-fx-background-color: green");
+                //this.setStyle("-fx-background-color: green");
                 true_false_flag = 1;
             }
             else{
-                this.setStyle("-fx-background-color: red");
+                //this.setStyle("-fx-background-color: red");
                 true_false_flag = 0;
             }
         }
-    }*/
+    }
 }
+/**
+ ImageIcon img = new ImageIcon("/View/Image/sampleIcon.jpg");
+
+ public class JavaFX_ApplicationIcon extends Application {
+
+@Override
+public void start(final Stage primaryStage) {
+
+Button btn = new Button();
+btn.setText("Say 'Hello World'");
+btn.setOnAction(new EventHandler<ActionEvent>() {
+
+@Override
+public void handle(ActionEvent event) {
+System.out.println("Hello World!");
+
+//load another image from internet
+//and dynamically add it as new apllication icon
+Image anotherIcon = new Image("http://goo.gl/kYEQl");
+primaryStage.getIcons().add(anotherIcon);
+}
+});
+
+StackPane root = new StackPane();
+root.getChildren().add(btn);
+
+Scene scene = new Scene(root, 300, 250);
+
+//set icon of the application
+Image applicationIcon = new Image(getClass().getResourceAsStream("dukes_36x36.png"));
+primaryStage.getIcons().add(applicationIcon);
+
+primaryStage.setTitle("Hello World!");
+primaryStage.setScene(scene);
+primaryStage.show();
+}
+
+public static void main(String[] args) {
+launch(args);
+}
+
+}
+
+ http://java-buddy.blogspot.kr/2013/11/javafx-example-how-to-set-icon-of.html
+
+ 아이콘 이미지 바꾸어주는것 : 버튼 누르면 개귀엽
+ 도전 한ㅂㄴ merger 버튼 누르면 색깔 바꾸는 것으로 .. ?ㅎㅎ
+ merge 가근데 오랫동안 안걸릴것같으니 포기
+
+ */
