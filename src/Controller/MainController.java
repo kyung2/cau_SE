@@ -115,7 +115,7 @@ public class MainController implements Initializable {
     * */
     private void compareOnAction() {
         if(left_text_area == null || right_text_area == null || left_text_list == null || right_text_list == null){
-            initTextAreaAndListOnTab();
+           initTextAreaAndListOnTab();
         }
         left_text_area.setVisible(false);
         right_text_area.setVisible(false);
@@ -144,52 +144,21 @@ public class MainController implements Initializable {
     @FXML
     private void copyToLeftOnAction() {
         System.out.println("Click");
-
     }
     @FXML
     private void copyToRightOnAction() { copy_to_right_button.setText(""); }
     @FXML
     private void copyToRightAllOnAction() {
-        Model model = ModelRealize.getInstance();
-        ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
-        ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
-        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
-
-        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
-        ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
-
-        model.setText(now_tab_num,left_text,1);
-        right_text_list.setItems(left_list_item);
+        copy_to_right_all_button.setText("");
     }
     @FXML
     private void copyToLeftAllOnAction(){
-        Model model = ModelRealize.getInstance();
-        ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
-        ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
-        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
-
-        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
-        ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
-
-        left_text = model.getArrangedText(now_tab_num, 1);
-        left_text_list.setItems(right_list_item);
-        model.setText(now_tab_num,right_text,0);
-        right_text_list.setItems(left_list_item);
+        copy_to_left_all_button.setText("");
     }
     @FXML
-    private void nextDifferenceOnAction() {
-        next_difference_button.setText("");
-        Model model = ModelRealize.getInstance();
-        left_text_area.setScrollTop(left_text_list.getMaxHeight());
-        right_text_area.setScrollLeft(Double.MAX_VALUE);
-        left_text_area.positionCaret(left_text_area.getLength());
-        //맨 마지막이면 비활성화 되어야함
-    }
+    private void nextDifferenceOnAction() { next_difference_button.setText(""); }
     @FXML
-    private void postDifferenceOnAction() {
-        post_difference_button.setText("");
-        //맨 처음이면 비활성화 되어야함
-    }
+    private void postDifferenceOnAction() { post_difference_button.setText(""); }
     @FXML
     private void firstDifferenceOnAction() { first_difference_button.setText(""); }
     @FXML
@@ -301,7 +270,7 @@ public class MainController implements Initializable {
         tab_menu.getItems().remove(2, tab_menu_item_num + 2);
         tab_menu_item_num = 0;
         Model model = ModelRealize.getInstance();
-
+        
     }
     @FXML
     private void tabMenuItemOnAction(int index){
