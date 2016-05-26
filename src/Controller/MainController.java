@@ -28,6 +28,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import javafx.util.Callback;
 
 import java.awt.*;
 import java.net.URL;
@@ -55,6 +56,7 @@ public class MainController implements Initializable {
     private MyListView left_text_list, right_text_list;
     private TextArea left_text_area, right_text_area;
 
+    private int true_false_flag;
     private ArrayList<String[]> toolbar_stage = new ArrayList<String []>();
     private int tab_num, now_tab_num, tab_menu_item_num;
     @Override
@@ -129,18 +131,26 @@ public class MainController implements Initializable {
             ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
             left_text_list.setItems(left_list_item);
             right_text_list.setItems(right_list_item);
-            setHighlight(text_index);
-
             left_text_list.setVisible(true);
-            left_text_list.setDisable(false);
             right_text_list.setVisible(true);
+            left_text_list.setDisable(false);
             right_text_list.setDisable(false);
 
+            left_text_list.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
+                @Override
+                public ListCell<String> call(ListView<String> param){
+                    return new trueFalseCell();//(param.getItems());
+                }
+            });
+
+            //setHighlight(text_index);
         }catch (Exception e){
             e.printStackTrace();
         }
         setClickabeButtons("true","true","true","true","true","true","true","true","true","true");
     }
+
+
     @FXML
     private void copyToLeftOnAction() {
         System.out.println("Click");
@@ -387,18 +397,18 @@ public class MainController implements Initializable {
     * */
     private String[] makeStinrgsForList(ArrayList<String> arrayList, ArrayList<Integer> index){
         String[] strings;
-        int flag = 0;
+        true_false_flag = 0;
 
         if(index.get(0) == 0){
-            flag = 1;
+            true_false_flag = 1;
         }
 
-        strings = new String[index.size() - flag];
+        strings = new String[index.size() - true_false_flag];
 
         for (int i = 0, array = 0, n = strings.length; i < n; i++) {
             strings[i] = "";
 
-            for(int j=0, m = index.get(i + flag); j < m; j++){
+            for(int j=0, m = index.get(i + true_false_flag); j < m; j++){
                 strings[i] += arrayList.get(array) + "\n";
                 array++;
             }
@@ -411,6 +421,7 @@ public class MainController implements Initializable {
     * */
     private void setHighlight(ArrayList<Integer> index){
         int count = 0;
+        System.out.print("step 2");
         for (int i = 0, n = index.size(); i < n; i++) {
             if(i %2 != 0) {
                 left_text_list.setColorsOnBlock(i, MyListView.Red);
@@ -419,6 +430,25 @@ public class MainController implements Initializable {
             else {
                 left_text_list.setColorsOnBlock(i, MyListView.Green);
                 right_text_list.setColorsOnBlock(i, MyListView.Green);
+            }
+        }
+    }
+
+    class trueFalseCell extends ListCell<String> {
+        //public trueFalseCell(ObservableList<String> item){
+        //    super();
+        //}
+        @Override
+        public void updateItem(String item, boolean empty){
+            super.updateItem(item,empty);
+            System.out.println(item);
+            if(true_false_flag == 0) {
+                //this.setStyle("-fx-background-color: green");
+                true_false_flag = 1;
+            }
+            else{
+                //this.setStyle("-fx-background-color: red");
+                true_false_flag = 0;
             }
         }
     }

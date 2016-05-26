@@ -5,6 +5,7 @@ import com.sun.javafx.scene.control.skin.ListViewSkin;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Cell;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 import javafx.scene.paint.Color;
