@@ -118,7 +118,7 @@
                   <MenuItem fx:id="copy_to_left_menu_item"  accelerator="Alt+Left" mnemonicParsing="false" onAction="#copyToLeftOnAction" text="Copy to Left" />
                   <MenuItem fx:id="copy_to_right_all_menu_item"  accelerator="Ctrl+Alt+Right" mnemonicParsing="false" onAction="#copyToRightAllOnAction" text="Copy to Right All" />
                   <MenuItem fx:id="copy_to_left_all_menu_item" accelerator="Ctrl+Alt+Left" mnemonicParsing="false" onAction="#copyToLeftAllOnAction" text="Copy to Left All" />
-                  <MenuItem fx:id="compare_menu_item" mnemonicParsing="false" onAction="#compareOnAction" text="Compare" />
+                  <MenuItem fx:id="compare_menu_item" accelerator="Alt+C" mnemonicParsing="false" onAction="#compareOnAction" text="Compare" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
