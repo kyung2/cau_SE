@@ -177,7 +177,7 @@ public class MainController implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        right_text_area.setText(arrayListToString(model.getText(now_tab_num,0)));
+        right_text_area.setText(arrayListToString(model.getText(now_tab_num, 0)));
         compareOnAction();
     }
 
@@ -271,12 +271,76 @@ public class MainController implements Initializable {
 
     @FXML
     private void saveRightFileMenuItemOnAction() {
-        System.out.println("");
+        if (left_text_area == null || right_text_area == null || left_text_list == null || right_text_list == null) {
+            initTextAreaAndListOnTab();
+        }
+
+        AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
+        saveAlarmWindow.showAndWait();
+        if((boolean)saveAlarmWindow.getUserData()) {
+            Model model = ModelRealize.getInstance();
+            try {
+                model.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
+                model.writeTextOuter(tab_num, 1);
+                right_text_area.setEditable(false);
+                AnchorPane anchorPane = (AnchorPane) ((SplitPane) right_text_area.getParent().getParent().getParent()).getParent();
+                AnchorPane button_area = (AnchorPane) anchorPane.getChildren().get(0);
+                Button right_load = (Button) button_area.getChildren().get(1);
+                Button right_edit = (Button) button_area.getChildren().get(2);
+                Button right_save = (Button) button_area.getChildren().get(3);
+                right_load.setDisable(false);
+                right_save.setDisable(true);
+                right_edit.setStyle("-fx-background-color:transparent");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try{
+                if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
+                    if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
+                        compare_button.setDisable(false);
+                    }
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
     private void saveLeftFileMenuItemOnAction() {
-        System.out.println("");
+        if (left_text_area == null || right_text_area == null || left_text_list == null || right_text_list == null) {
+            initTextAreaAndListOnTab();
+        }
+
+        AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
+        saveAlarmWindow.showAndWait();
+        if((boolean)saveAlarmWindow.getUserData()) {
+            Model model = ModelRealize.getInstance();
+            try {
+                model.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
+                model.writeTextOuter(tab_num, 0);
+                left_text_area.setEditable(false);
+                AnchorPane anchorPane = (AnchorPane) ((SplitPane) left_text_area.getParent().getParent().getParent()).getParent();
+                AnchorPane button_area = (AnchorPane) anchorPane.getChildren().get(0);
+                Button left_load = (Button) button_area.getChildren().get(1);
+                Button left_edit = (Button) button_area.getChildren().get(2);
+                Button left_save = (Button) button_area.getChildren().get(3);
+                left_load.setDisable(false);
+                left_save.setDisable(true);
+                left_edit.setStyle("-fx-background-color:transparent");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            try{
+                if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
+                    if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
+                        compare_button.setDisable(false);
+                    }
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -543,12 +607,24 @@ public class MainController implements Initializable {
     /*
     * ArrayList 로 들어온 문자를 \n 을 붙여 String 하나로 만든다.
     * */
-    private String arrayListToString(ArrayList<String> arrayList){
+    private String arrayListToString(ArrayList<String> arrayList) {
         String s = new String();
         for (String s1 : arrayList) {
             s += s1 + "\n";
         }
         return s;
+    }
+
+    /*
+    * String 을 받아와서 \n 로 split 한 후 ArrayList 에 저장한다.
+    * */
+    private ArrayList<String> stringToArrayList(String s) {
+        ArrayList<String> arrayList = new ArrayList<String>();
+        String[] strings = s.split("\n");
+        for (int i = 0, n = strings.length; i < n; i++) {
+            arrayList.add(strings[i]);
+        }
+        return arrayList;
     }
 }
     /*
