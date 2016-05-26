@@ -165,10 +165,13 @@ public class MainController implements Initializable {
     private void copyToRightAllOnAction() {
         Model model = ModelRealize.getInstance();
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
+        int a = 0;
         try {
             for (int i = 0, n = text_index.size(); i < n; i++) {
                 if (i % 2 != 0) {
-                    model.mergeByGroup(now_tab_num, i, true);
+                    System.out.println(i);
+                    model.mergeByGroup(now_tab_num, i - a, true);
+                    a += 2;
                 }
             }
         } catch (Exception e) {
@@ -358,7 +361,8 @@ public class MainController implements Initializable {
         tab_menu.getItems().remove(2, tab_menu_item_num + 2);
         tab_menu_item_num = 0;
         Model model = ModelRealize.getInstance();
-
+        //model.closeAll(); 같은 것 필요
+        //removeAllToolbarStage 해야 함
     }
 
     @FXML
