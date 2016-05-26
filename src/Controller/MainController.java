@@ -209,6 +209,9 @@ public class MainController implements Initializable {
     @FXML
     private void saveLeftFileMenuItemOnAction() { System.out.println(""); }
     @FXML
+    /*
+    * main window 를 닫는다.
+    * */
     private void closeMenuItemOnAction() {
         /*
         여러가지 조건 필요
@@ -219,6 +222,9 @@ public class MainController implements Initializable {
         System.out.println("");
     }
     @FXML
+    /*
+    * help window 를 연다.
+    * */
     private void helpMenuItemOnAction() {
         HelpWindow HelpWindow = new HelpWindow();
         try {
@@ -229,6 +235,9 @@ public class MainController implements Initializable {
         System.out.println("Help");
     }
     @FXML
+    /*
+    * program info window 를 연다.
+    * */
     private void programInformationMenuItemOnAction() {
         ProgramInformationWindow programInformationWindow = new ProgramInformationWindow();
         try {
@@ -241,6 +250,8 @@ public class MainController implements Initializable {
     @FXML
     /*
     * tab 이 꺼지면 그에 해당하는 toolbar stage 의 값을 null 로 바꾼다.
+    * 그 후 tab menu item 을 하나 없에고
+    * 해당하는 모델을 닫는다.
     * */
     private void tabCloseAction(){
         System.out.println("Close tab num " + (now_tab_num + 1) );
@@ -256,6 +267,11 @@ public class MainController implements Initializable {
         }
     }
     @FXML
+    /*
+    * close tab 의 menu item 을 누르면 일어나는 일
+    * 현재 선택된 tab 을 지우고
+    * tab 이 닫힐 때 일어나는 일을 한다.
+    * */
     private void closeTabMenuItemOnAction() {
         ((TabPane)now_tab.getTabPane()).getTabs().remove(now_tab);
         tabCloseAction();
@@ -270,9 +286,12 @@ public class MainController implements Initializable {
         tab_menu.getItems().remove(2, tab_menu_item_num + 2);
         tab_menu_item_num = 0;
         Model model = ModelRealize.getInstance();
-        
+
     }
     @FXML
+    /*
+    * tab menu item 의 숫자에 맞게 tab 을 선택해 준다.
+    * */
     private void tabMenuItemOnAction(int index){
         tab_pane.getSelectionModel().select(index);
     }
@@ -386,7 +405,10 @@ public class MainController implements Initializable {
         }
         return strings;
     }
-    /**/
+    /*
+    * highlighting 을 한다.
+    * index 에서 홀수면 다른 것, 짝수면 일치하는 것 이며 각각 Red 와 Green 으로 배경을 바꿈
+    * */
     private void setHighlight(ArrayList<Integer> index){
         int count = 0;
         for (int i = 0, n = index.size(); i < n; i++) {
