@@ -141,6 +141,7 @@ public class SplitFilePaneController implements Initializable {
         else{
             //수정이 불가능 할 때 = 누르면 수정이 가능. 로드 불가능, 저장 가능, compare 불가능
             left_text_area.setEditable(true);
+            checkCompareButton();
             invisibleListViewVisibleTextArea();
             disableAllButtonInToolBar();
             setClickableButtons("left","false",null,"true");
@@ -173,6 +174,7 @@ public class SplitFilePaneController implements Initializable {
             //수정이 불가능 할 때 - 누르면 수정 가능, 로드 불가능, 저장 가능
             right_text_area.setEditable(true);
             invisibleListViewVisibleTextArea();
+            checkCompareButton();
             disableAllButtonInToolBar();
             setClickableButtons("right","false",null,"true");
             // hk - edit이 활성화 될 시 하이라이팅 (이미지바꿀려면 저 setStyle메소드 이용하면됨)
@@ -311,7 +313,6 @@ public class SplitFilePaneController implements Initializable {
     * */
     private void disableAllButtonInToolBar(){
         ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
-
         for(int i=0, n=toolBar.getItems().size(); i<n; i++){
             if( i != 5 && i != 10) {
                 ((Button) toolBar.getItems().get(i)).setDisable(true);
