@@ -37,7 +37,7 @@ import static javafx.scene.control.Tab.SELECTION_CHANGED_EVENT;
 
 public class MainController implements Initializable {
     @FXML
-    private Button compare_button, copy_to_left_button,copy_to_right_button, copy_to_left_all_button, copy_to_right_all_button,
+    private Button compare_button, copy_to_left_button, copy_to_right_button, copy_to_left_all_button, copy_to_right_all_button,
             next_difference_button, post_difference_button, first_difference_button, now_difference_button, last_difference_button;
     @FXML
     private TabPane tab_pane;
@@ -55,11 +55,10 @@ public class MainController implements Initializable {
     private TextArea left_text_area, right_text_area;
 
     private int true_false_flag;
-    private ArrayList<String[]> toolbar_stage = new ArrayList<String []>();
+    private ArrayList<String[]> toolbar_stage = new ArrayList<String[]>();
     private int tab_num, now_tab_num, tab_menu_item_num;
 
     ImageIcon img = new ImageIcon("/View/Image/sampleIcon.jpg");
-
 
 
     @Override
@@ -73,9 +72,9 @@ public class MainController implements Initializable {
         now_tab = tab;
         now_tab.setUserData(tab_num);
         tab_menu_item_num = 1;
-        tab_menu_item.setOnAction( e -> tabMenuItemOnAction(0));
-        setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
-        toolbar_stage.add(new String[]{"false","false","false","false","false","false","false","false","false","false"});
+        tab_menu_item.setOnAction(e -> tabMenuItemOnAction(0));
+        setClickabeButtons("false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
+        toolbar_stage.add(new String[]{"false", "false", "false", "false", "false", "false", "false", "false", "false", "false"});
 
         left_text_list = null;
         right_text_list = null;
@@ -84,14 +83,14 @@ public class MainController implements Initializable {
         try {
             Model model = ModelRealize.getInstance();
             model.newModel(tab_num);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         tab_pane.getSelectionModel().selectedItemProperty().addListener(
                 new ChangeListener<Tab>() {
                     @Override
                     public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
-                        if(t1 != null) {
+                        if (t1 != null) {
                             String[] stage = makeToolbarStage();
                             now_tab = t1;
                             toolbar_stage.set(now_tab_num, stage);
@@ -101,14 +100,14 @@ public class MainController implements Initializable {
                                     toolbar_stage.get(now_tab_num)[6], toolbar_stage.get(now_tab_num)[7], toolbar_stage.get(now_tab_num)[8], toolbar_stage.get(now_tab_num)[9]);
 
                             initTextAreaAndListOnTab();
-                        }
-                        else {
-                            setClickabeButtons("false","false","false","false","false","false","false","false","false","false");
+                        } else {
+                            setClickabeButtons("false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
                         }
                     }
                 }
         );
     }
+
     @FXML
     /*
     * 조건에 따라 달라져야 함.
@@ -118,8 +117,8 @@ public class MainController implements Initializable {
     * 차이점이 선택 되었을 때 그 차이점이 마지막 차이점과 같다면 마지막 차이점 비활성화
     * */
     private void compareOnAction() {
-        if(left_text_area == null || right_text_area == null || left_text_list == null || right_text_list == null){
-           initTextAreaAndListOnTab();
+        if (left_text_area == null || right_text_area == null || left_text_list == null || right_text_list == null) {
+            initTextAreaAndListOnTab();
         }
         left_text_area.setVisible(false);
         right_text_area.setVisible(false);
@@ -129,8 +128,8 @@ public class MainController implements Initializable {
             ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
             ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
 
-            ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
-            ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
+            ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text, text_index));
+            ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text, text_index));
             left_text_list.setItems(left_list_item);
             right_text_list.setItems(right_list_item);
             left_text_list.setVisible(true);
@@ -146,48 +145,54 @@ public class MainController implements Initializable {
             });*/
 
             setHighlight(text_index);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
-        setClickabeButtons("true","true","true","true","true","true","true","true","true","true");
+        setClickabeButtons("true", "true", "true", "true", "true", "true", "true", "true", "true", "true");
     }
 
     @FXML
     private void copyToLeftOnAction() {
         System.out.println("Click");
     }
+
     @FXML
-    private void copyToRightOnAction() { copy_to_right_button.setText(""); }
+    private void copyToRightOnAction() {
+        copy_to_right_button.setText("");
+    }
+
     @FXML
     private void copyToRightAllOnAction() {
         Model model = ModelRealize.getInstance();
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
         try {
             for (int i = 0, n = text_index.size(); i < n; i++) {
-                if(i % 2 != 0) {
+                if (i % 2 != 0) {
                     model.mergeByGroup(now_tab_num, i, true);
                 }
             }
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         compareOnAction();
     }
+
     @FXML
-    private void copyToLeftAllOnAction(){
+    private void copyToLeftAllOnAction() {
         Model model = ModelRealize.getInstance();
         ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
         ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
 
-        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
-        ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text, text_index));
+        ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text, text_index));
 
         left_text = model.getArrangedText(now_tab_num, 1);
         left_text_list.setItems(right_list_item);
-        model.setText(now_tab_num,right_text,0);
+        model.setText(now_tab_num, right_text, 0);
         right_text_list.setItems(left_list_item);
     }
+
     @FXML
     private void nextDifferenceOnAction() {
         next_difference_button.setText("");
@@ -197,17 +202,28 @@ public class MainController implements Initializable {
         left_text_area.positionCaret(left_text_area.getLength());
         //맨 마지막이면 비활성화 되어야함
     }
+
     @FXML
     private void postDifferenceOnAction() {
         post_difference_button.setText("");
         //맨 처음이면 비활성화 되어야함
     }
+
     @FXML
-    private void firstDifferenceOnAction() { first_difference_button.setText(""); }
+    private void firstDifferenceOnAction() {
+        first_difference_button.setText("");
+    }
+
     @FXML
-    private void nowDifferenceOnAction() { now_difference_button.setText(""); }
+    private void nowDifferenceOnAction() {
+        now_difference_button.setText("");
+    }
+
     @FXML
-    private void lastDifferenceOnAction() { last_difference_button.setText(""); }
+    private void lastDifferenceOnAction() {
+        last_difference_button.setText("");
+    }
+
     @FXML
     /*
     * new tab 을 누르면 fxml 로 부터 정보를 읽어온 후
@@ -222,34 +238,43 @@ public class MainController implements Initializable {
             new_tab.setContent(root);
             new_tab.setUserData(++tab_num);
             new_tab.setOnClosed(e -> tabCloseAction());
-            toolbar_stage.add(new String[]{"false","false","false","false","false","false","false","false","false","false"});
+            toolbar_stage.add(new String[]{"false", "false", "false", "false", "false", "false", "false", "false", "false", "false"});
             tab_pane.getTabs().add(new_tab);
             MenuItem tab_menuitem = new MenuItem("Tab " + ++tab_menu_item_num);
             tab_menu.getItems().add(tab_menuitem);
-            tab_menuitem.setOnAction(( e )  -> {
+            tab_menuitem.setOnAction((e) -> {
                 tabMenuItemOnAction(Integer.parseInt(tab_menuitem.getText().split(" ")[1]) - 1);
             });
             Model model = ModelRealize.getInstance();
             model.newModel(tab_num);
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);// 적절한 예외처리로 바꿔야함
         }
 
     }
+
     @FXML
     private void openMenuItemOnAction() {
         OpenFileWindow openFileWindow = new OpenFileWindow(now_tab);
         System.out.println("Open");
     }
+
     @FXML
     private void saveMenuItemOnAction() {
         SaveFileWindow saveFileWindow = new SaveFileWindow(now_tab);
         System.out.println("Save");
     }
+
     @FXML
-    private void saveRightFileMenuItemOnAction() { System.out.println(""); }
+    private void saveRightFileMenuItemOnAction() {
+        System.out.println("");
+    }
+
     @FXML
-    private void saveLeftFileMenuItemOnAction() { System.out.println(""); }
+    private void saveLeftFileMenuItemOnAction() {
+        System.out.println("");
+    }
+
     @FXML
     /*
     * main window 를 닫는다.
@@ -260,9 +285,10 @@ public class MainController implements Initializable {
         EX> 저장되지 않은 상태라면 저장하고 종료를 묻는다.
             Compare 중 이라면 merge 하지않고 종료할 것인지 묻는다.
         * */
-        ((Stage)(main_pane.getScene().getWindow())).close();// 종료 method
+        ((Stage) (main_pane.getScene().getWindow())).close();// 종료 method
         System.out.println("");
     }
+
     @FXML
     /*
     * help window 를 연다.
@@ -276,6 +302,7 @@ public class MainController implements Initializable {
         }
         System.out.println("Help");
     }
+
     @FXML
     /*
     * program info window 를 연다.
@@ -289,25 +316,27 @@ public class MainController implements Initializable {
         }
         System.out.println("ProgramInfo");
     }
+
     @FXML
     /*
     * tab 이 꺼지면 그에 해당하는 toolbar stage 의 값을 null 로 바꾼다.
     * 그 후 tab menu item 을 하나 없에고
     * 해당하는 모델을 닫는다.
     * */
-    private void tabCloseAction(){
-        System.out.println("Close tab num " + (now_tab_num + 1) );
+    private void tabCloseAction() {
+        System.out.println("Close tab num " + (now_tab_num + 1));
         System.out.println(toolbar_stage);
-        toolbar_stage.set(now_tab_num + 1,null);
+        toolbar_stage.set(now_tab_num + 1, null);
         tab_menu.getItems().remove(tab_menu_item_num + 1);
         tab_menu_item_num--;
         Model model = ModelRealize.getInstance();
         try {
             model.closeModel(now_tab_num + 1);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
     @FXML
     /*
     * close tab 의 menu item 을 누르면 일어나는 일
@@ -315,123 +344,159 @@ public class MainController implements Initializable {
     * tab 이 닫힐 때 일어나는 일을 한다.
     * */
     private void closeTabMenuItemOnAction() {
-        ((TabPane)now_tab.getTabPane()).getTabs().remove(now_tab);
+        ((TabPane) now_tab.getTabPane()).getTabs().remove(now_tab);
         tabCloseAction();
     }
+
     @FXML
     /*
     * 모든 tab 을 닫는다.
     * 모든 tab menu item 을 없에고 모든 toolbar stage 를 null 로 한다.
     * */
     private void closeTabAllMenuItemOnAction() {
-        ((TabPane)now_tab.getTabPane()).getTabs().remove(0, tab_pane.getTabs().size());
+        ((TabPane) now_tab.getTabPane()).getTabs().remove(0, tab_pane.getTabs().size());
         tab_menu.getItems().remove(2, tab_menu_item_num + 2);
         tab_menu_item_num = 0;
         Model model = ModelRealize.getInstance();
 
     }
+
     @FXML
     /*
     * tab menu item 의 숫자에 맞게 tab 을 선택해 준다.
     * */
-    private void tabMenuItemOnAction(int index){
+    private void tabMenuItemOnAction(int index) {
         tab_pane.getSelectionModel().select(index);
     }
+
     /*
     * Toolbar 에 있는 버튼들의 활성화와 비활성화를 조절한다.
     * 아무 행동도 하지 않으려면 null 을 입력하면 된다.
     * */
-    private void setClickabeButtons(String next, String post, String first, String now, String last, String ctor, String ctol, String ctora, String ctola, String compare){
-        if(next != null){
-            if(next == "true") next_difference_button.setDisable(false);
+    private void setClickabeButtons(String next, String post, String first, String now, String last, String ctor, String ctol, String ctora, String ctola, String compare) {
+        if (next != null) {
+            if (next == "true") next_difference_button.setDisable(false);
             else next_difference_button.setDisable(true);
         }
-        if(post != null){
-            if(post == "true") post_difference_button.setDisable(false);
+        if (post != null) {
+            if (post == "true") post_difference_button.setDisable(false);
             else post_difference_button.setDisable(true);
         }
-        if(first != null){
-            if(first == "true") first_difference_button.setDisable(false);
+        if (first != null) {
+            if (first == "true") first_difference_button.setDisable(false);
             else first_difference_button.setDisable(true);
         }
-        if(now != null){
-            if(now == "true") now_difference_button.setDisable(false);
+        if (now != null) {
+            if (now == "true") now_difference_button.setDisable(false);
             else now_difference_button.setDisable(true);
         }
-        if(last != null){
-            if(last == "true") last_difference_button.setDisable(false);
+        if (last != null) {
+            if (last == "true") last_difference_button.setDisable(false);
             else last_difference_button.setDisable(true);
         }
-        if(ctor != null){
-            if(ctor == "true") copy_to_right_button.setDisable(false);
+        if (ctor != null) {
+            if (ctor == "true") copy_to_right_button.setDisable(false);
             else copy_to_right_button.setDisable(true);
         }
-        if(ctol != null){
-            if(ctol == "true") copy_to_left_button.setDisable(false);
+        if (ctol != null) {
+            if (ctol == "true") copy_to_left_button.setDisable(false);
             else copy_to_left_button.setDisable(true);
         }
-        if(ctora != null){
-            if(ctora == "true") copy_to_right_all_button.setDisable(false);
+        if (ctora != null) {
+            if (ctora == "true") copy_to_right_all_button.setDisable(false);
             else copy_to_right_all_button.setDisable(true);
         }
-        if(ctola != null){
-            if(ctola == "true") copy_to_left_all_button.setDisable(false);
+        if (ctola != null) {
+            if (ctola == "true") copy_to_left_all_button.setDisable(false);
             else copy_to_left_all_button.setDisable(true);
         }
-        if(compare != null){
-            if(compare == "true") compare_button.setDisable(false);
+        if (compare != null) {
+            if (compare == "true") compare_button.setDisable(false);
             else compare_button.setDisable(true);
         }
     }
+
     /*
     * 버튼들의 상태를 봐서 tool bar stage 를 만든다.
     * */
-    private String[] makeToolbarStage(){
+    private String[] makeToolbarStage() {
         String[] stage = new String[10];
-        if(!next_difference_button.isDisable()) { stage[0] = "true"; }
-        else { stage[0] = "false"; }
-        if(!post_difference_button.isDisable()) { stage[1] = "true"; }
-        else { stage[1] = "false"; }
-        if(!first_difference_button.isDisable()) { stage[2] = "true"; }
-        else { stage[2] = "false"; }
-        if(!now_difference_button.isDisable()) { stage[3] = "true"; }
-        else { stage[3] = "false"; }
-        if(!last_difference_button.isDisable()) { stage[4] = "true"; }
-        else { stage[4] = "false"; }
-        if(!copy_to_right_button.isDisable()) { stage[5] = "true"; }
-        else { stage[5] = "false"; }
-        if(!copy_to_left_button.isDisable()) { stage[6] = "true"; }
-        else { stage[6] = "false"; }
-        if(!copy_to_right_all_button.isDisable()) { stage[7] = "true"; }
-        else { stage[7] = "false"; }
-        if(!copy_to_left_all_button.isDisable()){ stage[8] = "true"; }
-        else { stage[8] = "false"; }
-        if(!compare_button.isDisable()) { stage[9] = "true"; }
-        else { stage[9] = "false"; }
+        if (!next_difference_button.isDisable()) {
+            stage[0] = "true";
+        } else {
+            stage[0] = "false";
+        }
+        if (!post_difference_button.isDisable()) {
+            stage[1] = "true";
+        } else {
+            stage[1] = "false";
+        }
+        if (!first_difference_button.isDisable()) {
+            stage[2] = "true";
+        } else {
+            stage[2] = "false";
+        }
+        if (!now_difference_button.isDisable()) {
+            stage[3] = "true";
+        } else {
+            stage[3] = "false";
+        }
+        if (!last_difference_button.isDisable()) {
+            stage[4] = "true";
+        } else {
+            stage[4] = "false";
+        }
+        if (!copy_to_right_button.isDisable()) {
+            stage[5] = "true";
+        } else {
+            stage[5] = "false";
+        }
+        if (!copy_to_left_button.isDisable()) {
+            stage[6] = "true";
+        } else {
+            stage[6] = "false";
+        }
+        if (!copy_to_right_all_button.isDisable()) {
+            stage[7] = "true";
+        } else {
+            stage[7] = "false";
+        }
+        if (!copy_to_left_all_button.isDisable()) {
+            stage[8] = "true";
+        } else {
+            stage[8] = "false";
+        }
+        if (!compare_button.isDisable()) {
+            stage[9] = "true";
+        } else {
+            stage[9] = "false";
+        }
         return stage;
     }
+
     /*
     * 현재 tab 을 통해서 현재 선택된 tab 의 text area 와 list view 를 가져온다.
     * */
-    private void initTextAreaAndListOnTab(){
-        AnchorPane left_anchor_pane = (AnchorPane)((SplitPane)now_tab.getContent()).getItems().get(0);
-        AnchorPane right_anchor_pane = (AnchorPane)((SplitPane)now_tab.getContent()).getItems().get(1);
-        SplitPane left_split_pane = (SplitPane)((SplitPane)left_anchor_pane.getChildren().get(1));
-        SplitPane right_split_pane = (SplitPane)((SplitPane)right_anchor_pane.getChildren().get(1));
+    private void initTextAreaAndListOnTab() {
+        AnchorPane left_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(0);
+        AnchorPane right_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(1);
+        SplitPane left_split_pane = (SplitPane) ((SplitPane) left_anchor_pane.getChildren().get(1));
+        SplitPane right_split_pane = (SplitPane) ((SplitPane) right_anchor_pane.getChildren().get(1));
 
-        left_text_area = (TextArea) ((AnchorPane)left_split_pane.getItems().get(0)).getChildren().get(0);
-        right_text_area = (TextArea) ((AnchorPane)right_split_pane.getItems().get(0)).getChildren().get(0);
-        left_text_list = (MyListView)((AnchorPane)left_split_pane.getItems().get(0)).getChildren().get(1);
-        right_text_list = (MyListView)((AnchorPane)right_split_pane.getItems().get(0)).getChildren().get(1);
+        left_text_area = (TextArea) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(0);
+        right_text_area = (TextArea) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(0);
+        left_text_list = (MyListView) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(1);
+        right_text_list = (MyListView) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(1);
     }
+
     /*
     * String 을 저장한 array list 와 index를 저장한 array list 를 통해 list view 에 넣을 string 배열을 만든다.
     * */
-    private String[] makeStinrgsForList(ArrayList<String> arrayList, ArrayList<Integer> index){
+    private String[] makeStinrgsForList(ArrayList<String> arrayList, ArrayList<Integer> index) {
         String[] strings;
         true_false_flag = 0;
 
-        if(index.get(0) == 0){
+        if (index.get(0) == 0) {
             true_false_flag = 1;
         }
 
@@ -440,22 +505,23 @@ public class MainController implements Initializable {
         for (int i = 0, array = 0, n = strings.length; i < n; i++) {
             strings[i] = "";
 
-            for(int j=0, m = index.get(i + true_false_flag); j < m; j++){
+            for (int j = 0, m = index.get(i + true_false_flag); j < m; j++) {
                 strings[i] += arrayList.get(array) + "\n";
                 array++;
             }
         }
         return strings;
     }
+
     /*
     * highlighting 을 한다.
     * index 에서 홀수면 다른 것, 짝수면 일치하는 것 이며 각각 Red 와 Green 으로 배경을 바꿈
     * */
-    private void setHighlight(ArrayList<Integer> index){
+    private void setHighlight(ArrayList<Integer> index) {
         int count = 0;
         System.out.println(index);
         for (int i = 0, n = index.size(); i < n; i++) {
-            if(index.get(i) != 0) {
+            if (index.get(i) != 0) {
                 if (i % 2 != 1) {
                     left_text_list.setColorsOnBlock(count, MyListView.Example);
                     right_text_list.setColorsOnBlock(count, MyListView.Example);
@@ -468,6 +534,7 @@ public class MainController implements Initializable {
             }
         }
     }
+}
     /*
     class trueFalseCell extends ListCell<String> {
         public trueFalseCell(ObservableList<String> item){
