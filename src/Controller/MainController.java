@@ -93,7 +93,6 @@ public class MainController implements Initializable {
                             now_tab = t1;
                             toolbar_stage.set(now_tab_num, stage);
                             now_tab_num = (int) now_tab.getUserData();
-                            System.out.println("chagne tab num " +now_tab_num);
                             setClickabeButtons(toolbar_stage.get(now_tab_num)[0], toolbar_stage.get(now_tab_num)[1], toolbar_stage.get(now_tab_num)[2],
                                     toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4], toolbar_stage.get(now_tab_num)[5],
                                     toolbar_stage.get(now_tab_num)[6], toolbar_stage.get(now_tab_num)[7], toolbar_stage.get(now_tab_num)[8], toolbar_stage.get(now_tab_num)[9]);
@@ -159,16 +158,46 @@ public class MainController implements Initializable {
     private void copyToRightOnAction() { copy_to_right_button.setText(""); }
     @FXML
     private void copyToRightAllOnAction() {
-        copy_to_right_all_button.setText("");
+        Model model = ModelRealize.getInstance();
+        ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
+        ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
+        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
+
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
+        ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
+
+        model.setText(now_tab_num,left_text,1);
+        right_text_list.setItems(left_list_item);
     }
     @FXML
     private void copyToLeftAllOnAction(){
-        copy_to_left_all_button.setText("");
+        Model model = ModelRealize.getInstance();
+        ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
+        ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
+        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
+
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
+        ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
+
+        left_text = model.getArrangedText(now_tab_num, 1);
+        left_text_list.setItems(right_list_item);
+        model.setText(now_tab_num,right_text,0);
+        right_text_list.setItems(left_list_item);
     }
     @FXML
-    private void nextDifferenceOnAction() { next_difference_button.setText(""); }
+    private void nextDifferenceOnAction() {
+        next_difference_button.setText("");
+        Model model = ModelRealize.getInstance();
+        left_text_area.setScrollTop(left_text_list.getMaxHeight());
+        right_text_area.setScrollLeft(Double.MAX_VALUE);
+        left_text_area.positionCaret(left_text_area.getLength());
+        //맨 마지막이면 비활성화 되어야함
+    }
     @FXML
-    private void postDifferenceOnAction() { post_difference_button.setText(""); }
+    private void postDifferenceOnAction() {
+        post_difference_button.setText("");
+        //맨 처음이면 비활성화 되어야함
+    }
     @FXML
     private void firstDifferenceOnAction() { first_difference_button.setText(""); }
     @FXML
@@ -184,7 +213,6 @@ public class MainController implements Initializable {
     * */
     private void newTabMenuItemOnAction() {
         try {
-            System.out.println(tab_num);
             Parent root = FXMLLoader.load(getClass().getResource("/View/Fxml/SplitFilePane.fxml"));
             Tab new_tab = new Tab("File");
             new_tab.setContent(root);
@@ -424,7 +452,7 @@ public class MainController implements Initializable {
         System.out.print("step 2");
         for (int i = 0, n = index.size(); i < n; i++) {
             if(i %2 != 0) {
-                left_text_list.setColorsOnBlock(i, MyListView.Red);
+                left_text_list.setColorsOnBlock(i, MyListView.Example);
                 right_text_list.setColorsOnBlock(i, MyListView.Red);
             }
             else {
