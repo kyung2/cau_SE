@@ -1,6 +1,6 @@
 package Model;
 
-
+/*
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
@@ -103,6 +103,6 @@ public class JModelTest {
         ArrayList<String> s1 = m.getArrangedText(2,0);
         ArrayList<String> s2 = m.getArrangedText(2,1);
     }
-}
+}*/
 
 
