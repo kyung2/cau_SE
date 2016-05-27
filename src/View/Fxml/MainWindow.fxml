@@ -33,7 +33,7 @@
                               <Tooltip contentDisplay="BOTTOM" text="Next Difference" />
                           </tooltip>
                       </Button>
-                      <Button id="post_difference_button" fx:id="post_difference_button" mnemonicParsing="false" onAction="#postDifferenceOnAction" prefHeight="36.0" prefWidth="36.0" styleClass="btn">
+                      <Button id="previous_difference_button" fx:id="previous_difference_button" mnemonicParsing="false" onAction="#previousDifferenceOnAction" prefHeight="36.0" prefWidth="36.0" styleClass="btn">
                           <tooltip>
                               <Tooltip contentDisplay="BOTTOM" text="Previous Difference" />
                           </tooltip>
@@ -110,7 +110,7 @@
           <Menu mnemonicParsing="false" text="Merge">
             <items>
               <MenuItem fx:id="next_difference_menu_item" accelerator="Alt+DOWN" mnemonicParsing="false" onAction="#nextDifferenceOnAction" text="Next Difference" />
-                  <MenuItem fx:id="post_difference_menu_item" accelerator="Alt+UP" mnemonicParsing="false" onAction="#postDifferenceOnAction" text="Post Difference" />
+                  <MenuItem fx:id="previous_difference_menu_item" accelerator="Alt+UP" mnemonicParsing="false" onAction="#previousDifferenceOnAction" text="Post Difference" />
                   <MenuItem fx:id="first_difference_menu_item" accelerator="Alt+Home" mnemonicParsing="false" onAction="#firstDifferenceOnAction" text="First Difference" />
                   <MenuItem fx:id="now_difference_menu_item"  accelerator="Alt+N" mnemonicParsing="false" onAction="#nowDifferenceOnAction" text="Now Selected Difference" />
                   <MenuItem fx:id="last_difference_menu_item"  accelerator="Alt+End" mnemonicParsing="false" onAction="#lastDifferenceOnAction" text="Last Difference" />

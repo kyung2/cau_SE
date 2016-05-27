@@ -29,7 +29,7 @@ import java.util.ResourceBundle;
 public class MainController implements Initializable {
     @FXML
     private Button compare_button, copy_to_left_button, copy_to_right_button, copy_to_left_all_button, copy_to_right_all_button,
-            next_difference_button, post_difference_button, first_difference_button, now_difference_button, last_difference_button;
+            next_difference_button, previous_difference_button, first_difference_button, now_difference_button, last_difference_button;
     @FXML
     private TabPane tab_pane;
     @FXML
@@ -191,8 +191,8 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void postDifferenceOnAction() {
-        post_difference_button.setText("");
+    private void previousDifferenceOnAction() {
+        previous_difference_button.setText("");
         //left_text_list.getSelectionModel().;
         //맨 처음이면 비활성화 되어야함
     }
@@ -438,14 +438,14 @@ public class MainController implements Initializable {
     * Toolbar 에 있는 버튼들의 활성화와 비활성화를 조절한다.
     * 아무 행동도 하지 않으려면 null 을 입력하면 된다.
     * */
-    private void setClickabeButtons(String next, String post, String first, String now, String last, String ctor, String ctol, String ctora, String ctola, String compare) {
+    private void setClickabeButtons(String next, String previous, String first, String now, String last, String ctor, String ctol, String ctora, String ctola, String compare) {
         if (next != null) {
             if (next == "true") next_difference_button.setDisable(false);
             else next_difference_button.setDisable(true);
         }
-        if (post != null) {
-            if (post == "true") post_difference_button.setDisable(false);
-            else post_difference_button.setDisable(true);
+        if (previous != null) {
+            if (previous == "true") previous_difference_button.setDisable(false);
+            else previous_difference_button.setDisable(true);
         }
         if (first != null) {
             if (first == "true") first_difference_button.setDisable(false);
@@ -491,7 +491,7 @@ public class MainController implements Initializable {
         } else {
             stage[0] = "false";
         }
-        if (!post_difference_button.isDisable()) {
+        if (!previous_difference_button.isDisable()) {
             stage[1] = "true";
         } else {
             stage[1] = "false";

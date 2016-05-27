@@ -63,19 +63,19 @@ public class TabPaneTest extends GuiTest {
     public void testLeftEditButton()
     {
         click("#left_edit_button");
-        assertNodeExists("Click");
+        assertNodeExists("");
     }
     @Test
     public void testLeftSaveButton()
     {
         click("#left_save_button");
-        assertNodeExists("Click");
+        assertNodeExists("");
     }
     @Test
     public void testRightLoadButton()
     {
         click("#right_load_button");
-        assertNodeExists("Click");
+        assertNodeExists("");
     }
     @Test
     public void testRightEditButton()

@@ -4,6 +4,7 @@ import View.MainWindow;
 import View.OpenFileWindow;
 import com.google.common.util.concurrent.SettableFuture;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +14,7 @@ import org.loadui.testfx.utils.UserInputDetector;
 
 import java.util.concurrent.TimeUnit;
 
+import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
 import static org.loadui.testfx.Assertions.assertNodeExists;
 
@@ -51,6 +53,21 @@ public class MainWindowTest extends GuiTest {
     @Override
     protected Parent getRootNode() {
         return stage.getScene().getRoot();
+    }
+
+    @Test
+    public void initButtonTest(){
+        assertTrue(((Button)GuiTest.find("#compare_button")).isDisable());
+        assertTrue(((Button)GuiTest.find("#next_difference_button")).isDisable());
+        assertTrue(((Button)GuiTest.find("#previous_difference_button")).isDisable());
+        assertTrue(((Button)GuiTest.find("#first_difference_button")).isDisable());
+        assertTrue(((Button)GuiTest.find("#now_difference_button")).isDisable());
+        assertTrue(((Button)GuiTest.find("#last_difference_button")).isDisable());
+        assertTrue(((Button)GuiTest.find("#copy_to_left_button")).isDisable());
+        assertTrue(((Button)GuiTest.find("#copy_to_left_all_button")).isDisable());
+        assertTrue(((Button)GuiTest.find("#copy_to_right_button")).isDisable());
+        assertTrue(((Button)GuiTest.find("#copy_to_right_all_button")).isDisable());
+        //버튼이 모두 disable 인지 test
     }
     @Test
     public void testCompareButton()

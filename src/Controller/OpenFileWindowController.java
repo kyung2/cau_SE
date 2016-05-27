@@ -174,7 +174,6 @@ public class OpenFileWindowController {
         AnchorPane left_pane = (AnchorPane)((SplitPane)tab.getContent()).getItems().get(0);
         AnchorPane right_pane = (AnchorPane)((SplitPane)tab.getContent()).getItems().get(1);
         
-        
         AnchorPane left_file_button_tab = (AnchorPane)left_pane.getChildren().get(0);
         AnchorPane right_file_button_tab = (AnchorPane) right_pane.getChildren().get(0);
  
