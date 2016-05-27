@@ -143,6 +143,7 @@ public class PseudoMain2 {
             System.out.println("00000");
 
             System.out.println("11111");
+            m.writeTextOuter(2,"C:\\Users\\User\\a.txt",0);
             m.closeModel(2);
             m.closeModel(c);
             System.out.println("1131211");
@@ -157,7 +158,7 @@ public class PseudoMain2 {
         }
         catch(Exception e)
         {
-            System.out.println("!");
+            System.out.println(e.getLocalizedMessage());
 
         }
 

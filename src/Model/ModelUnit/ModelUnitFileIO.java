@@ -56,7 +56,7 @@ class ModelUnitFileIO {
         OutputStreamWriter OutputStreamWriter = new OutputStreamWriter(fileOutputStream, "EUC-KR");
         BufferedWriter writer = new BufferedWriter(OutputStreamWriter);
         ArrayList<String> newLines = m.codes[i].lines;
-        for(int k=0;i<newLines.size();k++) {
+        for(int k=0;k<newLines.size();k++) {
             writer.write(newLines.get(k));
             writer.newLine();
         }
