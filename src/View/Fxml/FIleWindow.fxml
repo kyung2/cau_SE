@@ -10,16 +10,16 @@
 
 <AnchorPane fx:id="file_anchor_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="273.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="90.0" layoutY="106.0" text="RightFile" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="102.0" />
-      <Label layoutX="93.0" layoutY="143.0" text="LeftFIle " AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="142.0" />
+      <Label layoutX="90.0" layoutY="106.0" text="RightFile" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="142.0" />
+      <Label layoutX="93.0" layoutY="143.0" text="LeftFIle " AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="102.0" />
       <TextField fx:id="warning_info_text_area" disable="true" editable="false" layoutX="14.0" layoutY="263.0" prefHeight="23.0" prefWidth="381.0" text="안내문구" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></TextField>
-      <TextField fx:id="right_file_text_area" layoutX="154.0" layoutY="102.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="100.0" />
-      <TextField fx:id="left_file_text_area" layoutX="154.0" layoutY="139.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="140.0" />
-      <Button fx:id="right_file_find_button" layoutX="432.0" layoutY="102.0" mnemonicParsing="false" onAction="#rightFileFindButtonOnAction" prefHeight="23.0" prefWidth="55.0" text="Find" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="100.0" />
-      <Button fx:id="left_file_find_button" layoutX="432.0" layoutY="139.0" mnemonicParsing="false" onAction="#leftFileFindButtonOnAction" prefHeight="23.0" prefWidth="55.0" text="Find" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="140.0" />
+      <TextField fx:id="right_file_text_area" editable="false" layoutX="154.0" layoutY="102.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="138.0" />
+      <TextField fx:id="left_file_text_area" editable="false" layoutX="150.0" layoutY="138.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="100.0" />
+      <Button fx:id="right_file_find_button" layoutX="432.0" layoutY="102.0" mnemonicParsing="false" onAction="#rightFileFindButtonOnAction" prefHeight="23.0" prefWidth="55.0" text="Find" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="140.0" />
+      <Button fx:id="left_file_find_button" layoutX="432.0" layoutY="139.0" mnemonicParsing="false" onAction="#leftFileFindButtonOnAction" prefHeight="23.0" prefWidth="55.0" text="Find" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="102.0" />
       <Label layoutX="34.0" layoutY="52.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="30.0">
          <font>
             <Font size="18.0" />
