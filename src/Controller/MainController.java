@@ -164,19 +164,8 @@ public class MainController implements Initializable {
     @FXML
     private void copyToRightAllOnAction() {
         Model model = ModelRealize.getInstance();
-        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
-        int a = 0;
-        try {
-            for (int i = 0, n = text_index.size(); i < n; i++) {
-                if (i % 2 != 0) {
-                    System.out.println(i);
-                    model.mergeByGroup(now_tab_num, i - a, true);
-                    a += 2;
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        model.setText(now_tab_num,model.getText(now_tab_num,0),1);
+        
         right_text_area.setText(arrayListToString(model.getText(now_tab_num, 0)));
         compareOnAction();
     }
