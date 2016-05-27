@@ -2,7 +2,6 @@ package Controller;
 
 import Model.ModelRealize;
 import View.AlarmWindow;
-import View.MyListView;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -27,7 +26,7 @@ public class SaveFileWindowController {
     private Button left_load, left_edit, left_save, right_load, right_edit, right_save;
     private TextArea left_text_area, right_text_area;
     private TextArea left_file_bottom_text_area, right_file_bottom_text_area;
-    private MyListView left_list_view, right_list_view;
+    private ListView left_list_view, right_list_view;
 
     @FXML
     private AnchorPane file_anchor_pane;
@@ -136,9 +135,9 @@ public class SaveFileWindowController {
         AnchorPane right_file_pane = (AnchorPane)((SplitPane)right_pane.getChildren().get(1)).getItems().get(0);
 
         left_text_area = (TextArea)left_file_pane.getChildren().get(0);
-        left_list_view = (MyListView)left_file_pane.getChildren().get(1);
+        left_list_view = (ListView)left_file_pane.getChildren().get(1);
         right_text_area = (TextArea)right_file_pane.getChildren().get(0);
-        right_list_view = (MyListView)right_file_pane.getChildren().get(1);
+        right_list_view = (ListView)right_file_pane.getChildren().get(1);
     }
     /*
     * file chooser 를 연다.
@@ -147,6 +146,7 @@ public class SaveFileWindowController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
         fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Files", "*.java", "*.c", "*.cpp", "*.txt"),
                 new FileChooser.ExtensionFilter("Java Files", "*.java"),
                 new FileChooser.ExtensionFilter("C Files", "*.c","*.cpp"),
                 new FileChooser.ExtensionFilter("Text Files", "*.txt")

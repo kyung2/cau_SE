@@ -16,7 +16,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
 
-<?import View.MyListView?>
 <SplitPane fx:id="split_pane" dividerPositions="0.5" minWidth="45.0" prefHeight="368.0" prefWidth="528.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SplitFilePaneController">
     <items>
         <AnchorPane fx:id="left_file_pane" prefHeight="200.0" prefWidth="200.0">
@@ -49,7 +48,7 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                             <children>
                                 <TextArea id="left_text_area" fx:id="left_text_area" editable="false" minWidth="20.0" prefHeight="310.0" prefWidth="226.0" style="-fx-background-color: transparent;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                <MyListView fx:id="left_text_list" disable="true" layoutX="44.0" layoutY="38.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                <ListView fx:id="left_text_list" disable="true" layoutX="44.0" layoutY="38.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                             </children>
                             <effect>
                                 <ColorAdjust />
@@ -90,7 +89,7 @@
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                             <children>
                                 <TextArea fx:id="right_text_area" editable="false" minWidth="20.0" prefHeight="310.0" prefWidth="260.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                                <MyListView fx:id="right_text_list" disable="true" layoutX="29.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                <ListView fx:id="right_text_list" disable="true" layoutX="29.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                             </children>
                         </AnchorPane>
                         <TextArea fx:id="right_file_bottom_text_area" editable="false" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" />

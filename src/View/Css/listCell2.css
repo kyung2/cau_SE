@@ -1,0 +1,22 @@
+.list-cell {
+    -fx-alignment: top_left;
+    -fx-background: gray;
+}
+.list-cell:filled:odd {
+    -fx-cell-hover-color: green;
+    -fx-background-color: #49c5b1;
+}
+.list-cell:filled:even { /* <=== changed to even */
+    -fx-cell-hover-color: yellow;
+    -fx-background-color: #eedc00;
+}
+.list-cell:{
+}
+.list-cell:even:filled:hover {
+    -fx-background-color: yellow;
+    -fx-text-fill: green;
+}
+.list-cell:hover:filled:hover {
+    -fx-background-color: green;
+    -fx-text-fill: yellow;
+}

@@ -5,19 +5,11 @@ import java.io.IOException;
 
 import Model.Model;
 import Model.ModelRealize;
-import View.MyListView;
 import View.OpenFileWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.SplitPane;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToolBar;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
@@ -49,7 +41,7 @@ public class OpenFileWindowController {
     
 	private TextArea left_file_bottom_text_area, right_file_bottom_text_area;
     
-	private MyListView left_list_view, right_list_view;
+	private ListView left_list_view, right_list_view;
 
     Model modelLeft;
     Model modelRight;
@@ -155,6 +147,12 @@ public class OpenFileWindowController {
     private File loadFileChooser(Button position){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Files", "*.java", "*.c", "*.cpp", "*.txt"),
+                new FileChooser.ExtensionFilter("Java Files", "*.java"),
+                new FileChooser.ExtensionFilter("C Files", "*.c","*.cpp"),
+                new FileChooser.ExtensionFilter("Text Files", "*.txt")
+        );
         File selectedFile = fileChooser.showOpenDialog(null);
         // 선택된 파일이 없으면
         if(selectedFile == null) {
@@ -190,9 +188,9 @@ public class OpenFileWindowController {
         AnchorPane right_file_pane = (AnchorPane)((SplitPane)right_pane.getChildren().get(1)).getItems().get(0);
 
         left_text_area = (TextArea)left_file_pane.getChildren().get(0);
-        left_list_view = (MyListView)left_file_pane.getChildren().get(1);
+        left_list_view = (ListView)left_file_pane.getChildren().get(1);
         right_text_area = (TextArea)right_file_pane.getChildren().get(0);
-        right_list_view = (MyListView)right_file_pane.getChildren().get(1);
+        right_list_view = (ListView)right_file_pane.getChildren().get(1);
     }
 
     private String arrayListToString(ArrayList<String> arrayList){

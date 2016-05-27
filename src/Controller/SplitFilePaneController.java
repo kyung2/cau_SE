@@ -3,7 +3,6 @@ package Controller;
 import Model.Model;
 import Model.ModelRealize;
 import View.AlarmWindow;
-import View.MyListView;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -32,7 +31,7 @@ public class SplitFilePaneController implements Initializable {
     private Button left_load_button,left_edit_button,left_save_button,
                     right_load_button,right_save_button,right_edit_button;
     @FXML
-    private MyListView left_text_list, right_text_list;
+    private ListView left_text_list, right_text_list;
     @FXML
     private SplitPane split_pane;
     @FXML

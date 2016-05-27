@@ -8,10 +8,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
-import javafx.event.EventDispatchChain;
-import javafx.event.EventHandler;
-import javafx.event.WeakEventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -24,16 +20,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-import javafx.util.Callback;
 
 import javax.swing.*;
-import java.awt.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
-import static javafx.scene.control.Tab.SELECTION_CHANGED_EVENT;
 
 public class MainController implements Initializable {
     @FXML
@@ -51,7 +42,7 @@ public class MainController implements Initializable {
     BorderPane main_pane;
 
     private Tab now_tab;
-    private MyListView left_text_list, right_text_list;
+    private ListView left_text_list, right_text_list;
     private TextArea left_text_area, right_text_area;
 
     private int true_false_flag;
@@ -128,23 +119,26 @@ public class MainController implements Initializable {
             ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
             ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
 
+            if(text_index.get(0) == 0){
+                left_text_list.getStylesheets().add("/View/Css/listCell2.css");
+                right_text_list.getStylesheets().add("/View/Css/listCell2.css");
+            }
+            else{
+                left_text_list.getStylesheets().add("/View/Css/listCell1.css");
+                right_text_list.getStylesheets().add("/View/Css/listCell1.css");
+            }
+
             ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text, text_index));
             ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text, text_index));
             left_text_list.setItems(left_list_item);
             right_text_list.setItems(right_list_item);
+
             left_text_list.setVisible(true);
             right_text_list.setVisible(true);
             left_text_list.setDisable(false);
             right_text_list.setDisable(false);
-            /*
-            left_text_list.setCellFactory(new Callback<ListView<String>, ListCell<String>>() {
-                @Override
-                public ListCell<String> call(ListView<String> param){
-                    return new trueFalseCell(param.getItems());//(param.getItems());
-                }
-            });*/
 
-            setHighlight(text_index);
+            //setHighlight(text_index);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -165,7 +159,7 @@ public class MainController implements Initializable {
     private void copyToRightAllOnAction() {
         Model model = ModelRealize.getInstance();
         model.setText(now_tab_num,model.getText(now_tab_num,0),1);
-        
+
         right_text_area.setText(arrayListToString(model.getText(now_tab_num, 0)));
         compareOnAction();
     }
@@ -555,8 +549,8 @@ public class MainController implements Initializable {
 
         left_text_area = (TextArea) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(0);
         right_text_area = (TextArea) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(0);
-        left_text_list = (MyListView) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(1);
-        right_text_list = (MyListView) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(1);
+        left_text_list = (ListView) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(1);
+        right_text_list = (ListView) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(1);
     }
 
     /*
@@ -584,28 +578,6 @@ public class MainController implements Initializable {
     }
 
     /*
-    * highlighting 을 한다.
-    * index 에서 홀수면 다른 것, 짝수면 일치하는 것 이며 각각 Red 와 Green 으로 배경을 바꿈
-    * */
-    private void setHighlight(ArrayList<Integer> index) {
-        int count = 0;
-        System.out.println(index);
-        for (int i = 0, n = index.size(); i < n; i++) {
-            if (index.get(i) != 0) {
-                if (i % 2 != 1) {
-                    left_text_list.setColorsOnBlock(count, MyListView.Example);
-                    right_text_list.setColorsOnBlock(count, MyListView.Example);
-                    count++;
-                } else {
-                    left_text_list.setColorsOnBlock(count, MyListView.Yellow);
-                    right_text_list.setColorsOnBlock(count, MyListView.Yellow);
-                    count++;
-                }
-            }
-        }
-    }
-
-    /*
     * ArrayList 로 들어온 문자를 \n 을 붙여 String 하나로 만든다.
     * */
     private String arrayListToString(ArrayList<String> arrayList) {
@@ -628,28 +600,8 @@ public class MainController implements Initializable {
         return arrayList;
     }
 }
-    /*
-    class trueFalseCell extends ListCell<String> {
-        public trueFalseCell(ObservableList<String> item){
-            super();
-            this.setText(item.get());
-        }
-        @Override
-        public void updateItem(String item, boolean empty){
-            super.updateItem(item,empty);
-            System.out.println(item);
-            if(true_false_flag == 0) {
-                //this.setStyle("-fx-background-color: green");
-                true_false_flag = 1;
-            }
-            else{
-                //this.setStyle("-fx-background-color: red");
-                true_false_flag = 0;
-            }
-        }
-    }
-}
-/**
+
+/*
  ImageIcon img = new ImageIcon("/View/Image/sampleIcon.jpg");
 
  public class JavaFX_ApplicationIcon extends Application {
