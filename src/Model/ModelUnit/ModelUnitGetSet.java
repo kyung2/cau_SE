@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by User on 2016-05-27.
  */
-public class ModelUnitGetSet {
+class ModelUnitGetSet {
     static public ArrayList<String> textReceive(int i, ModelUnitData m) throws IndexOutOfBoundsException
     {
         return new ArrayList(m.codes[i].lines);

@@ -1,4 +1,4 @@
-package Model.LCSsupport;
+package Model.ModelUnit.LCSsupport;
 
 import java.util.ArrayList;
 

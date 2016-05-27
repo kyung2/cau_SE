@@ -1,6 +1,6 @@
 package Model;
 
-import Model.LCSsupport.*;
+import Model.ModelUnit.LCSsupport.*;
 
 import java.util.ArrayList;
 

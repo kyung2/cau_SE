@@ -1,8 +1,5 @@
 package Model.ModelUnit;
 
-import Model.LCSsupport.LCSClassEnum;
-import Model.LCSsupport.LCSGrouping;
-import Model.Model;
 import Model.ModelException.MergeLineIllegalException;
 
 import java.io.IOException;

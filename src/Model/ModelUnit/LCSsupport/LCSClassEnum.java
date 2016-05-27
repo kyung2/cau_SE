@@ -1,4 +1,4 @@
-package Model.LCSsupport;
+package Model.ModelUnit.LCSsupport;
 
 /**
  * Created by User on 2016-05-20.
