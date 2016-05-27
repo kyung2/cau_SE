@@ -8,12 +8,10 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -71,7 +69,7 @@ public class SplitFilePaneController implements Initializable {
     * */
     @FXML
     private void leftLoadButtonOnAction() {
-        checkTabNum();
+        checkTabNumAndCompareButton();
         File file = loadFileChooser();
         Model model = ModelRealize.getInstance();
         if(file != null){
@@ -81,6 +79,7 @@ public class SplitFilePaneController implements Initializable {
                 left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
                 setClickableButtons("left","true","true","false");
                 changeTabName(file.getName(),"left");
+                disableAllButtonInToolBar();
                 left_file_label.setText(file.getName());
             }catch(Exception e){
                 e.printStackTrace();
@@ -91,7 +90,7 @@ public class SplitFilePaneController implements Initializable {
     }
     @FXML
     private void rightLoadButtonOnAction(){
-        checkTabNum();
+        checkTabNumAndCompareButton();
         File file = loadFileChooser();
         if(file != null){
             Model model = ModelRealize.getInstance();
@@ -101,6 +100,7 @@ public class SplitFilePaneController implements Initializable {
                 right_text_area.setText(arrayListToString(model.getText(tab_num,1)));
                 setClickableButtons("right","true","true","false");
                 changeTabName(file.getName(),"right");
+                disableAllButtonInToolBar();
                 right_file_label.setText(file.getName());
             }catch(Exception e){
                 e.printStackTrace();
@@ -119,7 +119,7 @@ public class SplitFilePaneController implements Initializable {
     @FXML
     private void leftEditButtonOnAction() {
         boolean edit_flag = left_text_area.isEditable();
-        checkTabNum();
+        checkTabNumAndCompareButton();
         if(edit_flag){
             /*
             * 수정이 가능할 때 - 누르면 수정이 불가능해짐. 로드는 가능해짐. 모델에 있는 정보를 바꿈,
@@ -151,7 +151,7 @@ public class SplitFilePaneController implements Initializable {
     @FXML
     private void rightEditButtonOnAction() {
         boolean edit_flag = right_text_area.isEditable();
-        checkTabNum();
+        checkTabNumAndCompareButton();
         if(edit_flag){
             /*
             * 수정이 가능할 때 - 누르면 수정이 불가능해짐. 로드는 가능해짐. 모델에 있는 정보를 바꿈,
@@ -186,7 +186,7 @@ public class SplitFilePaneController implements Initializable {
     * */
     @FXML
     private void leftSaveButtonOnAction(){
-        checkTabNum();
+        checkTabNumAndCompareButton();
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
 
@@ -206,7 +206,7 @@ public class SplitFilePaneController implements Initializable {
     }
     @FXML
     private void rightSaveButtonOnAction(){
-        checkTabNum();
+        checkTabNumAndCompareButton();
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
 
@@ -223,6 +223,15 @@ public class SplitFilePaneController implements Initializable {
                 e.printStackTrace();
             }
         }
+    }
+
+    @FXML
+    private void onLeftListViewMouseClicked(){
+        right_text_list.getSelectionModel().select(left_text_list.getSelectionModel().getSelectedIndex());
+    }
+    @FXML
+    private void onRightListViewMouseClicked(){
+        left_text_list.getSelectionModel().select(right_text_list.getSelectionModel().getSelectedIndex());
     }
     /*
     *  file chooser 를 열어서 파일의 path 를 가져온다.
@@ -283,9 +292,6 @@ public class SplitFilePaneController implements Initializable {
     * save 버튼이 눌렸을 때 두 text area 가 수정 불가능 한 경우 활성화
     * */
     private void checkCompareButton(){
-        if(compare_button == null) {
-            compare_button = (Button)((ToolBar)((BorderPane)((BorderPane)split_pane.getScene().getRoot()).getCenter()).getTop()).getItems().get(11);
-        }
         Model model = ModelRealize.getInstance();
         try{
             if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
@@ -301,9 +307,12 @@ public class SplitFilePaneController implements Initializable {
     * Tab num 값을 확인한다.
     * -1 일 경우 초기값이므로 현재 tab 의 번호를 넣어준다.
     * */
-    private void checkTabNum(){
+    private void checkTabNumAndCompareButton(){
         if(tab_num == -1){
             tab_num = (int)getSelectedTab().getUserData();
+        }
+        if(compare_button == null) {
+            compare_button = (Button)((ToolBar)((BorderPane)((BorderPane)split_pane.getScene().getRoot()).getCenter()).getTop()).getItems().get(11);
         }
     }
     /*
