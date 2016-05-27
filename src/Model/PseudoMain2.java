@@ -1,6 +1,6 @@
 package Model;
 
-import Model.LCSsupport.*;
+import Model.ModelUnit.LCSsupport.*;
 
 import java.util.ArrayList;
 
@@ -10,12 +10,14 @@ import java.util.ArrayList;
 public class PseudoMain2 {
     public static void main(String args[]) {
 
+        System.out.println("0000");
         ArrayList<String> a1 = new  ArrayList<String>(), a2 = new  ArrayList<String>(), a3;
         ArrayList<String> b1 = new  ArrayList<String>(), b2 = new  ArrayList<String>();
         ArrayList<Integer> aaa;
         String fp1 = new String("C:\\Users\\User\\Desktop\\a.txt"), fp2 = new String("C:\\Users\\User\\Desktop\\b.txt");
         int c;
 
+        System.out.println("0000");
         a1.add("a");
         a1.add("b");
         a1.add("c");
@@ -45,19 +47,24 @@ public class PseudoMain2 {
         b2.add("g");
         b2.add("d");
 
+        System.out.println("0000");
         Model m = ModelRealize.getInstance();
-
+        System.out.println("0000");
         m.newModel(2);
         m.newModel(4);
         c = m.newModel();
+        System.out.println("0000");
         try
         {
+
             m.readTextOuter(2,fp1,0);
+            System.out.println("0000");
             m.readTextOuter(2,fp2,1);
             m.setText(4,b1,0);
             m.setText(4,b2,1);
             m.setText(c,a2,0);
             m.setText(c,a1,1);
+            System.out.println("0000");
 
             System.out.println(m.isOpen(2,0));
 
@@ -135,10 +142,12 @@ public class PseudoMain2 {
             }
             System.out.println("00000");
 
-
+            System.out.println("11111");
+            m.writeTextOuter(2,"C:\\Users\\User\\a.txt",0);
             m.closeModel(2);
             m.closeModel(c);
-            m.writeTextOuter(2,"C:\\Users\\User\\Desktop\\c.txt",1);
+            System.out.println("1131211");
+            System.out.println("111211");
 
             System.out.println(LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum));
 
@@ -149,7 +158,7 @@ public class PseudoMain2 {
         }
         catch(Exception e)
         {
-            System.out.println("!");
+            System.out.println(e.getLocalizedMessage());
 
         }
 

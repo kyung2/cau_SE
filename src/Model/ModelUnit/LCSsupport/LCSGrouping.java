@@ -1,4 +1,4 @@
-package Model.LCSsupport;
+package Model.ModelUnit.LCSsupport;
 
 import java.util.ArrayList;
 
@@ -20,7 +20,7 @@ public class LCSGrouping {
         for(int k=0;k<groupXSize;k++)
         {
             try {
-                lcs[k] = (LCSSupport) (Class.forName("Model.LCSsupport."+LCSClassEnum.values()[k].toString()).newInstance());
+                lcs[k] = (LCSSupport) (Class.forName("Model.ModelUnit.LCSsupport."+LCSClassEnum.values()[k].toString()).newInstance());
             }
             catch(Exception e)
             {
