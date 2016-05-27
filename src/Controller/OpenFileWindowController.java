@@ -25,10 +25,8 @@ public class OpenFileWindowController {
 	@FXML
 	private AnchorPane file_anchor_pane;
 	@FXML
-	private Button cancel_button,ok_button;
-	@FXML
-	private TextField right_file_text_area, left_file_text_area;
-	
+	private TextField right_file_text_area, left_file_text_area, warning_info_text_area;
+
     private Button compare_button_file;
     
 	private Tab tab;
@@ -42,9 +40,6 @@ public class OpenFileWindowController {
 	private TextArea left_file_bottom_text_area, right_file_bottom_text_area;
     
 	private ListView left_list_view, right_list_view;
-
-    Model modelLeft;
-    Model modelRight;
     
     String fileRightname="";
     String fileLeftname="";
@@ -57,16 +52,16 @@ public class OpenFileWindowController {
         File file = loadFileChooser(left_load);
 
     	tab_num = (int)tab.getUserData();
-        modelLeft = ModelRealize.getInstance();
+        Model model = ModelRealize.getInstance();
 
         //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
     	if(file != null){
             try {
-               modelLeft.readTextOuter(tab_num, file.getAbsolutePath(), 0);
+               model.readTextOuter(tab_num, file.getAbsolutePath(), 0);
                left_file_text_area.setText(file.getAbsolutePath());
                fileLeftname = file.getName();
             }catch(Exception e){
-                e.printStackTrace();
+                warning_info_text_area.setText("Select no Left File");
             }
         }
 
@@ -79,16 +74,16 @@ public class OpenFileWindowController {
         File file = loadFileChooser(right_load);
 
     	tab_num = (int)tab.getUserData();
-        modelRight = ModelRealize.getInstance();
+        Model model = ModelRealize.getInstance();
 
         //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
     	if(file != null){
             try {
-               modelRight.readTextOuter(tab_num, file.getAbsolutePath(), 1);
+               model.readTextOuter(tab_num, file.getAbsolutePath(), 1);
                right_file_text_area.setText(file.getAbsolutePath());
                fileRightname = file.getName();
             }catch(Exception e){
-                e.printStackTrace();
+                warning_info_text_area.setText("Select no Right File");
             }
         }
     }
@@ -107,16 +102,16 @@ public class OpenFileWindowController {
         right_text_area.setVisible(true);
         left_list_view.setVisible(false);
         right_list_view.setVisible(false);
-
+        Model model = ModelRealize.getInstance();
         //탭의 패널 이름 변경
         if(!fileLeftname.equals("")) {
-            left_text_area.setText(arrayListToString(modelLeft.getText(tab_num, 0)));
+            left_text_area.setText(arrayListToString(model.getText(tab_num, 0)));
             left_file_label.setText(fileLeftname);
             changeTabName(fileLeftname,"left");
 
         }
         if(!fileRightname.equals("")) {
-            right_text_area.setText(arrayListToString(modelRight.getText(tab_num, 1)));
+            right_text_area.setText(arrayListToString(model.getText(tab_num, 1)));
             right_file_label.setText(fileRightname);
             changeTabName(fileRightname,"right");
         }
@@ -135,14 +130,14 @@ public class OpenFileWindowController {
             compare.setDisable(false);
         }
         //창 종료
-        Stage stage = (Stage) ok_button.getScene().getWindow();
+        Stage stage = (Stage) file_anchor_pane.getScene().getWindow();
         stage.close();
     }
 
     @FXML
     private void cancelButtonOnAction(){
         //창 닫기
-        Stage stage = (Stage) cancel_button.getScene().getWindow();
+        Stage stage = (Stage) file_anchor_pane.getScene().getWindow();
         stage.close();
     }
 
