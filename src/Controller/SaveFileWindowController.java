@@ -99,7 +99,7 @@ public class SaveFileWindowController {
     }
     @FXML
     private void cancelButtonOnAction(){
-        if(left_file != null && right_file != null) {
+        if(left_file != null || right_file != null) {
             AlarmWindow exitAlarmWindow = new AlarmWindow("Save File Alarm", "Wouldn't you Save this file?");
             exitAlarmWindow.showAndWait();
             if ((boolean) exitAlarmWindow.getUserData()) {

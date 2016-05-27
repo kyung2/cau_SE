@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import Model.Model;
 import Model.ModelRealize;
+import View.AlarmWindow;
 import View.OpenFileWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -136,9 +137,16 @@ public class OpenFileWindowController {
 
     @FXML
     private void cancelButtonOnAction(){
-        //창 닫기
-        Stage stage = (Stage) file_anchor_pane.getScene().getWindow();
-        stage.close();
+        if(!fileLeftname.equals("") || !fileRightname.equals("")) {
+            AlarmWindow exitAlarmWindow = new AlarmWindow("Load File Alarm", "Wouldn't you Load this file?");
+            exitAlarmWindow.showAndWait();
+            if ((boolean) exitAlarmWindow.getUserData()) {
+                ((Stage)file_anchor_pane.getScene().getWindow()).close();
+            }
+        }
+        else{
+            ((Stage)file_anchor_pane.getScene().getWindow()).close();
+        }
     }
 
     private File loadFileChooser(Button position){
