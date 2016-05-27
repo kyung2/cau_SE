@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 
 import java.io.IOException;
 
@@ -22,6 +23,7 @@ public class HelpWindow {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("HelpWindow");
+            stage.getIcons().add(new Image("/View/Image/sampleIcon.jpg"));
             stage.show();
         } catch (IOException ex) {
             System.out.println(ex);

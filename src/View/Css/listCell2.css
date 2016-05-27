@@ -10,8 +10,6 @@
     -fx-cell-hover-color: yellow;
     -fx-background-color: #eedc00;
 }
-.list-cell:{
-}
 .list-cell:even:filled:hover {
     -fx-background-color: yellow;
     -fx-text-fill: green;

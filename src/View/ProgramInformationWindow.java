@@ -5,7 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import javafx.scene.image.Image;
 import java.io.IOException;
 
 /**
@@ -21,7 +21,9 @@ public class ProgramInformationWindow {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setTitle("ProgramInformationWindow");
+
+            stage.setTitle("About Program");
+            stage.getIcons().add(new Image("/View/Image/sampleIcon.jpg"));
             stage.show();
         } catch (IOException ex) {
             System.out.println(ex);

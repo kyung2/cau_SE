@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -28,6 +29,7 @@ abstract public class AbstractFileWindow extends Stage {
         Scene scene = new Scene(root);
         this.setTitle(title);
         this.setScene(scene);
+        this.getIcons().add(new Image("/View/Image/sampleIcon.jpg"));
         this.show();
     }
     protected Label getWindowLabel(){
