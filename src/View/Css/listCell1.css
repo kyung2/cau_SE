@@ -6,7 +6,7 @@
     -fx-cell-hover-color: yellow;
     -fx-background-color: #eedc00;
 }
-.list-cell:filled:even { /* <=== changed to even */
+.list-cell:filled:even {
     -fx-cell-hover-color: green;
     -fx-background-color: #49c5b1;
 }
@@ -18,3 +18,7 @@
     -fx-background-color: green;
     -fx-text-fill: yellow;
 }
+.list-cell:filled:odd:selected:focused, .list-cell:odd:filled:selected {
+     -fx-background-color: linear-gradient(#e40046 0%, #ef426f 25%, #f67599 75%, #f8a3bc 100%);
+     -fx-text-fill: white;
+ }
