@@ -63,7 +63,7 @@ public class OpenFileWindowController {
     	if(file != null){
             try {
                modelLeft.readTextOuter(tab_num, file.getAbsolutePath(), 0);
-               left_file_text_area.setText(file.getName());
+               left_file_text_area.setText(file.getAbsolutePath());
                fileLeftname = file.getName();
             }catch(Exception e){
                 e.printStackTrace();
@@ -85,7 +85,7 @@ public class OpenFileWindowController {
     	if(file != null){
             try {
                modelRight.readTextOuter(tab_num, file.getAbsolutePath(), 1);
-               right_file_text_area.setText(file.getName());
+               right_file_text_area.setText(file.getAbsolutePath());
                fileRightname = file.getName();
             }catch(Exception e){
                 e.printStackTrace();
@@ -95,38 +95,40 @@ public class OpenFileWindowController {
 
     @FXML
     private void okButtonOnAction() throws IndexOutOfBoundsException, IllegalAccessException, IOException{
-        getTabContent();
-        if(!fileRightname.equals("") && !fileLeftname.equals("")){
-        //Parent root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-        //compare_button_file = (Button) root.lookup("#compare_button");
 
-    	/* 현재 탭의 구성요소들을 사용 가능하게 해 두고
-    	 * 버튼들을 활성화시킨다
-    	 */
+        /* 현재 탭의 구성요소들을 사용 가능하게 해 두고
+        * 버튼들을 활성화시킨다
+        */
+        getTabContent();
+
         int tab_num = (int)tab.getUserData();
         //textarea
         left_text_area.setVisible(true);
         right_text_area.setVisible(true);
-        left_text_area.setText(arrayListToString(modelLeft.getText(tab_num,0)));
-        right_text_area.setText(arrayListToString(modelRight.getText(tab_num,1)));
+        left_list_view.setVisible(false);
+        right_list_view.setVisible(false);
 
+        //탭의 패널 이름 변경
+        if(!fileLeftname.equals("")) {
+            left_text_area.setText(arrayListToString(modelLeft.getText(tab_num, 0)));
+            left_file_label.setText(fileLeftname);
+            changeTabName(fileLeftname,"left");
+
+        }
+        if(!fileRightname.equals("")) {
+            right_text_area.setText(arrayListToString(modelRight.getText(tab_num, 1)));
+            right_file_label.setText(fileRightname);
+            changeTabName(fileRightname,"right");
+        }
         //스플릿 패널 활성화 설정
         left_load.setDisable(false);
         left_edit.setDisable(false);
         left_save.setDisable(true);
-
         right_load.setDisable(false);
         right_edit.setDisable(false);
         right_save.setDisable(true);
 
-        //탭의 패널 이름 변경
-        changeTabName(fileLeftname,"left");
-        changeTabName(fileRightname,"right");
-        left_file_label.setText(fileLeftname);
-        right_file_label.setText(fileRightname);
 
-        //compare_button_file.setDisable(false);
-        }
         if(!left_edit.isDisable() && !right_edit.isDisable()) {
             BorderPane main_center_pane = (BorderPane)((BorderPane)tab.getTabPane().getScene().getRoot()).getCenter();
             Button compare = (Button)((ToolBar)(main_center_pane.getTop())).getItems().get(11);
