@@ -422,7 +422,7 @@ public class MainController implements Initializable {
         tab_menu.getItems().remove(2, tab_menu_item_num + 2);
         tab_menu_item_num = 0;
         Model model = ModelRealize.getInstance();
-        //model.closeAll(); 같은 것 필요
+        model.closeModelAll();
         //removeAllToolbarStage 해야 함
     }
 
