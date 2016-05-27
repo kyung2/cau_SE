@@ -359,8 +359,10 @@ public class SplitFilePaneController implements Initializable {
     private void invisibleListViewVisibleTextArea(){
         right_text_area.setVisible(true);
         right_text_list.setVisible(false);
+        right_text_list.setDisable(true);
         left_text_area.setVisible(true);
         left_text_list.setVisible(false);
+        left_text_list.setDisable(true);
     }
     /*
     * 파일 이름을 받아서 tab name 을 바꿔준다.
