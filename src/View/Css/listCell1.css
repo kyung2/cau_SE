@@ -22,3 +22,7 @@
      -fx-background-color: linear-gradient(#e40046 0%, #ef426f 25%, #f67599 75%, #f8a3bc 100%);
      -fx-text-fill: white;
  }
+.list-cell:filled:even:selected:focused, .list-cell:even:filled:selected {
+     -fx-background-color: green;
+     -fx-text-fill: yellow;
+ }

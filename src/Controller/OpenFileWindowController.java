@@ -102,7 +102,9 @@ public class OpenFileWindowController {
         left_text_area.setVisible(true);
         right_text_area.setVisible(true);
         left_list_view.setVisible(false);
+        left_list_view.setDisable(true);
         right_list_view.setVisible(false);
+        right_list_view.setDisable(true);
         Model model = ModelRealize.getInstance();
         //탭의 패널 이름 변경
         if(!fileLeftname.equals("")) {

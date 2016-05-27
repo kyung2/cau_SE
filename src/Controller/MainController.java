@@ -193,6 +193,7 @@ public class MainController implements Initializable {
     @FXML
     private void postDifferenceOnAction() {
         post_difference_button.setText("");
+        //left_text_list.getSelectionModel().;
         //맨 처음이면 비활성화 되어야함
     }
 
