@@ -75,6 +75,7 @@ public class SaveFileWindowController {
                 model.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
                 model.writeTextOuter(tab_num,left_file.getAbsolutePath(), 0);
                 changeTabName(left_file.getName(),"left");
+                left_file_label.setText(left_file.getName());
                 doActionBySave("left");
                 System.out.println("left");
             }
@@ -82,6 +83,7 @@ public class SaveFileWindowController {
                 model.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
                 model.writeTextOuter(tab_num,right_file.getAbsolutePath(), 1);
                 changeTabName(right_file.getName(),"right");
+                right_file_label.setText(right_file.getName());
                 doActionBySave("right");
                 System.out.println("right");
             }
