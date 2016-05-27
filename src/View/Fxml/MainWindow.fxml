@@ -55,7 +55,7 @@
                       </Button>
                   <Separator orientation="VERTICAL" prefHeight="34.0" prefWidth="4.0">
                      <effect>
-                        <ColorInput height="34.0" paint="BLACK" width="4.0" />
+                        <ColorInput height="34.0" paint="BLACK" width="1.0" />
                      </effect>
                   </Separator>
                       <Button id="copy_to_right_button" fx:id="copy_to_right_button" mnemonicParsing="false" onAction="#copyToRightOnAction" prefHeight="36.0" prefWidth="36.0" styleClass="btn">
@@ -80,7 +80,7 @@
                       </Button>
                   <Separator orientation="VERTICAL" prefHeight="34.0" prefWidth="4.0">
                      <effect>
-                        <ColorInput height="34.0" paint="BLACK" width="4.0" />
+                        <ColorInput height="34.0" paint="BLACK" width="1.0" />
                      </effect>
                   </Separator>
                       <Button id="compare_button" fx:id="compare_button" mnemonicParsing="false" onAction="#compareOnAction" prefHeight="36.0" prefWidth="36.0" styleClass="btn">
