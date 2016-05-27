@@ -3,6 +3,7 @@ package Controller;
 import View.AlarmWindow;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 
 /**
@@ -13,20 +14,20 @@ public class AlarmController {
     private Button yes_button;
     @FXML
     private void yesButtonOnAction(){
-        Window window = yes_button.getScene().getWindow();
+        Stage stage = (Stage)yes_button.getScene().getWindow();
 
         boolean clicked_button = true;
-        window.setUserData(clicked_button);
+        stage.setUserData(clicked_button);
 
-        window.hide();
+        stage.close();
     }
     @FXML
     private void noButtonOnAction(){
-        Window window = yes_button.getScene().getWindow();
+        Stage stage = (Stage)yes_button.getScene().getWindow();
 
         boolean clicked_button = false;
-        window.setUserData(clicked_button);
+        stage.setUserData(clicked_button);
 
-        window.hide();
+        stage.close();
     }
 }
