@@ -10,6 +10,7 @@ class ModelUnitFileIO {
     static public void open(String filepath, int i, ModelUnitData m) throws IOException, IndexOutOfBoundsException
     {
         ReadFromOuter(filepath,i,m);
+        m.codes[i].filepath = filepath;
         m.groupNull();
     }
     static public void save(String filepath, int i, ModelUnitData m) throws IOException, IndexOutOfBoundsException
