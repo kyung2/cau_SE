@@ -49,6 +49,7 @@ public class MainController implements Initializable {
     private ArrayList<String[]> toolbar_stage = new ArrayList<String[]>();
     private int tab_num, now_tab_num, tab_menu_item_num;
 
+    private int text_block_index;
     ImageIcon img = new ImageIcon("/View/Image/sampleIcon.jpg");
 
 
@@ -133,26 +134,68 @@ public class MainController implements Initializable {
             left_text_list.setItems(left_list_item);
             right_text_list.setItems(right_list_item);
 
+
+
+            if(left_list_item.get(0).equals(right_list_item.get(0))) text_block_index = 1;
+            else text_block_index = 0;
             left_text_list.setVisible(true);
             right_text_list.setVisible(true);
             left_text_list.setDisable(false);
             right_text_list.setDisable(false);
 
             //setHighlight(text_index);
+            left_text_list.getSelectionModel ().select (text_block_index);
+            right_text_list.getSelectionModel ().select (text_block_index);
+
+            // 파일의 차이점이 없을 경우 차이점 관련 버튼을 비활성화,
+            // 차이점이 있을 경우 차이점 관련 버튼을 활성화
+            if(left_list_item.size()==1) setClickabeButtons("false", "false", "false", "false", "false", "true", "true", "true", "true", "true");
+            else setClickabeButtons("true", "false", "true", "true", "true", "true", "true", "true", "true", "true");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        setClickabeButtons("true", "true", "true", "true", "true", "true", "true", "true", "true", "true");
     }
 
     @FXML
     private void copyToLeftOnAction() {
         System.out.println("Click");
+        Model model = ModelRealize.getInstance();
+        ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
+        ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
+        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
+        ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
+        String temp;
+
+        left_list_item.set(text_block_index,right_list_item.get(text_block_index));
+        temp = left_list_item.toString();
+        temp = temp.replaceAll("\n, ","\n");
+        temp = temp.substring(1,temp.length()-1);
+
+        model.setText(now_tab_num,stringToArrayList(temp),0);
+        left_text_area.setText(arrayListToString(model.getText(now_tab_num, 0)));
+        compareOnAction();
     }
 
     @FXML
     private void copyToRightOnAction() {
-        copy_to_right_button.setText("");
+        System.out.println("Click");
+        Model model = ModelRealize.getInstance();
+        ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
+        ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
+        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
+        ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
+        String temp;
+
+        right_list_item.set(text_block_index,left_list_item.get(text_block_index));
+        temp = right_list_item.toString();
+        temp = temp.replaceAll("\n, ","\n");
+        temp = temp.substring(1,temp.length()-1);
+
+        model.setText(now_tab_num,stringToArrayList(temp),1);
+        left_text_area.setText(arrayListToString(model.getText(now_tab_num, 1)));
+        compareOnAction();
     }
 
     @FXML
@@ -167,27 +210,37 @@ public class MainController implements Initializable {
     @FXML
     private void copyToLeftAllOnAction() {
         Model model = ModelRealize.getInstance();
-        ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
-        ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
-        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
 
-        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text, text_index));
-        ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text, text_index));
+        model.setText(now_tab_num,model.getText(now_tab_num,1),0);
 
-        left_text = model.getArrangedText(now_tab_num, 1);
-        left_text_list.setItems(right_list_item);
-        model.setText(now_tab_num, right_text, 0);
-        right_text_list.setItems(left_list_item);
+        left_text_area.setText(arrayListToString(model.getText(now_tab_num, 1)));
+        compareOnAction();
     }
 
     @FXML
     private void nextDifferenceOnAction() {
         next_difference_button.setText("");
         Model model = ModelRealize.getInstance();
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(model.getArrangedText(now_tab_num,0),model.getArrangedGroupSpace(now_tab_num)));
+
+        //맨 마지막이면 비활성화 되어야함
+        if(text_block_index+2<left_list_item.size()-1) {
+            text_block_index += 2;
+            if(post_difference_button.isDisable()) post_difference_button.setDisable(false);
+            if(text_block_index==left_list_item.size()-2 || text_block_index==left_list_item.size()-1)
+               next_difference_button.setDisable(true);
+        }
+
+        left_text_list.getSelectionModel ().select (text_block_index);
+        right_text_list.getSelectionModel ().select (text_block_index);
+
         left_text_area.setScrollTop(left_text_list.getMaxHeight());
+        left_text_area.getOnScrollFinished();
         right_text_area.setScrollLeft(Double.MAX_VALUE);
         left_text_area.positionCaret(left_text_area.getLength());
-        //맨 마지막이면 비활성화 되어야함
+        //left_text_area.setScrollTop(left_text_list.getMaxHeight());
+        right_text_area.setScrollLeft(Double.MAX_VALUE);
+        left_text_area.positionCaret(left_text_area.getLength());
     }
 
     @FXML
@@ -195,21 +248,65 @@ public class MainController implements Initializable {
         previous_difference_button.setText("");
         //left_text_list.getSelectionModel().;
         //맨 처음이면 비활성화 되어야함
+        if(text_block_index-2>=0) {
+            text_block_index -= 2;
+            if(next_difference_button.isDisable()) next_difference_button.setDisable(false);
+            if(text_block_index==1 || text_block_index==0)
+                post_difference_button.setDisable(true);
+        }
+        left_text_list.getSelectionModel ().select (text_block_index);
+        right_text_list.getSelectionModel ().select (text_block_index);
     }
 
     @FXML
     private void firstDifferenceOnAction() {
         first_difference_button.setText("");
+        //처음 차이점으로;
+        Model model = ModelRealize.getInstance();
+        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(model.getArrangedText(now_tab_num,0),model.getArrangedGroupSpace(now_tab_num)));
+
+        if(text_index.get(0) == 0) text_block_index=0;
+        else text_block_index=1;
+
+        left_text_list.getSelectionModel ().select (text_block_index);
+        right_text_list.getSelectionModel ().select (text_block_index);
+
+        // 이전 차이점 버튼 비활성화
+        // + 맨 처음으로 돌아갔는데, 맨 마지막 차이점일 경우(차이나는 부분이 하나밖에 없을 경우)
+        // 다음 차이점 버튼 비활성화
+        post_difference_button.setDisable(true);
+        if(!(text_block_index==left_list_item.size()-2 || text_block_index==left_list_item.size()-1)) next_difference_button.setDisable(false);
+        else next_difference_button.setDisable(true);
     }
 
     @FXML
     private void nowDifferenceOnAction() {
         now_difference_button.setText("");
+        //시점만을 현재 위치로 이동
+        left_text_list.getSelectionModel ().select (text_block_index);
+        right_text_list.getSelectionModel ().select (text_block_index);
     }
 
     @FXML
     private void lastDifferenceOnAction() {
         last_difference_button.setText("");
+        //마지막 차이점으로
+        Model model = ModelRealize.getInstance();
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(model.getArrangedText(now_tab_num,0),model.getArrangedGroupSpace(now_tab_num)));
+        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
+        if(text_index.get(0) == 0) text_block_index=left_list_item.size()-1;
+        else text_block_index=left_list_item.size()-2;
+
+        left_text_list.getSelectionModel ().select (text_block_index);
+        right_text_list.getSelectionModel ().select (text_block_index);
+
+        // 다음 차이점 버튼 비활성화
+        // + 맨 끝으로 갔는데, 맨 처음 차이점일 경우(차이나는 부분이 하나밖에 없을 경우)
+        // 이전 차이점 버튼 비활성화
+        next_difference_button.setDisable(true);
+        if(!(text_block_index==0 || text_block_index==1)) post_difference_button.setDisable(false);
+        else post_difference_button.setDisable(true);
     }
 
     @FXML
