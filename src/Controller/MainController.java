@@ -146,10 +146,14 @@ public class MainController implements Initializable {
             //setHighlight(text_index);
             left_text_list.getSelectionModel ().select (text_block_index);
             right_text_list.getSelectionModel ().select (text_block_index);
+
+            // 파일의 차이점이 없을 경우 차이점 관련 버튼을 비활성화,
+            // 차이점이 있을 경우 차이점 관련 버튼을 활성화
+            if(left_list_item.size()==1) setClickabeButtons("false", "false", "false", "false", "false", "true", "true", "true", "true", "true");
+            else setClickabeButtons("true", "false", "true", "true", "true", "true", "true", "true", "true", "true");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        setClickabeButtons("true", "false", "true", "true", "true", "true", "true", "true", "true", "true");
     }
 
     @FXML
