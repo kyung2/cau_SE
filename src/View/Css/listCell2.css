@@ -1,37 +1,33 @@
 .list-cell {
     -fx-alignment: top_left;
-    -fx-background: white;
+    -fx-background: gray;
 }
 .list-cell:filled:odd {
-    -fx-cell-hover-color: #8e8e8e;
-    -fx-background-color: gray;
-    -fx-text-fill :white;
-
+    -fx-cell-hover-color: green;
+    -fx-background-color: #49c5b1;
 }
-/*이건 기능 안하는것 같은데 / */
 .list-cell:filled:even {
-    -fx-cell-hover-color: red;
+    -fx-cell-hover-color: yellow;
     -fx-background-color: #eedc00;
 }
-
 .list-cell:even:filled:hover {
     -fx-background-color: yellow;
-    -fx-text-fill: white;
+    -fx-text-fill: green;
 }
-/*
 .list-cell:odd:filled:hover {
     -fx-background-color: green;
     -fx-text-fill: yellow;
-}*/
+}
 .list-cell:filled:even:selected:focused, .list-cell:filled:even:selected {
-     -fx-background-color: linear-gradient(#e40046 0%, #ef426f 25%, #f67599 75%, #f8a3bc 100%);
-     -fx-text-fill: white;
- }
+    -fx-background-color: linear-gradient(#e40046 0%, #ef426f 25%, #f67599 75%, #f8a3bc 100%);
+    -fx-text-fill: white;
+}
 
 .list-cell:filled:odd:selected:focused, .list-cell:filled:odd:selected {
-    -fx-background-color: lightgrey;
-    -fx-text-fill: black;
+    -fx-background-color: green;
+    -fx-text-fill : yellow;
 }
+
 /*
 .list-cell {
     -fx-alignment: top_left;
