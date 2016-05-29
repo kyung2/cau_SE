@@ -11,7 +11,7 @@ hover 적용 & 클릭시 이벤트 적용
 
 .btn:hover,.tab_btn:hover{
     -fx-background-color: #cacaca;
-    -f-tooltip-visible:true;
+    -fx-tooltip-visible:true;
 }
 
 .btn:pressed,.tab_btn:pressed {
@@ -20,9 +20,11 @@ hover 적용 & 클릭시 이벤트 적용
 
 .tooltip {
     -fx-text-fill:black;
-    -fx-border : 2px solid black;
-    -fx-background-radius: 3px;
-    -fx-background-color: #f8cacc;
+    -fx-text-alignment: center;
+    -fx-border-color: black;
+    -fx-border-radius: 3px;
+    -fx-background-color: WHITE;
+    -fx-effect : none;
 }
 
 #program_info_ok_button {
@@ -81,3 +83,8 @@ hover 적용 & 클릭시 이벤트 적용
 }
 
 
+/*
+.separator {
+    -fx-background-color : darkgray;
+}
+*/
