@@ -2,38 +2,35 @@
 /*compare 하고 나서의 text 창 색깔 */
 .list-cell {
     -fx-alignment: top_left;
-    -fx-background: white;
+    -fx-background: rgb(218, 217, 214);
 }
-/**/
+/*틀렸을때 기본*/
 .list-cell:filled:odd {
-    -fx-cell-hover-color: yellow;
-    -fx-background-color: #eedc00;
+    -fx-cell-hover-color: #ff4c3d;;
+    -fx-background-color: #DD4132;
 }
-/**/
+/*맞았을때 */
 .list-cell:filled:even {
-    -fx-cell-hover-color: green;
-    -fx-background-color: #49c5b1;
+    -fx-background-color: WHITE;
 }
-/**/
+/*틀렸을때 hover*/
 .list-cell:odd:filled:hover {
-    -fx-background-color: yellow;
-    -fx-text-fill: green;
+    -fx-background-color: #92A8D1;
+    -fx-text-fill: black;
 }
-/**/
+/*맞았을때 hover*/
 .list-cell:even:filled:hover {
-    -fx-background-color: green;
-    -fx-text-fill: yellow;
+    -fx-background-color: #9896A4;
+    -fx-text-fill: Black;
 }
 /**/
 .list-cell:filled:odd:selected:focused, .list-cell:odd:filled:selected {
-    -fx-background-color: #ef426f;
-     -fx-background-color: linear-gradient(#e40046 0%, #ef426f 25%, #f67599 75%, #f8a3bc 100%);
-     -fx-text-fill: WHITE;
+    -fx-background-color: #F7786B;
+    -fx-text-fill: WHITE;
  }
 /**/
 .list-cell:filled:even:selected:focused, .list-cell:even:filled:selected {
-     -fx-background-color: green;
-     -fx-text-fill: yellow;
+    -fx-background-color: #92A8D1;
  }
 /**/
 
