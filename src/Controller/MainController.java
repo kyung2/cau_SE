@@ -162,7 +162,8 @@ public class MainController implements Initializable {
         System.out.println("Click");
         Model model = ModelRealize.getInstance();
         try {
-            model.mergeByGroup(now_tab_num, text_block_index, false);
+            text_block_index=left_text_list.getSelectionModel().getSelectedIndex();
+            model.mergeByGroup(now_tab_num, text_block_index+(model.getArrangedGroupSpace(now_tab_num).get(0)==0?1:0), false);
         }
          catch (MergeLineIllegalException e) {
             e.printStackTrace();
@@ -183,7 +184,8 @@ public class MainController implements Initializable {
         System.out.println("Click");
         Model model = ModelRealize.getInstance();
         try {
-            model.mergeByGroup(now_tab_num, text_block_index, true);
+            text_block_index=right_text_list.getSelectionModel().getSelectedIndex();
+            model.mergeByGroup(now_tab_num, text_block_index+(model.getArrangedGroupSpace(now_tab_num).get(0)==0?1:0), true);
         }
         catch (MergeLineIllegalException e) {
             e.printStackTrace();
@@ -257,7 +259,7 @@ public class MainController implements Initializable {
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
         ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(model.getArrangedText(now_tab_num,0),model.getArrangedGroupSpace(now_tab_num)));
 
-        if(text_index.get(0) == 0) text_block_index=0;
+        if(text_index.get(0) == 0) text_block_index=1;
         else text_block_index=1;
 
         left_text_list.getSelectionModel ().select (text_block_index);
