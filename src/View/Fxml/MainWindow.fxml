@@ -38,7 +38,6 @@
                               <Tooltip contentDisplay="BOTTOM" text="Previous Difference" />
                           </tooltip>
                       </Button>
-                      <Separator orientation="VERTICAL" prefHeight="34.0" prefWidth="4.0"></Separator>
                       <Button id="first_difference_button" fx:id="first_difference_button" mnemonicParsing="false" onAction="#firstDifferenceOnAction" prefHeight="36.0" prefWidth="36.0" styleClass="btn">
                           <tooltip>
                               <Tooltip contentDisplay="BOTTOM" text="First Difference" />
@@ -69,7 +68,6 @@
                               <Tooltip contentDisplay="BOTTOM" text="Copy Left" />
                           </tooltip>
                       </Button>
-                      <Separator orientation="VERTICAL" prefHeight="34.0" prefWidth="4.0"></Separator>
                       <Button id="copy_to_right_all_button" fx:id="copy_to_right_all_button" mnemonicParsing="false" onAction="#copyToRightAllOnAction" prefHeight="36.0" prefWidth="36.0" styleClass="btn">
                           <tooltip>
                               <Tooltip contentDisplay="BOTTOM" text="Copy All Right" />

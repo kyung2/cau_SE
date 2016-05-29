@@ -18,14 +18,12 @@ hover 적용 & 클릭시 이벤트 적용
     -fx-border-color:black; /* 선 바꾸는 것 */
 }
 
-.tooltip {
-    -fx-text-fill:black;
-    -fx-text-alignment: center;
-    -fx-border-color: black;
+.tooltip     {
+    -fx-text-fill : black;
+    -fx-border-color: darkgray;
     -fx-border-radius: 3px;
     -fx-background-color: WHITE;
-    -fx-effect : none;
-}
+   }
 
 #program_info_ok_button {
     -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
@@ -82,9 +80,3 @@ hover 적용 & 클릭시 이벤트 적용
     -fx-background-image: url("/View/Image/copy_all_Left.png");
 }
 
-
-/*
-.separator {
-    -fx-background-color : darkgray;
-}
-*/
