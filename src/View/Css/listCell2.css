@@ -28,7 +28,7 @@
     -fx-background-color: #F7786B;
     -fx-text-fill: white;
 }
-/**/
+/*맞았을때 포커스 */
 
 .list-cell:filled:odd:selected:focused, .list-cell:filled:odd:selected {
     -fx-background-color: #92A8D1;
@@ -77,71 +77,20 @@ hover 적용 & 클릭시 이벤트 적용
 */
 
 /*
+    -fx-background-color : #F7CAC9;
+    로즈 쿼터니트
+    F7786B 피치에코
+   -fx-background-color: #92A8D1;
+    -fx-background-color: #FAE03C;
+    -fx-background-color: #79C753;
+    -fx-background-color: #98DDDE;
+    -fx-background-color: #034F84;
 팬톤 올해의컬러
-Hex#: F7CAC9
-RGB: 247.202.201
-CMYK: 1.24.15.0
-Pantone: 13-1520
-*Rose Quartz
 
-
-Hex#: F7786B
-RGB: 247.120.107
-CMYK: 0.67.53
-Pantone: 16-1548
-Peach Echo
-
-Hex#: DD4132
-RGB: 221.65.50
-CMYK: 8.89.90.1
-Pantone: 17-1564
-Fiesta
-
-Hex#: FAE03C
-RGB: 250.224.60
-CMYK: 4.7.87.0
-Pantone: 12-0752
-Buttercup
-
-
-Hex#: B18F6A
-RGB: 177.143.106
-CMYK: 30.41.63.4
-Pantone: 15-1040
-Iced Coffee
-
-Hex#: 9896A4
-RGB: 152.150.164
-CMYK: 43.38.27.1
-Pantone: 16-3905
-Lilac Gray
-
-Hex#: 79C753
-RGB: 121.199.83
-CMYK: 56.0.90.0
-Pantone: 15-0146
-Green Flash
-
-
-Hex#:
-RGB: 152.221.222
-CMYK: 37.0.15.0
-Pantone: 13-4810
-Limpet Shell
-
-Hex#: 034F84
-RGB: 3.79.132
-CMYK: 99.74.24.7
-Pantone: 19-4049
-Snorkel Blue
-
-Hex#: 92A8D1
-RGB: 146.168.209
-CMYK: 42.24.3.0
-Pantone: 15-3919
-*Serenity
-
-
-
+피에스타 Hex#: DD4132
+버터컵 Hex#: FAE03C
+아이스커피 : Hex#: B18F6A
+라일락 그레이 : Hex#: 9896A4
+그린 플래쉬 : Hex#: 79C753
 
 */
