@@ -66,7 +66,7 @@
                         <Label fx:id="right_file_label" layoutX="22.0" layoutY="4.0" prefHeight="23.0" prefWidth="200.0" text="FileName" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="5.0" />
                         <Button id="right_load_button" fx:id="right_load_button" layoutX="135.0" layoutY="11.0" mnemonicParsing="false" onAction="#rightLoadButtonOnAction" prefHeight="24.0" prefWidth="24.0" styleClass="tab_btn" AnchorPane.rightAnchor="55.0" AnchorPane.topAnchor="4.0">
                             <tooltip>
-                                <Tooltip contentDisplay="BOTTOM" text="Load" />
+                                <Tooltip contentDisplay="BOTTOM" text="Load"  />
                             </tooltip>
                         </Button>
                         <Button id="right_edit_button" fx:id="right_edit_button" layoutX="192.0" layoutY="14.0" mnemonicParsing="false" onAction="#rightEditButtonOnAction" prefHeight="24.0" prefWidth="24.0" styleClass="tab_btn" AnchorPane.rightAnchor="30.0" AnchorPane.topAnchor="4.0">

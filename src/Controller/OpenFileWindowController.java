@@ -18,10 +18,6 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-/**
- * Created by woojin on 2016-05-16.
- */
-
 public class OpenFileWindowController {
 	@FXML
 	private AnchorPane file_anchor_pane;
@@ -155,10 +151,11 @@ public class OpenFileWindowController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Files", "*.java", "*.c", "*.cpp", "*.txt"),
+                new FileChooser.ExtensionFilter("All Files","*.txt", "*.java", "*.c", "*.cpp"),
+                new FileChooser.ExtensionFilter("Text Files", "*.txt"),
                 new FileChooser.ExtensionFilter("Java Files", "*.java"),
                 new FileChooser.ExtensionFilter("C Files", "*.c","*.cpp"),
-                new FileChooser.ExtensionFilter("Text Files", "*.txt")
+                new FileChooser.ExtensionFilter("Text Files", "*.txt`")
         );
         File selectedFile = fileChooser.showOpenDialog(null);
         // 선택된 파일이 없으면
