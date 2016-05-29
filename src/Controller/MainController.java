@@ -219,14 +219,13 @@ public class MainController implements Initializable {
 
     @FXML
     private void nextDifferenceOnAction() {
-        next_difference_button.setText("");
         Model model = ModelRealize.getInstance();
         ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(model.getArrangedText(now_tab_num,0),model.getArrangedGroupSpace(now_tab_num)));
 
         //맨 마지막이면 비활성화 되어야함
         if(text_block_index+2<left_list_item.size()-1) {
             text_block_index += 2;
-            if(post_difference_button.isDisable()) post_difference_button.setDisable(false);
+            if(previous_difference_button.isDisable()) previous_difference_button.setDisable(false);
             if(text_block_index==left_list_item.size()-2 || text_block_index==left_list_item.size()-1)
                next_difference_button.setDisable(true);
         }
@@ -245,14 +244,13 @@ public class MainController implements Initializable {
 
     @FXML
     private void previousDifferenceOnAction() {
-        previous_difference_button.setText("");
-        //left_text_list.getSelectionModel().;
+        //left_text_list.getSelectionModel().;      `
         //맨 처음이면 비활성화 되어야함
         if(text_block_index-2>=0) {
             text_block_index -= 2;
             if(next_difference_button.isDisable()) next_difference_button.setDisable(false);
             if(text_block_index==1 || text_block_index==0)
-                post_difference_button.setDisable(true);
+                previous_difference_button.setDisable(true);
         }
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
@@ -260,7 +258,6 @@ public class MainController implements Initializable {
 
     @FXML
     private void firstDifferenceOnAction() {
-        first_difference_button.setText("");
         //처음 차이점으로;
         Model model = ModelRealize.getInstance();
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
@@ -275,7 +272,7 @@ public class MainController implements Initializable {
         // 이전 차이점 버튼 비활성화
         // + 맨 처음으로 돌아갔는데, 맨 마지막 차이점일 경우(차이나는 부분이 하나밖에 없을 경우)
         // 다음 차이점 버튼 비활성화
-        post_difference_button.setDisable(true);
+        previous_difference_button.setDisable(true);
         if(!(text_block_index==left_list_item.size()-2 || text_block_index==left_list_item.size()-1)) next_difference_button.setDisable(false);
         else next_difference_button.setDisable(true);
     }
@@ -305,8 +302,8 @@ public class MainController implements Initializable {
         // + 맨 끝으로 갔는데, 맨 처음 차이점일 경우(차이나는 부분이 하나밖에 없을 경우)
         // 이전 차이점 버튼 비활성화
         next_difference_button.setDisable(true);
-        if(!(text_block_index==0 || text_block_index==1)) post_difference_button.setDisable(false);
-        else post_difference_button.setDisable(true);
+        if(!(text_block_index==0 || text_block_index==1)) previous_difference_button.setDisable(false);
+        else previous_difference_button.setDisable(true);
     }
 
     @FXML
