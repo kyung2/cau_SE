@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * Created by User on 2016-05-20.
  */
 public class PseudoMain2 {
+    static final int changeNum = 3;
     public static void main(String args[]) {
 
         System.out.println("0000");
@@ -22,51 +23,42 @@ public class PseudoMain2 {
         a1.add("b");
         a1.add("c");
         a1.add("d");
-        a1.add("e");
-        a1.add("f");
         a1.add("g");
+        a1.add("h");
+        a1.add("j");
+        a1.add("k");
+        a1.add("l");
+        a1.add("o");
+        a1.add("q");
+        a1.add("t");
 
-        a2.add("b");
-        a2.add("c");
-        a2.add("f");
+
+
+        a2.add("a");
+        a2.add("d");
+        a2.add("e");
         a2.add("f");
         a2.add("g");
-        a2.add("d");
-
-        b1.add("a");
-        b1.add("b");
-        b1.add("c");
-        b1.add("f");
-        b1.add("f");
-        b1.add("g");
-
-        b2.add("b");
-        b2.add("c");
-        b2.add("f");
-        b2.add("f");
-        b2.add("g");
-        b2.add("d");
+        a2.add("i");
+        a2.add("j");
+        a2.add("n");
+        a2.add("o");
+        a2.add("r");
+        a2.add("s");
+        a2.add("t");
 
         System.out.println("0000");
         Model m = ModelRealize.getInstance();
         System.out.println("0000");
         m.newModel(2);
-        m.newModel(4);
         c = m.newModel();
         System.out.println("0000");
         try
         {
 
-            m.readTextOuter(2,fp1,0);
+            m.setText(2,a1,0);
+            m.setText(2,a2,1);
             System.out.println("0000");
-            m.readTextOuter(2,fp2,1);
-            m.setText(4,b1,0);
-            m.setText(4,b2,1);
-            m.setText(c,a2,0);
-            m.setText(c,a1,1);
-            System.out.println("0000");
-
-            System.out.println(m.isOpen(2,0));
 
             a3 = m.getText(2,0);
             System.out.println("2,0 texts");
@@ -78,76 +70,46 @@ public class PseudoMain2 {
             for(int i=0;i<a3.size();i++) System.out.println(a3.get(i));
             System.out.println("-\n\n");
 
+            a3 = m.getArrangedText(2,0);
+            System.out.println("2,0 Atexts");
+            for(int i=0;i<a3.size();i++) System.out.println(a3.get(i));
+            System.out.println("-\n\n");
+
+            a3 = m.getArrangedText(2,1);
+            System.out.println("2,1 Atexts");
+            for(int i=0;i<a3.size();i++) System.out.println(a3.get(i));
+            System.out.println("-\n\n");
+
             aaa = m.getArrangedGroupSpace(2);
-            for(int k=0;k<aaa.size();k++)
-            {
-                System.out.println(aaa.get(k));
-            }
-            System.out.println("00000");
+            System.out.println("2 gnum");
+            for(int i=0;i<aaa.size();i++) System.out.println(aaa.get(i));
+            System.out.println("-\n\n");
 
-
-            aaa = m.getArrangedGroupSpace(c);
-            for(int k=0;k<aaa.size();k++)
-            {
-                System.out.println(aaa.get(k));
-            }
-            System.out.println("00000");
-
-            aaa = m.getArrangedGroupSpace(4);
-            for(int k=0;k<aaa.size();k++)
-            {
-                System.out.println(aaa.get(k));
-            }
-            System.out.println("00000");
-
-
-            a3 =  m.getArrangedText(2,1);
-            System.out.println("-");
+            m.mergeByGroup(2,changeNum,true);
+            a3 = m.getText(2,0);
+            System.out.println("2,0 texts");
             for(int i=0;i<a3.size();i++) System.out.println(a3.get(i));
-            System.out.println("-");
+            System.out.println("-\n\n");
 
-            System.out.println("0000");
-            m.mergeByGroup(2,3,false);
-            System.out.println("0000");
+            a3 = m.getText(2,1);
+            System.out.println("2,1 texts");
+            for(int i=0;i<a3.size();i++) System.out.println(a3.get(i));
+            System.out.println("-\n\n");
+
+            a3 = m.getArrangedText(2,0);
+            System.out.println("2,0 Atexts");
+            for(int i=0;i<a3.size();i++) System.out.println(a3.get(i));
+            System.out.println("-\n\n");
+
+            a3 = m.getArrangedText(2,1);
+            System.out.println("2,1 Atexts");
+            for(int i=0;i<a3.size();i++) System.out.println(a3.get(i));
+            System.out.println("-\n\n");
+
             aaa = m.getArrangedGroupSpace(2);
-            for(int k=0;k<aaa.size();k++)
-            {
-                System.out.println(aaa.get(k));
-            }
-            System.out.println("00000");
-            a3 =  m.getArrangedText(2,0);
-            System.out.println("-");
-            for(int i=0;i<a3.size();i++) System.out.println(a3.get(i));
-            System.out.println("-");
-            a3 =  m.getArrangedText(2,1);
-            System.out.println("-");
-            for(int i=0;i<a3.size();i++) System.out.println(a3.get(i));
-            System.out.println("-");
-
-            System.out.println("0000");
-            m.mergeByGroup(2,1,true);
-            System.out.println("0000");
-            a3 =  m.getArrangedText(2,0);
-            System.out.println("-");
-            for(int i=0;i<a3.size();i++) System.out.println(a3.get(i));
-            System.out.println("-");
-            a3 =  m.getArrangedText(2,1);
-            System.out.println("-");
-            for(int i=0;i<a3.size();i++) System.out.println(a3.get(i));
-            System.out.println("-");
-            aaa = m.getArrangedGroupSpace(2);
-            for(int k=0;k<aaa.size();k++)
-            {
-                System.out.println(aaa.get(k));
-            }
-            System.out.println("00000");
-
-            System.out.println("11111");
-            m.writeTextOuter(2,"C:\\Users\\User\\a.txt",0);
-            m.closeModel(2);
-            m.closeModel(c);
-            System.out.println("1131211");
-            System.out.println("111211");
+            System.out.println("2 gnum");
+            for(int i=0;i<aaa.size();i++) System.out.println(aaa.get(i));
+            System.out.println("-\n\n");
 
             System.out.println(LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum));
 

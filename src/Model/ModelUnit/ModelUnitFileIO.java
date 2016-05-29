@@ -16,6 +16,7 @@ class ModelUnitFileIO {
     static public void save(String filepath, int i, ModelUnitData m) throws IOException, IndexOutOfBoundsException
     {
         WriteFromOuter(filepath,i,m);
+        m.codes[i].filepath = filepath;
     }
     static public void save(int i, ModelUnitData m) throws IOException
     {
