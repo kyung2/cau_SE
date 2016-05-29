@@ -1,32 +1,41 @@
+
+/*compare 하고 나서의 text 창 색깔 */
 .list-cell {
     -fx-alignment: top_left;
-    -fx-background: gray;
+    -fx-background: white;
 }
+/**/
 .list-cell:filled:odd {
     -fx-cell-hover-color: yellow;
     -fx-background-color: #eedc00;
 }
+/**/
 .list-cell:filled:even {
     -fx-cell-hover-color: green;
     -fx-background-color: #49c5b1;
 }
+/**/
 .list-cell:odd:filled:hover {
     -fx-background-color: yellow;
     -fx-text-fill: green;
 }
+/**/
 .list-cell:even:filled:hover {
     -fx-background-color: green;
     -fx-text-fill: yellow;
 }
+/**/
 .list-cell:filled:odd:selected:focused, .list-cell:odd:filled:selected {
     -fx-background-color: #ef426f;
      -fx-background-color: linear-gradient(#e40046 0%, #ef426f 25%, #f67599 75%, #f8a3bc 100%);
      -fx-text-fill: WHITE;
  }
+/**/
 .list-cell:filled:even:selected:focused, .list-cell:even:filled:selected {
      -fx-background-color: green;
      -fx-text-fill: yellow;
  }
+/**/
 
 
 /*
