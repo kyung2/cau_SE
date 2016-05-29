@@ -223,23 +223,16 @@ public class MainController implements Initializable {
         ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(model.getArrangedText(now_tab_num,0),model.getArrangedGroupSpace(now_tab_num)));
 
         //맨 마지막이면 비활성화 되어야함
-        if(text_block_index+2<left_list_item.size()-1) {
-            text_block_index += 2;
+        if(text_block_index+2<=left_list_item.size()-1) {
+            text_block_index = left_text_list.getSelectionModel().getSelectedIndex() + 2;
             if(previous_difference_button.isDisable()) previous_difference_button.setDisable(false);
-            if(text_block_index==left_list_item.size()-2 || text_block_index==left_list_item.size()-1)
+            if(text_block_index>=left_list_item.size()-2)
                next_difference_button.setDisable(true);
         }
 
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
 
-        left_text_area.setScrollTop(left_text_list.getMaxHeight());
-        left_text_area.getOnScrollFinished();
-        right_text_area.setScrollLeft(Double.MAX_VALUE);
-        left_text_area.positionCaret(left_text_area.getLength());
-        //left_text_area.setScrollTop(left_text_list.getMaxHeight());
-        right_text_area.setScrollLeft(Double.MAX_VALUE);
-        left_text_area.positionCaret(left_text_area.getLength());
     }
 
     @FXML
@@ -247,9 +240,9 @@ public class MainController implements Initializable {
         //left_text_list.getSelectionModel().;      `
         //맨 처음이면 비활성화 되어야함
         if(text_block_index-2>=0) {
-            text_block_index -= 2;
+            text_block_index = left_text_list.getSelectionModel().getSelectedIndex() - 2;
             if(next_difference_button.isDisable()) next_difference_button.setDisable(false);
-            if(text_block_index==1 || text_block_index==0)
+            if(text_block_index<=1)
                 previous_difference_button.setDisable(true);
         }
         left_text_list.getSelectionModel ().select (text_block_index);
@@ -280,7 +273,19 @@ public class MainController implements Initializable {
     @FXML
     private void nowDifferenceOnAction() {
         now_difference_button.setText("");
+        Model model = ModelRealize.getInstance();
+        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(model.getArrangedText(now_tab_num,0),model.getArrangedGroupSpace(now_tab_num)));
+
         //시점만을 현재 위치로 이동
+        text_block_index=left_text_list.getSelectionModel().getSelectedIndex();
+        if(left_text_list.getSelectionModel().getSelectedIndex()==0 || left_text_list.getSelectionModel().getSelectedIndex()==1)
+            previous_difference_button.setDisable(true);
+        else previous_difference_button.setDisable(false);
+
+        if(left_text_list.getSelectionModel().getSelectedIndex()==left_list_item.size()-2 || left_text_list.getSelectionModel().getSelectedIndex()==left_list_item.size()-1)
+            next_difference_button.setDisable(true);
+        else next_difference_button.setDisable(false);
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
     }
