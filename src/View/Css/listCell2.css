@@ -23,7 +23,7 @@
     -fx-background-color: #9896A4;
     -fx-text-fill: black;
 }
-/**/
+/*틀린거 프레스드 */
 .list-cell:filled:even:selected:focused, .list-cell:filled:even:selected {
     -fx-background-color: #F7786B;
     -fx-text-fill: white;
@@ -31,11 +31,14 @@
 /*맞았을때 포커스 */
 
 .list-cell:filled:odd:selected:focused, .list-cell:filled:odd:selected {
+    -fx-background-color: #daa520;
+    /*
     -fx-background-color: #92A8D1;
     -fx-background-color: #FAE03C;
     -fx-background-color: #79C753;
     -fx-background-color: #98DDDE;
     -fx-background-color: #034F84;
+    */
 }
 /**/
 

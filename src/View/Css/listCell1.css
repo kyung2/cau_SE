@@ -30,7 +30,14 @@
  }
 /*맞았을때 포커스*/
 .list-cell:filled:even:selected:focused, .list-cell:even:filled:selected {
-    -fx-background-color: #92A8D1;
+    -fx-background-color: #daa520;
+    /*
+      -fx-background-color: #92A8D1;
+      -fx-background-color: #FAE03C;
+      -fx-background-color: #79C753;
+      -fx-background-color: #98DDDE;
+      -fx-background-color: #034F84;
+      */
  }
 /**/
 
