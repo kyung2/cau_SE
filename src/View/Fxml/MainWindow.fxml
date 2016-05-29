@@ -110,7 +110,7 @@
           <Menu mnemonicParsing="false" text="Merge">
             <items>
               <MenuItem fx:id="next_difference_menu_item" accelerator="Alt+DOWN" mnemonicParsing="false" onAction="#nextDifferenceOnAction" text="Next Difference" />
-                  <MenuItem fx:id="previous_difference_menu_item" accelerator="Alt+UP" mnemonicParsing="false" onAction="#previousDifferenceOnAction" text="Post Difference" />
+                  <MenuItem fx:id="previous_difference_menu_item" accelerator="Alt+UP" mnemonicParsing="false" onAction="#previousDifferenceOnAction" text="Pre Difference" />
                   <MenuItem fx:id="first_difference_menu_item" accelerator="Alt+Home" mnemonicParsing="false" onAction="#firstDifferenceOnAction" text="First Difference" />
                   <MenuItem fx:id="now_difference_menu_item"  accelerator="Alt+N" mnemonicParsing="false" onAction="#nowDifferenceOnAction" text="Now Selected Difference" />
                   <MenuItem fx:id="last_difference_menu_item"  accelerator="Alt+End" mnemonicParsing="false" onAction="#lastDifferenceOnAction" text="Last Difference" />

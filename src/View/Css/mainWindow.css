@@ -125,7 +125,7 @@ Pantone: 15-3919
 #next_difference_button{
     -fx-background-image: url("/View/Image/next_diff.png");
 }
-#pre_difference_button{
+#previous_difference_button {
     -fx-background-image: url("/View/Image/pre_diff.png");
 }
 #first_difference_button{
