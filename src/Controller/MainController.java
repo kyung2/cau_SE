@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Model;
+import Model.ModelException.MergeLineIllegalException;
 import Model.ModelRealize;
 
 import View.*;
@@ -160,6 +161,12 @@ public class MainController implements Initializable {
     private void copyToLeftOnAction() {
         System.out.println("Click");
         Model model = ModelRealize.getInstance();
+        try {
+            model.mergeByGroup(now_tab_num, text_block_index, false);
+        }
+         catch (MergeLineIllegalException e) {
+            e.printStackTrace();
+        }
         ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
         ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
@@ -167,12 +174,6 @@ public class MainController implements Initializable {
         ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
         String temp;
 
-        left_list_item.set(text_block_index,right_list_item.get(text_block_index));
-        temp = left_list_item.toString();
-        temp = temp.replaceAll("\n, ","\n");
-        temp = temp.substring(1,temp.length()-1);
-
-        model.setText(now_tab_num,stringToArrayList(temp),0);
         left_text_area.setText(arrayListToString(model.getText(now_tab_num, 0)));
         compareOnAction();
     }
@@ -181,6 +182,12 @@ public class MainController implements Initializable {
     private void copyToRightOnAction() {
         System.out.println("Click");
         Model model = ModelRealize.getInstance();
+        try {
+            model.mergeByGroup(now_tab_num, text_block_index, true);
+        }
+        catch (MergeLineIllegalException e) {
+            e.printStackTrace();
+        }
         ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
         ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
@@ -188,12 +195,6 @@ public class MainController implements Initializable {
         ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
         String temp;
 
-        right_list_item.set(text_block_index,left_list_item.get(text_block_index));
-        temp = right_list_item.toString();
-        temp = temp.replaceAll("\n, ","\n");
-        temp = temp.substring(1,temp.length()-1);
-
-        model.setText(now_tab_num,stringToArrayList(temp),1);
         left_text_area.setText(arrayListToString(model.getText(now_tab_num, 1)));
         compareOnAction();
     }

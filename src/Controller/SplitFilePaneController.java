@@ -139,6 +139,9 @@ public class SplitFilePaneController implements Initializable {
         }
         else{
             //수정이 불가능 할 때 = 누르면 수정이 가능. 로드 불가능, 저장 가능, compare 불가능
+            Model model = ModelRealize.getInstance();
+            left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
+            if(!right_text_area.isEditable()) right_text_area.setText(arrayListToString(model.getText(tab_num,1)));
             left_text_area.setEditable(true);
             checkCompareButton();
             invisibleListViewVisibleTextArea();
@@ -171,6 +174,9 @@ public class SplitFilePaneController implements Initializable {
         }
         else{
             //수정이 불가능 할 때 - 누르면 수정 가능, 로드 불가능, 저장 가능
+            Model model = ModelRealize.getInstance();
+            if(!left_text_area.isEditable()) left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
+            right_text_area.setText(arrayListToString(model.getText(tab_num,1)));
             right_text_area.setEditable(true);
             invisibleListViewVisibleTextArea();
             checkCompareButton();
