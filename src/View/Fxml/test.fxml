@@ -1,3 +1,4 @@
+<!--fxml test 창 나중에 삭제 .-->
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.layout.*?>
@@ -11,5 +12,9 @@
             <Tooltip autoFix="false" contentDisplay="BOTTOM" height="20.0" text="hello" width="20.0" />
          </tooltip>
       </Button>
+       <Button layoutX="-Infinity" layoutY="-Infinity" text = "Sample">
+       <tooltip><Tooltip autoFix = "true" contentDisplay="GRAPHIC_ONLY"/>
+       </tooltip>
+       </Button>
    </children>
 </AnchorPane>
