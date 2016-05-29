@@ -22,7 +22,7 @@ public class HelpWindow {
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
-            stage.setTitle("HelpWindow");
+            stage.setTitle("Help");
             stage.getIcons().add(new Image("/View/Image/sampleIcon.jpg"));
             stage.show();
         } catch (IOException ex) {

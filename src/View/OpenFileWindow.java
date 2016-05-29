@@ -10,13 +10,13 @@ public class OpenFileWindow extends AbstractFileWindow {
 
 
     public OpenFileWindow(Tab tab) {
-        super("OpenFileWindow",new OpenFileWindowController());
+        super("Open Files",new OpenFileWindowController());
         this.getScene().setUserData(tab);
         initLabel();
     }
 
     @Override
     protected void initLabel(){
-        getWindowLabel().setText("Compare Directory / File");
+        getWindowLabel().setText("Select Directory / File");
     }
 }

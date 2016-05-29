@@ -15,9 +15,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-/**
- * Created by woojin on 2016-05-18.
- */
 public class SaveFileWindowController {
     private boolean item_flag = false;
     private File left_file, right_file;
@@ -148,10 +145,11 @@ public class SaveFileWindowController {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Files", "*.java", "*.c", "*.cpp", "*.txt"),
+
+                new FileChooser.ExtensionFilter("All Files", "*.txt","*.java", "*.c", "*.cpp"),
+                new FileChooser.ExtensionFilter("Text Files", "*.txt"),
                 new FileChooser.ExtensionFilter("Java Files", "*.java"),
-                new FileChooser.ExtensionFilter("C Files", "*.c","*.cpp"),
-                new FileChooser.ExtensionFilter("Text Files", "*.txt")
+                new FileChooser.ExtensionFilter("C Files", "*.c","*.cpp")
         );
         File selectedFile = fileChooser.showSaveDialog(null);
 

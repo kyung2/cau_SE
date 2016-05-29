@@ -9,7 +9,7 @@ import javafx.scene.control.Tab;
 public class SaveFileWindow extends AbstractFileWindow {
 
     public SaveFileWindow(Tab tab) {
-        super("Save",new SaveFileWindowController());
+        super("Save Files",new SaveFileWindowController());
         this.getScene().setUserData(tab);
         initLabel();
     }
