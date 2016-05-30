@@ -88,7 +88,7 @@ public class MainController implements Initializable {
                             toolbar_stage.set(now_tab_num, stage);
                             close_tab_num = now_tab_num;
                             now_tab_num = (int) now_tab.getUserData();
-                            System.out.println(now_tab_num);
+                            System.out.println("Change now tab num "+ close_tab_num +" to " + now_tab_num);
                             setClickabeButtons(toolbar_stage.get(now_tab_num)[0], toolbar_stage.get(now_tab_num)[1], toolbar_stage.get(now_tab_num)[2],
                                     toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4], toolbar_stage.get(now_tab_num)[5],
                                     toolbar_stage.get(now_tab_num)[6], toolbar_stage.get(now_tab_num)[7], toolbar_stage.get(now_tab_num)[8], toolbar_stage.get(now_tab_num)[9]);
@@ -151,7 +151,7 @@ public class MainController implements Initializable {
 
             // 파일의 차이점이 없을 경우 차이점 관련 버튼을 비활성화,
             // 차이점이 있을 경우 차이점 관련 버튼을 활성화
-            if(left_list_item.size()==1) setClickabeButtons("false", "false", "false", "false", "false", "true", "true", "true", "true", "true");
+            if(left_list_item.size()==1) setClickabeButtons("false", "false", "false", "false", "false", "false", "false", "false", "false", "true");
             else setClickabeButtons("true", "false", "true", "true", "true", "true", "true", "true", "true", "true");
         } catch (Exception e) {
             e.printStackTrace();
