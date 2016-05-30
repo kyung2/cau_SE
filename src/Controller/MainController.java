@@ -47,7 +47,7 @@ public class MainController implements Initializable {
     private TextArea left_text_area, right_text_area;
 
     private ArrayList<String[]> toolbar_stage = new ArrayList<String[]>();
-    private int tab_num, now_tab_num, tab_menu_item_num;
+    private int tab_num, now_tab_num, tab_menu_item_num, close_tab_num;
 
     private int text_block_index;
     ImageIcon img = new ImageIcon("/View/Image/sampleIcon.jpg");
@@ -86,7 +86,9 @@ public class MainController implements Initializable {
                             String[] stage = makeToolbarStage();
                             now_tab = t1;
                             toolbar_stage.set(now_tab_num, stage);
+                            close_tab_num = now_tab_num;
                             now_tab_num = (int) now_tab.getUserData();
+                            System.out.println(now_tab_num);
                             setClickabeButtons(toolbar_stage.get(now_tab_num)[0], toolbar_stage.get(now_tab_num)[1], toolbar_stage.get(now_tab_num)[2],
                                     toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4], toolbar_stage.get(now_tab_num)[5],
                                     toolbar_stage.get(now_tab_num)[6], toolbar_stage.get(now_tab_num)[7], toolbar_stage.get(now_tab_num)[8], toolbar_stage.get(now_tab_num)[9]);
@@ -243,7 +245,7 @@ public class MainController implements Initializable {
         ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(model.getArrangedText(now_tab_num,0),model.getArrangedGroupSpace(now_tab_num)));
 
         if(text_index.get(0) == 0) text_block_index=1;
-        else text_block_index=1;
+        else text_block_index = 0;
 
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
@@ -480,14 +482,13 @@ public class MainController implements Initializable {
     * 해당하는 모델을 닫는다.
     * */
     private void tabCloseAction() {
-        System.out.println("Close tab num " + (now_tab_num + 1));
-        System.out.println(toolbar_stage);
-        toolbar_stage.set(now_tab_num + 1, null);
+        System.out.println("Close tab num " + (close_tab_num));
+        toolbar_stage.set(close_tab_num, null);
         tab_menu.getItems().remove(tab_menu_item_num + 1);
         tab_menu_item_num--;
         Model model = ModelRealize.getInstance();
         try {
-            model.closeModel(now_tab_num + 1);
+            model.closeModel(close_tab_num);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -500,8 +501,9 @@ public class MainController implements Initializable {
     * tab 이 닫힐 때 일어나는 일을 한다.
     * */
     private void closeTabMenuItemOnAction() {
-        ((TabPane) now_tab.getTabPane()).getTabs().remove(now_tab);
+        close_tab_num = now_tab_num;
         tabCloseAction();
+        ((TabPane) now_tab.getTabPane()).getTabs().remove(now_tab);
     }
 
     @FXML
