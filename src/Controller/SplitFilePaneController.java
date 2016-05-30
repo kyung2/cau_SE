@@ -239,22 +239,31 @@ public class SplitFilePaneController implements Initializable {
     }
     @FXML
     private void onRightListViewMouseClicked(){
-        left_text_list.getSelectionModel().select(right_text_list.getSelectionModel().getSelectedIndex());
+        int index = right_text_list.getSelectionModel().getSelectedIndex();
+        left_text_list.getSelectionModel().select(index);
+        changeToolbarButtonByClickList(index);
     }
-    /**/
+    /*
+    * listView 를 선택한 위치에 대한
+    * previous 버튼과 next 버튼의 able / disable
+    * */
     private void changeToolbarButtonByClickList(int index){
         checkTabNumAndCompareButton();
+
         Model model = ModelRealize.getInstance();
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(tab_num);
         int text_index_size = text_index.size() - 1;
+
         ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
         Button previous_difference = (Button)toolBar.getItems().get(1);
         Button next_difference = (Button)toolBar.getItems().get(0);
-        System.out.println(index);
-        System.out.println(text_index);
-        System.out.println(text_index_size);
+
         if(text_index.get(0) == 0) {
-            if(index == 0){
+            if(index % 2 == 1 ){
+                previous_difference.setDisable(true);
+                next_difference.setDisable(true);
+            }
+            else if(index == 0){
                 previous_difference.setDisable(true);
                 if(text_index_size > 2) next_difference.setDisable(true);
                 else next_difference.setDisable(false);
@@ -269,7 +278,11 @@ public class SplitFilePaneController implements Initializable {
             }
         }
         else{
-            if(index == 1 || index == 0){
+            if(index % 2 == 0 ){
+                previous_difference.setDisable(true);
+                next_difference.setDisable(true);
+            }
+            else if(index == 1 || index == 0){
                 if(text_index_size > 2) previous_difference.setDisable(true);
                 else previous_difference.setDisable(false);
                 next_difference.setDisable(false);

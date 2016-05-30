@@ -297,7 +297,7 @@ public class MainController implements Initializable {
         int text_index_size = text_index.size();
         System.out.println(text_index);
         System.out.println(text_index_size);
-        if(text_index.get(0) == 0) {
+        if(text_index.get(0) == 0) {    // 처음이 서로 같을 때
             if(text_index_size % 2 == 0) {
                 text_block_index = text_index_size - 2;
             }
@@ -305,7 +305,7 @@ public class MainController implements Initializable {
                 text_block_index = text_index_size - 3;
             }
         }
-        else {
+        else {  // 처음부터 서로 다를 때
             if(text_index_size % 2 == 0) {
                 text_block_index = text_index_size - 1 ;
             }
