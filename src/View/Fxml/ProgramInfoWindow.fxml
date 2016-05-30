@@ -4,16 +4,21 @@
 <?import javafx.scene.control.*?>
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane fx:id="info_window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="231.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProgramInfoWindowController">
    <children>
-      <Label layoutX="11.0" layoutY="33.0" text="프로그램 이름 : " AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="33.0" />
-      <Label layoutX="11.0" layoutY="63.0" text="Label" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="63.0" />
+      <Label layoutX="11.0" layoutY="33.0" text="nameeeee"  AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="33.0" />
       <Label layoutX="11.0" layoutY="93.0" text="제작자 : " AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="93.0" />
       <Label layoutX="11.0" layoutY="123.0" text="License : " AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="123.0" />
-      <Label layoutX="11.0" layoutY="153.0" text="버전 : " AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="153.0" />
+      <Label layoutX="11.0" layoutY="153.0" text="Date : 2016.06.10" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="153.0" />
       <!--layout X 범위는 55이상부터 적당한듯 알아서 조절하시길 ㅎㅅㅎ -->
-      <Label layoutX="55.0" layoutY="93.0" text="김소영,박찬우,장우진,최현경" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="93.0" />
+      <Label layoutX="55.0" layoutY="93.0" text="김소영,박찬우,장우진,최현경" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="63.0" />
+      <Text layoutX="55.0" layoutY="33.0" text="프 로 그 램 이 름 ">
+         <font>
+            <Font size="57.0" />
+         </font>
+      </Text>
       <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="308.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="55.0" AnchorPane.rightAnchor="23.835052490234375">
          <image>
             <Image url="/View/Image/sampleLogo.jpg" />

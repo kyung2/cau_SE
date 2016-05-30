@@ -124,14 +124,14 @@
           <Menu mnemonicParsing="false" text="Help">
             <items>
                 <MenuItem fx:id="help_menu_item" accelerator="F1" mnemonicParsing="false" onAction="#helpMenuItemOnAction" text="Help" />
-                <MenuItem fx:id="program_information_menu_item" mnemonicParsing="false" onAction="#programInformationMenuItemOnAction" text="Program Info" />
+                <MenuItem fx:id="program_information_menu_item" accelerator="F10" mnemonicParsing="false" onAction="#programInformationMenuItemOnAction" text="Program Info" />
             </items>
           </Menu>
             <Menu fx:id="tab_menu" mnemonicParsing="false" text="Window">
               <items>
-                  <MenuItem fx:id="close_tab_menu_item" mnemonicParsing="false" onAction="#closeTabMenuItemOnAction" text="Close Tab" />
-                  <MenuItem fx:id="close_tab_all_menu_item" mnemonicParsing="false" onAction="#closeTabAllMenuItemOnAction" text="Close Tab All" />
-                  <MenuItem fx:id="tab_menu_item" mnemonicParsing="false" text="Tab 1" />
+                  <MenuItem fx:id="close_tab_menu_item" accelerator="Ctrl + W" mnemonicParsing="false" onAction="#closeTabMenuItemOnAction" text="Close Tab" />
+                  <MenuItem fx:id="close_tab_all_menu_item" accelerator="Ctrl + Shift + W" mnemonicParsing="false" onAction="#closeTabAllMenuItemOnAction" text="Close Tab All" />
+                  <MenuItem fx:id="tab_menu_item" accelerator="Tab" mnemonicParsing="false" text="Tab 1" />
               </items>
             </Menu>
         </menus>
