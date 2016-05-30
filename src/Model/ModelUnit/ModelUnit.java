@@ -15,8 +15,8 @@ public interface ModelUnit {
     public ArrayList<String> textReceive(int i) throws IndexOutOfBoundsException;
     public void textSend(int i, ArrayList<String> s) throws IndexOutOfBoundsException;
     public ArrayList<String> getArrangedText(int i) throws IndexOutOfBoundsException;
-    public ArrayList<Integer> getArrangedGroup() throws IndexOutOfBoundsException;
-    public ArrayList<Integer> getArrangedGroupSpace() throws IndexOutOfBoundsException;
+    public ArrayList<Integer> getArrangedGroup();
+    public ArrayList<Integer> getArrangedGroupSpace();
 
     public void mergeBylineNum(int lineNum, boolean direction) throws IndexOutOfBoundsException, MergeLineIllegalException;
     public void mergeByGroupNum(int groupNum, boolean direction) throws MergeLineIllegalException;

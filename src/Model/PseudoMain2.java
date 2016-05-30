@@ -1,6 +1,7 @@
 package Model;
 
 import Model.ModelUnit.LCSsupport.*;
+import javafx.scene.control.ListView;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,8 @@ public class PseudoMain2 {
         String fp1 = new String("C:\\Users\\User\\Desktop\\a.txt"), fp2 = new String("C:\\Users\\User\\Desktop\\b.txt");
         int c;
 
+        //ListView text_list;
+        //text_list.getStylesheets().
         System.out.println("0000");
         a1.add("a");
         a1.add("b");

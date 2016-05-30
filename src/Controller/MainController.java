@@ -123,11 +123,15 @@ public class MainController implements Initializable {
             ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
 
             if(text_index.get(0) == 0){
+                left_text_list.getStylesheets().remove(0,left_text_list.getStylesheets().size());
                 left_text_list.getStylesheets().add("/View/Css/listCell2.css");
+                right_text_list.getStylesheets().remove(0,right_text_list.getStylesheets().size());
                 right_text_list.getStylesheets().add("/View/Css/listCell2.css");
             }
             else{
+                left_text_list.getStylesheets().remove(0,left_text_list.getStylesheets().size());
                 left_text_list.getStylesheets().add("/View/Css/listCell1.css");
+                right_text_list.getStylesheets().remove(0,right_text_list.getStylesheets().size());
                 right_text_list.getStylesheets().add("/View/Css/listCell1.css");
             }
 
