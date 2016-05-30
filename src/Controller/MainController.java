@@ -167,13 +167,6 @@ public class MainController implements Initializable {
          catch (MergeLineIllegalException e) {
             e.printStackTrace();
         }
-        ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
-        ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
-        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
-        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
-        ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
-        String temp;
-
         left_text_area.setText(arrayListToString(model.getText(now_tab_num, 0)));
         compareOnAction();
     }
@@ -189,12 +182,6 @@ public class MainController implements Initializable {
         catch (MergeLineIllegalException e) {
             e.printStackTrace();
         }
-        ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
-        ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
-        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
-        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
-        ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
-
         left_text_area.setText(arrayListToString(model.getText(now_tab_num, 1)));
         compareOnAction();
     }
