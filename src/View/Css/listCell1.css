@@ -5,8 +5,8 @@
 }
 /*틀렸을때 기본*/
 .list-cell:filled:odd {
-    -fx-cell-hover-color: #ff4c3d;;
-    -fx-background-color: #DD4132;
+    -fx-cell-hover-color: #F7786B;;
+    -fx-background-color: #F7CAC9;
 }
 /*맞았을때 */
 .list-cell:filled:even {
@@ -14,7 +14,7 @@
 }
 /*틀렸을때 hover*/
 .list-cell:odd:filled:hover {
-    -fx-background-color: #92A8D1;
+    -fx-background-color: #FAE03C;
     -fx-text-fill: black;
 }
 /*맞았을때 hover*/
@@ -22,12 +22,12 @@
     -fx-background-color: whitesmoke;
     -fx-text-fill: Black;
 }
-/**/
+/*틀린거 눌렀을때*/
 .list-cell:filled:odd:selected:focused, .list-cell:odd:filled:selected {
-    -fx-background-color: #F7786B;
+    -fx-background-color: #ff4c3d;
     -fx-text-fill: WHITE;
  }
 /*맞았을때 포커스*/
 .list-cell:filled:even:selected:focused, .list-cell:even:filled:selected {
-    -fx-background-color: antiquewhite;
+    -fx-background-color: rgba(141, 232, 97, 0.31);
  }

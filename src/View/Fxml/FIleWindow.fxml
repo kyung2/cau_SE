@@ -10,9 +10,9 @@
 
 <AnchorPane fx:id="file_anchor_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="273.0" prefWidth="544.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="90.0" layoutY="106.0" text="RightFile" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="142.0" />
-      <Label layoutX="93.0" layoutY="143.0" text="LeftFIle " AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="102.0" />
-      <TextField fx:id="warning_info_text_area" disable="true" editable="false" layoutX="14.0" layoutY="263.0" prefHeight="23.0" prefWidth="381.0" text="안내문구" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+      <Label layoutX="93.0" layoutY="143.0" text="Left File " AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="102.0" />
+      <Label layoutX="90.0" layoutY="106.0" text="Right File" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="142.0" />
+      <TextField fx:id="warning_info_text_area" disable="true" editable="false" layoutX="14.0" layoutY="263.0" prefHeight="23.0" prefWidth="381.0" text="" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></TextField>

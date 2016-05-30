@@ -154,8 +154,7 @@ public class OpenFileWindowController {
                 new FileChooser.ExtensionFilter("All Files","*.txt", "*.java", "*.c", "*.cpp"),
                 new FileChooser.ExtensionFilter("Text Files", "*.txt"),
                 new FileChooser.ExtensionFilter("Java Files", "*.java"),
-                new FileChooser.ExtensionFilter("C Files", "*.c","*.cpp"),
-                new FileChooser.ExtensionFilter("Text Files", "*.txt`")
+                new FileChooser.ExtensionFilter("C Files", "*.c","*.cpp")
         );
         File selectedFile = fileChooser.showOpenDialog(null);
         // 선택된 파일이 없으면

@@ -9,13 +9,13 @@
 }
 /*틀렸을때*/
 .list-cell:filled:even {
-    -fx-cell-hover-color: #ff4c3d;
+    -fx-cell-hover-color: #F7786B;
     -fx-background-color: #F7CAC9;
 }
 /*틀렸을때 hover*/
 .list-cell:even:filled:hover {
-    -fx-background-color: #92A8D1;
-    -fx-text-fill: white;
+    -fx-background-color: #FAE03C;
+    -fx-text-fill: black;
 }
 /*맞았을때 hover*/
 .list-cell:odd:filled:hover {
@@ -24,17 +24,19 @@
 }
 /*틀린거 프레스드 */
 .list-cell:filled:even:selected:focused, .list-cell:filled:even:selected {
-    -fx-background-color: #F7786B;
+    -fx-background-color: #ff4c3d;;
     -fx-text-fill: white;
 }
 /*맞았을때 포커스 */
 
 .list-cell:filled:odd:selected:focused, .list-cell:filled:odd:selected {
-    -fx-background-color: antiquewhite;
-    /*이쁜색상들 몇개
+    -fx-background-color: rgba(141, 232, 97, 0.31);
+    /*
+    -fx-background-color: #fcaebb;
     -fx-background-color : #F7CAC9;
     -fx-background-colir : #F7786B;
     -fx-background-color: #92A8D1;
+    -fx-cell-hover-color: #ff4c3d;
     -fx-background-color: #FAE03C;
     -fx-background-color: #79C753;
     -fx-background-color: #98DDDE;
