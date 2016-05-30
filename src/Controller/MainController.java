@@ -46,7 +46,6 @@ public class MainController implements Initializable {
     private ListView left_text_list, right_text_list;
     private TextArea left_text_area, right_text_area;
 
-    private int true_false_flag;
     private ArrayList<String[]> toolbar_stage = new ArrayList<String[]>();
     private int tab_num, now_tab_num, tab_menu_item_num;
 
@@ -195,7 +194,6 @@ public class MainController implements Initializable {
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
         ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text,text_index));
         ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text,text_index));
-        String temp;
 
         left_text_area.setText(arrayListToString(model.getText(now_tab_num, 1)));
         compareOnAction();
@@ -213,7 +211,6 @@ public class MainController implements Initializable {
     @FXML
     private void copyToLeftAllOnAction() {
         Model model = ModelRealize.getInstance();
-
         model.setText(now_tab_num,model.getText(now_tab_num,1),0);
 
         left_text_area.setText(arrayListToString(model.getText(now_tab_num, 1)));
@@ -235,7 +232,6 @@ public class MainController implements Initializable {
 
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
-
     }
 
     @FXML
@@ -282,6 +278,13 @@ public class MainController implements Initializable {
 
         //시점만을 현재 위치로 이동
         text_block_index=left_text_list.getSelectionModel().getSelectedIndex();
+        System.out.println(text_index.get(0));
+        if(text_index.get(0) == 1){ // 처음 cell 이 서로 동일할 때
+            if(text_block_index % 2 == 0) text_block_index += 1;
+        }
+        else{
+            if(text_block_index %2 == 1) text_block_index += 1;
+        }
         if(left_text_list.getSelectionModel().getSelectedIndex()==0 || left_text_list.getSelectionModel().getSelectedIndex()==1)
             previous_difference_button.setDisable(true);
         else previous_difference_button.setDisable(false);
@@ -661,7 +664,7 @@ public class MainController implements Initializable {
     * */
     private String[] makeStinrgsForList(ArrayList<String> arrayList, ArrayList<Integer> index) {
         String[] strings;
-        true_false_flag = 0;
+        int true_false_flag = 0;
 
         if (index.get(0) == 0) {
             true_false_flag = 1;
