@@ -280,10 +280,10 @@ public class MainController implements Initializable {
         text_block_index=left_text_list.getSelectionModel().getSelectedIndex();
         System.out.println(text_index.get(0));
         if(text_index.get(0) == 1){ // 처음 cell 이 서로 동일할 때
-            if(text_block_index % 2 == 0) text_block_index += 1;
+            if(text_block_index % 2 == 0) text_block_index += 1;    // 짝수번째(같은 부분)를 focus 중 이면 다음 cell 을 현재 차이점으로
         }
-        else{
-            if(text_block_index %2 == 1) text_block_index += 1;
+        else{   // 처음 cell 이 서로 다를 대
+            if(text_block_index %2 == 1) text_block_index += 1;     // 홀수번째(같은 부분)를 focus 중 이면 그 다음 cell 을 현재 차이점으로
         }
         if(left_text_list.getSelectionModel().getSelectedIndex()==0 || left_text_list.getSelectionModel().getSelectedIndex()==1)
             previous_difference_button.setDisable(true);
