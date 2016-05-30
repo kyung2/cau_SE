@@ -291,13 +291,28 @@ public class MainController implements Initializable {
 
     @FXML
     private void lastDifferenceOnAction() {
-        last_difference_button.setText("");
         //마지막 차이점으로
         Model model = ModelRealize.getInstance();
-        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(model.getArrangedText(now_tab_num,0),model.getArrangedGroupSpace(now_tab_num)));
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
-        if(text_index.get(0) == 0) text_block_index=left_list_item.size()-1;
-        else text_block_index=left_list_item.size()-2;
+        int text_index_size = text_index.size();
+        System.out.println(text_index);
+        System.out.println(text_index_size);
+        if(text_index.get(0) == 0) {
+            if(text_index_size % 2 == 0) {
+                text_block_index = text_index_size - 2;
+            }
+            else{
+                text_block_index = text_index_size - 3;
+            }
+        }
+        else {
+            if(text_index_size % 2 == 0) {
+                text_block_index = text_index_size - 1 ;
+            }
+            else{
+                text_block_index = text_index_size - 2;
+            }
+        }
 
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
