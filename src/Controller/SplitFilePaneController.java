@@ -33,11 +33,12 @@ public class SplitFilePaneController implements Initializable {
     @FXML
     private SplitPane split_pane;
     @FXML
-    private Button compare_button;
-    @FXML
     private Label left_file_label, right_file_label;
-    private int tab_num;
 
+    private int tab_num;
+    private Button compare_button;
+    private MenuBar menu_bar;
+    private MenuItem previous_menu_item, next_menu_item;
     /*
     * 기본적으로
     * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
@@ -59,6 +60,7 @@ public class SplitFilePaneController implements Initializable {
         right_text_area.setEditable(false);
 
         compare_button = null;
+        menu_bar = null;
     }
     /*
     * compare 버튼을 할당되있지 않을 경우 할당
@@ -69,7 +71,7 @@ public class SplitFilePaneController implements Initializable {
     * */
     @FXML
     private void leftLoadButtonOnAction() {
-        checkTabNumAndCompareButton();
+        checkTabNumAndCompareButtonAndMenuBar();
         File file = loadFileChooser();
         Model model = ModelRealize.getInstance();
         if(file != null){
@@ -79,7 +81,7 @@ public class SplitFilePaneController implements Initializable {
                 left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
                 setClickableButtons("left","true","true","false");
                 changeTabName(file.getName(),"left");
-                disableAllButtonInToolBar();
+                disableAllButtonInToolBarAndMenuItem();
                 left_file_label.setText(file.getName());
             }catch(Exception e){
                 e.printStackTrace();
@@ -90,7 +92,7 @@ public class SplitFilePaneController implements Initializable {
     }
     @FXML
     private void rightLoadButtonOnAction(){
-        checkTabNumAndCompareButton();
+        checkTabNumAndCompareButtonAndMenuBar();
         File file = loadFileChooser();
         if(file != null){
             Model model = ModelRealize.getInstance();
@@ -100,7 +102,7 @@ public class SplitFilePaneController implements Initializable {
                 right_text_area.setText(arrayListToString(model.getText(tab_num,1)));
                 setClickableButtons("right","true","true","false");
                 changeTabName(file.getName(),"right");
-                disableAllButtonInToolBar();
+                disableAllButtonInToolBarAndMenuItem();
                 right_file_label.setText(file.getName());
             }catch(Exception e){
                 e.printStackTrace();
@@ -119,7 +121,7 @@ public class SplitFilePaneController implements Initializable {
     @FXML
     private void leftEditButtonOnAction() {
         boolean edit_flag = left_text_area.isEditable();
-        checkTabNumAndCompareButton();
+        checkTabNumAndCompareButtonAndMenuBar();
         if(edit_flag){
             /*
             * 수정이 가능할 때 - 누르면 수정이 불가능해짐. 로드는 가능해짐. 모델에 있는 정보를 바꿈,
@@ -145,7 +147,7 @@ public class SplitFilePaneController implements Initializable {
             left_text_area.setEditable(true);
             checkCompareButton();
             invisibleListViewVisibleTextArea();
-            disableAllButtonInToolBar();
+            disableAllButtonInToolBarAndMenuItem();
             setClickableButtons("left","false",null,"true");
             // hk - edit이 활성화 될 시 하이라이팅 (이미지바꿀려면 저 setStyle메소드 이용하면됨)
             left_edit_button.setStyle("-fx-background-color: #a6a6a6");
@@ -154,7 +156,7 @@ public class SplitFilePaneController implements Initializable {
     @FXML
     private void rightEditButtonOnAction() {
         boolean edit_flag = right_text_area.isEditable();
-        checkTabNumAndCompareButton();
+        checkTabNumAndCompareButtonAndMenuBar();
         if(edit_flag){
             /*
             * 수정이 가능할 때 - 누르면 수정이 불가능해짐. 로드는 가능해짐. 모델에 있는 정보를 바꿈,
@@ -180,7 +182,7 @@ public class SplitFilePaneController implements Initializable {
             right_text_area.setEditable(true);
             invisibleListViewVisibleTextArea();
             checkCompareButton();
-            disableAllButtonInToolBar();
+            disableAllButtonInToolBarAndMenuItem();
             setClickableButtons("right","false",null,"true");
             // hk - edit이 활성화 될 시 하이라이팅 (이미지바꿀려면 저 setStyle메소드 이용하면됨)
             right_edit_button.setStyle("-fx-background-color: #a6a6a6");
@@ -192,7 +194,7 @@ public class SplitFilePaneController implements Initializable {
     * */
     @FXML
     private void leftSaveButtonOnAction(){
-        checkTabNumAndCompareButton();
+        checkTabNumAndCompareButtonAndMenuBar();
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
 
@@ -212,7 +214,7 @@ public class SplitFilePaneController implements Initializable {
     }
     @FXML
     private void rightSaveButtonOnAction(){
-        checkTabNumAndCompareButton();
+        checkTabNumAndCompareButtonAndMenuBar();
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
 
@@ -230,7 +232,9 @@ public class SplitFilePaneController implements Initializable {
             }
         }
     }
-
+    /*
+    * 리스트 뷰를 클릭했을 때 일어나는 일
+    * */
     @FXML
     private void onLeftListViewMouseClicked(){
         int index = left_text_list.getSelectionModel().getSelectedIndex();
@@ -248,7 +252,7 @@ public class SplitFilePaneController implements Initializable {
     * previous 버튼과 next 버튼의 able / disable
     * */
     private void changeToolbarButtonByClickList(int index){
-        checkTabNumAndCompareButton();
+        checkTabNumAndCompareButtonAndMenuBar();
 
         Model model = ModelRealize.getInstance();
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(tab_num);
@@ -371,25 +375,32 @@ public class SplitFilePaneController implements Initializable {
     * Tab num 값을 확인한다.
     * -1 일 경우 초기값이므로 현재 tab 의 번호를 넣어준다.
     * */
-    private void checkTabNumAndCompareButton(){
+    private void checkTabNumAndCompareButtonAndMenuBar(){
         if(tab_num == -1){
             tab_num = (int)getSelectedTab().getUserData();
         }
         if(compare_button == null) {
             compare_button = (Button)((ToolBar)((BorderPane)((BorderPane)split_pane.getScene().getRoot()).getCenter()).getTop()).getItems().get(11);
         }
+        if(menu_bar == null){
+            menu_bar = (MenuBar)((BorderPane)compare_button.getScene().getRoot()).getTop();
+            next_menu_item = (MenuItem)menu_bar.getMenus().get(0);
+            previous_menu_item = (MenuItem)menu_bar.getMenus().get(1);
+        }
     }
     /*
     * Toolbar 에 있는 모든 버튼을 비활성화 시킨다.
     * file 을 수정할 경우 compare 를 다시 해야하기에 모든 버튼을 비활성화
+    * MenuItem 중 필요 없는 것을 비활성화
     * */
-    private void disableAllButtonInToolBar(){
+    private void disableAllButtonInToolBarAndMenuItem(){
         ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
         for(int i=0, n=toolBar.getItems().size(); i<n; i++){
             if( i != 5 && i != 10) {
                 ((Button) toolBar.getItems().get(i)).setDisable(true);
             }
         }
+
     }
     /*
     * TabPane 에서 현재 선택 된 tab 을 가져온다.
