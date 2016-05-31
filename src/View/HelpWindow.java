@@ -13,6 +13,21 @@ import java.io.IOException;
  * Created by woojin on 2016-05-18.
  */
 public class HelpWindow {
+  /*
+        public void HelpWindow() throws IOException {
+            Runtime run = Runtime.getRuntime();
+            try {
+                Process p = Runtime.getRuntime().exec("simplemergehelper.chm");
+                p.waitFor();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+                System.out.println(e.getMessage());
+            }
+
+        }
+    }
+*/
 
     public void HelpWindow() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/HelpWindow.fxml"));
