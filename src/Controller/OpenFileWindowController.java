@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class OpenFileWindowController {
+public class OpenFileWindowController extends FileWindowAbstractClass {
 	@FXML
 	private AnchorPane file_anchor_pane;
 	@FXML
@@ -24,72 +24,80 @@ public class OpenFileWindowController {
     private Button compare_button_file;
     
 	private Tab tab;
-    
 	private Label left_file_label, right_file_label;
-    
 	private Button left_load, left_edit, left_save, right_load, right_edit, right_save;
-    
 	private TextArea left_text_area, right_text_area;
-    
 	private TextArea left_file_bottom_text_area, right_file_bottom_text_area;
-    
 	private ListView left_list_view, right_list_view;
-    
+
+    private boolean item_flag = false;
+
     String fileRightname="";
     String fileLeftname="";
 
 
     @FXML
-    private void leftFileFindButtonOnAction(){
-        int tab_num;
-    	getTabContent();
-        File file = loadFileChooser(left_load);
+    public void leftFileFindButtonOnAction(){
 
-    	tab_num = (int)tab.getUserData();
-        Model.ModelInterface model = ModelRealize.getInstance();
-
-        //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
-    	if(file != null){
-            try {
-               model.readTextOuter(tab_num, file.getAbsolutePath(), 0);
-               left_file_text_area.setText(file.getAbsolutePath());
-               fileLeftname = file.getName();
-            }catch(Exception e){
-                warning_info_text_area.setText("Select no Left File");
-            }
+        if(!item_flag){
+            getTabContent();
+            item_flag = true;
         }
+        int tab_num = (int)tab.getUserData();
+        FileChooser fileChooser = super.loadFileChooser();
+        try {
+            File file = fileChooser.showOpenDialog(null);
 
+            Model.ModelInterface model = ModelRealize.getInstance();
+            model.readTextOuter(tab_num, file.getAbsolutePath(), 0);
+
+            //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
+            left_file_text_area.setText(file.getAbsolutePath());
+            fileLeftname = file.getName();
+            warning_info_text_area.setText("Select " + fileLeftname);
+        }catch (NullPointerException e){
+            warning_info_text_area.setText("Select No Left File");
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        tab_num = (int)tab.getUserData();
     }
 
     @FXML
-    private void rightFileFindButtonOnAction(){
-        int tab_num;
-    	getTabContent();
-        File file = loadFileChooser(right_load);
+    public void rightFileFindButtonOnAction(){
+        if(!item_flag){
+            getTabContent();
+            item_flag = true;
+        }
+        int tab_num = (int)tab.getUserData();
+        FileChooser fileChooser = super.loadFileChooser();
+        try {
+            File file = fileChooser.showOpenDialog(null);
 
-    	tab_num = (int)tab.getUserData();
-        Model.ModelInterface model = ModelRealize.getInstance();
+            Model.ModelInterface model = ModelRealize.getInstance();
+            model.readTextOuter(tab_num, file.getAbsolutePath(), 1);
 
-        //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
-    	if(file != null){
-            try {
-               model.readTextOuter(tab_num, file.getAbsolutePath(), 1);
-               right_file_text_area.setText(file.getAbsolutePath());
-               fileRightname = file.getName();
-            }catch(Exception e){
-                warning_info_text_area.setText("Select no Right File");
-            }
+            //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
+            right_file_text_area.setText(file.getAbsolutePath());
+            fileRightname = file.getName();
+            warning_info_text_area.setText("Select " + fileRightname);
+        }catch (NullPointerException e){
+            warning_info_text_area.setText("Select No Right File");
+        }catch (IOException e){
+            e.printStackTrace();
         }
     }
 
     @FXML
-    private void okButtonOnAction() throws IndexOutOfBoundsException, IllegalAccessException, IOException{
+    public void okButtonOnAction() {
 
         /* 현재 탭의 구성요소들을 사용 가능하게 해 두고
         * 버튼들을 활성화시킨다
         */
-        getTabContent();
-
+        if(!item_flag){
+            getTabContent();
+            item_flag = true;
+        }
         int tab_num = (int)tab.getUserData();
         //textarea
         left_text_area.setVisible(true);
@@ -103,13 +111,13 @@ public class OpenFileWindowController {
         if(!fileLeftname.equals("")) {
             left_text_area.setText(arrayListToString(modelInterface.getText(tab_num, 0)));
             left_file_label.setText(fileLeftname);
-            changeTabName(fileLeftname,"left");
+            super.changeTabName(tab, fileLeftname,"left");
 
         }
         if(!fileRightname.equals("")) {
             right_text_area.setText(arrayListToString(modelInterface.getText(tab_num, 1)));
             right_file_label.setText(fileRightname);
-            changeTabName(fileRightname,"right");
+            super.changeTabName(tab, fileRightname,"right");
         }
         //스플릿 패널 활성화 설정
         left_load.setDisable(false);
@@ -131,45 +139,28 @@ public class OpenFileWindowController {
     }
 
     @FXML
-    private void cancelButtonOnAction(){
+    public void cancelButtonOnAction(){
+        Stage stage = (Stage)file_anchor_pane.getScene().getWindow();
+
         if(!fileLeftname.equals("") || !fileRightname.equals("")) {
-            AlarmWindow exitAlarmWindow = new AlarmWindow("Load File Alarm", "Wouldn't you Load this file?");
-            exitAlarmWindow.showAndWait();
-            if ((boolean) exitAlarmWindow.getUserData()) {
-                ((Stage)file_anchor_pane.getScene().getWindow()).close();
-            }
+           super.initCancelButtonAction("Open File Alarm", "Wouldn't you open this file", stage);
         }
         else{
-            ((Stage)file_anchor_pane.getScene().getWindow()).close();
+            stage.close();
         }
     }
-
-    private File loadFileChooser(Button position){
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("FileChooser");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Files","*.txt", "*.java", "*.c", "*.cpp"),
-                new FileChooser.ExtensionFilter("Text Files", "*.txt"),
-                new FileChooser.ExtensionFilter("Java Files", "*.java"),
-                new FileChooser.ExtensionFilter("C Files", "*.c","*.cpp")
-        );
-        File selectedFile = fileChooser.showOpenDialog(null);
-        // 선택된 파일이 없으면
-        if(selectedFile == null) {
-            System.out.println("No Select File");
-        }
-        return selectedFile;
-    }
-
+    /*
+    * tab 의 구성요소들을 가져온다.
+    * */
     private void getTabContent(){
     	//현재 탭의 버튼 요소들
         tab = (Tab)file_anchor_pane.getScene().getUserData();
         AnchorPane left_pane = (AnchorPane)((SplitPane)tab.getContent()).getItems().get(0);
         AnchorPane right_pane = (AnchorPane)((SplitPane)tab.getContent()).getItems().get(1);
-        
+
         AnchorPane left_file_button_tab = (AnchorPane)left_pane.getChildren().get(0);
         AnchorPane right_file_button_tab = (AnchorPane) right_pane.getChildren().get(0);
- 
+
         left_file_label = (Label)left_file_button_tab.getChildren().get(0);
         left_load = (Button)left_file_button_tab.getChildren().get(1);
         left_edit = (Button)left_file_button_tab.getChildren().get(2);
@@ -191,36 +182,14 @@ public class OpenFileWindowController {
         right_text_area = (TextArea)right_file_pane.getChildren().get(0);
         right_list_view = (ListView)right_file_pane.getChildren().get(1);
     }
-
+    /*
+    * array list 를 받아서 string 으로 만들어 준다.
+    * */
     private String arrayListToString(ArrayList<String> arrayList){
         String s = new String();
         for (String s1 : arrayList) {
             s += s1 + "\n";
         }
         return s;
-    }
-    
-    private void changeTabName(String name, String position){
-        String tab_name = tab.getText();
-        if(position.equals("left")) {
-            if (tab_name.equals("File")) {
-                tab_name = name + " - ";
-                tab.setText(tab_name);
-            }
-            else{
-                tab_name = name + " -" + tab_name.split("-")[1];
-                tab.setText(tab_name);
-            }
-        }
-        else {
-            if (tab_name.equals("File")) {
-                tab_name = " - " + name;
-                tab.setText(tab_name);
-            }
-            else{
-                tab_name = tab_name.split("-")[0] + "- " + name;
-                tab.setText(tab_name);
-            }
-        }
     }
 }
