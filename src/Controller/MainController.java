@@ -32,6 +32,11 @@ public class MainController implements Initializable, MainInterface {
     private Button compare_button, copy_to_left_button, copy_to_right_button, copy_to_left_all_button, copy_to_right_all_button,
             next_difference_button, previous_difference_button, first_difference_button, now_difference_button, last_difference_button;
     @FXML
+    private MenuItem open_menu_item, save_menu_item, save_right_file_menu_item, save_left_file_menu_item;
+    @FXML
+    private MenuItem next_difference_menu_item, previous_difference_menu_item, first_difference_menu_item, now_difference_menu_item, last_difference_menu_item,
+            copy_to_right_menu_item, copy_to_left_menu_item, copy_to_right_all_menu_item, copy_to_left_all_menu_item, compare_menu_item;
+    @FXML
     private TabPane tab_pane;
     @FXML
     private Tab tab;
@@ -58,6 +63,7 @@ public class MainController implements Initializable, MainInterface {
     * tab은 user data 를 통해 구별한다.
     * 현재 tab에 user data 를 저장한다.
     * tool bar의 버튼들을 모두 비활성화로 한다.
+    * 버튼과 관련된 menu item 들을 비활성화한다.
     * */
     public void initialize(URL location, ResourceBundle resources) {
         tab_num = 0;
@@ -65,7 +71,13 @@ public class MainController implements Initializable, MainInterface {
         now_tab.setUserData(tab_num);
         tab_menu_item_num = 1;
         tab_menu_item.setOnAction(e -> tabMenuItemOnAction(0));
-        setClickabeButtons("false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
+
+        open_menu_item.setDisable(false);
+        save_menu_item.setDisable(true);
+        save_left_file_menu_item.setDisable(true);
+        save_right_file_menu_item.setDisable(true);
+
+        setClickabeButtonsAndMenuItems("false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
         toolbar_stage.add(new String[]{"false", "false", "false", "false", "false", "false", "false", "false", "false", "false"});
 
         left_text_list = null;
@@ -89,13 +101,13 @@ public class MainController implements Initializable, MainInterface {
                             close_tab_num = now_tab_num;
                             now_tab_num = (int) now_tab.getUserData();
                             System.out.println("Change now tab num "+ close_tab_num +" to " + now_tab_num);
-                            setClickabeButtons(toolbar_stage.get(now_tab_num)[0], toolbar_stage.get(now_tab_num)[1], toolbar_stage.get(now_tab_num)[2],
+                            setClickabeButtonsAndMenuItems(toolbar_stage.get(now_tab_num)[0], toolbar_stage.get(now_tab_num)[1], toolbar_stage.get(now_tab_num)[2],
                                     toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4], toolbar_stage.get(now_tab_num)[5],
                                     toolbar_stage.get(now_tab_num)[6], toolbar_stage.get(now_tab_num)[7], toolbar_stage.get(now_tab_num)[8], toolbar_stage.get(now_tab_num)[9]);
 
                             initTextAreaAndListOnTab();
                         } else {
-                            setClickabeButtons("false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
+                            setClickabeButtonsAndMenuItems("false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
                         }
                     }
                 }
@@ -155,8 +167,8 @@ public class MainController implements Initializable, MainInterface {
 
             // 파일의 차이점이 없을 경우 차이점 관련 버튼을 비활성화,
             // 차이점이 있을 경우 차이점 관련 버튼을 활성화
-            if(left_list_item.size()==1) setClickabeButtons("false", "false", "false", "false", "false", "false", "false", "false", "false", "true");
-            else setClickabeButtons("true", "false", "true", "true", "true", "true", "true", "true", "true", "true");
+            if(left_list_item.size()==1) setClickabeButtonsAndMenuItems("false", "false", "false", "false", "false", "false", "false", "false", "false", "true");
+            else setClickabeButtonsAndMenuItems("true", "false", "true", "true", "true", "true", "true", "true", "true", "true");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -295,8 +307,6 @@ public class MainController implements Initializable, MainInterface {
         Model.ModelInterface model = ModelRealize.getInstance();
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
         int text_index_size = text_index.size();
-        System.out.println(text_index);
-        System.out.println(text_index_size);
         if(text_index.get(0) == 0) {    // 처음이 서로 같을 때
             if(text_index_size % 2 == 0) {
                 text_block_index = text_index_size - 2;
@@ -548,48 +558,109 @@ public class MainController implements Initializable, MainInterface {
 
     /*
     * Toolbar 에 있는 버튼들의 활성화와 비활성화를 조절한다.
+    * 버튼과 관련된 menu item 들의 활성화와 비활성화를 조절한다.
     * 아무 행동도 하지 않으려면 null 을 입력하면 된다.
     * */
-    private void setClickabeButtons(String next, String previous, String first, String now, String last, String ctor, String ctol, String ctora, String ctola, String compare) {
+    private void setClickabeButtonsAndMenuItems(String next, String previous, String first, String now, String last, String ctor, String ctol, String ctora, String ctola, String compare) {
         if (next != null) {
-            if (next == "true") next_difference_button.setDisable(false);
-            else next_difference_button.setDisable(true);
+            if (next == "true") {
+                next_difference_button.setDisable(false);
+                next_difference_menu_item.setDisable(false);
+            }
+            else {
+                next_difference_button.setDisable(true);
+                next_difference_menu_item.setDisable(true);
+            }
         }
         if (previous != null) {
-            if (previous == "true") previous_difference_button.setDisable(false);
-            else previous_difference_button.setDisable(true);
+            if (previous == "true") {
+                previous_difference_button.setDisable(false);
+                previous_difference_menu_item.setDisable(false);
+            }
+            else {
+                previous_difference_button.setDisable(true);
+                previous_difference_menu_item.setDisable(true);
+            }
         }
         if (first != null) {
-            if (first == "true") first_difference_button.setDisable(false);
-            else first_difference_button.setDisable(true);
+            if (first == "true") {
+                first_difference_button.setDisable(false);
+                first_difference_menu_item.setDisable(false);
+            }
+            else {
+                first_difference_button.setDisable(true);
+                first_difference_menu_item.setDisable(true);
+            }
         }
         if (now != null) {
-            if (now == "true") now_difference_button.setDisable(false);
-            else now_difference_button.setDisable(true);
+            if (now == "true") {
+                now_difference_button.setDisable(false);
+                now_difference_menu_item.setDisable(false);
+            }
+            else {
+                now_difference_button.setDisable(true);
+                now_difference_menu_item.setDisable(true);
+            }
         }
         if (last != null) {
-            if (last == "true") last_difference_button.setDisable(false);
-            else last_difference_button.setDisable(true);
+            if (last == "true") {
+                last_difference_button.setDisable(false);
+                last_difference_menu_item.setDisable(false);
+            }
+            else {
+                last_difference_button.setDisable(true);
+                last_difference_menu_item.setDisable(true);
+            }
         }
         if (ctor != null) {
-            if (ctor == "true") copy_to_right_button.setDisable(false);
-            else copy_to_right_button.setDisable(true);
+            if (ctor == "true") {
+                copy_to_right_button.setDisable(false);
+                copy_to_right_menu_item.setDisable(false);
+            }
+            else {
+                copy_to_right_button.setDisable(true);
+                copy_to_right_menu_item.setDisable(true);
+            }
         }
         if (ctol != null) {
-            if (ctol == "true") copy_to_left_button.setDisable(false);
-            else copy_to_left_button.setDisable(true);
+            if (ctol == "true") {
+                copy_to_left_button.setDisable(false);
+                copy_to_left_menu_item.setDisable(false);
+            }
+            else {
+                copy_to_left_button.setDisable(true);
+                copy_to_left_menu_item.setDisable(true);
+            }
         }
         if (ctora != null) {
-            if (ctora == "true") copy_to_right_all_button.setDisable(false);
-            else copy_to_right_all_button.setDisable(true);
+            if (ctora == "true") {
+                copy_to_right_all_button.setDisable(false);
+                copy_to_right_all_menu_item.setDisable(false);
+            }
+            else {
+                copy_to_right_all_button.setDisable(true);
+                copy_to_right_all_menu_item.setDisable(true);
+            }
         }
         if (ctola != null) {
-            if (ctola == "true") copy_to_left_all_button.setDisable(false);
-            else copy_to_left_all_button.setDisable(true);
+            if (ctola == "true") {
+                copy_to_left_all_button.setDisable(false);
+                copy_to_left_all_menu_item.setDisable(false);
+            }
+            else {
+                copy_to_left_all_button.setDisable(true);
+                copy_to_left_all_menu_item.setDisable(true);
+            }
         }
         if (compare != null) {
-            if (compare == "true") compare_button.setDisable(false);
-            else compare_button.setDisable(true);
+            if (compare == "true") {
+                compare_button.setDisable(false);
+                compare_menu_item.setDisable(false);
+            }
+            else {
+                compare_button.setDisable(true);
+                compare_menu_item.setDisable(true);
+            }
         }
     }
 
