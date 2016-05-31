@@ -77,7 +77,7 @@ public class MainController implements Initializable, MainInterface {
         save_left_file_menu_item.setDisable(true);
         save_right_file_menu_item.setDisable(true);
 
-        setClickabeButtonsAndMenuItems("false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
+        setClickableButtonsAndMenuItems("false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
         toolbar_stage.add(new String[]{"false", "false", "false", "false", "false", "false", "false", "false", "false", "false"});
 
         left_text_list = null;
@@ -101,13 +101,13 @@ public class MainController implements Initializable, MainInterface {
                             close_tab_num = now_tab_num;
                             now_tab_num = (int) now_tab.getUserData();
                             System.out.println("Change now tab num "+ close_tab_num +" to " + now_tab_num);
-                            setClickabeButtonsAndMenuItems(toolbar_stage.get(now_tab_num)[0], toolbar_stage.get(now_tab_num)[1], toolbar_stage.get(now_tab_num)[2],
+                            setClickableButtonsAndMenuItems(toolbar_stage.get(now_tab_num)[0], toolbar_stage.get(now_tab_num)[1], toolbar_stage.get(now_tab_num)[2],
                                     toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4], toolbar_stage.get(now_tab_num)[5],
                                     toolbar_stage.get(now_tab_num)[6], toolbar_stage.get(now_tab_num)[7], toolbar_stage.get(now_tab_num)[8], toolbar_stage.get(now_tab_num)[9]);
 
                             initTextAreaAndListOnTab();
                         } else {
-                            setClickabeButtonsAndMenuItems("false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
+                            setClickableButtonsAndMenuItems("false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
                         }
                     }
                 }
@@ -152,8 +152,6 @@ public class MainController implements Initializable, MainInterface {
             left_text_list.setItems(left_list_item);
             right_text_list.setItems(right_list_item);
 
-
-
             if(left_list_item.get(0).equals(right_list_item.get(0))) text_block_index = 1;
             else text_block_index = 0;
             left_text_list.setVisible(true);
@@ -167,8 +165,8 @@ public class MainController implements Initializable, MainInterface {
 
             // 파일의 차이점이 없을 경우 차이점 관련 버튼을 비활성화,
             // 차이점이 있을 경우 차이점 관련 버튼을 활성화
-            if(left_list_item.size()==1) setClickabeButtonsAndMenuItems("false", "false", "false", "false", "false", "false", "false", "false", "false", "true");
-            else setClickabeButtonsAndMenuItems("true", "false", "true", "true", "true", "true", "true", "true", "true", "true");
+            if(left_list_item.size()==1) setClickableButtonsAndMenuItems("false", "false", "false", "false", "false", "false", "false", "false", "false", "true");
+            else setClickableButtonsAndMenuItems("true", "false", "true", "true", "true", "true", "true", "true", "true", "true");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -230,9 +228,12 @@ public class MainController implements Initializable, MainInterface {
         //맨 마지막이면 비활성화 되어야함
         if(text_block_index+2<=left_list_item.size()-1) {
             text_block_index = left_text_list.getSelectionModel().getSelectedIndex() + 2;
-            if(previous_difference_button.isDisable()) previous_difference_button.setDisable(false);
-            if(text_block_index>=left_list_item.size()-2)
-               next_difference_button.setDisable(true);
+            if(previous_difference_button.isDisable()) {
+                preDifferenceButtonAndMenuItem(true);
+            }
+            if(text_block_index>=left_list_item.size()-2) {
+                nextDifferenceButtonAndMenuItem(false);
+            }
         }
 
         left_text_list.getSelectionModel ().select (text_block_index);
@@ -245,9 +246,12 @@ public class MainController implements Initializable, MainInterface {
         //맨 처음이면 비활성화 되어야함
         if(text_block_index-2>=0) {
             text_block_index = left_text_list.getSelectionModel().getSelectedIndex() - 2;
-            if(next_difference_button.isDisable()) next_difference_button.setDisable(false);
-            if(text_block_index<=1)
-                previous_difference_button.setDisable(true);
+            if(next_difference_button.isDisable()) {
+                nextDifferenceButtonAndMenuItem(true);
+            }
+            if(text_block_index<=1) {
+                preDifferenceButtonAndMenuItem(false);
+            }
         }
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
@@ -269,14 +273,13 @@ public class MainController implements Initializable, MainInterface {
         // 이전 차이점 버튼 비활성화
         // + 맨 처음으로 돌아갔는데, 맨 마지막 차이점일 경우(차이나는 부분이 하나밖에 없을 경우)
         // 다음 차이점 버튼 비활성화
-        previous_difference_button.setDisable(true);
-        if(!(text_block_index==left_list_item.size()-2 || text_block_index==left_list_item.size()-1)) next_difference_button.setDisable(false);
-        else next_difference_button.setDisable(true);
+        preDifferenceButtonAndMenuItem(false);
+        if(!(text_block_index==left_list_item.size()-2 || text_block_index==left_list_item.size()-1)) nextDifferenceButtonAndMenuItem(true);
+        else nextDifferenceButtonAndMenuItem(false);
     }
 
     @FXML
     public void nowDifferenceOnAction() {
-        now_difference_button.setText("");
         ModelInterface modelInterface = ModelRealize.getInstance();
         ArrayList<Integer> text_index = modelInterface.getArrangedGroupSpace(now_tab_num);
         ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStringsForList(modelInterface.getArrangedText(now_tab_num,0), modelInterface.getArrangedGroupSpace(now_tab_num)));
@@ -284,19 +287,17 @@ public class MainController implements Initializable, MainInterface {
         //시점만을 현재 위치로 이동
         text_block_index=left_text_list.getSelectionModel().getSelectedIndex();
         System.out.println(text_index.get(0));
-        if(text_index.get(0) == 1){ // 처음 cell 이 서로 동일할 때
+        if(text_index.get(0) != 0){ // 처음 cell 이 서로 동일할 때
             if(text_block_index % 2 == 0) text_block_index += 1;    // 짝수번째(같은 부분)를 focus 중 이면 다음 cell 을 현재 차이점으로
         }
         else{   // 처음 cell 이 서로 다를 대
             if(text_block_index %2 == 1) text_block_index += 1;     // 홀수번째(같은 부분)를 focus 중 이면 그 다음 cell 을 현재 차이점으로
         }
-        if(left_text_list.getSelectionModel().getSelectedIndex()==0 || left_text_list.getSelectionModel().getSelectedIndex()==1)
-            previous_difference_button.setDisable(true);
-        else previous_difference_button.setDisable(false);
+        if(text_block_index==0 || text_block_index==1) preDifferenceButtonAndMenuItem(false);
+        else preDifferenceButtonAndMenuItem(true);
 
-        if(left_text_list.getSelectionModel().getSelectedIndex()==left_list_item.size()-2 || left_text_list.getSelectionModel().getSelectedIndex()==left_list_item.size()-1)
-            next_difference_button.setDisable(true);
-        else next_difference_button.setDisable(false);
+        if(text_block_index == left_list_item.size()-2 || text_block_index == left_list_item.size()-1) nextDifferenceButtonAndMenuItem(false);
+        else nextDifferenceButtonAndMenuItem(true);
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
     }
@@ -323,16 +324,15 @@ public class MainController implements Initializable, MainInterface {
                 text_block_index = text_index_size - 2;
             }
         }
-
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
 
         // 다음 차이점 버튼 비활성화
         // + 맨 끝으로 갔는데, 맨 처음 차이점일 경우(차이나는 부분이 하나밖에 없을 경우)
         // 이전 차이점 버튼 비활성화
-        next_difference_button.setDisable(true);
-        if(!(text_block_index==0 || text_block_index==1)) previous_difference_button.setDisable(false);
-        else previous_difference_button.setDisable(true);
+        nextDifferenceButtonAndMenuItem(false);
+        if(!(text_block_index==0 || text_block_index==1)) preDifferenceButtonAndMenuItem(true);
+        else preDifferenceButtonAndMenuItem(false);
     }
 
     @FXML
@@ -399,21 +399,15 @@ public class MainController implements Initializable, MainInterface {
                 model.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
                 model.writeTextOuter(tab_num, 1);
                 right_text_area.setEditable(false);
-                AnchorPane anchorPane = (AnchorPane) ((SplitPane) right_text_area.getParent().getParent().getParent()).getParent();
-                AnchorPane button_area = (AnchorPane) anchorPane.getChildren().get(0);
-                Button right_load = (Button) button_area.getChildren().get(1);
-                Button right_edit = (Button) button_area.getChildren().get(2);
-                Button right_save = (Button) button_area.getChildren().get(3);
-                right_load.setDisable(false);
-                right_save.setDisable(true);
-                right_edit.setStyle("-fx-background-color:transparent");
+                setClickableButtonsInFilePane("right","true","false","false");
+
             } catch (Exception e) {
                 e.printStackTrace();
             }
             try{
                 if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
                     if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
-                        compare_button.setDisable(false);
+                        compareButtonAndMenuItem(true);
                     }
                 }
             }catch (Exception e){
@@ -439,21 +433,15 @@ public class MainController implements Initializable, MainInterface {
                 model.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
                 model.writeTextOuter(tab_num, 0);
                 left_text_area.setEditable(false);
-                AnchorPane anchorPane = (AnchorPane) ((SplitPane) left_text_area.getParent().getParent().getParent()).getParent();
-                AnchorPane button_area = (AnchorPane) anchorPane.getChildren().get(0);
-                Button left_load = (Button) button_area.getChildren().get(1);
-                Button left_edit = (Button) button_area.getChildren().get(2);
-                Button left_save = (Button) button_area.getChildren().get(3);
-                left_load.setDisable(false);
-                left_save.setDisable(true);
-                left_edit.setStyle("-fx-background-color:transparent");
+
+                setClickableButtonsInFilePane("left", "true", "false", "false");
             } catch (Exception e) {
                 e.printStackTrace();
             }
             try{
                 if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
                     if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
-                        compare_button.setDisable(false);
+                        compareButtonAndMenuItem(true);
                     }
                 }
             }catch (Exception e){
@@ -540,6 +528,7 @@ public class MainController implements Initializable, MainInterface {
     * 모든 tab 을 닫는다.
     * 모든 tab menu item 을 없에고 모든 toolbar stage 를 null 로 한다.
     * */
+
     public void closeTabAllMenuItemOnAction() {
         ((TabPane) now_tab.getTabPane()).getTabs().remove(0, tab_pane.getTabs().size());
         tab_menu.getItems().remove(2, tab_menu_item_num + 2);
@@ -556,12 +545,28 @@ public class MainController implements Initializable, MainInterface {
         tab_pane.getSelectionModel().select(index);
     }
 
+    /**/
+    private void compareButtonAndMenuItem(boolean compare){
+        compare_menu_item.setDisable(!compare);
+        compare_button.setDisable(!compare);
+    }
+    /**/
+    private void preDifferenceButtonAndMenuItem(boolean pre){
+        previous_difference_menu_item.setDisable(!pre);
+        previous_difference_button.setDisable(!pre);
+    }
+    /**/
+    private void nextDifferenceButtonAndMenuItem(boolean next){
+        next_difference_menu_item.setDisable(!next);
+        next_difference_button.setDisable(!next);
+    }
+
     /*
     * Toolbar 에 있는 버튼들의 활성화와 비활성화를 조절한다.
     * 버튼과 관련된 menu item 들의 활성화와 비활성화를 조절한다.
     * 아무 행동도 하지 않으려면 null 을 입력하면 된다.
     * */
-    private void setClickabeButtonsAndMenuItems(String next, String previous, String first, String now, String last, String ctor, String ctol, String ctora, String ctola, String compare) {
+    private void setClickableButtonsAndMenuItems(String next, String previous, String first, String now, String last, String ctor, String ctol, String ctora, String ctola, String compare) {
         if (next != null) {
             if (next == "true") {
                 next_difference_button.setDisable(false);
@@ -662,6 +667,70 @@ public class MainController implements Initializable, MainInterface {
                 compare_menu_item.setDisable(true);
             }
         }
+    }
+
+    /*
+    * file pane 버튼의 able 과 disable 을 해준다.
+    * position 에 left 와 right 를 통해서 위치를 선택
+    * 각각 load, edit, save에 true || false 를 통해서 able 과 disable 을 한다.
+    * null 일 경우 그 버튼은 현상 유지
+    * */
+    private void setClickableButtonsInFilePane(String position, String load, String edit, String save){
+        AnchorPane right_anchorPane = (AnchorPane) ((SplitPane) right_text_area.getParent().getParent().getParent()).getParent();
+        AnchorPane right_button_area = (AnchorPane) right_anchorPane.getChildren().get(0);
+        Button right_load = (Button) right_button_area.getChildren().get(1);
+        Button right_edit = (Button) right_button_area.getChildren().get(2);
+        Button right_save = (Button) right_button_area.getChildren().get(3);
+
+        AnchorPane left_anchorPane = (AnchorPane) ((SplitPane) left_text_area.getParent().getParent().getParent()).getParent();
+        AnchorPane left_button_area = (AnchorPane) left_anchorPane.getChildren().get(0);
+        Button left_load = (Button) left_button_area.getChildren().get(1);
+        Button left_edit = (Button) left_button_area.getChildren().get(2);
+        Button left_save = (Button) left_button_area.getChildren().get(3);
+
+        boolean f_load, f_edit, f_save;
+        if(load == "true") f_load = true;
+        else f_load = false;
+
+        if(edit == "true") f_edit = true;
+        else f_edit = false;
+
+        if(save == "true") f_save = true;
+        else f_save = false;
+
+        if(position == "left"){
+            if(load != null) {
+                left_load.setDisable(!f_load);
+                if(!f_load) open_menu_item.setDisable(true);
+            }
+            if(edit != null) {
+                left_edit.setDisable(!f_edit);
+                if(!f_edit) left_edit.setStyle("-fx-background-color:transparent");
+            }
+            if(save != null) {
+                left_save.setDisable(!f_save);
+                save_left_file_menu_item.setDisable(!f_save);
+                if(!f_save) save_menu_item.setDisable(true);
+            }
+        }
+        else{
+            if(load != null) {
+                right_load.setDisable(!f_load);
+                if(!f_load) open_menu_item.setDisable(true);
+            }
+            if(edit != null) {
+                right_edit.setDisable(!f_edit);
+                if(!f_edit) right_edit.setStyle("-fx-background-color:transparent");
+
+            }
+            if(save != null) {
+                right_save.setDisable(!f_save);
+                save_right_file_menu_item.setDisable(!f_save);
+                if(!f_save) save_menu_item.setDisable(true);
+            }
+        }
+        if(!left_load.isDisable() && !right_load.isDisable()) open_menu_item.setDisable(false);
+        if(!left_save.isDisable() && !right_save.isDisable()) save_menu_item.setDisable(false);
     }
 
     /*

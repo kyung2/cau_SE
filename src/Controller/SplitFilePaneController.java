@@ -332,10 +332,7 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
         if(load == "true") f_load = true;
         else f_load = false;
 
-        if(edit == "true") {
-            f_edit = true;
-
-        }
+        if(edit == "true") f_edit = true;
         else f_edit = false;
 
         if(save == "true") f_save = true;
