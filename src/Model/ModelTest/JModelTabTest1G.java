@@ -1,7 +1,9 @@
-package Model;
+package Model.ModelTest;
 
 
 import Model.ModelException.MergeLineIllegalException;
+import Model.ModelInterface;
+import Model.ModelRealize;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
