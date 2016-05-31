@@ -713,6 +713,16 @@ public class MainController implements Initializable {
         }
         return arrayList;
     }
+
+    private void init(){
+        left_text_list.setCellFactory(param -> new ListCell<String>(){
+            @Override
+            protected void updateItem(String item, boolean empty) {
+                setText(item);
+                setStyle("-fx-background : green");
+            }
+        });
+    }
 }
 
 /*
