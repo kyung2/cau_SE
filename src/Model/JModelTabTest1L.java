@@ -1,7 +1,6 @@
-package Model.ModelTest;
+package Model;
 
 
-import Model.ModelInterface;
 import Model.ModelException.MergeLineIllegalException;
 import org.junit.After;
 import org.junit.Before;
@@ -9,9 +8,9 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
-public class JModelTabTest1G {
+public class JModelTabTest1L {
 
 
 
@@ -19,7 +18,7 @@ public class JModelTabTest1G {
     @Before
     public void setUp() throws Exception {
 
-        m = Model.ModelRealize.getInstance();
+        m = ModelRealize.getInstance();
         m.newModel(0);
 
 
@@ -102,13 +101,13 @@ public class JModelTabTest1G {
     @Test(expected= MergeLineIllegalException.class)
     public void MergeAndCheck_G0R() {
         testData();
-        m.getUnit(0).mergeByGroupNum(0, true);
+        m.getUnit(0).mergeBylineNum(0, true);
     }
 
     @Test(expected= MergeLineIllegalException.class)
     public void MergeAndCheck_G0L() {
         testData();
-        m.getUnit(0).mergeByGroupNum(0, false);
+        m.getUnit(0).mergeBylineNum(0, false);
     }
 
     @Test
@@ -142,22 +141,53 @@ public class JModelTabTest1G {
         check(sra1, sra2, sa1, sa2, ia1, ia2);
     }
 
-    @Test(expected= MergeLineIllegalException.class)
+    @Test
     public void MergeAndCheck_G2R() {
         testData();
         m.getUnit(0).mergeByGroupNum(2, true);
-    }
 
-    @Test(expected= MergeLineIllegalException.class)
-    public void MergeAndCheck_G2L() {
-        testData();
-        m.getUnit(0).mergeByGroupNum(2, false);
+
+        String[] sra1 = {"a", "b", "c", "d","g","h","j","k","l","o","q","t"};
+        String[] sra2 = {"a", "b", "c", "d", "e","f","g","i","j","n","o","r","s","t"};
+        String[] sa1 = {"a", "b", "c", "d", "","","g","h","j","k","l","o","q","","t"};
+        String[] sa2 = {"a", "b", "c", "d", "e","f","g","i","j","n","","o","r","s","t"};
+        Integer[] ia1 = {0,0,0,0,1,1,2,3,4,5,5,6,7,7,8};
+        Integer[] ia2 = {4,2,1,1,1,2,1,2,1};
+
+        check(sra1, sra2, sa1, sa2, ia1, ia2);
     }
 
     @Test
+    public void MergeAndCheck_G2L() {
+        testData();
+        m.getUnit(0).mergeByGroupNum(2, false);
+
+        String[] sra1 = {"a", "d","g","h","j","k","l","o","q","t"};
+        String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","r","s","t"};
+        String[] sa1 = {"a", "d", "","","g","h","j","k","l","o","q","","t"};
+        String[] sa2 = {"a", "d", "e","f","g","i","j","n","","o","r","s","t"};
+        Integer[] ia1 = {0,0,1,1,2,3,4,5,5,6,7,7,8};
+        Integer[] ia2 = {2,2,1,1,1,2,1,2,1};
+
+        check(sra1, sra2, sa1, sa2, ia1, ia2);
+    }
+
+    @Test(expected= MergeLineIllegalException.class)
     public void MergeAndCheck_G3R() {
         testData();
         m.getUnit(0).mergeByGroupNum(3, true);
+    }
+
+    @Test(expected= MergeLineIllegalException.class)
+    public void MergeAndCheck_G3L() {
+        testData();
+        m.getUnit(0).mergeByGroupNum(3, false);
+    }
+
+    @Test
+    public void MergeAndCheck_G4R() {
+        testData();
+        m.getUnit(0).mergeByGroupNum(4, true);
 
         String[] sra1 = {"a", "b", "c", "d","g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a", "d", "g","i","j","n","o","r","s","t"};
@@ -170,9 +200,9 @@ public class JModelTabTest1G {
     }
 
     @Test
-    public void MergeAndCheck_G3L() {
+    public void MergeAndCheck_G4L() {
         testData();
-        m.getUnit(0).mergeByGroupNum(3, false);
+        m.getUnit(0).mergeByGroupNum(4, false);
 
         String[] sra1 = {"a", "b","c","d","e","f","g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a","d","e","f","g","i","j","n", "o","r","s","t"};
@@ -184,29 +214,17 @@ public class JModelTabTest1G {
         check(sra1, sra2, sa1, sa2, ia1, ia2);
     }
 
-    @Test(expected= MergeLineIllegalException.class)
-    public void MergeAndCheck_G4R() {
-        testData();
-        m.getUnit(0).mergeByGroupNum(4, true);
-    }
-
-    @Test(expected= MergeLineIllegalException.class)
-    public void MergeAndCheck_G4L() {
-        testData();
-        m.getUnit(0).mergeByGroupNum(4, false);
-    }
-
     @Test
     public void MergeAndCheck_G5R() {
         testData();
         m.getUnit(0).mergeByGroupNum(5, true);
 
-        String[] sra1 = {"a", "b","c","d","g","h","j","k","l","o","q","t"};
-        String[] sra2 = {"a","d","e","f","g","h","j","n", "o","r","s","t"};
-        String[] sa1 = {"a", "b","c","d","","","g","h","j","k","l","o","q","", "t"};
-        String[] sa2 = {"a", "", "", "d","e","f","g","h","j","n","", "o","r","s","t"};
-        Integer[] ia1 = {0,1,1,2,3,3,4,4,4,5,5,6,7,7,8};
-        Integer[] ia2 = {1,2,1,2,3,2,1,2,1};
+        String[] sra1 = {"a", "b", "c", "d","g","h","j","k","l","o","q","t"};
+        String[] sra2 = {"a", "d", "g","i","j","n","o","r","s","t"};
+        String[] sa1 = {"a", "b", "c", "d","g","h","j","k","l","o","q","","t"};
+        String[] sa2 = {"a", "", "", "d", "g","i","j","n","","o","r","s","t"};
+        Integer[] ia1 = {0,1,1,2,2,3,4,5,5,6,7,7,8};
+        Integer[] ia2 = {1,2,2,1,1,2,1,2,1};
 
         check(sra1, sra2, sa1, sa2, ia1, ia2);
     }
@@ -216,12 +234,12 @@ public class JModelTabTest1G {
         testData();
         m.getUnit(0).mergeByGroupNum(5, false);
 
-        String[] sra1 = {"a", "b","c","d","g","i","j","k","l","o","q","t"};
+        String[] sra1 = {"a", "b","c","d","e","f","g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a","d","e","f","g","i","j","n", "o","r","s","t"};
-        String[] sa1 = {"a", "b","c","d","","","g","i","j","k","l","o","q","", "t"};
+        String[] sa1 = {"a", "b","c","d","e","f","g","h","j","k","l","o","q","", "t"};
         String[] sa2 = {"a", "", "", "d","e","f","g","i","j","n","", "o","r","s","t"};
-        Integer[] ia1 = {0,1,1,2,3,3,4,4,4,5,5,6,7,7,8};
-        Integer[] ia2 = {1,2,1,2,3,2,1,2,1};
+        Integer[] ia1 = {0,1,1,2,2,2,2,3,4,5,5,6,7,7,8};
+        Integer[] ia2 = {1,2,4,1,1,2,1,2,1};
 
         check(sra1, sra2, sa1, sa2, ia1, ia2);
     }
@@ -243,12 +261,12 @@ public class JModelTabTest1G {
         testData();
         m.getUnit(0).mergeByGroupNum(7, true);
 
-        String[] sra1 = {"a", "b", "c", "d", "g","h","j","k","l","o","q","t"};
-        String[] sra2 = {"a", "d", "e","f","g","i","j","k","l","o","r","s","t"};
-        String[] sa1 = {"a", "b", "c", "d", "","","g","h","j","k","l","o","q","","t"};
-        String[] sa2 = {"a", "", "", "d", "e","f","g","i","j","k","l","o","r","s","t"};
-        Integer[] ia1 = {0,1,1,2,3,3,4,5,6,6,6,6,7,7,8};
-        Integer[] ia2 = {1,2,1,2,1,1,4,2,1};
+        String[] sra1 = {"a", "b","c","d","g","h","j","k","l","o","q","t"};
+        String[] sra2 = {"a","d","e","f","g","h","j","n", "o","r","s","t"};
+        String[] sa1 = {"a", "b","c","d","","","g","h","j","k","l","o","q","", "t"};
+        String[] sa2 = {"a", "", "", "d","e","f","g","h","j","n","", "o","r","s","t"};
+        Integer[] ia1 = {0,1,1,2,3,3,4,4,4,5,5,6,7,7,8};
+        Integer[] ia2 = {1,2,1,2,3,2,1,2,1};
 
         check(sra1, sra2, sa1, sa2, ia1, ia2);
     }
@@ -258,12 +276,12 @@ public class JModelTabTest1G {
         testData();
         m.getUnit(0).mergeByGroupNum(7, false);
 
-        String[] sra1 = {"a", "b", "c", "d", "g","h","j","n","o","q","t"};
-        String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","r","s","t"};
-        String[] sa1 = {"a", "b", "c", "d", "","","g","h","j","n","o","q","","t"};
-        String[] sa2 = {"a", "", "", "d", "e","f","g","i","j","n","o","r","s","t"};
-        Integer[] ia1 = {0,1,1,2,3,3,4,5,6,6,6,7,7,8};
-        Integer[] ia2 = {1,2,1,2,1,1,3,2,1};
+        String[] sra1 = {"a", "b","c","d","g","i","j","k","l","o","q","t"};
+        String[] sra2 = {"a","d","e","f","g","i","j","n", "o","r","s","t"};
+        String[] sa1 = {"a", "b","c","d","","","g","i","j","k","l","o","q","", "t"};
+        String[] sa2 = {"a", "", "", "d","e","f","g","i","j","n","", "o","r","s","t"};
+        Integer[] ia1 = {0,1,1,2,3,3,4,4,4,5,5,6,7,7,8};
+        Integer[] ia2 = {1,2,1,2,3,2,1,2,1};
 
         check(sra1, sra2, sa1, sa2, ia1, ia2);
     }
@@ -286,6 +304,78 @@ public class JModelTabTest1G {
         m.getUnit(0).mergeByGroupNum(9, true);
 
         String[] sra1 = {"a", "b", "c", "d", "g","h","j","k","l","o","q","t"};
+        String[] sra2 = {"a", "d", "e","f","g","i","j","k","l","o","r","s","t"};
+        String[] sa1 = {"a", "b", "c", "d", "","","g","h","j","k","l","o","q","","t"};
+        String[] sa2 = {"a", "", "", "d", "e","f","g","i","j","k","l","o","r","s","t"};
+        Integer[] ia1 = {0,1,1,2,3,3,4,5,6,6,6,6,7,7,8};
+        Integer[] ia2 = {1,2,1,2,1,1,4,2,1};
+
+        check(sra1, sra2, sa1, sa2, ia1, ia2);
+    }
+
+    @Test
+    public void MergeAndCheck_G9L() {
+        testData();
+        m.getUnit(0).mergeByGroupNum(9, false);
+
+        String[] sra1 = {"a", "b", "c", "d", "g","h","j","n","o","q","t"};
+        String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","r","s","t"};
+        String[] sa1 = {"a", "b", "c", "d", "","","g","h","j","n","o","q","","t"};
+        String[] sa2 = {"a", "", "", "d", "e","f","g","i","j","n","o","r","s","t"};
+        Integer[] ia1 = {0,1,1,2,3,3,4,5,6,6,6,7,7,8};
+        Integer[] ia2 = {1,2,1,2,1,1,3,2,1};
+
+        check(sra1, sra2, sa1, sa2, ia1, ia2);
+    }
+
+    @Test
+    public void MergeAndCheck_GAR() {
+        testData();
+        m.getUnit(0).mergeByGroupNum(10, true);
+
+        String[] sra1 = {"a", "b", "c", "d", "g","h","j","k","l","o","q","t"};
+        String[] sra2 = {"a", "d", "e","f","g","i","j","k","l","o","r","s","t"};
+        String[] sa1 = {"a", "b", "c", "d", "","","g","h","j","k","l","o","q","","t"};
+        String[] sa2 = {"a", "", "", "d", "e","f","g","i","j","k","l","o","r","s","t"};
+        Integer[] ia1 = {0,1,1,2,3,3,4,5,6,6,6,6,7,7,8};
+        Integer[] ia2 = {1,2,1,2,1,1,4,2,1};
+
+        check(sra1, sra2, sa1, sa2, ia1, ia2);
+    }
+
+    @Test
+    public void MergeAndCheck_GAL() {
+        testData();
+        m.getUnit(0).mergeByGroupNum(10, false);
+
+        String[] sra1 = {"a", "b", "c", "d", "g","h","j","n","o","q","t"};
+        String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","r","s","t"};
+        String[] sa1 = {"a", "b", "c", "d", "","","g","h","j","n","o","q","","t"};
+        String[] sa2 = {"a", "", "", "d", "e","f","g","i","j","n","o","r","s","t"};
+        Integer[] ia1 = {0,1,1,2,3,3,4,5,6,6,6,7,7,8};
+        Integer[] ia2 = {1,2,1,2,1,1,3,2,1};
+
+        check(sra1, sra2, sa1, sa2, ia1, ia2);
+    }
+
+    @Test(expected= MergeLineIllegalException.class)
+    public void MergeAndCheck_GBR() {
+        testData();
+        m.getUnit(0).mergeByGroupNum(11, true);
+    }
+
+    @Test(expected= MergeLineIllegalException.class)
+    public void MergeAndCheck_GBL() {
+        testData();
+        m.getUnit(0).mergeByGroupNum(11, false);
+    }
+
+    @Test
+    public void MergeAndCheck_GCR() {
+        testData();
+        m.getUnit(0).mergeByGroupNum(12, true);
+
+        String[] sra1 = {"a", "b", "c", "d", "g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","q","t"};
         String[] sa1 = {"a", "b", "c", "d", "","","g","h","j","k","l","o","q","t"};
         String[] sa2 = {"a", "", "", "d", "e","f","g","i","j","n","","o","q","t"};
@@ -296,9 +386,38 @@ public class JModelTabTest1G {
     }
 
     @Test
-    public void MergeAndCheck_G9L() {
+    public void MergeAndCheck_GCL() {
         testData();
-        m.getUnit(0).mergeByGroupNum(9, false);
+        m.getUnit(0).mergeByGroupNum(12, false);
+
+        String[] sra1 = {"a", "b", "c", "d", "g","h","j","k","l","o","r","s","t"};
+        String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","r","s","t"};
+        String[] sa1 = {"a", "b", "c", "d", "","","g","h","j","k","l","o","r","s","t"};
+        String[] sa2 = {"a", "", "", "d", "e","f","g","i","j","n","","o","r","s","t"};
+        Integer[] ia1 = {0,1,1,2,3,3,4,5,6,7,7,8,8,8,8};
+        Integer[] ia2 = {1,2,1,2,1,1,1,2,4};
+
+        check(sra1, sra2, sa1, sa2, ia1, ia2);
+    }
+    @Test
+    public void MergeAndCheck_GDR() {
+        testData();
+        m.getUnit(0).mergeByGroupNum(13, true);
+
+        String[] sra1 = {"a", "b", "c", "d", "g","h","j","k","l","o","q","t"};
+        String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","q","t"};
+        String[] sa1 = {"a", "b", "c", "d", "","","g","h","j","k","l","o","q","t"};
+        String[] sa2 = {"a", "", "", "d", "e","f","g","i","j","n","","o","q","t"};
+        Integer[] ia1 = {0,1,1,2,3,3,4,5,6,7,7,8,8,8};
+        Integer[] ia2 = {1,2,1,2,1,1,1,2,3};
+
+        check(sra1, sra2, sa1, sa2, ia1, ia2);
+    }
+
+    @Test
+    public void MergeAndCheck_GDL() {
+        testData();
+        m.getUnit(0).mergeByGroupNum(13, false);
 
         String[] sra1 = {"a", "b", "c", "d", "g","h","j","k","l","o","r","s","t"};
         String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","r","s","t"};
@@ -311,15 +430,15 @@ public class JModelTabTest1G {
     }
 
     @Test(expected= MergeLineIllegalException.class)
-    public void MergeAndCheck_GAR() {
+    public void MergeAndCheck_GER() {
         testData();
-        m.getUnit(0).mergeByGroupNum(10, true);
+        m.getUnit(0).mergeByGroupNum(14, true);
     }
 
     @Test(expected= MergeLineIllegalException.class)
-    public void MergeAndCheck_GAL() {
+    public void MergeAndCheck_GEL() {
         testData();
-        m.getUnit(0).mergeByGroupNum(10, false);
+        m.getUnit(0).mergeByGroupNum(14, false);
     }
 
     @Test(expected=MergeLineIllegalException.class)
@@ -337,13 +456,13 @@ public class JModelTabTest1G {
     @Test(expected=MergeLineIllegalException.class)
     public void MergeAndCheck_GoR() {
         testData();
-        m.getUnit(0).mergeByGroupNum(11, true);
+        m.getUnit(0).mergeByGroupNum(15, true);
     }
 
     @Test(expected= MergeLineIllegalException.class)
     public void MergeAndCheck_GoL() {
         testData();
-        m.getUnit(0).mergeByGroupNum(11, false);
+        m.getUnit(0).mergeByGroupNum(15, false);
     }
 
 }

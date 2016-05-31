@@ -71,12 +71,12 @@ public class SplitFilePaneController implements Initializable {
     private void leftLoadButtonOnAction() {
         checkTabNumAndCompareButton();
         File file = loadFileChooser();
-        ModelInterface modelInterface = ModelRealize.getInstance();
+        Model.ModelInterface model = ModelRealize.getInstance();
         if(file != null){
             try {
-                modelInterface.readTextOuter(tab_num, file.getAbsolutePath(), 0);
+                model.readTextOuter(tab_num, file.getAbsolutePath(), 0);
                 left_text_area.setVisible(true);
-                left_text_area.setText(arrayListToString(modelInterface.getText(tab_num,0)));
+                left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
                 setClickableButtons("left","true","true","false");
                 changeTabName(file.getName(),"left");
                 disableAllButtonInToolBar();
@@ -93,11 +93,11 @@ public class SplitFilePaneController implements Initializable {
         checkTabNumAndCompareButton();
         File file = loadFileChooser();
         if(file != null){
-            ModelInterface modelInterface = ModelRealize.getInstance();
+            Model.ModelInterface model = ModelRealize.getInstance();
             try {
-                modelInterface.readTextOuter(tab_num, file.getAbsolutePath(), 1);
+                model.readTextOuter(tab_num, file.getAbsolutePath(), 1);
                 right_text_area.setVisible(true);
-                right_text_area.setText(arrayListToString(modelInterface.getText(tab_num,1)));
+                right_text_area.setText(arrayListToString(model.getText(tab_num,1)));
                 setClickableButtons("right","true","true","false");
                 changeTabName(file.getName(),"right");
                 disableAllButtonInToolBar();
@@ -127,8 +127,8 @@ public class SplitFilePaneController implements Initializable {
             */
             left_text_area.setEditable(false);
             try {
-                ModelInterface modelInterface = ModelRealize.getInstance();
-                modelInterface.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
+                Model.ModelInterface model = ModelRealize.getInstance();
+                model.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -139,9 +139,9 @@ public class SplitFilePaneController implements Initializable {
         }
         else{
             //수정이 불가능 할 때 = 누르면 수정이 가능. 로드 불가능, 저장 가능, compare 불가능
-            ModelInterface modelInterface = ModelRealize.getInstance();
-            left_text_area.setText(arrayListToString(modelInterface.getText(tab_num,0)));
-            if(!right_text_area.isEditable()) right_text_area.setText(arrayListToString(modelInterface.getText(tab_num,1)));
+            Model.ModelInterface model = ModelRealize.getInstance();
+            left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
+            if(!right_text_area.isEditable()) right_text_area.setText(arrayListToString(model.getText(tab_num,1)));
             left_text_area.setEditable(true);
             checkCompareButton();
             invisibleListViewVisibleTextArea();
@@ -161,8 +161,8 @@ public class SplitFilePaneController implements Initializable {
             * 두 file pane 이 모두 수정 불가능 == save 가 비활성화 되있으면 compare 가능
             */
             try {
-                ModelInterface modelInterface = ModelRealize.getInstance();
-                modelInterface.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
+                Model.ModelInterface model = ModelRealize.getInstance();
+                model.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
             }catch (Exception e){
                 e.printStackTrace();
             }
@@ -174,9 +174,9 @@ public class SplitFilePaneController implements Initializable {
         }
         else{
             //수정이 불가능 할 때 - 누르면 수정 가능, 로드 불가능, 저장 가능
-            ModelInterface modelInterface = ModelRealize.getInstance();
-            if(!left_text_area.isEditable()) left_text_area.setText(arrayListToString(modelInterface.getText(tab_num,0)));
-            right_text_area.setText(arrayListToString(modelInterface.getText(tab_num,1)));
+            Model.ModelInterface model = ModelRealize.getInstance();
+            if(!left_text_area.isEditable()) left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
+            right_text_area.setText(arrayListToString(model.getText(tab_num,1)));
             right_text_area.setEditable(true);
             invisibleListViewVisibleTextArea();
             checkCompareButton();
@@ -198,9 +198,9 @@ public class SplitFilePaneController implements Initializable {
 
         if((boolean)saveAlarmWindow.getUserData()) {
             try {
-                ModelInterface modelInterface = ModelRealize.getInstance();
-                modelInterface.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
-                modelInterface.writeTextOuter(tab_num, 0);
+                Model.ModelInterface model = ModelRealize.getInstance();
+                model.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
+                model.writeTextOuter(tab_num, 0);
                 left_text_area.setEditable(false);
                 checkCompareButton();
                 setClickableButtons("left", "true", null, "false");
@@ -250,8 +250,8 @@ public class SplitFilePaneController implements Initializable {
     private void changeToolbarButtonByClickList(int index){
         checkTabNumAndCompareButton();
 
-        ModelInterface modelInterface = ModelRealize.getInstance();
-        ArrayList<Integer> text_index = modelInterface.getArrangedGroupSpace(tab_num);
+        Model.ModelInterface model = ModelRealize.getInstance();
+        ArrayList<Integer> text_index = model.getArrangedGroupSpace(tab_num);
         int text_index_size = text_index.size() - 1;
 
         ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
@@ -356,9 +356,9 @@ public class SplitFilePaneController implements Initializable {
     * save 버튼이 눌렸을 때 두 text area 가 수정 불가능 한 경우 활성화
     * */
     private void checkCompareButton(){
-        ModelInterface modelInterface = ModelRealize.getInstance();
+        Model.ModelInterface model = ModelRealize.getInstance();
         try{
-            if(modelInterface.isOpen(tab_num,0) && modelInterface.isOpen(tab_num,1)) {
+            if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
                 if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
                     compare_button.setDisable(false);
                 }

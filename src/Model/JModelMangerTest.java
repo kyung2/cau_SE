@@ -1,7 +1,6 @@
-package Model.ModelTest;
+package Model;
 
 
-import Model.ModelInterface;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;

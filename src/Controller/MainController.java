@@ -73,8 +73,8 @@ public class MainController implements Initializable {
         left_text_area = null;
         right_text_area = null;
         try {
-            ModelInterface modelInterface = ModelRealize.getInstance();
-            modelInterface.newModel(tab_num);
+            Model.ModelInterface model = ModelRealize.getInstance();
+            model.newModel(tab_num);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -116,11 +116,11 @@ public class MainController implements Initializable {
         }
         left_text_area.setVisible(false);
         right_text_area.setVisible(false);
-        ModelInterface modelInterface = ModelRealize.getInstance();
+        Model.ModelInterface model = ModelRealize.getInstance();
         try {
-            ArrayList<String> left_text = modelInterface.getArrangedText(now_tab_num, 0);
-            ArrayList<String> right_text = modelInterface.getArrangedText(now_tab_num, 1);
-            ArrayList<Integer> text_index = modelInterface.getArrangedGroupSpace(now_tab_num);
+            ArrayList<String> left_text = model.getArrangedText(now_tab_num, 0);
+            ArrayList<String> right_text = model.getArrangedText(now_tab_num, 1);
+            ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
 
             if(text_index.get(0) == 0){
                 left_text_list.getStylesheets().remove(0,left_text_list.getStylesheets().size());
@@ -165,55 +165,55 @@ public class MainController implements Initializable {
     @FXML
     private void copyToLeftOnAction() {
         System.out.println("Click");
-        ModelInterface modelInterface = ModelRealize.getInstance();
+        Model.ModelInterface model = ModelRealize.getInstance();
         try {
             text_block_index=left_text_list.getSelectionModel().getSelectedIndex();
-            modelInterface.mergeByGroup(now_tab_num, text_block_index+(modelInterface.getArrangedGroupSpace(now_tab_num).get(0)==0?1:0), false);
+            model.mergeByGroup(now_tab_num, text_block_index+(model.getArrangedGroupSpace(now_tab_num).get(0)==0?1:0), false);
         }
          catch (MergeLineIllegalException e) {
             e.printStackTrace();
         }
-        left_text_area.setText(arrayListToString(modelInterface.getText(now_tab_num, 0)));
+        left_text_area.setText(arrayListToString(model.getText(now_tab_num, 0)));
         compareOnAction();
     }
 
     @FXML
     private void copyToRightOnAction() {
         System.out.println("Click");
-        ModelInterface modelInterface = ModelRealize.getInstance();
+        Model.ModelInterface model = ModelRealize.getInstance();
         try {
             text_block_index=right_text_list.getSelectionModel().getSelectedIndex();
-            modelInterface.mergeByGroup(now_tab_num, text_block_index+(modelInterface.getArrangedGroupSpace(now_tab_num).get(0)==0?1:0), true);
+            model.mergeByGroup(now_tab_num, text_block_index+(model.getArrangedGroupSpace(now_tab_num).get(0)==0?1:0), true);
         }
         catch (MergeLineIllegalException e) {
             e.printStackTrace();
         }
-        left_text_area.setText(arrayListToString(modelInterface.getText(now_tab_num, 1)));
+        left_text_area.setText(arrayListToString(model.getText(now_tab_num, 1)));
         compareOnAction();
     }
 
     @FXML
     private void copyToRightAllOnAction() {
-        ModelInterface modelInterface = ModelRealize.getInstance();
-        modelInterface.setText(now_tab_num, modelInterface.getText(now_tab_num,0),1);
+        Model.ModelInterface model = ModelRealize.getInstance();
+        model.setText(now_tab_num, model.getText(now_tab_num,0),1);
 
-        right_text_area.setText(arrayListToString(modelInterface.getText(now_tab_num, 0)));
+        right_text_area.setText(arrayListToString(model.getText(now_tab_num, 0)));
         compareOnAction();
     }
 
     @FXML
     private void copyToLeftAllOnAction() {
-        ModelInterface modelInterface = ModelRealize.getInstance();
-        modelInterface.setText(now_tab_num, modelInterface.getText(now_tab_num,1),0);
+        Model.ModelInterface model = ModelRealize.getInstance();
+        model.setText(now_tab_num, model.getText(now_tab_num,1),0);
 
-        left_text_area.setText(arrayListToString(modelInterface.getText(now_tab_num, 1)));
+        left_text_area.setText(arrayListToString(model.getText(now_tab_num, 1)));
         compareOnAction();
     }
 
     @FXML
     private void nextDifferenceOnAction() {
-        ModelInterface modelInterface = ModelRealize.getInstance();
-        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(modelInterface.getArrangedText(now_tab_num,0), modelInterface.getArrangedGroupSpace(now_tab_num)));
+        Model.ModelInterface model = ModelRealize.getInstance();
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(model.getArrangedText(now_tab_num,0), model.getArrangedGroupSpace(now_tab_num)));
 
         //맨 마지막이면 비활성화 되어야함
         if(text_block_index+2<=left_list_item.size()-1) {
@@ -244,9 +244,9 @@ public class MainController implements Initializable {
     @FXML
     private void firstDifferenceOnAction() {
         //처음 차이점으로;
-        ModelInterface modelInterface = ModelRealize.getInstance();
-        ArrayList<Integer> text_index = modelInterface.getArrangedGroupSpace(now_tab_num);
-        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(modelInterface.getArrangedText(now_tab_num,0), modelInterface.getArrangedGroupSpace(now_tab_num)));
+        Model.ModelInterface model = ModelRealize.getInstance();
+        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(model.getArrangedText(now_tab_num,0), model.getArrangedGroupSpace(now_tab_num)));
 
         if(text_index.get(0) == 0) text_block_index = 0;
         else text_block_index = 1;
@@ -292,8 +292,8 @@ public class MainController implements Initializable {
     @FXML
     private void lastDifferenceOnAction() {
         //마지막 차이점으로
-        ModelInterface modelInterface = ModelRealize.getInstance();
-        ArrayList<Integer> text_index = modelInterface.getArrangedGroupSpace(now_tab_num);
+        Model.ModelInterface model = ModelRealize.getInstance();
+        ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
         int text_index_size = text_index.size();
         System.out.println(text_index);
         System.out.println(text_index_size);
@@ -346,8 +346,8 @@ public class MainController implements Initializable {
             tab_menuitem.setOnAction((e) -> {
                 tabMenuItemOnAction(Integer.parseInt(tab_menuitem.getText().split(" ")[1]) - 1);
             });
-            ModelInterface modelInterface = ModelRealize.getInstance();
-            modelInterface.newModel(tab_num);
+            Model.ModelInterface model = ModelRealize.getInstance();
+            model.newModel(tab_num);
         } catch (Exception e) {
             System.out.println(e);// 적절한 예외처리로 바꿔야함
         }
@@ -384,10 +384,10 @@ public class MainController implements Initializable {
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
         if((boolean)saveAlarmWindow.getUserData()) {
-            ModelInterface modelInterface = ModelRealize.getInstance();
+            Model.ModelInterface model = ModelRealize.getInstance();
             try {
-                modelInterface.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
-                modelInterface.writeTextOuter(tab_num, 1);
+                model.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
+                model.writeTextOuter(tab_num, 1);
                 right_text_area.setEditable(false);
                 AnchorPane anchorPane = (AnchorPane) ((SplitPane) right_text_area.getParent().getParent().getParent()).getParent();
                 AnchorPane button_area = (AnchorPane) anchorPane.getChildren().get(0);
@@ -401,7 +401,7 @@ public class MainController implements Initializable {
                 e.printStackTrace();
             }
             try{
-                if(modelInterface.isOpen(tab_num,0) && modelInterface.isOpen(tab_num,1)) {
+                if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
                     if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
                         compare_button.setDisable(false);
                     }
@@ -424,10 +424,10 @@ public class MainController implements Initializable {
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
         if((boolean)saveAlarmWindow.getUserData()) {
-            ModelInterface modelInterface = ModelRealize.getInstance();
+            Model.ModelInterface model = ModelRealize.getInstance();
             try {
-                modelInterface.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
-                modelInterface.writeTextOuter(tab_num, 0);
+                model.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
+                model.writeTextOuter(tab_num, 0);
                 left_text_area.setEditable(false);
                 AnchorPane anchorPane = (AnchorPane) ((SplitPane) left_text_area.getParent().getParent().getParent()).getParent();
                 AnchorPane button_area = (AnchorPane) anchorPane.getChildren().get(0);
@@ -441,7 +441,7 @@ public class MainController implements Initializable {
                 e.printStackTrace();
             }
             try{
-                if(modelInterface.isOpen(tab_num,0) && modelInterface.isOpen(tab_num,1)) {
+                if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
                     if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
                         compare_button.setDisable(false);
                     }
@@ -505,9 +505,9 @@ public class MainController implements Initializable {
         toolbar_stage.set(close_tab_num, null);
         tab_menu.getItems().remove(tab_menu_item_num + 1);
         tab_menu_item_num--;
-        ModelInterface modelInterface = ModelRealize.getInstance();
+        Model.ModelInterface model = ModelRealize.getInstance();
         try {
-            modelInterface.closeModel(close_tab_num);
+            model.closeModel(close_tab_num);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -534,8 +534,8 @@ public class MainController implements Initializable {
         ((TabPane) now_tab.getTabPane()).getTabs().remove(0, tab_pane.getTabs().size());
         tab_menu.getItems().remove(2, tab_menu_item_num + 2);
         tab_menu_item_num = 0;
-        ModelInterface modelInterface = ModelRealize.getInstance();
-        modelInterface.closeModelAll();
+        Model.ModelInterface model = ModelRealize.getInstance();
+        model.closeModelAll();
         //removeAllToolbarStage 해야 함
     }
 

@@ -46,12 +46,12 @@ public class OpenFileWindowController {
         File file = loadFileChooser(left_load);
 
     	tab_num = (int)tab.getUserData();
-        ModelInterface modelInterface = ModelRealize.getInstance();
+        Model.ModelInterface model = ModelRealize.getInstance();
 
         //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
     	if(file != null){
             try {
-               modelInterface.readTextOuter(tab_num, file.getAbsolutePath(), 0);
+               model.readTextOuter(tab_num, file.getAbsolutePath(), 0);
                left_file_text_area.setText(file.getAbsolutePath());
                fileLeftname = file.getName();
             }catch(Exception e){
@@ -68,12 +68,12 @@ public class OpenFileWindowController {
         File file = loadFileChooser(right_load);
 
     	tab_num = (int)tab.getUserData();
-        ModelInterface modelInterface = ModelRealize.getInstance();
+        Model.ModelInterface model = ModelRealize.getInstance();
 
         //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
     	if(file != null){
             try {
-               modelInterface.readTextOuter(tab_num, file.getAbsolutePath(), 1);
+               model.readTextOuter(tab_num, file.getAbsolutePath(), 1);
                right_file_text_area.setText(file.getAbsolutePath());
                fileRightname = file.getName();
             }catch(Exception e){
