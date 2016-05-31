@@ -19,7 +19,7 @@ public class MainWindow extends Application {
         primaryStage.setScene(new Scene(root));
         primaryStage.getScene().getStylesheets().add("/View/Css/mainWindow.css");
         //아이콘 이미지 바꾸는거 알아서 바꾸시길 ... 찾아서
-        primaryStage.getIcons().add(new Image("/View/Image/sampleIcon.jpg"));
+        primaryStage.getIcons().add(new Image("/View/Image/mainIcon.png"));
         primaryStage.show();
 
     }

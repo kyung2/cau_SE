@@ -23,7 +23,7 @@ public class ProgramInformationWindow {
             stage.setScene(scene);
 
             stage.setTitle("About Program");
-            stage.getIcons().add(new Image("/View/Image/sampleIcon.jpg"));
+            stage.getIcons().add(new Image("/View/Image/mainIcon.png"));
             stage.show();
         } catch (IOException ex) {
             System.out.println(ex);
