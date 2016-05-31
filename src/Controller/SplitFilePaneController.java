@@ -265,7 +265,7 @@ public class SplitFilePaneController implements Initializable {
             }
             else if(index == 0){
                 previous_difference.setDisable(true);
-                if(text_index_size > 2) next_difference.setDisable(true);
+                if(text_index_size < 2) next_difference.setDisable(true);
                 else next_difference.setDisable(false);
             }
             else if(index == text_index_size - 1 || (text_index_size % 2 == 0 && index == text_index_size - 2)){
@@ -282,10 +282,10 @@ public class SplitFilePaneController implements Initializable {
                 previous_difference.setDisable(true);
                 next_difference.setDisable(true);
             }
-            else if(index == 1 || index == 0){
-                if(text_index_size > 2) previous_difference.setDisable(true);
-                else previous_difference.setDisable(false);
-                next_difference.setDisable(false);
+            else if(index == 1){
+                previous_difference.setDisable(true);
+                if(text_index_size <3) next_difference.setDisable(true);
+                else next_difference.setDisable(false);
             }
             else if(index == text_index_size){
                 previous_difference.setDisable(false);
