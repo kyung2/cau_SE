@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
  * has Load, Save, Edit button action.
  * in Load button action, make file chooser.
  */
-public class SplitFilePaneController implements Initializable {
+public class SplitFilePaneController implements Initializable, splitFilePaneInterface {
     @FXML
     private TextArea left_text_area, right_text_area;
     @FXML
@@ -70,7 +70,7 @@ public class SplitFilePaneController implements Initializable {
     * 이미 파일이 있을 경우는 덮어쓰기
     * */
     @FXML
-    private void leftLoadButtonOnAction() {
+    public void leftLoadButtonOnAction() {
         checkTabNumAndCompareButtonAndMenuBar();
         File file = loadFileChooser();
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -91,7 +91,7 @@ public class SplitFilePaneController implements Initializable {
         checkCompareButton();
     }
     @FXML
-    private void rightLoadButtonOnAction(){
+    public void rightLoadButtonOnAction(){
         checkTabNumAndCompareButtonAndMenuBar();
         File file = loadFileChooser();
         if(file != null){
@@ -119,7 +119,7 @@ public class SplitFilePaneController implements Initializable {
     * 그 후 비활성화 된 load 버튼을 활성화로
     * */
     @FXML
-    private void leftEditButtonOnAction() {
+    public void leftEditButtonOnAction() {
         boolean edit_flag = left_text_area.isEditable();
         checkTabNumAndCompareButtonAndMenuBar();
         if(edit_flag){
@@ -154,7 +154,7 @@ public class SplitFilePaneController implements Initializable {
         }
     }
     @FXML
-    private void rightEditButtonOnAction() {
+    public void rightEditButtonOnAction() {
         boolean edit_flag = right_text_area.isEditable();
         checkTabNumAndCompareButtonAndMenuBar();
         if(edit_flag){
@@ -193,7 +193,7 @@ public class SplitFilePaneController implements Initializable {
     * 수정 사항을 저장한 후에는 로드 가능, 수정 가늗, 저장 불가능으로 된다.
     * */
     @FXML
-    private void leftSaveButtonOnAction(){
+    public void leftSaveButtonOnAction(){
         checkTabNumAndCompareButtonAndMenuBar();
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
@@ -213,7 +213,7 @@ public class SplitFilePaneController implements Initializable {
         }
     }
     @FXML
-    private void rightSaveButtonOnAction(){
+    public void rightSaveButtonOnAction(){
         checkTabNumAndCompareButtonAndMenuBar();
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
@@ -236,13 +236,13 @@ public class SplitFilePaneController implements Initializable {
     * 리스트 뷰를 클릭했을 때 일어나는 일
     * */
     @FXML
-    private void onLeftListViewMouseClicked(){
+    public void onLeftListViewMouseClicked(){
         int index = left_text_list.getSelectionModel().getSelectedIndex();
         right_text_list.getSelectionModel().select(index);
         changeToolbarButtonByClickList(index);
     }
     @FXML
-    private void onRightListViewMouseClicked(){
+    public void onRightListViewMouseClicked(){
         int index = right_text_list.getSelectionModel().getSelectedIndex();
         left_text_list.getSelectionModel().select(index);
         changeToolbarButtonByClickList(index);
@@ -400,7 +400,10 @@ public class SplitFilePaneController implements Initializable {
                 ((Button) toolBar.getItems().get(i)).setDisable(true);
             }
         }
-
+        Menu merge_menu = menu_bar.getMenus().get(1);
+        for(int i=0,n = merge_menu.getItems().size(); i<n; i++){
+            merge_menu.getItems().get(i).setDisable(true);
+        }
     }
     /*
     * TabPane 에서 현재 선택 된 tab 을 가져온다.
