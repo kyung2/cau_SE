@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-
+import java.io.*;
 import java.io.IOException;
 
 /**
@@ -18,6 +18,7 @@ public class HelpWindow {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/HelpWindow.fxml"));
         Parent root;
         try {
+
             root = (Parent) loader.load();
             Scene scene = new Scene(root);
             Stage stage = new Stage();
