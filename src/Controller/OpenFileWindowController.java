@@ -3,13 +3,10 @@ package Controller;
 import java.io.File;
 import java.io.IOException;
 
-import Model.Model;
+import Model.ModelInterface;
 import Model.ModelRealize;
 import View.AlarmWindow;
-import View.OpenFileWindow;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -49,7 +46,7 @@ public class OpenFileWindowController {
         File file = loadFileChooser(left_load);
 
     	tab_num = (int)tab.getUserData();
-        Model model = ModelRealize.getInstance();
+        Model.ModelInterface model = ModelRealize.getInstance();
 
         //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
     	if(file != null){
@@ -71,7 +68,7 @@ public class OpenFileWindowController {
         File file = loadFileChooser(right_load);
 
     	tab_num = (int)tab.getUserData();
-        Model model = ModelRealize.getInstance();
+        Model.ModelInterface model = ModelRealize.getInstance();
 
         //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
     	if(file != null){
@@ -101,16 +98,16 @@ public class OpenFileWindowController {
         left_list_view.setDisable(true);
         right_list_view.setVisible(false);
         right_list_view.setDisable(true);
-        Model model = ModelRealize.getInstance();
+        ModelInterface modelInterface = ModelRealize.getInstance();
         //탭의 패널 이름 변경
         if(!fileLeftname.equals("")) {
-            left_text_area.setText(arrayListToString(model.getText(tab_num, 0)));
+            left_text_area.setText(arrayListToString(modelInterface.getText(tab_num, 0)));
             left_file_label.setText(fileLeftname);
             changeTabName(fileLeftname,"left");
 
         }
         if(!fileRightname.equals("")) {
-            right_text_area.setText(arrayListToString(model.getText(tab_num, 1)));
+            right_text_area.setText(arrayListToString(modelInterface.getText(tab_num, 1)));
             right_file_label.setText(fileRightname);
             changeTabName(fileRightname,"right");
         }
