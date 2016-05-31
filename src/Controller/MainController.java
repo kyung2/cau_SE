@@ -27,7 +27,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class MainController implements Initializable {
+public class MainController implements Initializable, MainInterface {
     @FXML
     private Button compare_button, copy_to_left_button, copy_to_right_button, copy_to_left_all_button, copy_to_right_all_button,
             next_difference_button, previous_difference_button, first_difference_button, now_difference_button, last_difference_button;
@@ -110,7 +110,7 @@ public class MainController implements Initializable {
     * 차이점이 선택 되었을 때 그 차이점이 처음 차이점과 같다면 처음 차이점 비활성화
     * 차이점이 선택 되었을 때 그 차이점이 마지막 차이점과 같다면 마지막 차이점 비활성화
     * */
-    private void compareOnAction() {
+    public void compareOnAction() {
         if (left_text_area == null || right_text_area == null || left_text_list == null || right_text_list == null) {
             initTextAreaAndListOnTab();
         }
@@ -135,8 +135,8 @@ public class MainController implements Initializable {
                 right_text_list.getStylesheets().add("/View/Css/listCell1.css");
             }
 
-            ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(left_text, text_index));
-            ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStinrgsForList(right_text, text_index));
+            ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStringsForList(left_text, text_index));
+            ObservableList<String> right_list_item = FXCollections.observableArrayList(makeStringsForList(right_text, text_index));
             left_text_list.setItems(left_list_item);
             right_text_list.setItems(right_list_item);
 
@@ -163,7 +163,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void copyToLeftOnAction() {
+    public void copyToLeftOnAction() {
         System.out.println("Click");
         Model.ModelInterface model = ModelRealize.getInstance();
         try {
@@ -178,7 +178,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void copyToRightOnAction() {
+    public void copyToRightOnAction() {
         System.out.println("Click");
         Model.ModelInterface model = ModelRealize.getInstance();
         try {
@@ -193,7 +193,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void copyToRightAllOnAction() {
+    public void copyToRightAllOnAction() {
         Model.ModelInterface model = ModelRealize.getInstance();
         model.setText(now_tab_num, model.getText(now_tab_num,0),1);
 
@@ -202,7 +202,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void copyToLeftAllOnAction() {
+    public void copyToLeftAllOnAction() {
         Model.ModelInterface model = ModelRealize.getInstance();
         model.setText(now_tab_num, model.getText(now_tab_num,1),0);
 
@@ -211,9 +211,9 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void nextDifferenceOnAction() {
+    public void nextDifferenceOnAction() {
         Model.ModelInterface model = ModelRealize.getInstance();
-        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(model.getArrangedText(now_tab_num,0), model.getArrangedGroupSpace(now_tab_num)));
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStringsForList(model.getArrangedText(now_tab_num,0), model.getArrangedGroupSpace(now_tab_num)));
 
         //맨 마지막이면 비활성화 되어야함
         if(text_block_index+2<=left_list_item.size()-1) {
@@ -228,7 +228,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void previousDifferenceOnAction() {
+    public void previousDifferenceOnAction() {
         //left_text_list.getSelectionModel().;      `
         //맨 처음이면 비활성화 되어야함
         if(text_block_index-2>=0) {
@@ -242,11 +242,11 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void firstDifferenceOnAction() {
+    public void firstDifferenceOnAction() {
         //처음 차이점으로;
         Model.ModelInterface model = ModelRealize.getInstance();
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
-        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(model.getArrangedText(now_tab_num,0), model.getArrangedGroupSpace(now_tab_num)));
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStringsForList(model.getArrangedText(now_tab_num,0), model.getArrangedGroupSpace(now_tab_num)));
 
         if(text_index.get(0) == 0) text_block_index = 0;
         else text_block_index = 1;
@@ -263,11 +263,11 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void nowDifferenceOnAction() {
+    public void nowDifferenceOnAction() {
         now_difference_button.setText("");
         ModelInterface modelInterface = ModelRealize.getInstance();
         ArrayList<Integer> text_index = modelInterface.getArrangedGroupSpace(now_tab_num);
-        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStinrgsForList(modelInterface.getArrangedText(now_tab_num,0), modelInterface.getArrangedGroupSpace(now_tab_num)));
+        ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStringsForList(modelInterface.getArrangedText(now_tab_num,0), modelInterface.getArrangedGroupSpace(now_tab_num)));
 
         //시점만을 현재 위치로 이동
         text_block_index=left_text_list.getSelectionModel().getSelectedIndex();
@@ -290,7 +290,7 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    private void lastDifferenceOnAction() {
+    public void lastDifferenceOnAction() {
         //마지막 차이점으로
         Model.ModelInterface model = ModelRealize.getInstance();
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(now_tab_num);
@@ -332,7 +332,7 @@ public class MainController implements Initializable {
     * user data는 현재 tab num 에서 1을 더한 값을 저장한다.
     * tab 에 해당하는 새로운 모델을 하나 만든다
     * */
-    private void newTabMenuItemOnAction() {
+    public void newTabMenuItemOnAction() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/View/Fxml/SplitFilePane.fxml"));
             Tab new_tab = new Tab("File");
@@ -358,7 +358,7 @@ public class MainController implements Initializable {
     /*
     * open file window 를 연다.
     * */
-    private void openMenuItemOnAction() {
+    public void openMenuItemOnAction() {
         OpenFileWindow openFileWindow = new OpenFileWindow(now_tab);
         System.out.println("Open");
     }
@@ -367,7 +367,7 @@ public class MainController implements Initializable {
     /*
     * save file window 를 연다.
     * */
-    private void saveMenuItemOnAction() {
+    public void saveMenuItemOnAction() {
         SaveFileWindow saveFileWindow = new SaveFileWindow(now_tab);
         System.out.println("Save");
     }
@@ -376,7 +376,7 @@ public class MainController implements Initializable {
     /*
     * 오늘쪽 파일을 저장한다.
     * */
-    private void saveRightFileMenuItemOnAction() {
+    public void saveRightFileMenuItemOnAction() {
         if (left_text_area == null || right_text_area == null || left_text_list == null || right_text_list == null) {
             initTextAreaAndListOnTab();
         }
@@ -416,7 +416,7 @@ public class MainController implements Initializable {
     /*
     * 왼쪽 파일을 저장한다.
     * */
-    private void saveLeftFileMenuItemOnAction() {
+    public void saveLeftFileMenuItemOnAction() {
         if (left_text_area == null || right_text_area == null || left_text_list == null || right_text_list == null) {
             initTextAreaAndListOnTab();
         }
@@ -456,7 +456,7 @@ public class MainController implements Initializable {
     /*
     * main window 를 닫는다.
     * */
-    private void closeMenuItemOnAction() {
+    public void closeMenuItemOnAction() {
         /*
         여러가지 조건 필요
         EX> 저장되지 않은 상태라면 저장하고 종료를 묻는다.
@@ -470,7 +470,7 @@ public class MainController implements Initializable {
     /*
     * help window 를 연다.
     * */
-    private void helpMenuItemOnAction() {
+    public void helpMenuItemOnAction() {
         HelpWindow HelpWindow = new HelpWindow();
         try {
             HelpWindow.HelpWindow();
@@ -484,7 +484,7 @@ public class MainController implements Initializable {
     /*
     * program info window 를 연다.
     * */
-    private void programInformationMenuItemOnAction() {
+    public void programInformationMenuItemOnAction() {
         ProgramInformationWindow programInformationWindow = new ProgramInformationWindow();
         try {
             programInformationWindow.PrograminformationWindow();
@@ -500,7 +500,7 @@ public class MainController implements Initializable {
     * 그 후 tab menu item 을 하나 없에고
     * 해당하는 모델을 닫는다.
     * */
-    private void tabCloseAction() {
+    public void tabCloseAction() {
         System.out.println("Close tab num " + (close_tab_num));
         toolbar_stage.set(close_tab_num, null);
         tab_menu.getItems().remove(tab_menu_item_num + 1);
@@ -519,7 +519,7 @@ public class MainController implements Initializable {
     * 현재 선택된 tab 을 지우고
     * tab 이 닫힐 때 일어나는 일을 한다.
     * */
-    private void closeTabMenuItemOnAction() {
+    public void closeTabMenuItemOnAction() {
         close_tab_num = now_tab_num;
         tabCloseAction();
         ((TabPane) now_tab.getTabPane()).getTabs().remove(now_tab);
@@ -530,7 +530,7 @@ public class MainController implements Initializable {
     * 모든 tab 을 닫는다.
     * 모든 tab menu item 을 없에고 모든 toolbar stage 를 null 로 한다.
     * */
-    private void closeTabAllMenuItemOnAction() {
+    public void closeTabAllMenuItemOnAction() {
         ((TabPane) now_tab.getTabPane()).getTabs().remove(0, tab_pane.getTabs().size());
         tab_menu.getItems().remove(2, tab_menu_item_num + 2);
         tab_menu_item_num = 0;
@@ -539,11 +539,10 @@ public class MainController implements Initializable {
         //removeAllToolbarStage 해야 함
     }
 
-    @FXML
     /*
     * tab menu item 의 숫자에 맞게 tab 을 선택해 준다.
     * */
-    private void tabMenuItemOnAction(int index) {
+    public void tabMenuItemOnAction(int index) {
         tab_pane.getSelectionModel().select(index);
     }
 
@@ -670,7 +669,7 @@ public class MainController implements Initializable {
     /*
     * String 을 저장한 array list 와 index를 저장한 array list 를 통해 list view 에 넣을 string 배열을 만든다.
     * */
-    private String[] makeStinrgsForList(ArrayList<String> arrayList, ArrayList<Integer> index) {
+    private String[] makeStringsForList(ArrayList<String> arrayList, ArrayList<Integer> index) {
         String[] strings;
         int true_false_flag = 0;
 
