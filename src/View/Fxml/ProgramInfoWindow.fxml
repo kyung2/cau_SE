@@ -6,24 +6,24 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="info_window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="231.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProgramInfoWindowController">
+<AnchorPane fx:id="info_window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="230.0" prefWidth="434.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ProgramInfoWindowController">
    <children>
-      <Label layoutX="11.0" layoutY="33.0" text="nameeeee"  AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="33.0" />
-      <Label layoutX="11.0" layoutY="93.0" text="제작자 : " AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="93.0" />
-      <Label layoutX="11.0" layoutY="123.0" text="License : " AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="123.0" />
-      <Label layoutX="11.0" layoutY="153.0" text="Date : 2016.06.10" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="153.0" />
-      <!--layout X 범위는 55이상부터 적당한듯 알아서 조절하시길 ㅎㅅㅎ -->
-      <Label layoutX="55.0" layoutY="93.0" text="김소영,박찬우,장우진,최현경" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="63.0" />
-      <Text layoutX="55.0" layoutY="33.0" text="프 로 그 램 이 름 ">
+      <Text fx:id="info_text" layoutX="11.0" layoutY="77.0" text="Simple Merge" id="info_text">
          <font>
-            <Font size="57.0" />
+            <Font size="55.0" />
          </font>
       </Text>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="308.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="55.0" AnchorPane.rightAnchor="23.835052490234375">
+      <Label layoutX="11.0" layoutY="123.0" text="제작자 : " AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="123.0" />
+      <Label layoutX="11.0" layoutY="153.0" text="License : " AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="153.0" />
+      <Label layoutX="11.0" layoutY="183.0" text="Date : 2016.06.10" AnchorPane.leftAnchor="11.0" AnchorPane.topAnchor="183.0" />
+      <!--layout X 범위는 55이상부터 적당한듯 알아서 조절하시길 ㅎㅅㅎ -->
+      <Label layoutX="55.0" layoutY="123.0" text="김소영,박찬우,장우진,최현경" AnchorPane.leftAnchor="55.0" AnchorPane.topAnchor="123.0" />
+      <!--
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="308.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="55.0" AnchorPane.rightAnchor="23.835052490234375">
          <image>
             <Image url="/View/Image/sampleLogo.jpg" />
          </image>
-      </ImageView>
+      </ImageView> -->
       <Button id="info_btn" fx:id="program_info_ok_button" layoutX="368.0" layoutY="184.0" mnemonicParsing="false" onAction="#onAction_ok_btn" prefHeight="23.0" prefWidth="71.0" text="OK" AnchorPane.bottomAnchor="14.0" AnchorPane.rightAnchor="15.0" />
    </children>
 </AnchorPane>
