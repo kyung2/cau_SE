@@ -29,7 +29,7 @@ abstract class AbstractFileWindow extends Stage {
         Scene scene = new Scene(root);
         this.setTitle(title);
         this.setScene(scene);
-        this.getIcons().add(new Image("/View/Image/sampleIcon.jpg"));
+        this.getIcons().add(new Image("/View/Image/mainIcon.png"));
         this.show();
     }
     protected Label getWindowLabel(){
