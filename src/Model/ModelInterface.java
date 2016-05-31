@@ -9,7 +9,8 @@ import java.util.ArrayList;
 /**
  * Created by User on 2016-05-19.
  */
-public interface Model {
+public interface ModelInterface {
+
     void newModel(int tabNum) throws IllegalArgumentException;
     int newModel();
     public void closeModel(int tabNum) throws IllegalArgumentException;

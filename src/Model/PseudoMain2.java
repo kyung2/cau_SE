@@ -1,7 +1,6 @@
 package Model;
 
 import Model.ModelUnit.LCSsupport.*;
-import javafx.scene.control.ListView;
 
 import java.util.ArrayList;
 
@@ -19,8 +18,6 @@ public class PseudoMain2 {
         String fp1 = new String("C:\\Users\\User\\Desktop\\a.txt"), fp2 = new String("C:\\Users\\User\\Desktop\\b.txt");
         int c;
 
-        //ListView text_list;
-        //text_list.getStylesheets().
         System.out.println("0000");
         a1.add("a");
         a1.add("b");
@@ -51,7 +48,7 @@ public class PseudoMain2 {
         a2.add("t");
 
         System.out.println("0000");
-        Model m = ModelRealize.getInstance();
+        ModelInterface m = ModelRealize.getInstance();
         System.out.println("0000");
         m.newModel(2);
         c = m.newModel();

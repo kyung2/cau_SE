@@ -5,15 +5,13 @@ import View.AlarmWindow;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import Model.Model;
+import Model.ModelInterface;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
 public class SaveFileWindowController {
     private boolean item_flag = false;
@@ -65,20 +63,20 @@ public class SaveFileWindowController {
             getTabContent();
             item_flag = true;
         }
-        Model model = ModelRealize.getInstance();
+        ModelInterface modelInterface = ModelRealize.getInstance();
         try{
             int tab_num = (int)tab.getUserData();
             if(left_file != null) {
-                model.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
-                model.writeTextOuter(tab_num,left_file.getAbsolutePath(), 0);
+                modelInterface.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
+                modelInterface.writeTextOuter(tab_num,left_file.getAbsolutePath(), 0);
                 changeTabName(left_file.getName(),"left");
                 left_file_label.setText(left_file.getName());
                 doActionBySave("left");
                 System.out.println("left");
             }
             if(right_file != null) {
-                model.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
-                model.writeTextOuter(tab_num,right_file.getAbsolutePath(), 1);
+                modelInterface.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
+                modelInterface.writeTextOuter(tab_num,right_file.getAbsolutePath(), 1);
                 changeTabName(right_file.getName(),"right");
                 right_file_label.setText(right_file.getName());
                 doActionBySave("right");

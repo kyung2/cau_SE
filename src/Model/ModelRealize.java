@@ -12,7 +12,7 @@ import java.util.Comparator;
 /**
  * Created by User on 2016-05-19.
  */
-public class ModelRealize implements Model {
+public class ModelRealize implements ModelInterface {
 
     private static ModelRealize instance = null;
     private ArrayList<ModelUnitGroup> u;

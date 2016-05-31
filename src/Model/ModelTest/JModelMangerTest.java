@@ -1,25 +1,25 @@
-package Model;
+package Model.ModelTest;
 
-/*
+
+import Model.ModelInterface;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class JModelTest {
+public class JModelMangerTest {
 
 
 
-    Model m;
+    ModelInterface m;
     @Before
     public void setUp() throws Exception {
-        m = ModelRealize.getInstance();
+        m = Model.ModelRealize.getInstance();
 
     }
 
@@ -96,13 +96,6 @@ public class JModelTest {
         m.setText(3, s1, 0);
         m.setText(3, s2, 1);
     }
-
-    @Test
-    public void no006Compare()
-    {
-        ArrayList<String> s1 = m.getArrangedText(2,0);
-        ArrayList<String> s2 = m.getArrangedText(2,1);
-    }
-}*/
+}
 
 
