@@ -1,7 +1,9 @@
-package Model;
+package Model.ModelTest;
 
 
 import Model.ModelException.MergeLineIllegalException;
+import Model.ModelInterface;
+import Model.ModelRealize;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -129,7 +131,7 @@ public class JModelTabTest1L {
     @Test
     public void MergeAndCheck_G1L() {
         testData();
-        m.getUnit(0).mergeByGroupNum(1, false);
+        m.getUnit(0).mergeBylineNum(1, false);
 
         String[] sra1 = {"a", "d","g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","r","s","t"};
@@ -144,7 +146,7 @@ public class JModelTabTest1L {
     @Test
     public void MergeAndCheck_G2R() {
         testData();
-        m.getUnit(0).mergeByGroupNum(2, true);
+        m.getUnit(0).mergeBylineNum(2, true);
 
 
         String[] sra1 = {"a", "b", "c", "d","g","h","j","k","l","o","q","t"};
@@ -160,7 +162,7 @@ public class JModelTabTest1L {
     @Test
     public void MergeAndCheck_G2L() {
         testData();
-        m.getUnit(0).mergeByGroupNum(2, false);
+        m.getUnit(0).mergeBylineNum(2, false);
 
         String[] sra1 = {"a", "d","g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","r","s","t"};
@@ -175,19 +177,19 @@ public class JModelTabTest1L {
     @Test(expected= MergeLineIllegalException.class)
     public void MergeAndCheck_G3R() {
         testData();
-        m.getUnit(0).mergeByGroupNum(3, true);
+        m.getUnit(0).mergeBylineNum(3, true);
     }
 
     @Test(expected= MergeLineIllegalException.class)
     public void MergeAndCheck_G3L() {
         testData();
-        m.getUnit(0).mergeByGroupNum(3, false);
+        m.getUnit(0).mergeBylineNum(3, false);
     }
 
     @Test
     public void MergeAndCheck_G4R() {
         testData();
-        m.getUnit(0).mergeByGroupNum(4, true);
+        m.getUnit(0).mergeBylineNum(4, true);
 
         String[] sra1 = {"a", "b", "c", "d","g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a", "d", "g","i","j","n","o","r","s","t"};
@@ -202,7 +204,7 @@ public class JModelTabTest1L {
     @Test
     public void MergeAndCheck_G4L() {
         testData();
-        m.getUnit(0).mergeByGroupNum(4, false);
+        m.getUnit(0).mergeBylineNum(4, false);
 
         String[] sra1 = {"a", "b","c","d","e","f","g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a","d","e","f","g","i","j","n", "o","r","s","t"};
@@ -217,7 +219,7 @@ public class JModelTabTest1L {
     @Test
     public void MergeAndCheck_G5R() {
         testData();
-        m.getUnit(0).mergeByGroupNum(5, true);
+        m.getUnit(0).mergeBylineNum(5, true);
 
         String[] sra1 = {"a", "b", "c", "d","g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a", "d", "g","i","j","n","o","r","s","t"};
@@ -232,7 +234,7 @@ public class JModelTabTest1L {
     @Test
     public void MergeAndCheck_G5L() {
         testData();
-        m.getUnit(0).mergeByGroupNum(5, false);
+        m.getUnit(0).mergeBylineNum(5, false);
 
         String[] sra1 = {"a", "b","c","d","e","f","g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a","d","e","f","g","i","j","n", "o","r","s","t"};
@@ -247,19 +249,19 @@ public class JModelTabTest1L {
     @Test(expected= MergeLineIllegalException.class)
     public void MergeAndCheck_G6R() {
         testData();
-        m.getUnit(0).mergeByGroupNum(6, true);
+        m.getUnit(0).mergeBylineNum(6, true);
     }
 
     @Test(expected= MergeLineIllegalException.class)
     public void MergeAndCheck_G6L() {
         testData();
-        m.getUnit(0).mergeByGroupNum(6, false);
+        m.getUnit(0).mergeBylineNum(6, false);
     }
 
     @Test
     public void MergeAndCheck_G7R() {
         testData();
-        m.getUnit(0).mergeByGroupNum(7, true);
+        m.getUnit(0).mergeBylineNum(7, true);
 
         String[] sra1 = {"a", "b","c","d","g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a","d","e","f","g","h","j","n", "o","r","s","t"};
@@ -274,7 +276,7 @@ public class JModelTabTest1L {
     @Test
     public void MergeAndCheck_G7L() {
         testData();
-        m.getUnit(0).mergeByGroupNum(7, false);
+        m.getUnit(0).mergeBylineNum(7, false);
 
         String[] sra1 = {"a", "b","c","d","g","i","j","k","l","o","q","t"};
         String[] sra2 = {"a","d","e","f","g","i","j","n", "o","r","s","t"};
@@ -289,19 +291,19 @@ public class JModelTabTest1L {
     @Test(expected= MergeLineIllegalException.class)
     public void MergeAndCheck_G8R() {
         testData();
-        m.getUnit(0).mergeByGroupNum(8, true);
+        m.getUnit(0).mergeBylineNum(8, true);
     }
 
     @Test(expected= MergeLineIllegalException.class)
     public void MergeAndCheck_G8L() {
         testData();
-        m.getUnit(0).mergeByGroupNum(8, false);
+        m.getUnit(0).mergeBylineNum(8, false);
     }
 
     @Test
     public void MergeAndCheck_G9R() {
         testData();
-        m.getUnit(0).mergeByGroupNum(9, true);
+        m.getUnit(0).mergeBylineNum(9, true);
 
         String[] sra1 = {"a", "b", "c", "d", "g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a", "d", "e","f","g","i","j","k","l","o","r","s","t"};
@@ -316,7 +318,7 @@ public class JModelTabTest1L {
     @Test
     public void MergeAndCheck_G9L() {
         testData();
-        m.getUnit(0).mergeByGroupNum(9, false);
+        m.getUnit(0).mergeBylineNum(9, false);
 
         String[] sra1 = {"a", "b", "c", "d", "g","h","j","n","o","q","t"};
         String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","r","s","t"};
@@ -331,7 +333,7 @@ public class JModelTabTest1L {
     @Test
     public void MergeAndCheck_GAR() {
         testData();
-        m.getUnit(0).mergeByGroupNum(10, true);
+        m.getUnit(0).mergeBylineNum(10, true);
 
         String[] sra1 = {"a", "b", "c", "d", "g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a", "d", "e","f","g","i","j","k","l","o","r","s","t"};
@@ -346,7 +348,7 @@ public class JModelTabTest1L {
     @Test
     public void MergeAndCheck_GAL() {
         testData();
-        m.getUnit(0).mergeByGroupNum(10, false);
+        m.getUnit(0).mergeBylineNum(10, false);
 
         String[] sra1 = {"a", "b", "c", "d", "g","h","j","n","o","q","t"};
         String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","r","s","t"};
@@ -361,19 +363,19 @@ public class JModelTabTest1L {
     @Test(expected= MergeLineIllegalException.class)
     public void MergeAndCheck_GBR() {
         testData();
-        m.getUnit(0).mergeByGroupNum(11, true);
+        m.getUnit(0).mergeBylineNum(11, true);
     }
 
     @Test(expected= MergeLineIllegalException.class)
     public void MergeAndCheck_GBL() {
         testData();
-        m.getUnit(0).mergeByGroupNum(11, false);
+        m.getUnit(0).mergeBylineNum(11, false);
     }
 
     @Test
     public void MergeAndCheck_GCR() {
         testData();
-        m.getUnit(0).mergeByGroupNum(12, true);
+        m.getUnit(0).mergeBylineNum(12, true);
 
         String[] sra1 = {"a", "b", "c", "d", "g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","q","t"};
@@ -388,7 +390,7 @@ public class JModelTabTest1L {
     @Test
     public void MergeAndCheck_GCL() {
         testData();
-        m.getUnit(0).mergeByGroupNum(12, false);
+        m.getUnit(0).mergeBylineNum(12, false);
 
         String[] sra1 = {"a", "b", "c", "d", "g","h","j","k","l","o","r","s","t"};
         String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","r","s","t"};
@@ -402,7 +404,7 @@ public class JModelTabTest1L {
     @Test
     public void MergeAndCheck_GDR() {
         testData();
-        m.getUnit(0).mergeByGroupNum(13, true);
+        m.getUnit(0).mergeBylineNum(13, true);
 
         String[] sra1 = {"a", "b", "c", "d", "g","h","j","k","l","o","q","t"};
         String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","q","t"};
@@ -417,7 +419,7 @@ public class JModelTabTest1L {
     @Test
     public void MergeAndCheck_GDL() {
         testData();
-        m.getUnit(0).mergeByGroupNum(13, false);
+        m.getUnit(0).mergeBylineNum(13, false);
 
         String[] sra1 = {"a", "b", "c", "d", "g","h","j","k","l","o","r","s","t"};
         String[] sra2 = {"a", "d", "e","f","g","i","j","n","o","r","s","t"};
@@ -432,37 +434,37 @@ public class JModelTabTest1L {
     @Test(expected= MergeLineIllegalException.class)
     public void MergeAndCheck_GER() {
         testData();
-        m.getUnit(0).mergeByGroupNum(14, true);
+        m.getUnit(0).mergeBylineNum(14, true);
     }
 
     @Test(expected= MergeLineIllegalException.class)
     public void MergeAndCheck_GEL() {
         testData();
-        m.getUnit(0).mergeByGroupNum(14, false);
+        m.getUnit(0).mergeBylineNum(14, false);
     }
 
-    @Test(expected=MergeLineIllegalException.class)
+    @Test(expected=IndexOutOfBoundsException.class)
     public void MergeAndCheck_GmR() {
         testData();
-        m.getUnit(0).mergeByGroupNum(-1, true);
+        m.getUnit(0).mergeBylineNum(-1, true);
     }
 
-    @Test(expected= MergeLineIllegalException.class)
+    @Test(expected= IndexOutOfBoundsException.class)
     public void MergeAndCheck_GmL() {
         testData();
-        m.getUnit(0).mergeByGroupNum(-1, false);
+        m.getUnit(0).mergeBylineNum(-1, false);
     }
 
-    @Test(expected=MergeLineIllegalException.class)
+    @Test(expected=IndexOutOfBoundsException.class)
     public void MergeAndCheck_GoR() {
         testData();
-        m.getUnit(0).mergeByGroupNum(15, true);
+        m.getUnit(0).mergeBylineNum(15, true);
     }
 
-    @Test(expected= MergeLineIllegalException.class)
+    @Test(expected= IndexOutOfBoundsException.class)
     public void MergeAndCheck_GoL() {
         testData();
-        m.getUnit(0).mergeByGroupNum(15, false);
+        m.getUnit(0).mergeBylineNum(15, false);
     }
 
 }

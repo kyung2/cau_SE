@@ -1,6 +1,7 @@
-package Model;
+package Model.ModelTest;
 
-
+/*
+import Model.ModelInterface;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -96,5 +97,6 @@ public class JModelMangerTest {
         m.setText(3, s2, 1);
     }
 }
+*/
 
 
