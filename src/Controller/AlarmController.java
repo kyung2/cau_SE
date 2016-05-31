@@ -9,11 +9,11 @@ import javafx.stage.Window;
 /**
  * Created by woojin on 2016-05-19.
  */
-public class AlarmController {
+public class AlarmController implements AlarmInterface {
     @FXML
     private Button yes_button;
     @FXML
-    private void yesButtonOnAction(){
+    public void yesButtonOnAction(){
         Stage stage = (Stage)yes_button.getScene().getWindow();
 
         boolean clicked_button = true;
@@ -22,7 +22,7 @@ public class AlarmController {
         stage.close();
     }
     @FXML
-    private void noButtonOnAction(){
+    public void noButtonOnAction(){
         Stage stage = (Stage)yes_button.getScene().getWindow();
 
         boolean clicked_button = false;
