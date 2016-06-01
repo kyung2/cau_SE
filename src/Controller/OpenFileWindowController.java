@@ -20,12 +20,13 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
 	@FXML
 	private TextField right_file_text_area, left_file_text_area, warning_info_text_area;
 
-    private Button compare_button_file;
+    private Button compare_button;
     
 	private Tab tab;
 	private Label left_file_label, right_file_label;
 	private Button left_load, left_edit, left_save, right_load, right_edit, right_save;
-	private TextArea left_text_area, right_text_area;
+    private MenuItem open_menu_item, save_menu_item, save_right_file_menu_item, save_left_file_menu_item, compare_menu_item;
+    private TextArea left_text_area, right_text_area;
 	private TextArea left_file_bottom_text_area, right_file_bottom_text_area;
 	private ListView left_list_view, right_list_view;
 
@@ -119,19 +120,11 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
             super.changeTabName(tab, fileRightname,"right");
         }
         //스플릿 패널 활성화 설정
-        left_load.setDisable(false);
-        left_edit.setDisable(false);
-        left_save.setDisable(true);
-        right_load.setDisable(false);
-        right_edit.setDisable(false);
-        right_save.setDisable(true);
+        setClickableButtonsInFilePane("left","true","true","false");
+        setClickableButtonsInFilePane("right","true","true","false");
 
+        checkCompareButtonAndMenuItem();
 
-        if(!left_edit.isDisable() && !right_edit.isDisable()) {
-            BorderPane main_center_pane = (BorderPane)((BorderPane)tab.getTabPane().getScene().getRoot()).getCenter();
-            Button compare = (Button)((ToolBar)(main_center_pane.getTop())).getItems().get(11);
-            compare.setDisable(false);
-        }
         //창 종료
         Stage stage = (Stage) file_anchor_pane.getScene().getWindow();
         stage.close();
@@ -148,6 +141,7 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
             stage.close();
         }
     }
+
     /*
     * tab 의 구성요소들을 가져온다.
     * */
@@ -170,6 +164,9 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
         right_edit = (Button)right_file_button_tab.getChildren().get(2);
         right_save = (Button)right_file_button_tab.getChildren().get(3);
 
+        BorderPane main_center_pane = (BorderPane)((BorderPane)tab.getTabPane().getScene().getRoot()).getCenter();
+        compare_button = (Button)((ToolBar)(main_center_pane.getTop())).getItems().get(11);
+
         left_file_bottom_text_area = (TextArea)((SplitPane)left_pane.getChildren().get(1)).getItems().get(1);
         right_file_bottom_text_area = (TextArea)((SplitPane)right_pane.getChildren().get(1)).getItems().get(1);
 
@@ -180,6 +177,74 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
         left_list_view = (ListView)left_file_pane.getChildren().get(1);
         right_text_area = (TextArea)right_file_pane.getChildren().get(0);
         right_list_view = (ListView)right_file_pane.getChildren().get(1);
+
+        MenuBar menu_bar = (MenuBar)((BorderPane)compare_button.getScene().getRoot()).getTop();
+
+        Menu menu = menu_bar.getMenus().get(1);
+        compare_menu_item = menu.getItems().get(9);
+
+        menu = menu_bar.getMenus().get(0);
+        open_menu_item = menu.getItems().get(1);
+        save_menu_item = menu.getItems().get(2);
+        save_left_file_menu_item = menu.getItems().get(3);
+        save_right_file_menu_item = menu.getItems().get(4);
+    }
+
+    /*
+    * file pane 버튼의 able 과 disable 을 해준다.
+    * position 에 left 와 right 를 통해서 위치를 선택
+    * 각각 load, edit, save에 true || false 를 통해서 able 과 disable 을 한다.
+    * null 일 경우 그 버튼은 현상 유지
+    * */
+    private void setClickableButtonsInFilePane(String position, String load, String edit, String save){
+        boolean f_load, f_edit, f_save;
+        f_load = load == "true" ? true : false;
+        f_edit = edit == "true" ? true : false;
+        f_save = save == "true" ? true : false;
+
+        if(position == "left"){
+            if(load != null) {
+                left_load.setDisable(!f_load);
+                if(!f_load) open_menu_item.setDisable(true);
+            }
+            if(edit != null) {
+                left_edit.setDisable(!f_edit);
+                if(!f_edit) left_edit.setStyle("-fx-background-color:transparent");
+            }
+            if(save != null) {
+                left_save.setDisable(!f_save);
+                save_left_file_menu_item.setDisable(!f_save);
+                if(!f_save) save_menu_item.setDisable(true);
+            }
+        }
+        else{
+            if(load != null) {
+                right_load.setDisable(!f_load);
+                if(!f_load) open_menu_item.setDisable(true);
+            }
+            if(edit != null) {
+                right_edit.setDisable(!f_edit);
+                if(!f_edit) right_edit.setStyle("-fx-background-color:transparent");
+
+            }
+            if(save != null) {
+                right_save.setDisable(!f_save);
+                save_right_file_menu_item.setDisable(!f_save);
+                if(!f_save) save_menu_item.setDisable(true);
+            }
+        }
+        if(!left_load.isDisable() && !right_load.isDisable()) open_menu_item.setDisable(false);
+        if(!left_save.isDisable() && !right_save.isDisable()) save_menu_item.setDisable(false);
+    }
+
+    /*
+    * compare 버튼의 조건을 검사하고 활성화 or 비활성화
+    * */
+    private void checkCompareButtonAndMenuItem(){
+        if(!left_edit.isDisable() && !right_edit.isDisable()) {
+            compare_button.setDisable(false);
+            compare_menu_item.setDisable(false);
+        }
     }
     /*
     * array list 를 받아서 string 으로 만들어 준다.

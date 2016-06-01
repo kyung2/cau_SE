@@ -17,7 +17,8 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
     private File left_file, right_file;
     private Tab tab;
     private Label left_file_label, right_file_label;
-    private Button left_load, left_edit, left_save, right_load, right_edit, right_save;
+    private Button left_load_button, left_edit_button, left_save_button, right_load_button, right_edit_button, right_save_button, compare_button;
+    private MenuItem open_menu_item, save_menu_item, save_left_file_menu_item, save_right_file_menu_item, compare_menu_item;
     private TextArea left_text_area, right_text_area;
     private TextArea left_file_bottom_text_area, right_file_bottom_text_area;
     private ListView left_list_view, right_list_view;
@@ -42,6 +43,7 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
             warning_info_text_area.setText("Select no Left File");
         }
     }
+
     @FXML
     public void rightFileFindButtonOnAction(){
         if(!item_flag){
@@ -57,6 +59,7 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
             warning_info_text_area.setText("Select no Right File");
         }
     }
+
     @FXML
     public void okButtonOnAction(){
         if(!item_flag){
@@ -82,16 +85,13 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
                 doActionBySave("right");
                 System.out.println("right");
             }
-            if(!left_edit.isDisable() && !right_edit.isDisable()) {
-                BorderPane main_center_pane = (BorderPane)((BorderPane)tab.getTabPane().getScene().getRoot()).getCenter();
-                Button compare = (Button)((ToolBar)(main_center_pane.getTop())).getItems().get(11);
-                compare.setDisable(false);
-            }
+            checkCompareButtonAndMenuItem();
         }catch (Exception e){
             e.printStackTrace();
         }
         ((Stage)file_anchor_pane.getScene().getWindow()).close();
     }
+
     @FXML
     public void cancelButtonOnAction(){
         Stage stage = (Stage)file_anchor_pane.getScene().getWindow();
@@ -102,6 +102,7 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
             stage.close();
         }
     }
+
     /*
     *  tab 에 포함된 내용물들을 가져온다
     * */
@@ -113,14 +114,17 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         AnchorPane right_file_button_tab = (AnchorPane) right_pane.getChildren().get(0);
 
         left_file_label = (Label)left_file_button_tab.getChildren().get(0);
-        left_load = (Button)left_file_button_tab.getChildren().get(1);
-        left_edit = (Button)left_file_button_tab.getChildren().get(2);
-        left_save = (Button)left_file_button_tab.getChildren().get(3);
+        left_load_button = (Button)left_file_button_tab.getChildren().get(1);
+        left_edit_button = (Button)left_file_button_tab.getChildren().get(2);
+        left_save_button = (Button)left_file_button_tab.getChildren().get(3);
 
         right_file_label = (Label)right_file_button_tab.getChildren().get(0);
-        right_load = (Button)right_file_button_tab.getChildren().get(1);
-        right_edit = (Button)right_file_button_tab.getChildren().get(2);
-        right_save = (Button)right_file_button_tab.getChildren().get(3);
+        right_load_button = (Button)right_file_button_tab.getChildren().get(1);
+        right_edit_button = (Button)right_file_button_tab.getChildren().get(2);
+        right_save_button = (Button)right_file_button_tab.getChildren().get(3);
+
+        BorderPane main_center_pane = (BorderPane)((BorderPane)tab.getTabPane().getScene().getRoot()).getCenter();
+        compare_button = (Button)((ToolBar)(main_center_pane.getTop())).getItems().get(11);
 
         left_file_bottom_text_area = (TextArea)((SplitPane)left_pane.getChildren().get(1)).getItems().get(1);
         right_file_bottom_text_area = (TextArea)((SplitPane)right_pane.getChildren().get(1)).getItems().get(1);
@@ -132,24 +136,49 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         left_list_view = (ListView)left_file_pane.getChildren().get(1);
         right_text_area = (TextArea)right_file_pane.getChildren().get(0);
         right_list_view = (ListView)right_file_pane.getChildren().get(1);
+
+        MenuBar menu_bar = (MenuBar)((BorderPane)compare_button.getScene().getRoot()).getTop();
+
+        Menu menu = menu_bar.getMenus().get(1);
+        compare_menu_item = menu.getItems().get(9);
+
+        menu = menu_bar.getMenus().get(0);
+        open_menu_item = menu.getItems().get(1);
+        save_menu_item = menu.getItems().get(2);
+        save_left_file_menu_item = menu.getItems().get(3);
+        save_right_file_menu_item = menu.getItems().get(4);
+    }
+
+    /*
+    * compare 버튼의 조건을 검사하고 활성화 or 비활성화
+    * */
+    private void checkCompareButtonAndMenuItem(){
+        if(!left_edit_button.isDisable() && !right_edit_button.isDisable()) {
+            compare_button.setDisable(false);
+            compare_menu_item.setDisable(false);
+        }
     }
 
     /*
     * position 을 받아서 save 할 때의 action 을 한다.
     * */
     private void doActionBySave(String position){
+        save_menu_item.setDisable(true);
         if(position == "left") {
-            left_load.setDisable(false);
-            left_save.setDisable(true);
+            left_load_button.setDisable(false);
+            left_save_button.setDisable(true);
+            save_left_file_menu_item.setDisable(true);
             left_text_area.setEditable(false);
-            left_edit.setStyle("-fx-background-color:transparent");
+            left_edit_button.setStyle("-fx-background-color:transparent");
         }
         else {
-            right_load.setDisable(false);
-            right_save.setDisable(true);
+            right_load_button.setDisable(false);
+            right_save_button.setDisable(true);
+            save_right_file_menu_item.setDisable(true);
             right_text_area.setEditable(false);
-            right_edit.setStyle("-fx-background-color:transparent");
+            right_edit_button.setStyle("-fx-background-color:transparent");
         }
+        if(!left_load_button.isDisable() && !right_load_button.isDisable()) open_menu_item.setDisable(false);
     }
     /*
     * String 을 받아와서 \n 로 split 한 후 ArrayList 에 저장한다.
