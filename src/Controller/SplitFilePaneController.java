@@ -237,13 +237,20 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
     public void onLeftListViewMouseClicked(){
         int index = left_text_list.getSelectionModel().getSelectedIndex();
         right_text_list.getSelectionModel().select(index);
+        changeScrollbar(index);
         changeToolbarButtonByClickList(index);
     }
     @FXML
     public void onRightListViewMouseClicked(){
         int index = right_text_list.getSelectionModel().getSelectedIndex();
         left_text_list.getSelectionModel().select(index);
+        changeScrollbar(index);
         changeToolbarButtonByClickList(index);
+    }
+
+    private void changeScrollbar(int index){
+        left_text_list.scrollTo(index - 2);
+        right_text_list.scrollTo(index - 2);
     }
     /*
     * listView 를 선택한 위치에 대한

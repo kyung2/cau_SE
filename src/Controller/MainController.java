@@ -219,10 +219,11 @@ public class MainController implements Initializable, MainInterface {
     public void nextDifferenceOnAction() {
         Model.ModelInterface model = ModelRealize.getInstance();
         ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStringsForList(model.getArrangedText(now_tab_num,0), model.getArrangedGroupSpace(now_tab_num)));
-
         //맨 마지막이면 비활성화 되어야함
         if(text_block_index+2<=left_list_item.size()-1) {
             text_block_index = left_text_list.getSelectionModel().getSelectedIndex() + 2;
+            changeScrollbar(text_block_index);
+
             if(previous_difference_button.isDisable()) {
                 preDifferenceButtonAndMenuItem(true);
             }
@@ -241,6 +242,8 @@ public class MainController implements Initializable, MainInterface {
         //맨 처음이면 비활성화 되어야함
         if(text_block_index-2>=0) {
             text_block_index = left_text_list.getSelectionModel().getSelectedIndex() - 2;
+            changeScrollbar(text_block_index);
+
             if(next_difference_button.isDisable()) {
                 nextDifferenceButtonAndMenuItem(true);
             }
@@ -261,6 +264,7 @@ public class MainController implements Initializable, MainInterface {
 
         if(text_index.get(0) == 0) text_block_index = 0;
         else text_block_index = 1;
+        changeScrollbar(text_block_index);
 
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
@@ -281,6 +285,8 @@ public class MainController implements Initializable, MainInterface {
 
         //시점만을 현재 위치로 이동
         text_block_index=left_text_list.getSelectionModel().getSelectedIndex();
+        changeScrollbar(text_block_index);
+
         System.out.println(text_index.get(0));
         if(text_index.get(0) != 0){ // 처음 cell 이 서로 동일할 때
             if(text_block_index % 2 == 0) text_block_index += 1;    // 짝수번째(같은 부분)를 focus 중 이면 다음 cell 을 현재 차이점으로
@@ -319,6 +325,8 @@ public class MainController implements Initializable, MainInterface {
                 text_block_index = text_index_size - 2;
             }
         }
+        changeScrollbar(text_block_index);
+
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
 
@@ -729,6 +737,14 @@ public class MainController implements Initializable, MainInterface {
         }
         if(!left_load.isDisable() && !right_load.isDisable()) open_menu_item.setDisable(false);
         if(!left_save.isDisable() && !right_save.isDisable()) save_menu_item.setDisable(false);
+    }
+
+    /*
+    * 원하는 index 로 scrollbar 를 움직인다.
+    * */
+    private void changeScrollbar(int index){
+        left_text_list.scrollTo(index - 2);
+        right_text_list.scrollTo(index - 2);
     }
 
     /*
