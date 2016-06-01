@@ -270,7 +270,7 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
                 if(text_index_size < 2) nextDifferenceButtonAndMenuItem(false);
                 else nextDifferenceButtonAndMenuItem(true);
             }
-            else if(index == text_index_size - 1 || (text_index_size % 2 == 0 && index == text_index_size - 2)){
+            else if(index == text_index_size - 1 || index == text_index_size - 2){
                 preDifferenceButtonAndMenuItem(true);
                 nextDifferenceButtonAndMenuItem(false);
             }
@@ -289,7 +289,7 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
                 if(text_index_size <3) nextDifferenceButtonAndMenuItem(false);
                 else nextDifferenceButtonAndMenuItem(true);
             }
-            else if(index == text_index_size){
+            else if(index == text_index_size || index == text_index_size - 1 ){
                 preDifferenceButtonAndMenuItem(true);
                 nextDifferenceButtonAndMenuItem(false);
             }
