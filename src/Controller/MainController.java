@@ -530,7 +530,9 @@ public class MainController implements Initializable, MainInterface {
         tab_menu_item_num = 0;
         Model.ModelInterface model = ModelRealize.getInstance();
         model.closeModelAll();
-        //removeAllToolbarStage 해야 함
+        for (String[] strings : toolbar_stage) {
+            strings = null;
+        }
     }
 
     /*
