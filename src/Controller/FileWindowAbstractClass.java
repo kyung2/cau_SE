@@ -2,12 +2,8 @@ package Controller;
 
 import View.AlarmWindow;
 import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-
-import java.io.File;
-import java.util.ArrayList;
 
 /**
  * Created by woojin on 2016-05-31.
@@ -22,7 +18,7 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
     @Override
     abstract public void cancelButtonOnAction();
 
-    protected void initCancelButtonAction(String title, String content, Stage stage){
+    void initCancelButtonAction(String title, String content, Stage stage){
         AlarmWindow exitAlarmWindow = new AlarmWindow(title, content);
         exitAlarmWindow.showAndWait();
         if ((boolean) exitAlarmWindow.getUserData()) {
@@ -30,7 +26,7 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
         }
     }
 
-    protected void changeTabName(Tab tab, String name, String position){
+    void changeTabName(Tab tab, String name, String position){
         String tab_name = tab.getText();
         if(position.equals("left")) {
             if (tab_name.equals("File")) {
@@ -54,7 +50,7 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
         }
     }
 
-    protected FileChooser loadFileChooser(){
+    FileChooser loadFileChooser(){
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("FileChooser");
         fileChooser.getExtensionFilters().addAll(

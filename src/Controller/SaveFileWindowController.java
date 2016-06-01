@@ -2,7 +2,6 @@ package Controller;
 
 import Model.ModelInterface;
 import Model.ModelRealize;
-import View.AlarmWindow;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -158,8 +157,8 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
     private ArrayList<String> stringToArrayList(String s){
         ArrayList<String> arrayList = new ArrayList<String>();
         String[] strings = s.split("\n");
-        for(int i = 0, n = strings.length; i < n; i++){
-            arrayList.add(strings[i]);
+        for (String string : strings) {
+            arrayList.add(string);
         }
         return arrayList;
     }

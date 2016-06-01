@@ -14,10 +14,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -91,24 +87,21 @@ public class MainController implements Initializable, MainInterface {
             e.printStackTrace();
         }
         tab_pane.getSelectionModel().selectedItemProperty().addListener(
-                new ChangeListener<Tab>() {
-                    @Override
-                    public void changed(ObservableValue<? extends Tab> ov, Tab t, Tab t1) {
-                        if (t1 != null) {
-                            String[] stage = makeToolbarStage();
-                            now_tab = t1;
-                            toolbar_stage.set(now_tab_num, stage);
-                            close_tab_num = now_tab_num;
-                            now_tab_num = (int) now_tab.getUserData();
-                            System.out.println("Change now tab num "+ close_tab_num +" to " + now_tab_num);
-                            setClickableButtonsAndMenuItems(toolbar_stage.get(now_tab_num)[0], toolbar_stage.get(now_tab_num)[1], toolbar_stage.get(now_tab_num)[2],
-                                    toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4], toolbar_stage.get(now_tab_num)[5],
-                                    toolbar_stage.get(now_tab_num)[6], toolbar_stage.get(now_tab_num)[7], toolbar_stage.get(now_tab_num)[8], toolbar_stage.get(now_tab_num)[9]);
+                (ov, t, t1) -> {
+                    if (t1 != null) {
+                        String[] stage = makeToolbarStage();
+                        now_tab = t1;
+                        toolbar_stage.set(now_tab_num, stage);
+                        close_tab_num = now_tab_num;
+                        now_tab_num = (int) now_tab.getUserData();
+                        System.out.println("Change now tab num "+ close_tab_num +" to " + now_tab_num);
+                        setClickableButtonsAndMenuItems(toolbar_stage.get(now_tab_num)[0], toolbar_stage.get(now_tab_num)[1], toolbar_stage.get(now_tab_num)[2],
+                                toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4], toolbar_stage.get(now_tab_num)[5],
+                                toolbar_stage.get(now_tab_num)[6], toolbar_stage.get(now_tab_num)[7], toolbar_stage.get(now_tab_num)[8], toolbar_stage.get(now_tab_num)[9]);
 
-                            initTextAreaAndListOnTab();
-                        } else {
-                            setClickableButtonsAndMenuItems("false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
-                        }
+                        initTextAreaAndListOnTab();
+                    } else {
+                        setClickableButtonsAndMenuItems("false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
                     }
                 }
         );
@@ -541,7 +534,7 @@ public class MainController implements Initializable, MainInterface {
     /*
     * tab menu item 의 숫자에 맞게 tab 을 선택해 준다.
     * */
-    public void tabMenuItemOnAction(int index) {
+    private void tabMenuItemOnAction(int index) {
         tab_pane.getSelectionModel().select(index);
     }
 
@@ -695,14 +688,9 @@ public class MainController implements Initializable, MainInterface {
         Button left_save = (Button) left_button_area.getChildren().get(3);
 
         boolean f_load, f_edit, f_save;
-        if(load == "true") f_load = true;
-        else f_load = false;
-
-        if(edit == "true") f_edit = true;
-        else f_edit = false;
-
-        if(save == "true") f_save = true;
-        else f_save = false;
+        f_load = load == "true" ? true : false;
+        f_edit = edit == "true" ? true : false;
+        f_save = save == "true" ? true : false;
 
         if(position == "left"){
             if(load != null) {

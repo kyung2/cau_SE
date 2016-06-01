@@ -5,7 +5,6 @@ import java.io.IOException;
 
 import Model.ModelInterface;
 import Model.ModelRealize;
-import View.AlarmWindow;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
@@ -32,8 +31,8 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
 
     private boolean item_flag = false;
 
-    String fileRightname="";
-    String fileLeftname="";
+    private String fileRightname="";
+    private String fileLeftname="";
 
 
     @FXML

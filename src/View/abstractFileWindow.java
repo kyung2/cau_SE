@@ -16,7 +16,7 @@ import java.io.IOException;
  * Created by woojin on 2016-05-18.
  */
 abstract class AbstractFileWindow extends Stage {
-    public AbstractFileWindow(String title, Object controllerFile) {
+    protected AbstractFileWindow(String title, Object controllerFile) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/FileWindow.fxml"));
         loader.setController(controllerFile);
 

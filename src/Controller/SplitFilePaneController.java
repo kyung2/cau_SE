@@ -6,8 +6,6 @@ import View.AlarmWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 
@@ -350,14 +348,9 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
     * */
     private void setClickableButtons(String position, String load, String edit, String save){
         boolean f_load, f_edit, f_save;
-        if(load == "true") f_load = true;
-        else f_load = false;
-
-        if(edit == "true") f_edit = true;
-        else f_edit = false;
-
-        if(save == "true") f_save = true;
-        else f_save = false;
+        f_load = load == "true" ? true : false;
+        f_edit = edit == "true" ? true : false;
+        f_save = save == "true" ? true : false;
 
         if(position == "left"){
             if(load != null) {
@@ -490,8 +483,8 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
     private ArrayList<String> stringToArrayList(String s){
         ArrayList<String> arrayList = new ArrayList<String>();
         String[] strings = s.split("\n");
-        for(int i = 0, n = strings.length; i < n; i++){
-            arrayList.add(strings[i]);
+        for (String string : strings) {
+            arrayList.add(string);
         }
         return arrayList;
     }

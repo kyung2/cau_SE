@@ -1,10 +1,8 @@
 package Controller;
 
-import View.AlarmWindow;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 /**
  * Created by woojin on 2016-05-19.
