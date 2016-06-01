@@ -545,17 +545,23 @@ public class MainController implements Initializable, MainInterface {
         tab_pane.getSelectionModel().select(index);
     }
 
-    /**/
+    /*
+    *  compare 의 able / disable
+    * */
     private void compareButtonAndMenuItem(boolean compare){
         compare_menu_item.setDisable(!compare);
         compare_button.setDisable(!compare);
     }
-    /**/
+    /*
+    *  previous difference 의 able / disable
+    * */
     private void preDifferenceButtonAndMenuItem(boolean pre){
         previous_difference_menu_item.setDisable(!pre);
         previous_difference_button.setDisable(!pre);
     }
-    /**/
+    /*
+    *  next difference 의 able / disable
+    * */
     private void nextDifferenceButtonAndMenuItem(boolean next){
         next_difference_menu_item.setDisable(!next);
         next_difference_button.setDisable(!next);

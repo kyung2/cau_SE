@@ -3,7 +3,7 @@ package Controller;
 /**
  * Created by woojin on 2016-05-31.
  */
-interface FileWindowInterface {
+public interface FileWindowInterface {
     /*
     * left find 버튼 을 눌렀을 때
     * left file 을 load or save

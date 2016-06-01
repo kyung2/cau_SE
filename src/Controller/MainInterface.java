@@ -3,7 +3,7 @@ package Controller;
 /**
  * Created by woojin on 2016-05-31.
  */
-interface MainInterface {
+public interface MainInterface {
     /*
     * compare 버튼을 클릭했을 때
     * 현재 있는 text 들을 비교하여 비교한 결과를 list view 를 통하여 넣어준다.

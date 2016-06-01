@@ -38,7 +38,7 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
     private int tab_num;
     private Button compare_button;
     private MenuBar menu_bar;
-    private MenuItem previous_menu_item, next_menu_item;
+    private MenuItem previous_menu_item, next_menu_item, compare_menu_item, open_menu_item, save_menu_item, save_right_file_menu_item, save_left_file_menu_item;
     /*
     * 기본적으로
     * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
@@ -47,10 +47,10 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tab_num = -1;
-
+        /*
         setClickableButtons("right","true","false","false");
         setClickableButtons("left","true","false","false");
-
+        */
         left_text_list.setDisable(true);
         left_text_list.setVisible(false);
         right_text_list.setDisable(true);
@@ -264,40 +264,40 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
 
         if(text_index.get(0) == 0) {
             if(index % 2 == 1 ){
-                previous_difference.setDisable(true);
-                next_difference.setDisable(true);
+                preDifferenceButtonAndMenuItem(false);
+                nextDifferenceButtonAndMenuItem(false);
             }
             else if(index == 0){
-                previous_difference.setDisable(true);
-                if(text_index_size < 2) next_difference.setDisable(true);
-                else next_difference.setDisable(false);
+                preDifferenceButtonAndMenuItem(false);
+                if(text_index_size < 2) nextDifferenceButtonAndMenuItem(false);
+                else nextDifferenceButtonAndMenuItem(true);
             }
             else if(index == text_index_size - 1 || (text_index_size % 2 == 0 && index == text_index_size - 2)){
-                previous_difference.setDisable(false);
-                next_difference.setDisable(true);
+                preDifferenceButtonAndMenuItem(true);
+                nextDifferenceButtonAndMenuItem(false);
             }
             else{
-                previous_difference.setDisable(false);
-                next_difference.setDisable(false);
+                preDifferenceButtonAndMenuItem(true);
+                nextDifferenceButtonAndMenuItem(true);
             }
         }
         else{
             if(index % 2 == 0 ){
-                previous_difference.setDisable(true);
-                next_difference.setDisable(true);
+                preDifferenceButtonAndMenuItem(false);
+                nextDifferenceButtonAndMenuItem(false);
             }
             else if(index == 1){
-                previous_difference.setDisable(true);
-                if(text_index_size <3) next_difference.setDisable(true);
-                else next_difference.setDisable(false);
+                preDifferenceButtonAndMenuItem(false);
+                if(text_index_size <3) nextDifferenceButtonAndMenuItem(false);
+                else nextDifferenceButtonAndMenuItem(true);
             }
             else if(index == text_index_size){
-                previous_difference.setDisable(false);
-                next_difference.setDisable(true);
+                preDifferenceButtonAndMenuItem(true);
+                nextDifferenceButtonAndMenuItem(false);
             }
             else{
-                previous_difference.setDisable(false);
-                next_difference.setDisable(false);
+                preDifferenceButtonAndMenuItem(true);
+                nextDifferenceButtonAndMenuItem(true);
             }
         }
     }
@@ -322,10 +322,31 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
         return selectedFile;
     }
     /*
+   *  previous difference 의 able / disable
+   * */
+    private void preDifferenceButtonAndMenuItem(boolean pre){
+        ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
+        Button previous_button = (Button)toolBar.getItems().get(1);
+
+        previous_menu_item.setDisable(!pre);
+        previous_button.setDisable(!pre);
+    }
+    /*
+    *  next difference 의 able / disable
+    * */
+    private void nextDifferenceButtonAndMenuItem(boolean next){
+        ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
+        Button next_button = (Button)toolBar.getItems().get(0);
+
+        next_menu_item.setDisable(!next);
+        next_button.setDisable(!next);
+    }
+    /*
     * file pane 버튼의 able 과 disable 을 해준다.
     * position 에 left 와 right 를 통해서 위치를 선택
     * 각각 load, edit, save에 true || false 를 통해서 able 과 disable 을 한다.
     * null 일 경우 그 버튼은 현상 유지
+    * 버튼들과 연관된 menu item 의 활성화와 비활성화를 조절
     * */
     private void setClickableButtons(String position, String load, String edit, String save){
         boolean f_load, f_edit, f_save;
@@ -339,17 +360,45 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
         else f_save = false;
 
         if(position == "left"){
-            if(load != null) left_load_button.setDisable(!f_load);
-            if(edit != null) left_edit_button.setDisable(!f_edit);
-            if(save != null) left_save_button.setDisable(!f_save);
-
-
+            if(load != null) {
+                System.out.println(f_load);
+                left_load_button.setDisable(!f_load);
+                if(!f_load) {
+                    System.out.println("kk");
+                    open_menu_item.setDisable(true);
+                }
+            }
+            if(edit != null) {
+                left_edit_button.setDisable(!f_edit);
+                if(!f_edit) left_edit_button.setStyle("-fx-background-color:transparent");
+            }
+            if(save != null) {
+                left_save_button.setDisable(!f_save);
+                save_left_file_menu_item.setDisable(!f_save);
+                if(!f_save) save_menu_item.setDisable(true);
+            }
         }
         else{
-            if(load != null) right_load_button.setDisable(!f_load);
-            if(edit != null) right_edit_button.setDisable(!f_edit);
-            if(save != null) right_save_button.setDisable(!f_save);
+            if(load != null) {
+                right_load_button.setDisable(!f_load);
+                if(!f_load) open_menu_item.setDisable(true);
+            }
+            if(edit != null) {
+                right_edit_button.setDisable(!f_edit);
+                if(!f_edit) right_edit_button.setStyle("-fx-background-color:transparent");
+
+            }
+            if(save != null) {
+                right_save_button.setDisable(!f_save);
+                save_right_file_menu_item.setDisable(!f_save);
+                if(!f_save) save_menu_item.setDisable(true);
+            }
         }
+        Model.ModelInterface model = ModelRealize.getInstance();
+        if(!left_load_button.isDisable() && !right_load_button.isDisable() ) {
+             open_menu_item.setDisable(false);
+        }
+        if(!left_save_button.isDisable() && !right_save_button.isDisable() && model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) save_menu_item.setDisable(false);
     }
     /*
     * compare 버튼이 활성화 되도 되는지 체크
@@ -362,6 +411,7 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
             if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
                 if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
                     compare_button.setDisable(false);
+                    compare_menu_item.setDisable(false);
                 }
             }
         }catch (Exception e){
@@ -381,8 +431,17 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
         }
         if(menu_bar == null){
             menu_bar = (MenuBar)((BorderPane)compare_button.getScene().getRoot()).getTop();
-            next_menu_item = (MenuItem)menu_bar.getMenus().get(0);
-            previous_menu_item = (MenuItem)menu_bar.getMenus().get(1);
+
+            Menu menu = menu_bar.getMenus().get(1);
+            next_menu_item = menu.getItems().get(0);
+            previous_menu_item = menu.getItems().get(1);
+            compare_menu_item = menu.getItems().get(9);
+
+            menu = menu_bar.getMenus().get(0);
+            open_menu_item = menu.getItems().get(1);
+            save_menu_item = menu.getItems().get(2);
+            save_left_file_menu_item = menu.getItems().get(3);
+            save_right_file_menu_item = menu.getItems().get(4);
         }
     }
     /*
