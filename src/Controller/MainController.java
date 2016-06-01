@@ -145,6 +145,8 @@ public class MainController implements Initializable, MainInterface {
             left_text_list.setItems(left_list_item);
             right_text_list.setItems(right_list_item);
 
+            ScrollbarBinding.bind(left_text_list,right_text_list);
+
             if(left_list_item.get(0).equals(right_list_item.get(0))) text_block_index = 1;
             else text_block_index = 0;
             left_text_list.setVisible(true);
