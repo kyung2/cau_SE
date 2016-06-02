@@ -3,6 +3,7 @@ package View.Test;
 import View.MainWindow;
 import com.google.common.util.concurrent.SettableFuture;
 import javafx.scene.Parent;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,16 +14,16 @@ import org.loadui.testfx.utils.UserInputDetector;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assume.assumeTrue;
-import static org.loadui.testfx.Assertions.assertNodeExists;
+import static org.loadui.testfx.GuiTest.targetWindow;
 
 /**
- * Created by woojin on 2016-05-17.
+ * Created by woojin on 2016-06-02.
  */
-public class SplitPaneTest extends GuiTest {
+public class ProgramInfoWindowTest extends GuiTest {
     private static final SettableFuture<Stage> stageFuture = SettableFuture.create();
 
-    protected static class TestTabPane extends MainWindow {
-        public TestTabPane() {
+    protected static class TestProgramInfoWindow extends MainWindow {
+        public TestProgramInfoWindow() {
             super();
         }
 
@@ -38,7 +39,7 @@ public class SplitPaneTest extends GuiTest {
     public void setupStage() throws Throwable {
         assumeTrue(!UserInputDetector.instance.hasDetectedUserInput());
 
-        FXTestUtils.launchApp(SplitPaneTest.TestTabPane.class); // You can add start parameters here
+        FXTestUtils.launchApp(ProgramInfoWindowTest.TestProgramInfoWindow.class); // You can add start parameters here
         try {
             stage = targetWindow(stageFuture.get(25, TimeUnit.SECONDS));
             FXTestUtils.bringToFront(stage);
@@ -53,39 +54,13 @@ public class SplitPaneTest extends GuiTest {
     }
 
     @Test
-    public void testLeftLoadButton()
-    {
-        click("#left_load_button");
+    public void testOpenProgramInfoWindow(){
+        click("#help_and_info_menu");
+        click("#program_info");
+        click("#info_btn");
     }
-    @Test
-    public void testLeftEditButton()
-    {
-        click("#left_edit_button");
-        assertNodeExists("");
-    }
-
-    @Test
-    public void testLeftSaveButton()
-    {
-        click("#left_save_button");
-        assertNodeExists("");
-    }
-    @Test
-    public void testRightLoadButton()
-    {
-        click("#right_load_button");
-        assertNodeExists("");
-    }
-    @Test
-    public void testRightEditButton()
-    {
-        click("#right_edit_button");
-        assertNodeExists("Click");
-    }
-    @Test
-    public void testRightSaveButton()
-    {
-        click("#right_save_button");
-        assertNodeExists("Click");
+    public void testKeyCode(){
+        type(KeyCode.F10);
+        click("#info_btn");
     }
 }
