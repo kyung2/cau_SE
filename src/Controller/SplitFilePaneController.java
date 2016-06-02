@@ -249,8 +249,46 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
     }
 
     private void changeScrollbar(int index){
-        left_text_list.scrollTo(index - 2);
-        right_text_list.scrollTo(index - 2);
+        ModelInterface model = ModelRealize.getInstance();
+        ArrayList<Integer> arrangedGroupSpace = model.getArrangedGroupSpace(tab_num);
+        int lineNum = 0;
+        if( index  < 2) {
+            if (index == 1) {
+                if (arrangedGroupSpace.get(0) != 0 && arrangedGroupSpace.get(0) < 9) {
+                    left_text_list.scrollTo(0);
+                    right_text_list.scrollTo(0);
+                }
+                else if (arrangedGroupSpace.get(0) == 0 && arrangedGroupSpace.get(1) < 9) {
+                    left_text_list.scrollTo(0);
+                    right_text_list.scrollTo(0);
+                }
+                else {
+                    left_text_list.scrollTo(index);
+                    right_text_list.scrollTo(index);
+                }
+            }
+            else {
+                left_text_list.scrollTo(index);
+                right_text_list.scrollTo(index);
+            }
+        }
+        else {
+            if (arrangedGroupSpace.get(0) == 0) {
+            while(index > 0 && lineNum + arrangedGroupSpace.get(index) < 9){
+                lineNum += arrangedGroupSpace.get(index);
+                index--;
+            }
+        }
+        else {
+            while(index > 0 && lineNum + arrangedGroupSpace.get(index - 1) < 9){
+                lineNum += arrangedGroupSpace.get(index - 1);
+                index--;
+            }
+        }
+            left_text_list.scrollTo(index);
+            right_text_list.scrollTo(index);
+
+        }
     }
     /*
     * listView 를 선택한 위치에 대한
