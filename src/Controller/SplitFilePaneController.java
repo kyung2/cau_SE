@@ -237,15 +237,17 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
     public void onLeftListViewMouseClicked(){
         int index = left_text_list.getSelectionModel().getSelectedIndex();
         right_text_list.getSelectionModel().select(index);
-        changeScrollbar(index);
+
         changeToolbarButtonByClickList(index);
+        changeScrollbar(index);
     }
     @FXML
     public void onRightListViewMouseClicked(){
         int index = right_text_list.getSelectionModel().getSelectedIndex();
         left_text_list.getSelectionModel().select(index);
-        changeScrollbar(index);
+
         changeToolbarButtonByClickList(index);
+        changeScrollbar(index);
     }
 
     private void changeScrollbar(int index){
@@ -463,6 +465,7 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
     private void checkTabNumAndCompareButtonAndMenuBar(){
         if(tab_num == -1){
             tab_num = (int)getSelectedTab().getUserData();
+            System.out.println(tab_num);
         }
         if(compare_button == null) {
             compare_button = (Button)((ToolBar)((BorderPane)((BorderPane)split_pane.getScene().getRoot()).getCenter()).getTop()).getItems().get(11);
