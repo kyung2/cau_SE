@@ -1,12 +1,9 @@
 package Controller;
 
-import Model.ModelInterface;
 import Model.ModelException.MergeLineIllegalException;
+import Model.ModelInterface;
 import Model.ModelRealize;
-
 import View.*;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -875,6 +872,10 @@ public class MainController implements Initializable, MainInterface {
                 setStyle("-fx-background : green");
             }
         });
+    }
+
+    public int getTextBlockIndex(){
+        return text_block_index;
     }
 }
 
