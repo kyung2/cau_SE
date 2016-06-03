@@ -1,35 +1,34 @@
 package View;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
+import java.awt.*;
 import java.io.*;
-import java.io.IOException;
 
 /**
- * Created by woojin on 2016-05-18.
+ * Created by hyunkyung on 2016-06-01.
  */
-public class HelpWindow {
-  /*
-        public void HelpWindow() throws IOException {
-            Runtime run = Runtime.getRuntime();
-            try {
-                Process p = Runtime.getRuntime().exec("simplemergehelper.chm");
-                p.waitFor();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-                System.out.println(e.getMessage());
-            }
 
-        }
-    }
-*/
+
+public class HelpWindow {
 
     public void HelpWindow() throws Exception {
+        File helperhtml =  new File("WebHelp/index.htm");
+        Desktop.getDesktop().browse(helperhtml.toURI());
+
+    }
+}
+/*최종버전이 완성되면 지워야하는 주석 */
+/*
+       Runtime run = Runtime.getRuntime();
+        try {
+            Process p = Runtime.getRuntime().exec("helper/simplemergehelper.chm");
+            p.waitFor();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+    }
+}*/
+/*
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/HelpWindow.fxml"));
         Parent root;
         try {
@@ -46,3 +45,5 @@ public class HelpWindow {
         }
     }
 }
+*/
+

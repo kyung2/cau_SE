@@ -7,7 +7,22 @@
 
 </head>
 
-<body>
+<body><script language="JavaScript" type="text/JavaScript">
+function syn(){
+ if(parent.nav.loaded){
+  parent.nav.selectNode(3);
+ }else{
+  setTimeout("syn()",500);
+}}
+if(parent!=self){
+  setTimeout("syn()",100);
+}else{
+  document.write('<BR><table width="35%" border="0" align="center" cellpadding="5" cellspacing="1" bgcolor="#666666"><tr><td align="center" bgcolor="#FFFFFF">');
+  document.write('<a href="../index.htm#page=open_save_edit.htm">Show Navigation Frame</a>'); 
+  document.write('</td></tr></table><BR>');
+}
+</script> 
+
 <H1><FONT size=7><B>Open Save Edit</B></FONT></H1>
 <HR>
 
