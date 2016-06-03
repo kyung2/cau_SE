@@ -11,10 +11,13 @@ import javafx.stage.Stage;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.exceptions.NoNodesVisibleException;
 import org.loadui.testfx.utils.FXTestUtils;
 import org.loadui.testfx.utils.UserInputDetector;
+import org.junit.runners.MethodSorters;
+import org.junit.FixMethodOrder;
 
 import java.awt.*;
 import java.util.concurrent.TimeUnit;
@@ -30,8 +33,11 @@ import static org.loadui.testfx.Assertions.assertNodeExists;
 /**
  * Created by woojin on 2016-05-17.
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SplitPaneTest extends GuiTest {
     private static final SettableFuture<Stage> stageFuture = SettableFuture.create();
+    private int left_phase = 0;
+    private int right_phase = 0;
 
     protected static class TestTabPane extends MainWindow {
         public TestTabPane() {
@@ -65,7 +71,7 @@ public class SplitPaneTest extends GuiTest {
     }
 
     @Test
-    public void testInitButtonTest(){
+    public void stage0_testInitButtonTest(){
         assertFalse(GuiTest.find("#left_load_button").isDisable());
         assertFalse(GuiTest.find("#right_load_button").isDisable());
         assertTrue(GuiTest.find("#left_edit_button").isDisable());
@@ -75,7 +81,7 @@ public class SplitPaneTest extends GuiTest {
     }
 
     @Test
-    public void testInitTextAreaAndListView(){
+    public void stage0_testInitTextAreaAndListView(){
         assertTrue(GuiTest.find("#left_text_area").isVisible());
         assertFalse(((TextArea)GuiTest.find("#left_text_area")).isEditable());
         assertTrue(GuiTest.find("#right_text_area").isVisible());
@@ -100,61 +106,55 @@ public class SplitPaneTest extends GuiTest {
         return false;
     }
 
-    private int left_phase = 0;
-    private int right_phase = 0;
     @Test
-    public void testLeftLoadButton () {
+    public void stage1_testLeftLoadButton () {
+        System.out.println(left_phase);
         click("#left_load_button");
         type("src").type(KeyCode.ENTER);
         type("View").type(KeyCode.ENTER);
         type("Test").type(KeyCode.ENTER);
         type("test-load.txt").type(KeyCode.ENTER);
         assertEquals("Testing load button!\n",((TextArea)GuiTest.find("#left_text_area")).getText());
-        left_phase++;
     }
     @Test
-    public void testRightLoadButton() {
+    public void stage1_testRightLoadButton() {
         click("#right_load_button");
         type("src").type(KeyCode.ENTER);
         type("View").type(KeyCode.ENTER);
         type("Test").type(KeyCode.ENTER);
         type("test-load.txt").type(KeyCode.ENTER);
         assertEquals("Testing load button!\n",((TextArea)GuiTest.find("#right_text_area")).getText());
-        right_phase++;
     }
     @Test
-    public void testLeftEditButton() {
-        if (left_phase == 0) {
-            testLeftLoadButton();
+    public void stage2_testLeftEditButton() {
+        if (GuiTest.find("#left_edit_button").isDisable()) {
+            stage1_testLeftLoadButton();
         }
         assertFalse(GuiTest.find("#left_edit_button").isDisable());
         click("#left_edit_button");
         assertFalse(GuiTest.find("#left_text_area").isDisable());
         assertFalse(GuiTest.find("#left_save_button").isDisable());
         assertTrue(GuiTest.find("#left_load_button").isDisable());
-        left_phase++;
     }
     @Test
-    public void testRightEditButton()
-    {
-        if (right_phase == 0) {
-            testRightLoadButton();
+    public void stage2_testRightEditButton() {
+        if (GuiTest.find("#right_edit_button").isDisable()) {
+            stage1_testRightLoadButton();
         }
+        System.out.println(left_phase);
         assertFalse(GuiTest.find("#right_edit_button").isDisable());
         click("#right_edit_button");
         assertFalse(GuiTest.find("#right_text_area").isDisable());
         assertFalse(GuiTest.find("#right_save_button").isDisable());
         assertTrue(GuiTest.find("#right_load_button").isDisable());
-        left_phase++;
     }
     @Test
-    public void testLeftSaveButton()
-    {
-        if(left_phase == 0){
-            testLeftLoadButton();
+    public void stage3_testLeftSaveButton() {
+        if(GuiTest.find("#left_edit_button").isDisable()){
+            stage1_testLeftLoadButton();
         }
-        if(left_phase == 1){
-            testLeftEditButton();
+        if(GuiTest.find("#left_save_button").isDisable()){
+            stage2_testLeftEditButton();
         }
         click("#left_save_button");
         click("#no_button");
@@ -167,14 +167,13 @@ public class SplitPaneTest extends GuiTest {
         assertFalse(GuiTest.find("#left_load_button").isDisable());
         assertTrue(GuiTest.find("#left_save_button").isDisable());
     }
-
     @Test
-    public void testRightSaveButton() {
-        if(right_phase == 0) {
-            testRightLoadButton();
+    public void stage3_testRightSaveButton() {
+        if(GuiTest.find("#right_edit_button").isDisable()) {
+            stage1_testRightLoadButton();
         }
-        if(right_phase == 1){
-            testRightEditButton();
+        if(GuiTest.find("#right_save_button").isDisable()){
+            stage2_testRightEditButton();
         }
         click("#right_save_button");
         click("#no_button");
