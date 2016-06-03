@@ -6,9 +6,7 @@ import com.google.common.util.concurrent.SettableFuture;
 import javafx.scene.Parent;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,11 +17,8 @@ import org.loadui.testfx.utils.UserInputDetector;
 import org.junit.runners.MethodSorters;
 import org.junit.FixMethodOrder;
 
-import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.sym.error;
-import static javafx.scene.input.KeyCode.R;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assume.assumeTrue;
 import static org.junit.Assert.assertFalse;
@@ -39,8 +34,8 @@ public class SplitPaneTest extends GuiTest {
     private int left_phase = 0;
     private int right_phase = 0;
 
-    protected static class TestTabPane extends MainWindow {
-        public TestTabPane() {
+    protected static class TestSplitPane extends MainWindow {
+        public TestSplitPane() {
             super();
         }
 
@@ -56,7 +51,7 @@ public class SplitPaneTest extends GuiTest {
     public void setupStage() throws Throwable {
         assumeTrue(!UserInputDetector.instance.hasDetectedUserInput());
 
-        FXTestUtils.launchApp(SplitPaneTest.TestTabPane.class); // You can add start parameters here
+        FXTestUtils.launchApp(TestSplitPane.class); // You can add start parameters here
         try {
             stage = targetWindow(stageFuture.get(25, TimeUnit.SECONDS));
             FXTestUtils.bringToFront(stage);
