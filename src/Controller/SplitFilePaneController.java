@@ -360,6 +360,14 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
                 new FileChooser.ExtensionFilter("C Files", "*.c","*.cpp"),
                 new FileChooser.ExtensionFilter("Text Files", "*.txt")
         );
+
+        File currentDirFile = new File(".");
+        String init_path = currentDirFile.getAbsolutePath();
+        init_path = init_path.substring(0, init_path.length() - 2);
+
+        //String init_path = System.getProperty("user.home")+File.separator+"Documents";
+
+        fileChooser.setInitialDirectory(new File(init_path));
         File selectedFile = fileChooser.showOpenDialog(null);
         if(selectedFile == null) {
             System.out.println("No Select FIle");
@@ -404,7 +412,6 @@ public class SplitFilePaneController implements Initializable, splitFilePaneInte
                 System.out.println(f_load);
                 left_load_button.setDisable(!f_load);
                 if(!f_load) {
-                    System.out.println("kk");
                     open_menu_item.setDisable(true);
                 }
             }
