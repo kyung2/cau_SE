@@ -101,6 +101,7 @@ public class SplitPaneTest extends GuiTest {
 
     @Test
     public void stage1_testLeftLoadButton () {
+        click("#left_load_button");
         type("src").type(KeyCode.ENTER);
         type("View").type(KeyCode.ENTER);
         type("Test").type(KeyCode.ENTER);
