@@ -5,7 +5,6 @@ import Controller.*;
 
 import static org.easymock.EasyMock.*;
 
-import javafx.stage.FileChooser;
 import org.easymock.*;
 import org.junit.*;
 import java.io.*;
