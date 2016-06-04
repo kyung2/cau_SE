@@ -31,8 +31,6 @@ import static org.loadui.testfx.Assertions.assertNodeExists;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SplitPaneTest extends GuiTest {
     private static final SettableFuture<Stage> stageFuture = SettableFuture.create();
-    private int left_phase = 0;
-    private int right_phase = 0;
 
     protected static class TestSplitPane extends MainWindow {
         public TestSplitPane() {
@@ -103,7 +101,6 @@ public class SplitPaneTest extends GuiTest {
 
     @Test
     public void stage1_testLeftLoadButton () {
-        click("#left_load_button");
         type("src").type(KeyCode.ENTER);
         type("View").type(KeyCode.ENTER);
         type("Test").type(KeyCode.ENTER);
@@ -135,7 +132,6 @@ public class SplitPaneTest extends GuiTest {
         if (GuiTest.find("#right_edit_button").isDisable()) {
             stage1_testRightLoadButton();
         }
-        System.out.println(left_phase);
         assertFalse(GuiTest.find("#right_edit_button").isDisable());
         click("#right_edit_button");
         assertFalse(GuiTest.find("#right_text_area").isDisable());
