@@ -103,7 +103,6 @@ public class SplitPaneTest extends GuiTest {
 
     @Test
     public void stage1_testLeftLoadButton () {
-        System.out.println(left_phase);
         click("#left_load_button");
         type("src").type(KeyCode.ENTER);
         type("View").type(KeyCode.ENTER);
@@ -180,5 +179,23 @@ public class SplitPaneTest extends GuiTest {
         assertFalse(((TextArea)GuiTest.find("#right_text_area")).isEditable());
         assertFalse(GuiTest.find("#right_load_button").isDisable());
         assertTrue(GuiTest.find("#right_save_button").isDisable());
+    }
+    @Test
+    public void stage4_testCompareButton(){
+        if(GuiTest.find("#left_edit_button").isDisable()) {
+            click("#left_load_button");
+            type("src").type(KeyCode.ENTER);
+            type("View").type(KeyCode.ENTER);
+            type("Test").type(KeyCode.ENTER);
+            type("test-compare1.txt").type(KeyCode.ENTER);
+        }
+        if(GuiTest.find("#right_edit_button").isDisable()) {
+            click("#right_load_button");
+            type("src").type(KeyCode.ENTER);
+            type("View").type(KeyCode.ENTER);
+            type("Test").type(KeyCode.ENTER);
+            type("test-compare2.txt").type(KeyCode.ENTER);
+        }
+        click("#compare_button");
     }
 }
