@@ -3,7 +3,7 @@ package Controller;
 /**
  * Created by woojin on 2016-06-01.
  */
-interface splitFilePaneInterface {
+interface SplitFilePaneInterface {
     /*
     * load 버튼을 눌렀을 때
     * 파일을 불러와서 text area 에 적고

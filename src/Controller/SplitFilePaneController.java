@@ -20,7 +20,7 @@ import java.util.ResourceBundle;
  * has Load, Save, Edit button action.
  * in Load button action, make file chooser.
  */
-public class SplitFilePaneController implements Initializable, splitFilePaneInterface {
+public class SplitFilePaneController implements Initializable, SplitFilePaneInterface {
     @FXML
     private TextArea left_text_area, right_text_area;
     @FXML
