@@ -313,13 +313,18 @@ public class MainController implements Initializable, MainInterface {
         //시점만을 현재 위치로 이동
         text_block_index=left_text_list.getSelectionModel().getSelectedIndex();
         changeScrollbar(text_block_index);
-
-        System.out.println(text_index.get(0));
+        System.out.println(text_index);
         if(text_index.get(0) != 0){ // 처음 cell 이 서로 동일할 때
-            if(text_block_index % 2 == 0) text_block_index += 1;    // 짝수번째(같은 부분)를 focus 중 이면 다음 cell 을 현재 차이점으로
+            if(text_block_index % 2 == 0) {
+                if(text_block_index == text_index.size() - 1 ) text_block_index -= 1;
+                else text_block_index += 1;                 // 짝수번째(같은 부분)를 focus 중 이면 다음 cell 을 현재 차이점으로
+            }
         }
         else{   // 처음 cell 이 서로 다를 대
-            if(text_block_index %2 == 1) text_block_index += 1;     // 홀수번째(같은 부분)를 focus 중 이면 그 다음 cell 을 현재 차이점으로
+            if(text_block_index %2 == 1){
+                if(text_block_index == text_index.size() - 2 ) text_block_index -= 1;
+                else text_block_index += 1;                 // 홀수번째(같은 부분)를 focus 중 이면 다음 cell 을 현재 차이점으로
+            }
         }
         if(text_block_index==0 || text_block_index==1) preDifferenceButtonAndMenuItem(false);
         else preDifferenceButtonAndMenuItem(true);
@@ -953,68 +958,7 @@ public class MainController implements Initializable, MainInterface {
         return arrayList;
     }
 
-    private void init(){
-        left_text_list.setCellFactory(param -> new ListCell<String>(){
-            @Override
-            protected void updateItem(String item, boolean empty) {
-                setText(item);
-                setStyle("-fx-background : green");
-            }
-        });
-    }
-
     public int getTextBlockIndex(){
         return text_block_index;
     }
 }
-
-/*
- ImageIcon img = new ImageIcon("/View/Image/sampleIcon.jpg");
-
- public class JavaFX_ApplicationIcon extends Application {
-
-@Override
-public void start(final Stage primaryStage) {
-
-Button btn = new Button();
-btn.setText("Say 'Hello World'");
-btn.setOnAction(new EventHandler<ActionEvent>() {
-
-@Override
-public void handle(ActionEvent event) {
-System.out.println("Hello World!");
-
-//load another image from internet
-//and dynamically add it as new apllication icon
-Image anotherIcon = new Image("http://goo.gl/kYEQl");
-primaryStage.getIcons().add(anotherIcon);
-}
-});
-
-StackPane root = new StackPane();
-root.getChildren().add(btn);
-
-Scene scene = new Scene(root, 300, 250);
-
-//set icon of the application
-Image applicationIcon = new Image(getClass().getResourceAsStream("dukes_36x36.png"));
-primaryStage.getIcons().add(applicationIcon);
-
-primaryStage.setTitle("Hello World!");
-primaryStage.setScene(scene);
-primaryStage.show();
-}
-
-public static void main(String[] args) {
-launch(args);
-}
-
-}
-
- http://java-buddy.blogspot.kr/2013/11/javafx-example-how-to-set-icon-of.html
-
- 아이콘 이미지 바꾸어주는것 : 버튼 누르면 개귀엽
- 도전 한ㅂㄴ merger 버튼 누르면 색깔 바꾸는 것으로 .. ?ㅎㅎ
- merge 가근데 오랫동안 안걸릴것같으니 포기
-
- */
