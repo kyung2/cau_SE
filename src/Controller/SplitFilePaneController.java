@@ -36,7 +36,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     private TextArea left_status_pane, right_status_pane;
 
     private int tab_num;
-    private Button compare_button;
+    private Button compare_button, previous_difference_button, next_difference_button;
     private MenuBar menu_bar;
     private MenuItem previous_menu_item, next_menu_item, compare_menu_item, open_menu_item, save_menu_item, save_right_file_menu_item, save_left_file_menu_item;
     private StatusControll left_status, right_status;
@@ -347,46 +347,42 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         ArrayList<Integer> text_index = model.getArrangedGroupSpace(tab_num);
         int text_index_size = text_index.size() - 1;
 
-        ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
-        Button previous_difference = (Button)toolBar.getItems().get(1);
-        Button next_difference = (Button)toolBar.getItems().get(0);
-
         if(text_index.get(0) == 0) {
             if(index % 2 == 1 ){
-                preDifferenceButtonAndMenuItem(false);
-                nextDifferenceButtonAndMenuItem(false);
+                disableCopyButtonInToolBarAndMenuItem();
             }
-            else if(index == 0){
-                preDifferenceButtonAndMenuItem(false);
-                if(text_index_size < 2) nextDifferenceButtonAndMenuItem(false);
-                else nextDifferenceButtonAndMenuItem(true);
-            }
-            else if(index == text_index_size - 1 || index == text_index_size - 2){
-                preDifferenceButtonAndMenuItem(true);
-                nextDifferenceButtonAndMenuItem(false);
-            }
-            else{
-                preDifferenceButtonAndMenuItem(true);
-                nextDifferenceButtonAndMenuItem(true);
+            else {
+                ableCopyButtonInToolBarAndMenuItem();
+                if (index == 0) {
+                    preDifferenceButtonAndMenuItem(false);
+                    if (text_index_size < 2) nextDifferenceButtonAndMenuItem(false);
+                    else nextDifferenceButtonAndMenuItem(true);
+                } else if (index == text_index_size - 1 || index == text_index_size - 2) {
+                    preDifferenceButtonAndMenuItem(true);
+                    nextDifferenceButtonAndMenuItem(false);
+                } else {
+                    preDifferenceButtonAndMenuItem(true);
+                    nextDifferenceButtonAndMenuItem(true);
+                }
             }
         }
         else{
             if(index % 2 == 0 ){
-                preDifferenceButtonAndMenuItem(false);
-                nextDifferenceButtonAndMenuItem(false);
+                disableCopyButtonInToolBarAndMenuItem();
             }
-            else if(index == 1){
-                preDifferenceButtonAndMenuItem(false);
-                if(text_index_size <3) nextDifferenceButtonAndMenuItem(false);
-                else nextDifferenceButtonAndMenuItem(true);
-            }
-            else if(index == text_index_size || index == text_index_size - 1 ){
-                preDifferenceButtonAndMenuItem(true);
-                nextDifferenceButtonAndMenuItem(false);
-            }
-            else{
-                preDifferenceButtonAndMenuItem(true);
-                nextDifferenceButtonAndMenuItem(true);
+            else {
+                ableCopyButtonInToolBarAndMenuItem();
+                if (index == 1) {
+                    preDifferenceButtonAndMenuItem(false);
+                    if (text_index_size < 3) nextDifferenceButtonAndMenuItem(false);
+                    else nextDifferenceButtonAndMenuItem(true);
+                } else if (index == text_index_size || index == text_index_size - 1) {
+                    preDifferenceButtonAndMenuItem(true);
+                    nextDifferenceButtonAndMenuItem(false);
+                } else {
+                    preDifferenceButtonAndMenuItem(true);
+                    nextDifferenceButtonAndMenuItem(true);
+                }
             }
         }
     }
@@ -422,21 +418,15 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
    *  previous difference 의 able / disable
    * */
     private void preDifferenceButtonAndMenuItem(boolean pre){
-        ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
-        Button previous_button = (Button)toolBar.getItems().get(1);
-
         previous_menu_item.setDisable(!pre);
-        previous_button.setDisable(!pre);
+        previous_difference_button.setDisable(!pre);
     }
     /*
     *  next difference 의 able / disable
     * */
     private void nextDifferenceButtonAndMenuItem(boolean next){
-        ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
-        Button next_button = (Button)toolBar.getItems().get(0);
-
         next_menu_item.setDisable(!next);
-        next_button.setDisable(!next);
+        next_difference_button.setDisable(!next);
     }
     /*
     * file pane 버튼의 able 과 disable 을 해준다.
@@ -519,12 +509,16 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             System.out.println(tab_num);
         }
         if(compare_button == null) {
-            compare_button = (Button)((ToolBar)((BorderPane)((BorderPane)split_pane.getScene().getRoot()).getCenter()).getTop()).getItems().get(11);
+            ToolBar toolBar = (ToolBar)((BorderPane)((BorderPane)split_pane.getScene().getRoot()).getCenter()).getTop();
+            compare_button = (Button)toolBar.getItems().get(11);
+            next_difference_button = (Button)toolBar.getItems().get(0);
+            previous_difference_button = (Button)toolBar.getItems().get(1);
+
         }
         if(menu_bar == null){
             menu_bar = (MenuBar)((BorderPane)compare_button.getScene().getRoot()).getTop();
-
             Menu menu = menu_bar.getMenus().get(1);
+
             next_menu_item = menu.getItems().get(0);
             previous_menu_item = menu.getItems().get(1);
             compare_menu_item = menu.getItems().get(9);
@@ -534,6 +528,40 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             save_menu_item = menu.getItems().get(2);
             save_left_file_menu_item = menu.getItems().get(3);
             save_right_file_menu_item = menu.getItems().get(4);
+        }
+    }
+    /*
+    * copy 에 관련된 버튼과 menu item 을 disable 한다.
+    * */
+    private void disableCopyButtonInToolBarAndMenuItem(){
+        ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
+        for(int i=0, n=toolBar.getItems().size(); i<n; i++){
+            if( i == 0 || i == 1 || i == 6 || i == 7 || i == 8 || i == 9) {
+                ((Button) toolBar.getItems().get(i)).setDisable(true);
+            }
+        }
+        Menu merge_menu = menu_bar.getMenus().get(1);
+        for(int i=0,n = merge_menu.getItems().size(); i<n; i++){
+            if( i == 0 || i == 1 || i == 5 || i == 6 || i == 7 || i == 8) {
+                merge_menu.getItems().get(i).setDisable(true);
+            }
+        }
+    }
+    /*
+    * copy 에 관련된 버튼과 menu item 을 disable 한다.
+    * */
+    private void ableCopyButtonInToolBarAndMenuItem(){
+        ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
+        for(int i=0, n=toolBar.getItems().size(); i<n; i++){
+            if( i == 0 || i == 1 || i == 6 || i == 7 || i == 8 || i == 9) {
+                ((Button) toolBar.getItems().get(i)).setDisable(false);
+            }
+        }
+        Menu merge_menu = menu_bar.getMenus().get(1);
+        for(int i=0,n = merge_menu.getItems().size(); i<n; i++){
+            if( i == 0 || i == 1 || i == 5 || i == 6 || i == 7 || i == 8) {
+                merge_menu.getItems().get(i).setDisable(false);
+            }
         }
     }
     /*
