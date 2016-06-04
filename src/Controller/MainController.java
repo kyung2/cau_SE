@@ -260,7 +260,6 @@ public class MainController implements Initializable, MainInterface {
                 nextDifferenceButtonAndMenuItem(false);
             }
         }
-
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
     }
@@ -304,6 +303,7 @@ public class MainController implements Initializable, MainInterface {
         preDifferenceButtonAndMenuItem(false);
         if(!(text_block_index==left_list_item.size()-2 || text_block_index==left_list_item.size()-1)) nextDifferenceButtonAndMenuItem(true);
         else nextDifferenceButtonAndMenuItem(false);
+        setClickableButtonsAndMenuItems(null,null,"true","true","true","true","true","true","true",null);
     }
 
     @FXML
@@ -333,6 +333,8 @@ public class MainController implements Initializable, MainInterface {
 
         if(text_block_index == left_list_item.size()-2 || text_block_index == left_list_item.size()-1) nextDifferenceButtonAndMenuItem(false);
         else nextDifferenceButtonAndMenuItem(true);
+        setClickableButtonsAndMenuItems(null,null,"true","true","true","true","true","true","true",null);
+
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
     }
@@ -370,6 +372,8 @@ public class MainController implements Initializable, MainInterface {
         nextDifferenceButtonAndMenuItem(false);
         if(!(text_block_index==0 || text_block_index==1)) preDifferenceButtonAndMenuItem(true);
         else preDifferenceButtonAndMenuItem(false);
+
+        setClickableButtonsAndMenuItems(null,null,"true","true","true","true","true","true","true",null);
     }
 
     @FXML
