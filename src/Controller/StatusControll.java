@@ -8,24 +8,33 @@ import javafx.scene.control.TextArea;
 public class StatusControll  {
     private TextArea area;
     private String name;
+    private boolean meue_flag = false;
 
 
     public void addStatus(String str){
+        if(meue_flag) {
+            meue_flag = false;
+            return;
+        }
         String txt = area.getText();
+        txt += str + '\n';
 
         area.setText(txt);
-//        area.setScrollTop(area.getMaxHeight());
+    }
+
+    public void setMeueFlag(){
+        this.meue_flag = true;
     }
 
     public void addStatusWithName(String str){
+        if(meue_flag) {
+            meue_flag = false;
+            return;
+        }
         String txt = area.getText();
         txt += str + ": " + name + '\n';
 
-
-
         area.setText(txt);
-//        area.setScrollTop(0.0);
-//        area.setScrollTop(area.getMaxHeight());
     }
 
     public void setFileName(String str){
