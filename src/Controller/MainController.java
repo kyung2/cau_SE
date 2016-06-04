@@ -44,6 +44,8 @@ public class MainController implements Initializable, MainInterface {
     private ListView left_text_list, right_text_list;
     private TextArea left_text_area, right_text_area;
 
+    private StatusControll left_status, right_status;
+
     private ArrayList<String[]> toolbar_stage = new ArrayList<String[]>();
     private int tab_num, now_tab_num, tab_menu_item_num, close_tab_num;
 
@@ -159,8 +161,15 @@ public class MainController implements Initializable, MainInterface {
             // 차이점이 있을 경우 차이점 관련 버튼을 활성화
             if(left_list_item.size()==1) setClickableButtonsAndMenuItems("false", "false", "false", "false", "false", "false", "false", "false", "false", "true");
             else setClickableButtonsAndMenuItems("true", "false", "true", "true", "true", "true", "true", "true", "true", "true");
+
+            left_status.addStatusWithName("Compare");
+            right_status.addStatusWithName("Compare");
         } catch (Exception e) {
             e.printStackTrace();
+
+            left_status.addStatusWithName("ERR - "+e.getMessage());
+            right_status.addStatusWithName("ERR - "+e.getMessage());
+
         }
     }
 
@@ -171,9 +180,12 @@ public class MainController implements Initializable, MainInterface {
         try {
             text_block_index=left_text_list.getSelectionModel().getSelectedIndex();
             model.mergeByGroup(now_tab_num, text_block_index+(model.getArrangedGroupSpace(now_tab_num).get(0)==0?1:0), false);
+            left_status.addStatus("Copy to left: "+text_block_index);
+            right_status.addStatus("Copy to left: "+text_block_index);
         }
          catch (MergeLineIllegalException e) {
-            e.printStackTrace();
+             e.printStackTrace();
+             left_status.addStatusWithName("ERR - "+e.getMessage());
         }
         left_text_area.setText(arrayListToString(model.getText(now_tab_num, 0)));
         compareOnAction();
@@ -186,9 +198,12 @@ public class MainController implements Initializable, MainInterface {
         try {
             text_block_index=right_text_list.getSelectionModel().getSelectedIndex();
             model.mergeByGroup(now_tab_num, text_block_index+(model.getArrangedGroupSpace(now_tab_num).get(0)==0?1:0), true);
+            left_status.addStatus("Copy to right: "+text_block_index);
+            right_status.addStatus("Copy to right: "+text_block_index);
         }
         catch (MergeLineIllegalException e) {
             e.printStackTrace();
+            right_status.addStatusWithName("ERR - "+e.getMessage());
         }
         left_text_area.setText(arrayListToString(model.getText(now_tab_num, 1)));
         compareOnAction();
@@ -199,6 +214,9 @@ public class MainController implements Initializable, MainInterface {
         Model.ModelInterface model = ModelRealize.getInstance();
         model.setText(now_tab_num, model.getText(now_tab_num,0),1);
 
+        left_status.addStatus("Copy to right All: "+text_block_index);
+        right_status.addStatus("Copy to right All: "+text_block_index);
+
         right_text_area.setText(arrayListToString(model.getText(now_tab_num, 0)));
         compareOnAction();
     }
@@ -207,6 +225,9 @@ public class MainController implements Initializable, MainInterface {
     public void copyToLeftAllOnAction() {
         Model.ModelInterface model = ModelRealize.getInstance();
         model.setText(now_tab_num, model.getText(now_tab_num,1),0);
+
+        left_status.addStatus("Copy to left All: "+text_block_index);
+        right_status.addStatus("Copy to left All: "+text_block_index);
 
         left_text_area.setText(arrayListToString(model.getText(now_tab_num, 1)));
         compareOnAction();
@@ -231,6 +252,9 @@ public class MainController implements Initializable, MainInterface {
 
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
+
+        left_status.addStatus("Next difference: "+text_block_index);
+        right_status.addStatus("Next difference: "+text_block_index);
     }
 
     @FXML
@@ -250,6 +274,9 @@ public class MainController implements Initializable, MainInterface {
         }
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
+
+        left_status.addStatus("Prev difference: "+text_block_index);
+        right_status.addStatus("Prev difference: "+text_block_index);
     }
 
     @FXML
@@ -272,6 +299,9 @@ public class MainController implements Initializable, MainInterface {
         preDifferenceButtonAndMenuItem(false);
         if(!(text_block_index==left_list_item.size()-2 || text_block_index==left_list_item.size()-1)) nextDifferenceButtonAndMenuItem(true);
         else nextDifferenceButtonAndMenuItem(false);
+
+        left_status.addStatus("First difference: "+text_block_index);
+        right_status.addStatus("First difference: "+text_block_index);
     }
 
     @FXML
@@ -298,6 +328,9 @@ public class MainController implements Initializable, MainInterface {
         else nextDifferenceButtonAndMenuItem(true);
         left_text_list.getSelectionModel ().select (text_block_index);
         right_text_list.getSelectionModel ().select (text_block_index);
+
+        left_status.addStatus("Now difference: "+text_block_index);
+        right_status.addStatus("Now difference: "+text_block_index);
     }
 
     @FXML
@@ -333,6 +366,9 @@ public class MainController implements Initializable, MainInterface {
         nextDifferenceButtonAndMenuItem(false);
         if(!(text_block_index==0 || text_block_index==1)) preDifferenceButtonAndMenuItem(true);
         else preDifferenceButtonAndMenuItem(false);
+
+        left_status.addStatus("Last difference: "+text_block_index);
+        right_status.addStatus("Last difference: "+text_block_index);
     }
 
     @FXML
@@ -403,6 +439,7 @@ public class MainController implements Initializable, MainInterface {
 
             } catch (Exception e) {
                 e.printStackTrace();
+                right_status.addStatusWithName("ERR - "+e.getMessage());
             }
             try{
                 if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
@@ -412,7 +449,9 @@ public class MainController implements Initializable, MainInterface {
                 }
             }catch (Exception e){
                 e.printStackTrace();
+                right_status.addStatusWithName("ERR - "+e.getMessage());
             }
+            right_status.addStatusWithName("File save");
         }
     }
 
@@ -437,6 +476,7 @@ public class MainController implements Initializable, MainInterface {
                 setClickableButtonsInFilePane("left", "true", "false", "false");
             } catch (Exception e) {
                 e.printStackTrace();
+                left_status.addStatusWithName("ERR - "+e.getMessage());
             }
             try{
                 if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
@@ -446,7 +486,9 @@ public class MainController implements Initializable, MainInterface {
                 }
             }catch (Exception e){
                 e.printStackTrace();
+                left_status.addStatusWithName("ERR - "+e.getMessage());
             }
+            left_status.addStatusWithName("File save");
         }
     }
 
@@ -852,6 +894,16 @@ public class MainController implements Initializable, MainInterface {
         right_text_area = (TextArea) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(0);
         left_text_list = (ListView) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(1);
         right_text_list = (ListView) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(1);
+
+        Model.ModelInterface model = ModelRealize.getInstance();
+
+        String[] left_filePath = model.getUnit(tab_num).filepath(0).split("/");
+        String[] right_filePath = model.getUnit(tab_num).filepath(1).split("/");
+
+        left_status = new StatusControll((TextArea)(left_split_pane.getItems().get(1)));
+        left_status.setFileName(left_filePath[left_filePath.length-1]);
+        right_status = new StatusControll((TextArea)(right_split_pane.getItems().get(1)));
+        right_status.setFileName(right_filePath[right_filePath.length-1]);
     }
 
     /*

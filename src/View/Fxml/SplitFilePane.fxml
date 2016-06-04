@@ -54,7 +54,7 @@
                                 <ColorAdjust />
                             </effect>
                         </AnchorPane>
-                        <TextArea fx:id="left_file_bottom_text_area" editable="false" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" />
+                        <TextArea fx:id="left_status_pane" editable="false" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" />
                     </items>
                 </SplitPane>
             </children>
@@ -92,7 +92,7 @@
                                 <ListView id="right_list_view" fx:id="right_text_list" disable="true" onMouseClicked="#onRightListViewMouseClicked" layoutX="29.0" layoutY="66.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                             </children>
                         </AnchorPane>
-                        <TextArea fx:id="right_file_bottom_text_area" editable="false" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" />
+                        <TextArea fx:id="right_status_pane" editable="false" maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="23.0" prefWidth="260.0" />
                     </items>
                 </SplitPane>
             </children>

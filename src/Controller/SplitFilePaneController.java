@@ -32,11 +32,14 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     private SplitPane split_pane;
     @FXML
     private Label left_file_label, right_file_label;
+    @FXML
+    private TextArea left_status_pane, right_status_pane;
 
     private int tab_num;
     private Button compare_button;
     private MenuBar menu_bar;
     private MenuItem previous_menu_item, next_menu_item, compare_menu_item, open_menu_item, save_menu_item, save_right_file_menu_item, save_left_file_menu_item;
+    private StatusControll left_status, right_status;
     /*
     * 기본적으로
     * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
@@ -49,6 +52,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         setClickableButtons("right","true","false","false");
         setClickableButtons("left","true","false","false");
         */
+
         left_text_list.setDisable(true);
         left_text_list.setVisible(false);
         right_text_list.setDisable(true);
@@ -59,6 +63,9 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
 
         compare_button = null;
         menu_bar = null;
+
+        left_status = new StatusControll(left_status_pane);
+        right_status = new StatusControll(right_status_pane);
     }
     /*
     * compare 버튼을 할당되있지 않을 경우 할당
@@ -81,8 +88,13 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
                 changeTabName(file.getName(),"left");
                 disableAllButtonInToolBarAndMenuItem();
                 left_file_label.setText(file.getName());
+                left_status.setFileName(file.getName());
+
+                left_status.addStatusWithName("File open");
             }catch(Exception e){
                 e.printStackTrace();
+
+                left_status.addStatusWithName("ERR - "+e.getMessage());
             }
         }
         invisibleListViewVisibleTextArea();
@@ -102,8 +114,13 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
                 changeTabName(file.getName(),"right");
                 disableAllButtonInToolBarAndMenuItem();
                 right_file_label.setText(file.getName());
+                right_status.setFileName(file.getName());
+
+                right_status.addStatusWithName("File open");
             }catch(Exception e){
                 e.printStackTrace();
+
+                right_status.addStatusWithName("ERR - "+e.getMessage());
             }
         }
         invisibleListViewVisibleTextArea();
@@ -129,8 +146,12 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             try {
                 Model.ModelInterface model = ModelRealize.getInstance();
                 model.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
+
+                left_status.addStatusWithName("nonEditable");
             }catch (Exception e){
                 e.printStackTrace();
+
+                left_status.addStatusWithName("ERR - "+e.getMessage());
             }
             checkCompareButton();
             setClickableButtons("left","true",null,null);
@@ -149,6 +170,8 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             setClickableButtons("left","false",null,"true");
             // hk - edit이 활성화 될 시 하이라이팅 (이미지바꿀려면 저 setStyle메소드 이용하면됨)
             left_edit_button.setStyle("-fx-background-color: #a6a6a6");
+
+            left_status.addStatusWithName("Editable");
         }
     }
     @FXML
@@ -163,8 +186,12 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             try {
                 Model.ModelInterface model = ModelRealize.getInstance();
                 model.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
+
+                right_status.addStatusWithName("nonEditable");
             }catch (Exception e){
                 e.printStackTrace();
+
+                right_status.addStatusWithName("ERR - "+e.getMessage());
             }
             right_text_area.setEditable(false);
             checkCompareButton();
@@ -184,6 +211,8 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             setClickableButtons("right","false",null,"true");
             // hk - edit이 활성화 될 시 하이라이팅 (이미지바꿀려면 저 setStyle메소드 이용하면됨)
             right_edit_button.setStyle("-fx-background-color: #a6a6a6");
+
+            right_status.addStatusWithName("Editable");
         }
     }
     /*
@@ -205,8 +234,12 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
                 checkCompareButton();
                 setClickableButtons("left", "true", null, "false");
                 left_edit_button.setStyle("-fx-background-color:transparent");
+
+                left_status.addStatusWithName("File save");
             }catch (Exception e){
                 e.printStackTrace();
+
+                left_status.addStatusWithName("ERR - "+e.getMessage());
             }
         }
     }
@@ -225,11 +258,16 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
                 checkCompareButton();
                 setClickableButtons("right", "true", null, "false");
                 right_edit_button.setStyle("-fx-background-color:transparent");
+
+                right_status.addStatusWithName("File save");
             }catch (Exception e){
                 e.printStackTrace();
+
+                right_status.addStatusWithName("ERR - "+e.getMessage());
             }
         }
     }
+
     /*
     * 리스트 뷰를 클릭했을 때 일어나는 일
     * */
@@ -240,6 +278,9 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
 
         changeToolbarButtonByClickList(index);
         changeScrollbar(index);
+
+        left_status.addStatus("Select line: "+(index+1));
+        right_status.addStatus("Select line: "+(index+1));
     }
     @FXML
     public void onRightListViewMouseClicked(){
@@ -248,6 +289,9 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
 
         changeToolbarButtonByClickList(index);
         changeScrollbar(index);
+
+        right_status.addStatus("Select line: "+(index+1));
+        left_status.addStatus("Select line: "+(index+1));
     }
 
     private void changeScrollbar(int index){
