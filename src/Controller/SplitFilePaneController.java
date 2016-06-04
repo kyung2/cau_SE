@@ -278,9 +278,6 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
 
         changeToolbarButtonByClickList(index);
         changeScrollbar(index);
-
-        left_status.addStatus("Select line: "+(index+1));
-        right_status.addStatus("Select line: "+(index+1));
     }
     @FXML
     public void onRightListViewMouseClicked(){
@@ -289,9 +286,6 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
 
         changeToolbarButtonByClickList(index);
         changeScrollbar(index);
-
-        right_status.addStatus("Select line: "+(index+1));
-        left_status.addStatus("Select line: "+(index+1));
     }
 
     private void changeScrollbar(int index){
