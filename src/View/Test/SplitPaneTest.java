@@ -4,6 +4,7 @@ import View.MainWindow;
 import com.google.common.util.concurrent.SettableFuture;
 
 import javafx.scene.Parent;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
@@ -194,5 +195,19 @@ public class SplitPaneTest extends GuiTest {
             type("test-compare2.txt").type(KeyCode.ENTER);
         }
         click("#compare_button");
+    }
+    @Test
+    public void stage5_testListViewScroll(){
+        ListView left_list = null, right_list;
+        try{
+            left_list = GuiTest.find("#left_list_view");
+            right_list = GuiTest.find("#right_list_view");
+        }catch(NoNodesVisibleException e){
+            stage4_testCompareButton();
+            left_list = GuiTest.find("#left_list_view");
+            right_list = GuiTest.find("#right_list_view");
+        }
+        ((ListView)GuiTest.find("#left_list_view")).scrollTo(3);
+        System.out.println(left_list.getSelectionModel());
     }
 }
