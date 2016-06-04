@@ -24,6 +24,7 @@ interface SplitFilePaneInterface {
     * edit 버튼을 비활성화 하고
     * 두 text area 가 모두 파일이 있고 edit 상태가 아닐 때 compare 버튼의 활성화한다.
     * */
+
     void leftEditButtonOnAction();
     void rightEditButtonOnAction();
     /*
@@ -41,4 +42,5 @@ interface SplitFilePaneInterface {
     * */
     void onLeftListViewMouseClicked();
     void onRightListViewMouseClicked();
+
 }
