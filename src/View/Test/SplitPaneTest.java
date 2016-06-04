@@ -6,9 +6,7 @@ import com.google.common.util.concurrent.SettableFuture;
 import javafx.scene.Parent;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,11 +17,8 @@ import org.loadui.testfx.utils.UserInputDetector;
 import org.junit.runners.MethodSorters;
 import org.junit.FixMethodOrder;
 
-import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.sym.error;
-import static javafx.scene.input.KeyCode.R;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assume.assumeTrue;
 import static org.junit.Assert.assertFalse;
@@ -36,11 +31,9 @@ import static org.loadui.testfx.Assertions.assertNodeExists;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SplitPaneTest extends GuiTest {
     private static final SettableFuture<Stage> stageFuture = SettableFuture.create();
-    private int left_phase = 0;
-    private int right_phase = 0;
 
-    protected static class TestTabPane extends MainWindow {
-        public TestTabPane() {
+    protected static class TestSplitPane extends MainWindow {
+        public TestSplitPane() {
             super();
         }
 
@@ -56,7 +49,7 @@ public class SplitPaneTest extends GuiTest {
     public void setupStage() throws Throwable {
         assumeTrue(!UserInputDetector.instance.hasDetectedUserInput());
 
-        FXTestUtils.launchApp(SplitPaneTest.TestTabPane.class); // You can add start parameters here
+        FXTestUtils.launchApp(TestSplitPane.class); // You can add start parameters here
         try {
             stage = targetWindow(stageFuture.get(25, TimeUnit.SECONDS));
             FXTestUtils.bringToFront(stage);
@@ -108,7 +101,6 @@ public class SplitPaneTest extends GuiTest {
 
     @Test
     public void stage1_testLeftLoadButton () {
-        System.out.println(left_phase);
         click("#left_load_button");
         type("src").type(KeyCode.ENTER);
         type("View").type(KeyCode.ENTER);
@@ -141,7 +133,6 @@ public class SplitPaneTest extends GuiTest {
         if (GuiTest.find("#right_edit_button").isDisable()) {
             stage1_testRightLoadButton();
         }
-        System.out.println(left_phase);
         assertFalse(GuiTest.find("#right_edit_button").isDisable());
         click("#right_edit_button");
         assertFalse(GuiTest.find("#right_text_area").isDisable());
@@ -185,5 +176,23 @@ public class SplitPaneTest extends GuiTest {
         assertFalse(((TextArea)GuiTest.find("#right_text_area")).isEditable());
         assertFalse(GuiTest.find("#right_load_button").isDisable());
         assertTrue(GuiTest.find("#right_save_button").isDisable());
+    }
+    @Test
+    public void stage4_testCompareButton(){
+        if(GuiTest.find("#left_edit_button").isDisable()) {
+            click("#left_load_button");
+            type("src").type(KeyCode.ENTER);
+            type("View").type(KeyCode.ENTER);
+            type("Test").type(KeyCode.ENTER);
+            type("test-compare1.txt").type(KeyCode.ENTER);
+        }
+        if(GuiTest.find("#right_edit_button").isDisable()) {
+            click("#right_load_button");
+            type("src").type(KeyCode.ENTER);
+            type("View").type(KeyCode.ENTER);
+            type("Test").type(KeyCode.ENTER);
+            type("test-compare2.txt").type(KeyCode.ENTER);
+        }
+        click("#compare_button");
     }
 }
