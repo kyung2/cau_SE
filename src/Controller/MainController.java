@@ -440,7 +440,7 @@ public class MainController implements Initializable, MainInterface {
                 model.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
                 model.writeTextOuter(tab_num, 1);
                 right_text_area.setEditable(false);
-                setClickableButtonsInFilePane("right","true","false","false");
+                setClickableButtonsInFilePane("right","true", null,"false");
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -478,7 +478,7 @@ public class MainController implements Initializable, MainInterface {
                 model.writeTextOuter(tab_num, 0);
                 left_text_area.setEditable(false);
 
-                setClickableButtonsInFilePane("left", "true", "false", "false");
+                setClickableButtonsInFilePane("left", "true", null, "false");
             } catch (Exception e) {
                 e.printStackTrace();
                 left_status.addStatusWithName("ERR - "+e.getMessage());

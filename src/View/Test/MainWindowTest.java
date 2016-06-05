@@ -79,6 +79,7 @@ public class MainWindowTest extends GuiTest {
         System.out.println("Check all toolbar button is disabled");
         //버튼이 모두 disable 인지 test
     }
+
     @Test
     public void stage0_testInitFileMenuTest(){
         click("#file_menu");
@@ -96,6 +97,7 @@ public class MainWindowTest extends GuiTest {
         assertTrue(save_left.isDisable());
         assertTrue(save_right.isDisable());
     }
+
     @Test
     public void stage0_testInitMergeMenuTest(){
         click("#merge_menu");
@@ -121,6 +123,7 @@ public class MainWindowTest extends GuiTest {
         assertTrue(copy_right_all.isDisable());
         assertTrue(compare.isDisable());
     }
+
     @Test
     public void stage1_testOpenWindow(){
         String file = "test-load.txt";
@@ -163,6 +166,7 @@ public class MainWindowTest extends GuiTest {
         System.out.println("Type HotKey : Ctrl + L");
         press(KeyCode.CONTROL).type(KeyCode.L).release(KeyCode.CONTROL);
     }
+
     @Test
     public void stage2_testLeftSaveMenuItem(){
         if(GuiTest.find("#left_save_button").isDisable()){
@@ -174,7 +178,7 @@ public class MainWindowTest extends GuiTest {
         testSaveLeftFileHotKey();
         assertNodeExists("#alarm_window");
         click("#yes_button");
-        assertTrue(GuiTest.find("#left_edit_button").isDisable());
+        assertTrue(GuiTest.find("#left_save_button").isDisable());
 
         if(GuiTest.find("#left_save_button").isDisable()){
             if(GuiTest.find("#left_edit_button").isDisable()) {
@@ -184,11 +188,11 @@ public class MainWindowTest extends GuiTest {
         }
         click("#file_menu").click("Save Left File");
         click("#no_button");
-        assertFalse(GuiTest.find("#left_edit_button").isDisable());
+        assertFalse(GuiTest.find("#left_save_button").isDisable());
 
         click("#file_menu").click("Save Left File");
         click("#yes_button");
-        assertTrue(GuiTest.find("#left_edit_button").isDisable());
+        assertTrue(GuiTest.find("#left_save_button").isDisable());
     }
     private void testSaveLeftFileHotKey(){
         System.out.println("Type Save left file HotKey : Ctrl + Alt + L");
@@ -204,7 +208,34 @@ public class MainWindowTest extends GuiTest {
 
     @Test
     public void stage2_testRightSaveMenuItem(){
+        if(GuiTest.find("#right_save_button").isDisable()){
+            if(GuiTest.find("#right_edit_button").isDisable()) {
+                loadRightFile();
+            }
+            click("#right_edit_button");
+        }
+        testSaveRightFileHotKey();
+        assertNodeExists("#alarm_window");
+        click("#yes_button");
+        assertTrue(GuiTest.find("#right_save_button").isDisable());
 
+        if(GuiTest.find("#right_save_button").isDisable()){
+            if(GuiTest.find("#right_edit_button").isDisable()) {
+                loadRightFile();
+            }
+            click("#right_edit_button");
+        }
+        click("#file_menu").click("Save Right File");
+        click("#no_button");
+        assertFalse(GuiTest.find("#right_save_button").isDisable());
+
+        click("#file_menu").click("Save Right File");
+        click("#yes_button");
+        assertTrue(GuiTest.find("#right_save_button").isDisable());
+    }
+    private void testSaveRightFileHotKey(){
+        System.out.println("Type Save right file HotKey : Ctrl + Alt + R");
+        press(KeyCode.CONTROL).press(KeyCode.ALT).type(KeyCode.R).release(KeyCode.CONTROL).release(KeyCode.ALT);
     }
     private void loadRightFile(){
         click("#right_load_button");
@@ -213,9 +244,18 @@ public class MainWindowTest extends GuiTest {
         type("Test").type(KeyCode.ENTER);
         type("test-compare2.txt").type(KeyCode.ENTER);
     }
+
+    @Test
+    public void staeg2_testSaveMenuItem(){
+        
+    }
+    private void testSaveHotKey(){
+
+    }
     @Test
     public void testCompareButton()
     {
+
         click("#compare_button");
         assertNodeExists("Click");
     }
