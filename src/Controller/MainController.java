@@ -899,7 +899,7 @@ public class MainController implements Initializable, MainInterface {
         right_text_area = (TextArea) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(0);
         left_text_list = (ListView) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(1);
         right_text_list = (ListView) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(1);
-
+        /*
         Model.ModelInterface model = ModelRealize.getInstance();
 
         File left_file = new File(model.getUnit(tab_num).filepath(0));
@@ -909,6 +909,7 @@ public class MainController implements Initializable, MainInterface {
         left_status.setFileName(left_file.getName());
         right_status = new StatusControll((TextArea)(right_split_pane.getItems().get(1)));
         right_status.setFileName(right_file.getName());
+        */
     }
 
     /*
