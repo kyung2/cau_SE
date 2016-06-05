@@ -156,10 +156,12 @@ public class SplitPaneTest extends GuiTest {
             stage2_testLeftEditButton();
         }
         click("#left_save_button");
+        assertNodeExists("#alarm_window");
         click("#no_button");
         assertTrue(((TextArea)GuiTest.find("#left_text_area")).isEditable());
         assertTrue(GuiTest.find("#left_load_button").isDisable());
         assertFalse(GuiTest.find("#left_save_button").isDisable());
+
         click("#left_save_button");
         click("#yes_button");
         assertFalse(((TextArea)GuiTest.find("#left_text_area")).isEditable());
@@ -175,10 +177,12 @@ public class SplitPaneTest extends GuiTest {
             stage2_testRightEditButton();
         }
         click("#right_save_button");
+        assertNodeExists("#alarm_window");
         click("#no_button");
         assertTrue(((TextArea)GuiTest.find("#right_text_area")).isEditable());
         assertTrue(GuiTest.find("#right_load_button").isDisable());
         assertFalse(GuiTest.find("#right_save_button").isDisable());
+
         click("#right_save_button");
         click("#yes_button");
         assertFalse(((TextArea)GuiTest.find("#right_text_area")).isEditable());
