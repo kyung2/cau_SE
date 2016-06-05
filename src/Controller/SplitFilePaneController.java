@@ -323,7 +323,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     /*
     * 리스트 뷰를 클릭했을 때 일어나는 일
     * */
-    
+
     @FXML
     public void onLeftListViewMouseClicked(){
         int index = left_text_list.getSelectionModel().getSelectedIndex();

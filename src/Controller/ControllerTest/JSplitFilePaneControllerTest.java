@@ -1,20 +1,15 @@
 package Controller.ControllerTest;
 
 import Model.*;
+import View.*;
 import Controller.*;
 
 import static org.easymock.EasyMock.*;
-
 import org.easymock.*;
 import org.junit.*;
 import java.io.*;
 
-
-
-import junit.framework.Assert;
-
 /*
-
 createMock : 인터페이스나 클래스의 mock객체를 생성한다.
 replay : mock객체의 인터페이스를 호출하는 것을 기록한 것을 다시 처음으로 돌린다.
 verify : 기록한 내용의 behavior(행위)들을 다 실행을 했는지 체크를 한다.
@@ -23,23 +18,27 @@ reset : createMock으로 생성한 mock을 초기화 한다.
 */
 /**
  * Created by hyunkyung on 2016-06-04.
+ * @author hyunkyung
  */
 public class JSplitFilePaneControllerTest {
     private SplitFilePaneController mocksplitFilePaneController; //Idepency.
-    private ModelInterface model;
-    private MainController controller;
+
+
     @Before
     public void setUp() {
+
         mocksplitFilePaneController = EasyMock.createMock(SplitFilePaneController.class);
     }
 
     @Test
     public void testleftLaodButtonOnAction() {
-        /**
-         * 파일이 제대로 불러왔는지 파일입출력을 통해서
-         * ㅜㅠ  lefttest가 제대로 불러왔는지 비교 /
-         *
-         */
+        File left = new File("./left.txt");
+
+        if( !left.exists() ) System.out.println("fail"); //실패 메세지 보내기 fail("File is not Open!!");
+
+        //left 파일이 제대로 읽혀왓나 테스트 assert이용
+
+
     }
 
 
@@ -50,6 +49,7 @@ public class JSplitFilePaneControllerTest {
     @Test
     public void testleftEditButtonOnAction(){
         /*
+        여기서 열려있ㅇ야할듯 먼저
         *
         *
         *
@@ -66,6 +66,7 @@ public class JSplitFilePaneControllerTest {
     }
     @Test
     public void testrightSaveButtonOnAction(){
+        /*위에 left 모의객체로 만들면 sace가 작동더ㅣㄴㄴ상황 save button 눌럿을시 제대로 save되냐 */
 
     }
     @Test
@@ -123,36 +124,176 @@ public class JSplitFilePaneControllerTest {
 */
 }
 
+/*
+* package Data;
+
+import java.io.File;
+
+import junit.framework.TestCase;
+
+import org.junit.Test;
+
+import View.Drawable;
+
+
+public class FileComparerTest extends TestCase{
+
+
+	@Test
+	public void testFactory(){
+
+		File f1 = new File("./june2.txt");
+		File f2 = new File("./june.txt");
+
+		if( !f1.exists() || !f2.exists()  ) fail("File is not Open!!");
+
+		FileComparer compare1 = FileComparer.Factory.create(f1);
+		FileComparer compare2 = FileComparer.Factory.create(f2);
+
+		assertTrue(compare1 instanceof ASCIIFileComparer);
+		assertTrue(compare2 instanceof ASCIIFileComparer);
+
+
+		File d1 = new File("./a");
+		File d2 = new File("./b");
+
+		if( !d1.exists() || !d2.exists()  ) fail("File is not Open!!");
+
+		FileComparer compare3 = FileComparer.Factory.create(d1);
+		FileComparer compare4 = FileComparer.Factory.create(d2);
+
+		assertTrue(compare3 instanceof DirectoryComparer);
+		assertTrue(compare4 instanceof DirectoryComparer);
+	}
+	@Test
+	public void testDiff() {
+
+		File f1 = new File("./june2.txt");
+		File f2 = new File("./june.txt");
+
+		if( !f1.exists() || !f2.exists()  ) fail("File is not Open!!");
+
+		FileComparer compare1 = FileComparer.Factory.create(f1);
+		FileComparer compare2 = FileComparer.Factory.create(f2);
+
+		assertTrue(compare1.diff(compare2) instanceof Drawable);
+		assertTrue(compare2.diff(compare1) instanceof Drawable);
 
 
 
-    /*
-    *       checkTabNumAndCompareButtonAndMenuBar();
-        File file = loadFileChooser();
-        Model.ModelInterface model = ModelRealize.getInstance();
-        if(file != null){
-            try {
-                model.readTextOuter(tab_num, file.getAbsolutePath(), 0);
-                left_text_area.setVisible(true);
-                left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
-                setClickableButtons("left","true","true","false");
-                changeTabName(file.getName(),"left");
-                disableAllButtonInToolBarAndMenuItem();
-                left_file_label.setText(file.getName());
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-        }
-        invisibleListViewVisibleTextArea();
-        checkCompareButton();
+		File d1 = new File("./a");
+		File d2 = new File("./b");
+
+		if( !d1.exists() || !d2.exists()  ) fail("File is not Open!!");
+
+		FileComparer compare3 = FileComparer.Factory.create(d1);
+		FileComparer compare4 = FileComparer.Factory.create(d2);
+
+		assertTrue(compare3.diff(compare4) instanceof Drawable);
+		assertTrue(compare4.diff(compare3) instanceof Drawable);
+
+	}
+
+	@Test
+	public void testEquals() {
+
+		File f1 = new File("./june2.txt");
+		File f2 = new File("./june2.txt");
+		File f3 = new File("./june.txt");
+
+		if( !f1.exists() || !f2.exists() || !f3.exists() ) fail("File is not Open!!");
+
+
+		FileComparer compare1 = FileComparer.Factory.create(f1);
+		FileComparer compare2 = FileComparer.Factory.create(f2);
+		FileComparer compare3 = FileComparer.Factory.create(f3);
+
+		assertEquals(true,compare1.equals(compare2));
+		assertEquals(false,compare1.equals(compare3));
+
+		File d1 = new File("./a");
+		File d2 = new File("./a");
+		File d3 = new File("./b");
+
+
+		if( !d1.exists() || !d2.exists() || !d3.exists() ) fail("File is not Open!!");
+
+		FileComparer dircompare1 = FileComparer.Factory.create(d1);
+		FileComparer dircompare2 = FileComparer.Factory.create(d2);
+		FileComparer dircompare3 = FileComparer.Factory.create(d3);
+
+		assertEquals(true,dircompare1.equals(dircompare2));
+		assertEquals(false,dircompare1.equals(dircompare3));
+
+
+	}
+
+}
+*/
+
+/*package Contoller;
+
+import junit.framework.TestCase;
+
+import org.easymock.EasyMock;
+import org.junit.Test;
+
+import Data.FileComparer;
+import View.Drawable;
+
+public class ControllerTest extends TestCase{
+
+	private Controller testContoller;
+	private FileComparer mock;
+	private FileComparer mock2;
+
+	private Drawable draw;
+	private Drawable draw2;
+
+/*
+@Override
+/*protected void etUp() throws Exception {
+    super.setUp();
+
+
+    mock = EasyMock.createMock(FileComparer.class);
+    mock2 = EasyMock.createMock(FileComparer.class);
+
+    draw = EasyMock.createMock(Drawable.class);
+    draw2 = EasyMock.createMock(Drawable.class);
+
+    if(mock == null || mock2 == null) fail("Null!!!");
+    testContoller = new Controller();
+    testContoller.setFileComparer(mock, mock2);
+
+
+}
+
+    @Test
+    public void testSimpleTest(){
+        EasyMock.expect(mock.diff(mock2)).andReturn(draw);
+        EasyMock.expect(mock2.diff(mock)).andReturn(draw2);
+        EasyMock.replay(mock,mock2);
+
+        assertTrue(testContoller.initMerge());
+        assertTrue(testContoller.resultDraw());
     }
-    */
 
-    /*
-        @Test
-        public void add(){
-            //recoding
 
-            //verify
-        }
-        */
+    @Test
+    public void testInitMerge() {
+        Controller c = new Controller();
+
+        assertTrue(c.initMerge());
+    }
+
+    @Test
+    public void testSelectCharge() {
+        Controller c = new Controller();
+
+        assertTrue(c.selectCharge("./june2.txt", "./june.txt"));
+    }
+
+
+}
+*/
