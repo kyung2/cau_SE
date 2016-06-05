@@ -125,6 +125,7 @@ public class MainWindowTest extends GuiTest {
     public void stage1_testOpenWindow(){
         String file = "test-load.txt";
         testOpenWindowHotKey(); // 단축키 test
+        click("#cancel_button");
 
         click("#file_menu").click("Open");
         click("#left_find_button");
@@ -161,7 +162,56 @@ public class MainWindowTest extends GuiTest {
     private void testOpenWindowHotKey(){
         System.out.println("Type HotKey : Ctrl + L");
         press(KeyCode.CONTROL).type(KeyCode.L).release(KeyCode.CONTROL);
-        click("Cancel");
+    }
+    @Test
+    public void stage2_testLeftSaveMenuItem(){
+        if(GuiTest.find("#left_save_button").isDisable()){
+            if(GuiTest.find("#left_edit_button").isDisable()) {
+                loadLeftFile();
+            }
+            click("#left_edit_button");
+        }
+        testSaveLeftFileHotKey();
+        assertNodeExists("#alarm_window");
+        click("#yes_button");
+        assertTrue(GuiTest.find("#left_edit_button").isDisable());
+
+        if(GuiTest.find("#left_save_button").isDisable()){
+            if(GuiTest.find("#left_edit_button").isDisable()) {
+                loadLeftFile();
+            }
+            click("#left_edit_button");
+        }
+        click("#file_menu").click("Save Left File");
+        click("#no_button");
+        assertFalse(GuiTest.find("#left_edit_button").isDisable());
+
+        click("#file_menu").click("Save Left File");
+        click("#yes_button");
+        assertTrue(GuiTest.find("#left_edit_button").isDisable());
+    }
+    private void testSaveLeftFileHotKey(){
+        System.out.println("Type Save left file HotKey : Ctrl + Alt + L");
+        press(KeyCode.CONTROL).press(KeyCode.ALT).type(KeyCode.L).release(KeyCode.CONTROL).release(KeyCode.ALT);
+    }
+    private void loadLeftFile(){
+        click("#left_load_button");
+        type("src").type(KeyCode.ENTER);
+        type("View").type(KeyCode.ENTER);
+        type("Test").type(KeyCode.ENTER);
+        type("test-compare1.txt").type(KeyCode.ENTER);
+    }
+
+    @Test
+    public void stage2_testRightSaveMenuItem(){
+
+    }
+    private void loadRightFile(){
+        click("#right_load_button");
+        type("src").type(KeyCode.ENTER);
+        type("View").type(KeyCode.ENTER);
+        type("Test").type(KeyCode.ENTER);
+        type("test-compare2.txt").type(KeyCode.ENTER);
     }
     @Test
     public void testCompareButton()
