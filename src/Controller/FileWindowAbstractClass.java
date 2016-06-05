@@ -5,6 +5,8 @@ import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 /**
  * Created by woojin on 2016-05-31.
  */
@@ -59,6 +61,14 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
                 new FileChooser.ExtensionFilter("Java Files", "*.java"),
                 new FileChooser.ExtensionFilter("C Files", "*.c","*.cpp")
         );
+
+        File currentDirFile = new File(".");
+        String init_path = currentDirFile.getAbsolutePath();
+        init_path = init_path.substring(0, init_path.length() - 2);
+
+        //String init_path = System.getProperty("user.home")+File.separator+"Documents";
+
+        fileChooser.setInitialDirectory(new File(init_path));
         return fileChooser;
     }
 }
