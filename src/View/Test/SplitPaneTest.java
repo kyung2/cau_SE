@@ -9,8 +9,7 @@ import javafx.geometry.Orientation;
 import javafx.geometry.VerticalDirection;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.ListView;
-import javafx.scene.control.ScrollBar;
+import javafx.scene.control.*;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
@@ -25,6 +24,7 @@ import org.junit.runners.MethodSorters;
 import org.junit.FixMethodOrder;
 
 import java.awt.*;
+import java.awt.Label;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
@@ -115,7 +115,9 @@ public class SplitPaneTest extends GuiTest {
         type("Test").type(KeyCode.ENTER);
         type("test-load.txt").type(KeyCode.ENTER);
         assertEquals("Testing load button!\n",((TextArea)GuiTest.find("#left_text_area")).getText());
+        assertTrue(((javafx.scene.control.Label)GuiTest.find("#left_file_label")).getText().equals("test-load.txt"));
     }
+
     @Test
     public void stage1_testRightLoadButton() {
         click("#right_load_button");
@@ -124,7 +126,9 @@ public class SplitPaneTest extends GuiTest {
         type("Test").type(KeyCode.ENTER);
         type("test-load.txt").type(KeyCode.ENTER);
         assertEquals("Testing load button!\n",((TextArea)GuiTest.find("#right_text_area")).getText());
+        assertTrue(((javafx.scene.control.Label)GuiTest.find("#right_file_label")).getText().equals("test-load.txt"));
     }
+
     @Test
     public void stage2_testLeftEditButton() {
         if (GuiTest.find("#left_edit_button").isDisable()) {
@@ -136,6 +140,7 @@ public class SplitPaneTest extends GuiTest {
         assertFalse(GuiTest.find("#left_save_button").isDisable());
         assertTrue(GuiTest.find("#left_load_button").isDisable());
     }
+
     @Test
     public void stage2_testRightEditButton() {
         if (GuiTest.find("#right_edit_button").isDisable()) {
@@ -147,6 +152,7 @@ public class SplitPaneTest extends GuiTest {
         assertFalse(GuiTest.find("#right_save_button").isDisable());
         assertTrue(GuiTest.find("#right_load_button").isDisable());
     }
+
     @Test
     public void stage3_testLeftSaveButton() {
         if(GuiTest.find("#left_edit_button").isDisable()){
@@ -168,6 +174,7 @@ public class SplitPaneTest extends GuiTest {
         assertFalse(GuiTest.find("#left_load_button").isDisable());
         assertTrue(GuiTest.find("#left_save_button").isDisable());
     }
+
     @Test
     public void stage3_testRightSaveButton() {
         if(GuiTest.find("#right_edit_button").isDisable()) {
@@ -189,24 +196,29 @@ public class SplitPaneTest extends GuiTest {
         assertFalse(GuiTest.find("#right_load_button").isDisable());
         assertTrue(GuiTest.find("#right_save_button").isDisable());
     }
+
     @Test
     public void stage4_testCompareButton(){
-        if(GuiTest.find("#left_edit_button").isDisable()) {
-            click("#left_load_button");
-            type("src").type(KeyCode.ENTER);
-            type("View").type(KeyCode.ENTER);
-            type("Test").type(KeyCode.ENTER);
-            type("test-compare1.txt").type(KeyCode.ENTER);
-        }
-        if(GuiTest.find("#right_edit_button").isDisable()) {
-            click("#right_load_button");
-            type("src").type(KeyCode.ENTER);
-            type("View").type(KeyCode.ENTER);
-            type("Test").type(KeyCode.ENTER);
-            type("test-compare2.txt").type(KeyCode.ENTER);
-        }
+        initForCompare();
         click("#compare_button");
+        assertNodeExists("#left_list_view");
+        assertNodeExists("#right_list_view");
     }
+    private void initForCompare(){
+        click("#left_load_button");
+        type("src").type(KeyCode.ENTER);
+        type("View").type(KeyCode.ENTER);
+        type("Test").type(KeyCode.ENTER);
+        type("test-compare1.txt").type(KeyCode.ENTER);
+
+        click("#right_load_button");
+        type("src").type(KeyCode.ENTER);
+        type("View").type(KeyCode.ENTER);
+        type("Test").type(KeyCode.ENTER);
+        type("test-compare2.txt").type(KeyCode.ENTER);
+
+    }
+
     @Test
     public void stage5_testBindingListViewScrollBar(){
         ListView left_list = null, right_list;
@@ -240,6 +252,7 @@ public class SplitPaneTest extends GuiTest {
         scroll(4,VerticalDirection.UP);
         assertTrue(bar1.getValue() == bar2.getValue());
     }
+
     @Test
     public void stage5_testListViewClicked(){
         ListView left_list = null, right_list;
