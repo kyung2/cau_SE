@@ -135,7 +135,7 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
         Stage stage = (Stage)file_anchor_pane.getScene().getWindow();
 
         if(!fileLeftname.equals("") || !fileRightname.equals("")) {
-           super.initCancelButtonAction("Open File Alarm", "Wouldn't you open this file", stage);
+           super.initCancelButtonAction("Open File Alarm", "Wouldn't you open this file?", stage);
         }
         else{
             stage.close();
