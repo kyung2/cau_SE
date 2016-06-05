@@ -47,6 +47,12 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        /**
+         * Returns void initialize
+         *
+         * @param location,resources : url location & Resource
+         * @return void
+         */
         tab_num = -1;
         /*
         setClickableButtons("right","true","false","false");
@@ -76,6 +82,12 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * */
     @FXML
     public void leftLoadButtonOnAction() {
+        /**
+         * Click LeftLoadButton this method setting button,textarea etc. state change.
+         *
+         * @param void : just clickAction.
+         * @return void
+         */
         checkTabNumAndCompareButtonAndMenuBar();
         File file = loadFileChooser();
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -102,6 +114,12 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
     @FXML
     public void rightLoadButtonOnAction(){
+        /**
+         * Click RightLoadButton this method setting button,textarea etc. state change.
+         * also open FileChooser
+         * @param void : just clickAction.
+         * @return void
+         */
         checkTabNumAndCompareButtonAndMenuBar();
         File file = loadFileChooser();
         if(file != null){
@@ -135,6 +153,13 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * */
     @FXML
     public void leftEditButtonOnAction() {
+        /**
+         * Click LeftEditButton this method setting button,textarea etc. state change.
+         * edit mode , only activite save and edit button
+         * That means, other function cannot work.
+         * @param void : just clickAction.
+         * @return void
+         */
         boolean edit_flag = left_text_area.isEditable();
         checkTabNumAndCompareButtonAndMenuBar();
         if(edit_flag){
@@ -176,6 +201,13 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
     @FXML
     public void rightEditButtonOnAction() {
+        /**
+         * Click rightEditButton this method setting button,textarea etc. state change.
+         * edit mode , only activite save and edit button
+         * That means, other function cannot work.
+         * @param void : just clickAction.
+         * @return void
+         */
         boolean edit_flag = right_text_area.isEditable();
         checkTabNumAndCompareButtonAndMenuBar();
         if(edit_flag){
@@ -221,6 +253,13 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * */
     @FXML
     public void leftSaveButtonOnAction(){
+        /**
+         * Click LeftSaveButton this method setting button,textarea etc. state change.
+         * save , change loaded file to User working result
+         * End Save except save button ,activite
+         * @param void : just clickAction.
+         * @return void
+         */
         checkTabNumAndCompareButtonAndMenuBar();
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
