@@ -4,7 +4,9 @@ import Controller.SaveFileWindowController;
 import javafx.scene.control.Tab;
 
 /**
- * Created by woojin on 2016-05-18.
+ * SaveFileWindow
+ * Created by woojin on 2016-05-16.
+ * @author Woonjin Jang
  */
 public class SaveFileWindow extends AbstractFileWindow {
 

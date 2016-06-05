@@ -1,7 +1,8 @@
 /**
- * Created by hyunkyung on 2016-05-18.
- */
-
+    * Main CSS
+    *
+    * @author Hyunkyung -Choi
+    */
 .btn,.tab_btn {
     -fx-background-color: transparent;
 }

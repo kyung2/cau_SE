@@ -8,7 +8,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollBar;
 
 /**
- * Created by JRD on 03/03/2015.
+ * Created by JRD on 03/03/2015. -> reuse ~~
  */
 public class ScrollbarBinding {
 

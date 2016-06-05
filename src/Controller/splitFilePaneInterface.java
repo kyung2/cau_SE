@@ -1,8 +1,6 @@
 package Controller;
 
-/**
- * Created by woojin on 2016-06-01.
- */
+
 interface SplitFilePaneInterface {
     /*
     * load 버튼을 눌렀을 때
@@ -19,7 +17,6 @@ interface SplitFilePaneInterface {
     * text area 를 editable 하게 하고
     * load 버튼을 비활성화하고 save 버튼을 활성화한다.
     * compare 하여 list view 가 있을 때 load 하면 text area 를 visible 시키고 list view 를 invisible 시킨다.
-    * ////////////////////////////////////
     * text area 가 edit 상태 라면
     * edit 버튼을 비활성화 하고
     * 두 text area 가 모두 파일이 있고 edit 상태가 아닐 때 compare 버튼의 활성화한다.

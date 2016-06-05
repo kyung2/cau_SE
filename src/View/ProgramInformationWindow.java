@@ -8,7 +8,9 @@ import javafx.scene.image.Image;
 import java.io.IOException;
 
 /**
- * Created by woojin on 2016-05-17.
+ *  About Program info simple!
+ * Created by woojin on 2016-05-16.
+ * @author Hyunkyung Choi
  */
 public class ProgramInformationWindow {
 
