@@ -45,14 +45,15 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
     * toolbar 의 버튼은 모두 비활성화
     * */
+    /**
+     * filepane : load - able , edit-disable , save -disable
+     *
+     * @param location,resources : url location & Resource
+     * @return void
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        /**
-         * Returns void initialize
-         *
-         * @param location,resources : url location & Resource
-         * @return void
-         */
+
         tab_num = -1;
         /*
         setClickableButtons("right","true","false","false");
@@ -80,14 +81,15 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * text area 를 visible 하게 바꾼다.
     * 이미 파일이 있을 경우는 덮어쓰기
     * */
+    /**
+     * Click LeftLoadButton this method setting button,textarea etc. state change.
+     *
+     * @param  : just clickAction.
+     * @return void
+     */
     @FXML
     public void leftLoadButtonOnAction() {
-        /**
-         * Click LeftLoadButton this method setting button,textarea etc. state change.
-         *
-         * @param void : just clickAction.
-         * @return void
-         */
+
         checkTabNumAndCompareButtonAndMenuBar();
         File file = loadFileChooser();
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -112,14 +114,15 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         invisibleListViewVisibleTextArea();
         checkCompareButton();
     }
+    /**
+     * Click RightLoadButton this method setting button,textarea etc. state change.
+     * also open FileChooser
+     * @param : just clickAction.
+     * @return void
+     */
     @FXML
     public void rightLoadButtonOnAction(){
-        /**
-         * Click RightLoadButton this method setting button,textarea etc. state change.
-         * also open FileChooser
-         * @param void : just clickAction.
-         * @return void
-         */
+
         checkTabNumAndCompareButtonAndMenuBar();
         File file = loadFileChooser();
         if(file != null){
@@ -151,15 +154,16 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * 수정 가능한 상황에서 한 번 더 버튼을 누르면 다시 수정 불가
     * 그 후 비활성화 된 load 버튼을 활성화로
     * */
+    /**
+     * Click LeftEditButton this method setting button,textarea etc. state change.
+     * edit mode , only activite save and edit button
+     * That means, other function cannot work.
+     * @param  : just clickAction.
+     * @return void
+     */
     @FXML
     public void leftEditButtonOnAction() {
-        /**
-         * Click LeftEditButton this method setting button,textarea etc. state change.
-         * edit mode , only activite save and edit button
-         * That means, other function cannot work.
-         * @param void : just clickAction.
-         * @return void
-         */
+
         boolean edit_flag = left_text_area.isEditable();
         checkTabNumAndCompareButtonAndMenuBar();
         if(edit_flag){
@@ -199,15 +203,16 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             left_status.addStatusWithName("Editable");
         }
     }
+    /**
+     * Click rightEditButton this method setting button,textarea etc. state change.
+     * edit mode , only activite save and edit button
+     * That means, other function cannot work.
+     * @param  : just clickAction.
+     * @return void
+     */
     @FXML
     public void rightEditButtonOnAction() {
-        /**
-         * Click rightEditButton this method setting button,textarea etc. state change.
-         * edit mode , only activite save and edit button
-         * That means, other function cannot work.
-         * @param void : just clickAction.
-         * @return void
-         */
+
         boolean edit_flag = right_text_area.isEditable();
         checkTabNumAndCompareButtonAndMenuBar();
         if(edit_flag){
@@ -251,15 +256,16 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * edit 버튼을 눌러서 수정이 가해진 상황 일 경우 save 버튼이 활성화 된다.
     * 수정 사항을 저장한 후에는 로드 가능, 수정 가늗, 저장 불가능으로 된다.
     * */
+    /**
+     * Click LeftSaveButton this method setting button,textarea etc. state change.
+     * save , change loaded file to User working result
+     * End Save except save button ,activite
+     * @param  : just clickAction.
+     * @return void
+     */
     @FXML
     public void leftSaveButtonOnAction(){
-        /**
-         * Click LeftSaveButton this method setting button,textarea etc. state change.
-         * save , change loaded file to User working result
-         * End Save except save button ,activite
-         * @param void : just clickAction.
-         * @return void
-         */
+
         checkTabNumAndCompareButtonAndMenuBar();
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
@@ -282,6 +288,13 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             }
         }
     }
+    /**
+     * Click rightSaveButton this method setting button,textarea etc. state change.
+     * save , change loaded file to User working result
+     * End Save except save button ,activite
+     * @param  : just clickAction.
+     * @return void
+     */
     @FXML
     public void rightSaveButtonOnAction(){
         checkTabNumAndCompareButtonAndMenuBar();
@@ -310,6 +323,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     /*
     * 리스트 뷰를 클릭했을 때 일어나는 일
     * */
+    
     @FXML
     public void onLeftListViewMouseClicked(){
         int index = left_text_list.getSelectionModel().getSelectedIndex();
