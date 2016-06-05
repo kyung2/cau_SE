@@ -5,18 +5,22 @@ import View.OpenFileWindow;
 import com.google.common.util.concurrent.SettableFuture;
 import com.sun.javafx.scene.control.skin.ContextMenuContent;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.loadui.testfx.GuiTest;
 import org.loadui.testfx.utils.FXTestUtils;
 import org.loadui.testfx.utils.UserInputDetector;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Pattern;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assume.assumeTrue;
@@ -25,6 +29,7 @@ import static org.loadui.testfx.Assertions.assertNodeExists;
 /**
  * Created by woojin on 2016-05-17.
  */
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MainWindowTest extends GuiTest {
     private static final SettableFuture<Stage> stageFuture = SettableFuture.create();
 
@@ -60,7 +65,7 @@ public class MainWindowTest extends GuiTest {
     }
 
     @Test
-    public void testInitToolBarButtonSetting(){
+    public void stage0_testInitToolBarButtonSetting(){
         assertTrue(GuiTest.find("#compare_button").isDisable());
         assertTrue(GuiTest.find("#next_difference_button").isDisable());
         assertTrue(GuiTest.find("#previous_difference_button").isDisable());
@@ -75,7 +80,7 @@ public class MainWindowTest extends GuiTest {
         //버튼이 모두 disable 인지 test
     }
     @Test
-    public void testInitFileMenuTest(){
+    public void stage0_testInitFileMenuTest(){
         click("#file_menu");
         MenuItem new_tab = ((ContextMenuContent.MenuItemContainer)GuiTest.find("#new_tab_menu_item")).getItem();
         MenuItem open = ((ContextMenuContent.MenuItemContainer)GuiTest.find("#open_menu_item")).getItem();
@@ -92,7 +97,7 @@ public class MainWindowTest extends GuiTest {
         assertTrue(save_right.isDisable());
     }
     @Test
-    public void testInitMergeMenuTest(){
+    public void stage0_testInitMergeMenuTest(){
         click("#merge_menu");
         MenuItem next = ((ContextMenuContent.MenuItemContainer)GuiTest.find("#next_difference_menu_item")).getItem();
         MenuItem previous = ((ContextMenuContent.MenuItemContainer)GuiTest.find("#previous_difference_menu_item")).getItem();
@@ -115,6 +120,48 @@ public class MainWindowTest extends GuiTest {
         assertTrue(copy_left_all.isDisable());
         assertTrue(copy_right_all.isDisable());
         assertTrue(compare.isDisable());
+    }
+    @Test
+    public void stage1_testOpenWindow(){
+        String file = "test-load.txt";
+        testOpenWindowHotKey(); // 단축키 test
+
+        click("#file_menu").click("Open");
+        click("#left_find_button");
+        type("src").type(KeyCode.ENTER);
+        type("View").type(KeyCode.ENTER);
+        type("Test").type(KeyCode.ENTER);
+        type(file).type(KeyCode.ENTER);
+        assertTrue(((TextField)GuiTest.find("#warning_info")).getText().equals("Select " + file));
+        int size = ((TextField)GuiTest.find("#left_text_field")).getText().split(Pattern.quote(File.separator)).length;
+        assertTrue(((TextField)GuiTest.find("#left_text_field")).getText().split(Pattern.quote(File.separator))[size-1].equals(file));
+
+        click("#right_find_button");
+        type(KeyCode.ESCAPE);
+        assertTrue(((TextField)GuiTest.find("#warning_info")).getText().equals("Select No Right File"));
+
+        click("#right_find_button");
+        type("src").type(KeyCode.ENTER);
+        type("View").type(KeyCode.ENTER);
+        type("Test").type(KeyCode.ENTER);
+        type(file).type(KeyCode.ENTER);
+        size = ((TextField)GuiTest.find("#right_text_field")).getText().split(Pattern.quote(File.separator)).length;
+        assertTrue(((TextField)GuiTest.find("#right_text_field")).getText().split(Pattern.quote(File.separator))[size-1].equals(file));
+        assertTrue(((TextField)GuiTest.find("#warning_info")).getText().equals("Select " + file));
+
+        click("#cancel_button");
+        assertNodeExists("#alarm_window");
+        assertTrue(((Label)GuiTest.find("#alarm_label")).getText().equals("Wouldn't you open this file?"));
+        click("#no_button");
+        click("#ok_button");
+
+        assertEquals("Testing load button!\n",((TextArea)GuiTest.find("#left_text_area")).getText());
+        assertEquals("Testing load button!\n",((TextArea)GuiTest.find("#right_text_area")).getText());
+    }
+    private void testOpenWindowHotKey(){
+        System.out.println("Type HotKey : Ctrl + L");
+        press(KeyCode.CONTROL).type(KeyCode.L).release(KeyCode.CONTROL);
+        click("Cancel");
     }
     @Test
     public void testCompareButton()

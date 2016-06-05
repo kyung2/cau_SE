@@ -12,20 +12,20 @@
    <children>
       <Label layoutX="93.0" layoutY="143.0" text="Left File " AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="102.0" />
       <Label layoutX="90.0" layoutY="106.0" text="Right File" AnchorPane.leftAnchor="90.0" AnchorPane.topAnchor="142.0" />
-      <TextField fx:id="warning_info_text_area" disable="true" editable="false" layoutX="14.0" layoutY="263.0" prefHeight="23.0" prefWidth="381.0" text="" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+      <TextField id="warning_info" fx:id="warning_info_text_area" disable="true" editable="false" layoutX="14.0" layoutY="263.0" prefHeight="23.0" prefWidth="381.0" text="" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
          <opaqueInsets>
             <Insets />
          </opaqueInsets></TextField>
-      <TextField fx:id="right_file_text_area" editable="true" layoutX="154.0" layoutY="102.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="138.0" />
-      <TextField fx:id="left_file_text_area" editable="true" layoutX="150.0" layoutY="138.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="100.0" />
-      <Button fx:id="right_file_find_button" layoutX="432.0" layoutY="102.0" mnemonicParsing="false" onAction="#rightFileFindButtonOnAction" prefHeight="23.0" prefWidth="55.0" text="Find" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="140.0" />
-      <Button fx:id="left_file_find_button" layoutX="432.0" layoutY="139.0" mnemonicParsing="false" onAction="#leftFileFindButtonOnAction" prefHeight="23.0" prefWidth="55.0" text="Find" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="102.0" />
+      <TextField id="right_text_field" fx:id="right_file_text_area" editable="true" layoutX="154.0" layoutY="102.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="138.0" />
+      <TextField id="left_text_field" fx:id="left_file_text_area" editable="true" layoutX="150.0" layoutY="138.0" prefHeight="23.0" prefWidth="260.0" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="100.0" />
+      <Button id="right_find_button" fx:id="right_file_find_button" layoutX="432.0" layoutY="102.0" mnemonicParsing="false" onAction="#rightFileFindButtonOnAction" prefHeight="23.0" prefWidth="55.0" text="Find" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="140.0" />
+      <Button id="left_find_button" fx:id="left_file_find_button" layoutX="432.0" layoutY="139.0" mnemonicParsing="false" onAction="#leftFileFindButtonOnAction" prefHeight="23.0" prefWidth="55.0" text="Find" AnchorPane.leftAnchor="430.0" AnchorPane.topAnchor="102.0" />
       <Label layoutX="34.0" layoutY="52.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="30.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="ok_button" layoutX="405.0" layoutY="218.0" mnemonicParsing="false" onAction="#okButtonOnAction" prefHeight="23.0" prefWidth="55.0" text="OK" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="90.0" />
-      <Button fx:id="cancel_button" layoutX="468.0" layoutY="218.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" text="Cancel" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="25.0" />
+      <Button id="ok_button" fx:id="ok_button" layoutX="405.0" layoutY="218.0" mnemonicParsing="false" onAction="#okButtonOnAction" prefHeight="23.0" prefWidth="55.0" text="OK" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="90.0" />
+      <Button id="cancel_button" fx:id="cancel_button" layoutX="468.0" layoutY="218.0" mnemonicParsing="false" onAction="#cancelButtonOnAction" text="Cancel" AnchorPane.bottomAnchor="50.0" AnchorPane.rightAnchor="25.0" />
    </children>
 </AnchorPane>
