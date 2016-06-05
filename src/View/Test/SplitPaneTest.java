@@ -3,8 +3,14 @@ package View.Test;
 import View.MainWindow;
 import com.google.common.util.concurrent.SettableFuture;
 
+import com.sun.javafx.collections.UnmodifiableListSet;
+import com.sun.javafx.scene.control.skin.VirtualScrollBar;
+import javafx.geometry.Orientation;
+import javafx.geometry.VerticalDirection;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollBar;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
@@ -18,6 +24,7 @@ import org.loadui.testfx.utils.UserInputDetector;
 import org.junit.runners.MethodSorters;
 import org.junit.FixMethodOrder;
 
+import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertEquals;
@@ -197,7 +204,7 @@ public class SplitPaneTest extends GuiTest {
         click("#compare_button");
     }
     @Test
-    public void stage5_testListViewScroll(){
+    public void stage5_testBindingListViewScrollBar(){
         ListView left_list = null, right_list;
         try{
             left_list = GuiTest.find("#left_list_view");
@@ -207,7 +214,43 @@ public class SplitPaneTest extends GuiTest {
             left_list = GuiTest.find("#left_list_view");
             right_list = GuiTest.find("#right_list_view");
         }
-        ((ListView)GuiTest.find("#left_list_view")).scrollTo(3);
-        System.out.println(left_list.getSelectionModel());
+        ScrollBar bar1 = null;
+        ScrollBar bar2 = null;
+
+        for (Node node : left_list.lookupAll(".scroll-bar")) {
+            if (node instanceof ScrollBar && ((ScrollBar)node).getOrientation().equals(Orientation.VERTICAL)) {
+                bar1 = (ScrollBar)node;
+            }
+        }
+        for (Node node : right_list.lookupAll(".scroll-bar")) {
+            if (node instanceof ScrollBar && ((ScrollBar)node).getOrientation().equals(Orientation.VERTICAL)) {
+                bar2 = (ScrollBar)node;
+            }
+        }
+        System.out.println("0");
+        click(bar1);
+        scroll(5, VerticalDirection.DOWN);
+        assertTrue(bar1.getValue() == bar2.getValue());
+
+        click(bar2);
+        scroll(4,VerticalDirection.UP);
+        assertTrue(bar1.getValue() == bar2.getValue());
+    }
+    @Test
+    public void stage5_testListViewClicked(){
+        ListView left_list = null, right_list;
+        try{
+            left_list = GuiTest.find("#left_list_view");
+            right_list = GuiTest.find("#right_list_view");
+        }catch(NoNodesVisibleException e){
+            stage4_testCompareButton();
+            left_list = GuiTest.find("#left_list_view");
+            right_list = GuiTest.find("#right_list_view");
+        }
+        click(left_list);
+        assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0)==right_list.getSelectionModel().getSelectedIndices().get(0));
+
+        click(right_list);
+        assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0)==right_list.getSelectionModel().getSelectedIndices().get(0));
     }
 }
