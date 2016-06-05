@@ -20,9 +20,7 @@ import java.io.File;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import static org.junit.Assume.assumeTrue;
 import static org.loadui.testfx.Assertions.assertNodeExists;
 
@@ -96,6 +94,8 @@ public class MainWindowTest extends GuiTest {
         assertTrue(save.isDisable());
         assertTrue(save_left.isDisable());
         assertTrue(save_right.isDisable());
+
+        click("#file_menu");
     }
 
     @Test
@@ -122,16 +122,20 @@ public class MainWindowTest extends GuiTest {
         assertTrue(copy_left_all.isDisable());
         assertTrue(copy_right_all.isDisable());
         assertTrue(compare.isDisable());
+
+        click("#merge_menu");
     }
 
     @Test
     public void stage1_testOpenWindow(){
         String file = "test-load.txt";
+
         testOpenWindowHotKey(); // 단축키 test
         click("#cancel_button");
 
         click("#file_menu").click("Open");
         click("#left_find_button");
+
         type("src").type(KeyCode.ENTER);
         type("View").type(KeyCode.ENTER);
         type("Test").type(KeyCode.ENTER);
@@ -157,7 +161,10 @@ public class MainWindowTest extends GuiTest {
         assertNodeExists("#alarm_window");
         assertTrue(((Label)GuiTest.find("#alarm_label")).getText().equals("Wouldn't you open this file?"));
         click("#no_button");
+
         click("#ok_button");
+        assertTrue(((Label)GuiTest.find("#left_file_label")).getText().equals("test-load.txt"));
+        assertTrue(((Label)GuiTest.find("#right_file_label")).getText().equals("test-load.txt"));
 
         assertEquals("Testing load button!\n",((TextArea)GuiTest.find("#left_text_area")).getText());
         assertEquals("Testing load button!\n",((TextArea)GuiTest.find("#right_text_area")).getText());
@@ -203,7 +210,7 @@ public class MainWindowTest extends GuiTest {
         type("src").type(KeyCode.ENTER);
         type("View").type(KeyCode.ENTER);
         type("Test").type(KeyCode.ENTER);
-        type("test-compare1.txt").type(KeyCode.ENTER);
+        type("test-load.txt").type(KeyCode.ENTER);
     }
 
     @Test
@@ -242,75 +249,144 @@ public class MainWindowTest extends GuiTest {
         type("src").type(KeyCode.ENTER);
         type("View").type(KeyCode.ENTER);
         type("Test").type(KeyCode.ENTER);
-        type("test-compare2.txt").type(KeyCode.ENTER);
+        type("test-load.txt").type(KeyCode.ENTER);
     }
 
     @Test
-    public void staeg2_testSaveMenuItem(){
-        
-    }
-    private void testSaveHotKey(){
+    public void stage2_testSaveAsMenuItem(){
 
+        initForSaveAs();
+        testSaveAsHotKey();
+        click("#cancel_button");
+
+        initForSaveAs();
+        click("#file_menu").click("Save As");
+
+        click("#left_find_button");
+        type("src").type(KeyCode.ENTER);
+        type("View").type(KeyCode.ENTER);
+        type("Test").type(KeyCode.ENTER);
+        type("test-save1.txt").type(KeyCode.ENTER);
+        assertTrue(((TextField)GuiTest.find("#warning_info")).getText().equals("Select test-save1.txt"));
+        int size = ((TextField)GuiTest.find("#left_text_field")).getText().split(Pattern.quote(File.separator)).length;
+        assertTrue(((TextField)GuiTest.find("#left_text_field")).getText().split(Pattern.quote(File.separator))[size-1].equals("test-save1.txt"));
+
+        click("#right_find_button");
+        type(KeyCode.ESCAPE);
+        assertTrue(((TextField)GuiTest.find("#warning_info")).getText().equals("Select no Right File"));
+
+        click("#right_find_button");
+        type("src").type(KeyCode.ENTER);
+        type("View").type(KeyCode.ENTER);
+        type("Test").type(KeyCode.ENTER);
+        type("test-save2.txt").type(KeyCode.ENTER);
+
+        assertTrue(((TextField)GuiTest.find("#warning_info")).getText().equals("Select test-save2.txt"));
+        size = ((TextField)GuiTest.find("#right_text_field")).getText().split(Pattern.quote(File.separator)).length;
+        assertTrue(((TextField)GuiTest.find("#right_text_field")).getText().split(Pattern.quote(File.separator))[size-1].equals("test-save2.txt"));
+
+        click("#cancel_button");
+        assertNodeExists("#alarm_window");
+        click("#no_button");
+
+        click("#ok_button");
+        stage2_testSavedFile();
+    }
+    private void testSaveAsHotKey(){
+        System.out.println("Type Save As HotKey : Ctrl + S");
+        press(KeyCode.CONTROL).type(KeyCode.S).release(KeyCode.CONTROL);
+    }
+    private void initForSaveAs(){
+        File path_file = new File(".");
+        String path = path_file.getAbsolutePath().substring(0,path_file.getAbsolutePath().length() - 1);
+        try{
+            File file1 = new File(path+"src/View/Test/test-save1.txt");
+            file1.delete();
+        }catch(NullPointerException e){}
+        try{
+            File file2 = new File(path+"src/View/Test/test-save2.txt");
+            file2.delete();
+        }catch(NullPointerException e){}
+
+        if(GuiTest.find("#left_save_button").isDisable()){
+            if(GuiTest.find("#left_edit_button").isDisable()) {
+                loadLeftFile();
+            }
+            click("#left_edit_button");
+        }
+        if(GuiTest.find("#right_save_button").isDisable()){
+            if(GuiTest.find("#right_edit_button").isDisable()) {
+                loadRightFile();
+            }
+            click("#right_edit_button");
+        }
     }
     @Test
-    public void testCompareButton()
-    {
+    public void stage2_testSavedFile(){
+        assertTrue(((Label)GuiTest.find("#left_file_label")).getText().equals("test-save1.txt"));
+        assertTrue(((Label)GuiTest.find("#right_file_label")).getText().equals("test-save2.txt"));
+    }
+
+    /*
+    @Test
+    public void testCompareButton() {
 
         click("#compare_button");
         assertNodeExists("Click");
     }
+
     @Test
-    public void testNextDifferenceButton()
-    {
+    public void testNextDifferenceButton() {
         click("#next_difference_button");
         assertNodeExists("Click");
     }
+
     @Test
-    public void testPostDifferenceButton()
-    {
+    public void testPostDifferenceButton() {
         click("#post_difference_button");
         assertNodeExists("Click");
     }
+
     @Test
-    public void testFirstDifferenceButton()
-    {
+    public void testFirstDifferenceButton() {
         click("#first_difference_button");
         assertNodeExists("Click");
     }
+
     @Test
-    public void testNowDifferenceButton()
-    {
+    public void testNowDifferenceButton() {
         click("#now_difference_button");
         assertNodeExists("Click");
     }
+
     @Test
-    public void testLastDifferenceButton()
-    {
+    public void testLastDifferenceButton() {
         click("#last_difference_button");
         assertNodeExists("Click");
     }
     @Test
-    public void testCopyToRightButton()
-    {
+
+    public void testCopyToRightButton() {
         click("#copy_to_right_button");
         assertNodeExists("Click");
     }
+
     @Test
-    public void testCopyToLeftButton()
-    {
+    public void testCopyToLeftButton() {
         click("#copy_to_left_button");
         assertNodeExists("Click");
     }
+
     @Test
-    public void testCopyToRightAllButton()
-    {
+    public void testCopyToRightAllButton() {
         click("#copy_to_right_all_button");
         assertNodeExists("Click");
     }
+
     @Test
-    public void testCopyToLeftAllButton()
-    {
+    public void testCopyToLeftAllButton() {
         click("#copy_to_left_all_button");
         assertNodeExists("Click");
     }
+    */
 }
