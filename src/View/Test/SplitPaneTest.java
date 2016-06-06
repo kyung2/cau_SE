@@ -198,35 +198,13 @@ public class SplitPaneTest extends GuiTest {
     }
 
     @Test
-    public void stage4_testCompareButton(){
-        initForCompare();
-        click("#compare_button");
-        assertNodeExists("#left_list_view");
-        assertNodeExists("#right_list_view");
-    }
-    private void initForCompare(){
-        click("#left_load_button");
-        type("src").type(KeyCode.ENTER);
-        type("View").type(KeyCode.ENTER);
-        type("Test").type(KeyCode.ENTER);
-        type("test-compare1.txt").type(KeyCode.ENTER);
-
-        click("#right_load_button");
-        type("src").type(KeyCode.ENTER);
-        type("View").type(KeyCode.ENTER);
-        type("Test").type(KeyCode.ENTER);
-        type("test-compare2.txt").type(KeyCode.ENTER);
-
-    }
-
-    @Test
-    public void stage5_testBindingListViewScrollBar(){
+    public void stage4_testBindingListViewScrollBar(){
         ListView left_list = null, right_list;
         try{
             left_list = GuiTest.find("#left_list_view");
             right_list = GuiTest.find("#right_list_view");
         }catch(NoNodesVisibleException e){
-            stage4_testCompareButton();
+            initForListView();
             left_list = GuiTest.find("#left_list_view");
             right_list = GuiTest.find("#right_list_view");
         }
@@ -243,7 +221,6 @@ public class SplitPaneTest extends GuiTest {
                 bar2 = (ScrollBar)node;
             }
         }
-        System.out.println("0");
         click(bar1);
         scroll(5, VerticalDirection.DOWN);
         assertTrue(bar1.getValue() == bar2.getValue());
@@ -252,15 +229,30 @@ public class SplitPaneTest extends GuiTest {
         scroll(4,VerticalDirection.UP);
         assertTrue(bar1.getValue() == bar2.getValue());
     }
+    private void initForListView(){
+        click("#left_load_button");
+        type("src").type(KeyCode.ENTER);
+        type("View").type(KeyCode.ENTER);
+        type("Test").type(KeyCode.ENTER);
+        type("test-compare1.txt").type(KeyCode.ENTER);
+
+        click("#right_load_button");
+        type("src").type(KeyCode.ENTER);
+        type("View").type(KeyCode.ENTER);
+        type("Test").type(KeyCode.ENTER);
+        type("test-compare2.txt").type(KeyCode.ENTER);
+
+        click("#compare_button");
+    }
 
     @Test
-    public void stage5_testListViewClicked(){
+    public void stage4_testListViewClicked(){
         ListView left_list = null, right_list;
         try{
             left_list = GuiTest.find("#left_list_view");
             right_list = GuiTest.find("#right_list_view");
         }catch(NoNodesVisibleException e){
-            stage4_testCompareButton();
+            initForListView();
             left_list = GuiTest.find("#left_list_view");
             right_list = GuiTest.find("#right_list_view");
         }
