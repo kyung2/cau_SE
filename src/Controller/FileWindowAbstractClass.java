@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.ModelInterface;
+import Model.ModelRealize;
 import View.AlarmWindow;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
@@ -30,25 +32,35 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
 
     void changeTabName(Tab tab, String name, String position){
         String tab_name = tab.getText();
+        String left_file_name = null;
+        String right_file_name = null;
+
+        ModelInterface model = ModelRealize.getInstance();
+
         if(position.equals("left")) {
-            if (tab_name.equals("File")) {
-                tab_name = name + " - ";
-                tab.setText(tab_name);
+            try{
+                right_file_name = new File(model.getUnit((int)tab.getUserData()).filepath(1)).getName();
+            }catch (Exception e){}
+
+            if(right_file_name != null){
+                tab_name = name + " - " + right_file_name;
             }
-            else{
-                tab_name = name + " -" + tab_name.split("-")[1];
-                tab.setText(tab_name);
-            }
+            else tab_name = name + " - ";
+
+            tab.setText(tab_name);
         }
         else {
-            if (tab_name.equals("File")) {
-                tab_name = " - " + name;
-                tab.setText(tab_name);
+            try {
+                left_file_name = new File(model.getUnit((int)tab.getUserData()).filepath(0)).getName();
+
+            }catch (Exception e){}
+
+            if(left_file_name != null){
+                tab_name = left_file_name + " - " + name;
             }
-            else{
-                tab_name = tab_name.split("-")[0] + "- " + name;
-                tab.setText(tab_name);
-            }
+            else tab_name = " - " + name;
+
+            tab.setText(tab_name);
         }
     }
 

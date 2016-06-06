@@ -15,7 +15,7 @@
    <center>
       <BorderPane prefHeight="374.0" prefWidth="692.0" BorderPane.alignment="CENTER">
          <center>
-              <TabPane fx:id="tab_pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <TabPane id="tab_pane" fx:id="tab_pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                   <tabs>
                       <Tab fx:id="tab" onClosed="#tabCloseAction" text="File">
                           <content>
@@ -109,15 +109,15 @@
           </Menu>
           <Menu id="merge_menu" mnemonicParsing="false" text="Merge">
             <items>
-              <MenuItem id="next_difference_menu_item" fx:id="next_difference_menu_item" accelerator="Alt+DOWN" mnemonicParsing="false" onAction="#nextDifferenceOnAction" text="Next Difference" />
-                  <MenuItem id="previous_difference_menu_item" fx:id="previous_difference_menu_item" accelerator="Alt+UP" mnemonicParsing="false" onAction="#previousDifferenceOnAction" text="Pre Difference" />
-                  <MenuItem id="first_difference_menu_item" fx:id="first_difference_menu_item" accelerator="Alt+Home" mnemonicParsing="false" onAction="#firstDifferenceOnAction" text="First Difference" />
+              <MenuItem id="next_difference_menu_item" fx:id="next_difference_menu_item" accelerator="Ctrl+DOWN" mnemonicParsing="false" onAction="#nextDifferenceOnAction" text="Next Difference" />
+                  <MenuItem id="previous_difference_menu_item" fx:id="previous_difference_menu_item" accelerator="Ctrl+UP" mnemonicParsing="false" onAction="#previousDifferenceOnAction" text="Pre Difference" />
+                  <MenuItem id="first_difference_menu_item" fx:id="first_difference_menu_item"  mnemonicParsing="false" onAction="#firstDifferenceOnAction" text="First Difference" />
                   <MenuItem id="now_difference_menu_item" fx:id="now_difference_menu_item"  accelerator="Alt+N" mnemonicParsing="false" onAction="#nowDifferenceOnAction" text="Now Selected Difference" />
-                  <MenuItem id="last_difference_menu_item" fx:id="last_difference_menu_item"  accelerator="Alt+End" mnemonicParsing="false" onAction="#lastDifferenceOnAction" text="Last Difference" />
-                  <MenuItem id="copy_to_right_menu_item" fx:id="copy_to_right_menu_item"  accelerator="Alt+Right" mnemonicParsing="false" onAction="#copyToRightOnAction" text="Copy to Right" />
-                  <MenuItem id="copy_to_left_menu_item" fx:id="copy_to_left_menu_item"  accelerator="Alt+Left" mnemonicParsing="false" onAction="#copyToLeftOnAction" text="Copy to Left" />
-                  <MenuItem id="copy_to_right_all_menu_item" fx:id="copy_to_right_all_menu_item"  accelerator="Ctrl+Alt+Right" mnemonicParsing="false" onAction="#copyToRightAllOnAction" text="Copy to Right All" />
-                  <MenuItem id="copy_to_left_all_menu_item" fx:id="copy_to_left_all_menu_item" accelerator="Ctrl+Alt+Left" mnemonicParsing="false" onAction="#copyToLeftAllOnAction" text="Copy to Left All" />
+                  <MenuItem id="last_difference_menu_item" fx:id="last_difference_menu_item"  mnemonicParsing="false" onAction="#lastDifferenceOnAction" text="Last Difference" />
+                  <MenuItem id="copy_to_right_menu_item" fx:id="copy_to_right_menu_item"  accelerator="Ctrl+Right" mnemonicParsing="false" onAction="#copyToRightOnAction" text="Copy to Right" />
+                  <MenuItem id="copy_to_left_menu_item" fx:id="copy_to_left_menu_item"  accelerator="Ctrl+Left" mnemonicParsing="false" onAction="#copyToLeftOnAction" text="Copy to Left" />
+                  <MenuItem id="copy_to_right_all_menu_item" fx:id="copy_to_right_all_menu_item"  accelerator="Ctrl+Shift+Right" mnemonicParsing="false" onAction="#copyToRightAllOnAction" text="Copy to Right All" />
+                  <MenuItem id="copy_to_left_all_menu_item" fx:id="copy_to_left_all_menu_item" accelerator="Ctrl+Shift+Left" mnemonicParsing="false" onAction="#copyToLeftAllOnAction" text="Copy to Left All" />
                   <MenuItem id="compare_menu_item" fx:id="compare_menu_item" accelerator="Alt+C" mnemonicParsing="false" onAction="#compareOnAction" text="Compare" />
             </items>
           </Menu>
