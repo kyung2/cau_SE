@@ -82,7 +82,7 @@ public class MainController implements Initializable, MainInterface {
         right_text_area = null;
         left_status = null;
         right_status = null;
-
+        
         try {
             Model.ModelInterface model = ModelRealize.getInstance();
             model.newModel(tab_num);
@@ -119,7 +119,9 @@ public class MainController implements Initializable, MainInterface {
     * 차이점이 선택 되었을 때 그 차이점이 마지막 차이점과 같다면 마지막 차이점 비활성화
     * */
     public void compareOnAction() {
-        initTextAreaAndListOnTab();
+        if (right_text_area == null || left_text_area == null || right_text_list == null || left_text_list == null) {
+            initTextAreaAndListOnTab();
+        }
         initStatusTextArea();
 
         left_text_area.setVisible(false);
@@ -433,8 +435,9 @@ public class MainController implements Initializable, MainInterface {
     * 오늘쪽 파일을 저장한다.
     * */
     public void saveRightFileMenuItemOnAction() {
-        initTextAreaAndListOnTab();
-        initStatusTextArea();
+        if (right_text_area == null || left_text_area == null || right_text_list == null || left_text_list == null) {
+            initTextAreaAndListOnTab();
+        }initStatusTextArea();
 
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
@@ -469,7 +472,9 @@ public class MainController implements Initializable, MainInterface {
     * 왼쪽 파일을 저장한다.
     * */
     public void saveLeftFileMenuItemOnAction() {
-        initTextAreaAndListOnTab();
+        if (right_text_area == null || left_text_area == null || right_text_list == null || left_text_list == null) {
+            initTextAreaAndListOnTab();
+        }
         initStatusTextArea();
 
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
@@ -791,7 +796,7 @@ public class MainController implements Initializable, MainInterface {
     * */
     private void changeScrollbar(int index){
         ModelInterface model = ModelRealize.getInstance();
-        ArrayList<Integer> arrangedGroupSpace = model.getArrangedGroupSpace(tab_num);
+        ArrayList<Integer> arrangedGroupSpace = model.getArrangedGroupSpace(now_tab_num);
         int lineNum = 0;
 
         if( index  < 2) {
@@ -893,17 +898,15 @@ public class MainController implements Initializable, MainInterface {
     * 현재 tab 을 통해서 현재 선택된 tab 의 text area 와 list view 를 가져온다.
     * */
     private void initTextAreaAndListOnTab() {
-        if (right_text_area == null || left_text_area == null || right_text_list == null || left_text_list == null) {
-            AnchorPane left_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(0);
-            AnchorPane right_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(1);
-            SplitPane left_split_pane = (SplitPane) ((SplitPane) left_anchor_pane.getChildren().get(1));
-            SplitPane right_split_pane = (SplitPane) ((SplitPane) right_anchor_pane.getChildren().get(1));
-
-            left_text_area = (TextArea) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(0);
-            right_text_area = (TextArea) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(0);
-            left_text_list = (ListView) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(1);
-            right_text_list = (ListView) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(1);
-        }
+        AnchorPane left_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(0);
+        AnchorPane right_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(1);
+        SplitPane left_split_pane = (SplitPane) ((SplitPane) left_anchor_pane.getChildren().get(1));
+        SplitPane right_split_pane = (SplitPane) ((SplitPane) right_anchor_pane.getChildren().get(1));
+        
+        left_text_area = (TextArea) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(0);
+        right_text_area = (TextArea) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(0);
+        left_text_list = (ListView) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(1);
+        right_text_list = (ListView) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(1);
     }
     /*
     * left, right status area 를 초기화 한다.
