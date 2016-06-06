@@ -14,12 +14,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-/**
- * Created by woojin on 2016-05-15.
- * FilePanel Controller.
- * has Load, Save, Edit button action.
- * in Load button action, make file chooser.
- */
+
 public class SplitFilePaneController implements Initializable, SplitFilePaneInterface {
     @FXML
     private TextArea left_text_area, right_text_area;
@@ -45,12 +40,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
     * toolbar 의 버튼은 모두 비활성화
     * */
-    /**
-     * filepane : load - able , edit-disable , save -disable
-     *
-     * @param location,resources : url location & Resource
-     * @return void
-     */
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -81,12 +71,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * text area 를 visible 하게 바꾼다.
     * 이미 파일이 있을 경우는 덮어쓰기
     * */
-    /**
-     * Click LeftLoadButton this method setting button,textarea etc. state change.
-     *
-     * @param  : just clickAction.
-     * @return void
-     */
+
     @FXML
     public void leftLoadButtonOnAction() {
 
@@ -114,12 +99,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         invisibleListViewVisibleTextArea();
         checkCompareButton();
     }
-    /**
-     * Click RightLoadButton this method setting button,textarea etc. state change.
-     * also open FileChooser
-     * @param : just clickAction.
-     * @return void
-     */
+
     @FXML
     public void rightLoadButtonOnAction(){
 
@@ -154,13 +134,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * 수정 가능한 상황에서 한 번 더 버튼을 누르면 다시 수정 불가
     * 그 후 비활성화 된 load 버튼을 활성화로
     * */
-    /**
-     * Click LeftEditButton this method setting button,textarea etc. state change.
-     * edit mode , only activite save and edit button
-     * That means, other function cannot work.
-     * @param  : just clickAction.
-     * @return void
-     */
+
     @FXML
     public void leftEditButtonOnAction() {
 
@@ -203,13 +177,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             left_status.addStatusWithName("Editable");
         }
     }
-    /**
-     * Click rightEditButton this method setting button,textarea etc. state change.
-     * edit mode , only activite save and edit button
-     * That means, other function cannot work.
-     * @param  : just clickAction.
-     * @return void
-     */
+
     @FXML
     public void rightEditButtonOnAction() {
 
@@ -256,13 +224,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * edit 버튼을 눌러서 수정이 가해진 상황 일 경우 save 버튼이 활성화 된다.
     * 수정 사항을 저장한 후에는 로드 가능, 수정 가늗, 저장 불가능으로 된다.
     * */
-    /**
-     * Click LeftSaveButton this method setting button,textarea etc. state change.
-     * save , change loaded file to User working result
-     * End Save except save button ,activite
-     * @param  : just clickAction.
-     * @return void
-     */
+
     @FXML
     public void leftSaveButtonOnAction(){
 
@@ -288,13 +250,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             }
         }
     }
-    /**
-     * Click rightSaveButton this method setting button,textarea etc. state change.
-     * save , change loaded file to User working result
-     * End Save except save button ,activite
-     * @param  : just clickAction.
-     * @return void
-     */
+
     @FXML
     public void rightSaveButtonOnAction(){
         checkTabNumAndCompareButtonAndMenuBar();
@@ -717,8 +673,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
            return left_load_button.isDisable();
              }
         else if (position.equals("right")) {
-            Boolean result = right_load_button.isDisable();
-            return result;
+            return right_load_button.isDisable();
         }
         else {
             throw new IllegalAccessException();
@@ -726,26 +681,23 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
     public boolean isDisableEdit(String position) throws IllegalAccessException {
         if (position.equals("left")) {
-            Boolean result =left_edit_button.isDisable();
-            return result;
+            return left_edit_button.isDisable();
+
         }
         else if (position.equals("right")) {
-            Boolean result =right_edit_button.isDisable();
-            return result;
-        }
+            return right_edit_button.isDisable();
+            }
         else {
             throw new IllegalAccessException();
         }
     }
     public boolean isDisableSave(String position) throws IllegalAccessException {
         if (position.equals("left")) {
-            Boolean result =left_save_button.isDisable();
-            return result;
-        }
+            return left_save_button.isDisable();
+            }
         else if (position.equals("right")) {
-            Boolean result =right_save_button.isDisable();
-            return result;
-        }
+            return right_save_button.isDisable();
+            }
         else {
             throw new IllegalAccessException();
         }
