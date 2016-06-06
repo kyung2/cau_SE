@@ -80,6 +80,9 @@ public class MainController implements Initializable, MainInterface {
         right_text_list = null;
         left_text_area = null;
         right_text_area = null;
+        left_status = null;
+        right_status = null;
+
         try {
             Model.ModelInterface model = ModelRealize.getInstance();
             model.newModel(tab_num);
@@ -116,9 +119,9 @@ public class MainController implements Initializable, MainInterface {
     * 차이점이 선택 되었을 때 그 차이점이 마지막 차이점과 같다면 마지막 차이점 비활성화
     * */
     public void compareOnAction() {
-        if (left_text_area == null || right_text_area == null || left_text_list == null || right_text_list == null) {
-            initTextAreaAndListOnTab();
-        }
+        initTextAreaAndListOnTab();
+        initStatusTextArea();
+
         left_text_area.setVisible(false);
         right_text_area.setVisible(false);
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -176,7 +179,7 @@ public class MainController implements Initializable, MainInterface {
 
     @FXML
     public void copyToLeftOnAction() {
-        System.out.println("Click");
+        initStatusTextArea();
         Model.ModelInterface model = ModelRealize.getInstance();
         try {
             text_block_index=left_text_list.getSelectionModel().getSelectedIndex();
@@ -197,7 +200,7 @@ public class MainController implements Initializable, MainInterface {
 
     @FXML
     public void copyToRightOnAction() {
-        System.out.println("Click");
+        initStatusTextArea();
         Model.ModelInterface model = ModelRealize.getInstance();
         try {
             text_block_index=right_text_list.getSelectionModel().getSelectedIndex();
@@ -218,6 +221,7 @@ public class MainController implements Initializable, MainInterface {
 
     @FXML
     public void copyToRightAllOnAction() {
+        initStatusTextArea();
         Model.ModelInterface model = ModelRealize.getInstance();
         model.setText(now_tab_num, model.getText(now_tab_num,0),1);
 
@@ -232,6 +236,7 @@ public class MainController implements Initializable, MainInterface {
 
     @FXML
     public void copyToLeftAllOnAction() {
+        initStatusTextArea();
         Model.ModelInterface model = ModelRealize.getInstance();
         model.setText(now_tab_num, model.getText(now_tab_num,1),0);
 
@@ -428,9 +433,8 @@ public class MainController implements Initializable, MainInterface {
     * 오늘쪽 파일을 저장한다.
     * */
     public void saveRightFileMenuItemOnAction() {
-        if (left_text_area == null || right_text_area == null || left_text_list == null || right_text_list == null) {
-            initTextAreaAndListOnTab();
-        }
+        initTextAreaAndListOnTab();
+        initStatusTextArea();
 
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
@@ -465,9 +469,8 @@ public class MainController implements Initializable, MainInterface {
     * 왼쪽 파일을 저장한다.
     * */
     public void saveLeftFileMenuItemOnAction() {
-        if (left_text_area == null || right_text_area == null || left_text_list == null || right_text_list == null) {
-            initTextAreaAndListOnTab();
-        }
+        initTextAreaAndListOnTab();
+        initStatusTextArea();
 
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
@@ -890,28 +893,54 @@ public class MainController implements Initializable, MainInterface {
     * 현재 tab 을 통해서 현재 선택된 tab 의 text area 와 list view 를 가져온다.
     * */
     private void initTextAreaAndListOnTab() {
-        AnchorPane left_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(0);
-        AnchorPane right_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(1);
-        SplitPane left_split_pane = (SplitPane) ((SplitPane) left_anchor_pane.getChildren().get(1));
-        SplitPane right_split_pane = (SplitPane) ((SplitPane) right_anchor_pane.getChildren().get(1));
+        if (right_text_area == null || left_text_area == null || right_text_list == null || left_text_list == null) {
+            AnchorPane left_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(0);
+            AnchorPane right_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(1);
+            SplitPane left_split_pane = (SplitPane) ((SplitPane) left_anchor_pane.getChildren().get(1));
+            SplitPane right_split_pane = (SplitPane) ((SplitPane) right_anchor_pane.getChildren().get(1));
 
-        left_text_area = (TextArea) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(0);
-        right_text_area = (TextArea) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(0);
-        left_text_list = (ListView) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(1);
-        right_text_list = (ListView) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(1);
-        /*
-        Model.ModelInterface model = ModelRealize.getInstance();
-
-        File left_file = new File(model.getUnit(tab_num).filepath(0));
-        File right_file = new File(model.getUnit(tab_num).filepath(1));
-
-        left_status = new StatusControll((TextArea)(left_split_pane.getItems().get(1)));
-        left_status.setFileName(left_file.getName());
-        right_status = new StatusControll((TextArea)(right_split_pane.getItems().get(1)));
-        right_status.setFileName(right_file.getName());
-        */
+            left_text_area = (TextArea) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(0);
+            right_text_area = (TextArea) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(0);
+            left_text_list = (ListView) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(1);
+            right_text_list = (ListView) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(1);
+        }
     }
+    /*
+    * left, right status area 를 초기화 한다.
+    * */
+    private void initStatusTextArea() {
+        AnchorPane right_anchorPane = (AnchorPane) ((SplitPane) right_text_area.getParent().getParent().getParent()).getParent();
+        AnchorPane right_button_area = (AnchorPane) right_anchorPane.getChildren().get(0);
+        Button right_edit = (Button) right_button_area.getChildren().get(2);
 
+        AnchorPane left_anchorPane = (AnchorPane) ((SplitPane) left_text_area.getParent().getParent().getParent()).getParent();
+        AnchorPane left_button_area = (AnchorPane) left_anchorPane.getChildren().get(0);
+        Button left_edit = (Button) left_button_area.getChildren().get(2);
+
+        if (!left_edit.isDisable()) {
+            Model.ModelInterface model = ModelRealize.getInstance();
+
+            File left_file = new File(model.getUnit(tab_num).filepath(0));
+
+            AnchorPane left_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(0);
+            SplitPane left_split_pane = (SplitPane) ((SplitPane) left_anchor_pane.getChildren().get(1));
+
+            left_status = new StatusControll((TextArea) (left_split_pane.getItems().get(1)));
+            left_status.setFileName(left_file.getName());
+        }
+        if(!right_edit.isDisable()){
+            Model.ModelInterface model = ModelRealize.getInstance();
+
+            File right_file = new File(model.getUnit(tab_num).filepath(1));
+
+            AnchorPane right_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(1);
+            SplitPane right_split_pane = (SplitPane) ((SplitPane) right_anchor_pane.getChildren().get(1));
+
+            right_status = new StatusControll((TextArea) (right_split_pane.getItems().get(1)));
+            right_status.setFileName(right_file.getName());
+
+        }
+    }
     /*
     * String 을 저장한 array list 와 index를 저장한 array list 를 통해 list view 에 넣을 string 배열을 만든다.
     * */
