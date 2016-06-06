@@ -4,9 +4,10 @@ import java.awt.*;
 import java.io.*;
 
 /**
+ * HelpWindow
  * Created by hyunkyung on 2016-06-01.
+ * @author Hyunkyung Choi
  */
-
 
 public class HelpWindow {
 

@@ -10,11 +10,11 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
+ * Create Alarm window and show this to user.
+ * this have buttons that action "Yes" and "NO"
+ * boolen isYes() send messeage which button pressed.
  * Created by woojin on 2016-05-19.
- * 알람 창을 만들어 준다
- * 알람 창의 타이틀과 라벨을 받아서 해당하는 알람창을 만듬
- * 버튼은 Yes 와 No를 가지고 있다.
- * 어떤 버튼이 눌렸는지 boolean 형으로 isYes 함수를 통해 알려준다.
+ * @author Woonjin Jang
  */
 public class AlarmWindow extends Stage {
 

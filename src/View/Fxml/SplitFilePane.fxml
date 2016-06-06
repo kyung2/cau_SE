@@ -16,6 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.geometry.Insets?>
 
+
 <SplitPane fx:id="split_pane" dividerPositions="0.5" minWidth="45.0" prefHeight="368.0" prefWidth="528.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SplitFilePaneController">
     <items>
         <AnchorPane fx:id="left_file_pane" prefHeight="200.0" prefWidth="200.0">
