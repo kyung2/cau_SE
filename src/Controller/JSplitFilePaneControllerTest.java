@@ -1,4 +1,4 @@
-package Controller.ControllerTest;
+package Controller;
 
 import Model.*;
 import View.*;
@@ -23,21 +23,41 @@ reset : createMock으로 생성한 mock을 초기화 한다.
 public class JSplitFilePaneControllerTest {
     private SplitFilePaneController mocksplitFilePaneController; //Idepency.
 
-
     @Before
     public void setUp() {
-
         mocksplitFilePaneController = EasyMock.createMock(SplitFilePaneController.class);
     }
 
     @Test
     public void testleftLaodButtonOnAction() {
-        File left = new File("./left.txt");
-
+        File left = new File("/TestLeft/left.txt");
         if( !left.exists() ) System.out.println("fail"); //실패 메세지 보내기 fail("File is not Open!!");
 
         //left 파일이 제대로 읽혀왓나 테스트 assert이용
+        /*
+        *  checkTabNumAndCompareButtonAndMenuBar();
+        File file = loadFileChooser();
+        Model.ModelInterface model = ModelRealize.getInstance();
+        if(file != null){
+            try {
+                model.readTextOuter(tab_num, file.getAbsolutePath(), 0);
+                left_text_area.setVisible(true);
+                left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
+                setClickableButtons("left","true","true","false");
+                changeTabName(file.getName(),"left");
+                disableAllButtonInToolBarAndMenuItem();
+                left_file_label.setText(file.getName());
+                left_status.setFileName(file.getName());
 
+                left_status.addStatusWithName("File open");
+            }catch(Exception e){
+                e.printStackTrace();
+
+                left_status.addStatusWithName("ERR - "+e.getMessage());
+            }
+        }
+        invisibleListViewVisibleTextArea();
+        checkCompareButton();*/
 
     }
 

@@ -700,4 +700,38 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             }
         }
     }
+//disable 일때가 true
+    public boolean isDisableLoad(String position) throws IllegalAccessException {
+        if (position.equals("left")) {
+            return left_load_button.isDisable();
+        }
+        else if (position.equals("right")) {
+            return right_load_button.isDisable();
+        }
+        else {
+            throw new IllegalAccessException();
+        }
+    }
+    public boolean isDisableEdit(String position) throws IllegalAccessException {
+        if (position.equals("left")) {
+            return left_edit_button.isDisable();
+        }
+        else if (position.equals("right")) {
+            return right_edit_button.isDisable();
+        }
+        else {
+            throw new IllegalAccessException();
+        }
+    }
+    public boolean isDisableSave(String position) throws IllegalAccessException {
+        if (position.equals("left")) {
+            return left_save_button.isDisable();
+        }
+        else if (position.equals("right")) {
+            return right_save_button.isDisable();
+        }
+        else {
+            throw new IllegalAccessException();
+        }
+    }
 }

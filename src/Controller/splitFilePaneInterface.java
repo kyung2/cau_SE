@@ -40,4 +40,7 @@ interface SplitFilePaneInterface {
     void onLeftListViewMouseClicked();
     void onRightListViewMouseClicked();
 
+    boolean isDisableLoad(String s) throws IllegalAccessException;
+    boolean isDisableEdit(String s) throws IllegalAccessException;
+    boolean isDisableSave(String s) throws IllegalAccessException;
 }
