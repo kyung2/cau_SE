@@ -679,28 +679,39 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * */
     private void changeTabName(String name, String position){
         String tab_name = getSelectedTab().getText();
+        String left_file_name = null;
+        String right_file_name = null;
+
+        ModelInterface model = ModelRealize.getInstance();
+
         if(position.equals("left")) {
-            if (tab_name.equals("File")) {
-                tab_name = name + " - ";
-                getSelectedTab().setText(tab_name);
+            try{
+                right_file_name = new File(model.getUnit(tab_num).filepath(1)).getName();
+            }catch (Exception e){}
+
+            if(right_file_name != null){
+                tab_name = name + " - " + right_file_name;
             }
-            else{
-                tab_name = name + " -" + tab_name.split("-")[1];
-                getSelectedTab().setText(tab_name);
-            }
+            else tab_name = name + " - ";
+
+            getSelectedTab().setText(tab_name);
         }
         else {
-            if (tab_name.equals("File")) {
-                tab_name = " - " + name;
-                getSelectedTab().setText(tab_name);
+            try {
+                left_file_name = new File(model.getUnit(tab_num).filepath(0)).getName();
+
+            }catch (Exception e){}
+
+            if(left_file_name != null){
+                tab_name = left_file_name + " - " + name;
             }
-            else{
-                tab_name = tab_name.split("-")[0] + "- " + name;
-                getSelectedTab().setText(tab_name);
-            }
+            else tab_name = " - " + name;
+
+            getSelectedTab().setText(tab_name);
         }
     }
-//disable 일때가 true
+
+    //disable 일때가 true
     public boolean isDisableLoad(String position) throws IllegalAccessException {
         if (position.equals("left")) {
             return left_load_button.isDisable();
