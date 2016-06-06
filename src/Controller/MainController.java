@@ -994,4 +994,30 @@ public class MainController implements Initializable, MainInterface {
     public int getTextBlockIndex(){
         return text_block_index;
     }
+    public void setTextBlockIndex(int t_index) { text_block_index = t_index; }
+    public boolean[] getButtonDisabled(){
+        boolean[] conditionButton = new boolean[10];
+        conditionButton[0] = next_difference_button.isDisable();
+        conditionButton[1] = previous_difference_button.isDisable();
+        conditionButton[2] = first_difference_button.isDisable();
+        conditionButton[3] = now_difference_button.isDisable();
+        conditionButton[4] = last_difference_button.isDisable();
+        conditionButton[5] = copy_to_right_button.isDisable();
+        conditionButton[6] = copy_to_left_button.isDisable();
+        conditionButton[7] = copy_to_right_all_button.isDisable();
+        conditionButton[8] = copy_to_left_all_button.isDisable();
+        conditionButton[9] = compare_button.isDisable();
+
+        return conditionButton;
+
+
+    }
+    public int getNowTabNum(){
+        return now_tab_num;
+
+    }
+    public int getTabNum(){
+        return tab_num;
+    }
+
 }
