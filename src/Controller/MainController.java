@@ -26,7 +26,7 @@ public class MainController implements Initializable, MainInterface {
     private Button compare_button, copy_to_left_button, copy_to_right_button, copy_to_left_all_button, copy_to_right_all_button,
             next_difference_button, previous_difference_button, first_difference_button, now_difference_button, last_difference_button;
     @FXML
-    private MenuItem open_menu_item, save_menu_item, save_right_file_menu_item, save_left_file_menu_item;
+    private MenuItem open_menu_item, save_menu_item, save_right_file_menu_item, save_left_file_menu_item, tab_menu_item;
     @FXML
     private MenuItem next_difference_menu_item, previous_difference_menu_item, first_difference_menu_item, now_difference_menu_item, last_difference_menu_item,
             copy_to_right_menu_item, copy_to_left_menu_item, copy_to_right_all_menu_item, copy_to_left_all_menu_item, compare_menu_item;
@@ -36,8 +36,6 @@ public class MainController implements Initializable, MainInterface {
     private Tab tab;
     @FXML
     private Menu tab_menu;
-    @FXML
-    private MenuItem tab_menu_item;
     @FXML
     BorderPane main_pane;
 
@@ -190,6 +188,7 @@ public class MainController implements Initializable, MainInterface {
             right_status.addStatus("Copy to left");
             left_status.setMeueFlag();
             right_status.setMeueFlag();
+            saveButtonMenuItem("left",true);
         }
          catch (MergeLineIllegalException e) {
              e.printStackTrace();
@@ -211,12 +210,28 @@ public class MainController implements Initializable, MainInterface {
             right_status.addStatus("Copy to right");
             left_status.setMeueFlag();
             right_status.setMeueFlag();
-
+            saveButtonMenuItem("right",true);
         }
         catch (MergeLineIllegalException e) {
             e.printStackTrace();
             right_status.addStatusWithName("ERR - "+e.getMessage());
         }
+        left_text_area.setText(arrayListToString(model.getText(now_tab_num, 1)));
+        compareOnAction();
+    }
+
+    @FXML
+    public void copyToLeftAllOnAction() {
+        initStatusTextArea();
+        Model.ModelInterface model = ModelRealize.getInstance();
+        model.setText(now_tab_num, model.getText(now_tab_num,1),0);
+
+        left_status.addStatus("Copy to left All");
+        right_status.addStatus("Copy to left All");
+        left_status.setMeueFlag();
+        right_status.setMeueFlag();
+        saveButtonMenuItem("left",true);
+
         left_text_area.setText(arrayListToString(model.getText(now_tab_num, 1)));
         compareOnAction();
     }
@@ -231,23 +246,9 @@ public class MainController implements Initializable, MainInterface {
         right_status.addStatus("Copy to right All");
         left_status.setMeueFlag();
         right_status.setMeueFlag();
+        saveButtonMenuItem("right",true);
 
         right_text_area.setText(arrayListToString(model.getText(now_tab_num, 0)));
-        compareOnAction();
-    }
-
-    @FXML
-    public void copyToLeftAllOnAction() {
-        initStatusTextArea();
-        Model.ModelInterface model = ModelRealize.getInstance();
-        model.setText(now_tab_num, model.getText(now_tab_num,1),0);
-
-        left_status.addStatus("Copy to left All");
-        right_status.addStatus("Copy to left All");
-        left_status.setMeueFlag();
-        right_status.setMeueFlag();
-
-        left_text_area.setText(arrayListToString(model.getText(now_tab_num, 1)));
         compareOnAction();
     }
 
@@ -583,7 +584,6 @@ public class MainController implements Initializable, MainInterface {
     * 모든 tab 을 닫는다.
     * 모든 tab menu item 을 없에고 모든 toolbar stage 를 null 로 한다.
     * */
-
     public void closeTabAllMenuItemOnAction() {
         ((TabPane) now_tab.getTabPane()).getTabs().remove(0, tab_pane.getTabs().size());
         tab_menu.getItems().remove(2, tab_menu_item_num + 2);
@@ -602,6 +602,31 @@ public class MainController implements Initializable, MainInterface {
         tab_pane.getSelectionModel().select(index);
     }
 
+    /**/
+    private void saveButtonMenuItem(String position, boolean save){
+        AnchorPane right_anchorPane = (AnchorPane) ((SplitPane) right_text_area.getParent().getParent().getParent()).getParent();
+        AnchorPane right_button_area = (AnchorPane) right_anchorPane.getChildren().get(0);
+        Button right_save = (Button) right_button_area.getChildren().get(3);
+
+        AnchorPane left_anchorPane = (AnchorPane) ((SplitPane) left_text_area.getParent().getParent().getParent()).getParent();
+        AnchorPane left_button_area = (AnchorPane) left_anchorPane.getChildren().get(0);
+        Button left_save = (Button) left_button_area.getChildren().get(3);
+
+        if(position.equals("left")){
+            left_save.setDisable(!save);
+            save_left_file_menu_item.setDisable(!save);
+        }
+        else if(position.equals("right")) {
+            right_save.setDisable(!save);
+            save_right_file_menu_item.setDisable(!save);
+        }
+        else{
+            System.out.println("Wrong input");
+        }
+        if(!left_save.isDisable() && !right_save.isDisable()){
+            save_menu_item.setDisable(false);
+        }
+    }
     /*
     *  compare 의 able / disable
     * */
