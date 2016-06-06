@@ -56,5 +56,5 @@ public class JSplitFilePaneControllerTest {
         assertTrue(mockRight.isDisableEdit("right"));
 
     }
-    
+
 }
