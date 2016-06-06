@@ -178,6 +178,9 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
+    /*
+    * 선택한 차이점의 내용을 왼쪽으로 복사
+    * */
     public void copyToLeftOnAction() {
         initStatusTextArea();
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -200,6 +203,9 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
+    /*
+    * 선택한 차이점의 내용을 오른쪽으로 복사
+    * */
     public void copyToRightOnAction() {
         initStatusTextArea();
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -221,6 +227,9 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
+    /*
+    * 전체 차이점을 왼쪽으로 복사
+    * */
     public void copyToLeftAllOnAction() {
         initStatusTextArea();
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -237,6 +246,9 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
+    /*
+    * 전체 차이점을 오른쪽으로 복사
+    * */
     public void copyToRightAllOnAction() {
         initStatusTextArea();
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -253,6 +265,10 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
+    /*
+    * 현재 선택된 차이점에서 다음 차이점으로 넘어감.
+    * 다음 차이점이 존재하지 않을 경우 비활성화
+    * */
     public void nextDifferenceOnAction() {
         Model.ModelInterface model = ModelRealize.getInstance();
         ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStringsForList(model.getArrangedText(now_tab_num,0), model.getArrangedGroupSpace(now_tab_num)));
@@ -273,6 +289,10 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
+    /*
+    * 현재 선택된 차이점에서 이전 차이점으로 넘어감.
+    * 이전 차이점이 존재하지 않을 경우 비활성화
+    * */
     public void previousDifferenceOnAction() {
         //left_text_list.getSelectionModel().;      `
         //맨 처음이면 비활성화 되어야함
@@ -292,6 +312,9 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
+    /*
+    * 처음 차이점으로 간다.
+    * */
     public void firstDifferenceOnAction() {
         //처음 차이점으로;
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -315,6 +338,12 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
+    /*
+    * 현재 위치에서 가까운 차이점으로 간다.
+    * 차이점에 위치할 경우 그대로, 차이점이 아닐경우
+    * 보통은 바로 아래의 차이점으로 가지만
+    * 아래쪽에 차이점이 없을 경우 위로 간다..
+    * */
     public void nowDifferenceOnAction() {
         ModelInterface modelInterface = ModelRealize.getInstance();
         ArrayList<Integer> text_index = modelInterface.getArrangedGroupSpace(now_tab_num);
@@ -348,6 +377,9 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
+    /*
+    * 마지막 차이점으로 간다.
+    * */
     public void lastDifferenceOnAction() {
         //마지막 차이점으로
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -445,8 +477,8 @@ public class MainController implements Initializable, MainInterface {
         if((boolean)saveAlarmWindow.getUserData()) {
             Model.ModelInterface model = ModelRealize.getInstance();
             try {
-                model.setText(tab_num, stringToArrayList(right_text_area.getText()), 1);
-                model.writeTextOuter(tab_num, 1);
+                model.setText(now_tab_num, stringToArrayList(right_text_area.getText()), 1);
+                model.writeTextOuter(now_tab_num, 1);
                 right_text_area.setEditable(false);
                 setClickableButtonsInFilePane("right","true", null,"false");
 
@@ -455,7 +487,7 @@ public class MainController implements Initializable, MainInterface {
                 right_status.addStatusWithName("ERR - "+e.getMessage());
             }
             try{
-                if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
+                if(model.isOpen(now_tab_num,0) && model.isOpen(now_tab_num,1)) {
                     if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
                         compareButtonAndMenuItem(true);
                     }
@@ -483,8 +515,8 @@ public class MainController implements Initializable, MainInterface {
         if((boolean)saveAlarmWindow.getUserData()) {
             Model.ModelInterface model = ModelRealize.getInstance();
             try {
-                model.setText(tab_num, stringToArrayList(left_text_area.getText()), 0);
-                model.writeTextOuter(tab_num, 0);
+                model.setText(now_tab_num, stringToArrayList(left_text_area.getText()), 0);
+                model.writeTextOuter(now_tab_num, 0);
                 left_text_area.setEditable(false);
 
                 setClickableButtonsInFilePane("left", "true", null, "false");
@@ -493,7 +525,7 @@ public class MainController implements Initializable, MainInterface {
                 left_status.addStatusWithName("ERR - "+e.getMessage());
             }
             try{
-                if(model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) {
+                if(model.isOpen(now_tab_num,0) && model.isOpen(now_tab_num,1)) {
                     if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
                         compareButtonAndMenuItem(true);
                     }
@@ -602,7 +634,10 @@ public class MainController implements Initializable, MainInterface {
         tab_pane.getSelectionModel().select(index);
     }
 
-    /**/
+    /*
+    * save 버튼의 활성화와 비활성화를 조절
+    * save 버튼에 따라 menu item 도 활성화와 비활성화를 조절함
+    * */
     private void saveButtonMenuItem(String position, boolean save){
         AnchorPane right_anchorPane = (AnchorPane) ((SplitPane) right_text_area.getParent().getParent().getParent()).getParent();
         AnchorPane right_button_area = (AnchorPane) right_anchorPane.getChildren().get(0);
@@ -948,7 +983,7 @@ public class MainController implements Initializable, MainInterface {
         if (!left_edit.isDisable()) {
             Model.ModelInterface model = ModelRealize.getInstance();
 
-            File left_file = new File(model.getUnit(tab_num).filepath(0));
+            File left_file = new File(model.getUnit(now_tab_num).filepath(0));
 
             AnchorPane left_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(0);
             SplitPane left_split_pane = (SplitPane) ((SplitPane) left_anchor_pane.getChildren().get(1));
@@ -959,7 +994,7 @@ public class MainController implements Initializable, MainInterface {
         if(!right_edit.isDisable()){
             Model.ModelInterface model = ModelRealize.getInstance();
 
-            File right_file = new File(model.getUnit(tab_num).filepath(1));
+            File right_file = new File(model.getUnit(now_tab_num).filepath(1));
 
             AnchorPane right_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(1);
             SplitPane right_split_pane = (SplitPane) ((SplitPane) right_anchor_pane.getChildren().get(1));
