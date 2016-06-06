@@ -703,10 +703,11 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
 //disable 일때가 true
     public boolean isDisableLoad(String position) throws IllegalAccessException {
         if (position.equals("left")) {
-            return left_load_button.isDisable();
-        }
+           return left_load_button.isDisable();
+             }
         else if (position.equals("right")) {
-            return right_load_button.isDisable();
+            Boolean result = right_load_button.isDisable();
+            return result;
         }
         else {
             throw new IllegalAccessException();
@@ -714,10 +715,12 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
     public boolean isDisableEdit(String position) throws IllegalAccessException {
         if (position.equals("left")) {
-            return left_edit_button.isDisable();
+            Boolean result =left_edit_button.isDisable();
+            return result;
         }
         else if (position.equals("right")) {
-            return right_edit_button.isDisable();
+            Boolean result =right_edit_button.isDisable();
+            return result;
         }
         else {
             throw new IllegalAccessException();
@@ -725,10 +728,12 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
     public boolean isDisableSave(String position) throws IllegalAccessException {
         if (position.equals("left")) {
-            return left_save_button.isDisable();
+            Boolean result =left_save_button.isDisable();
+            return result;
         }
         else if (position.equals("right")) {
-            return right_save_button.isDisable();
+            Boolean result =right_save_button.isDisable();
+            return result;
         }
         else {
             throw new IllegalAccessException();
