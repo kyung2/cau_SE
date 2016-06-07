@@ -121,11 +121,11 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         if(right_file_chooser_flag) {
             checkTabNumAndCompareButtonAndMenuBar();
 
-            right_file_chooser_flag = false;
             FileChooser fileChooser = customFileChooser("Light File FileChooser");
+            right_file_chooser_flag = false;
+            File file = fileChooser.showOpenDialog(null);
             right_file_chooser_flag = true;
 
-            File file = fileChooser.showOpenDialog(null);
             if (file != null) {
                 Model.ModelInterface model = ModelRealize.getInstance();
                 try {
