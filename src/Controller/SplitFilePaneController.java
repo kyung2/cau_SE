@@ -90,6 +90,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
                 left_status.setFileName(file.getName());
 
                 left_status.addStatusWithName("File open");
+                if(model.isOpen(tab_num,1)) right_text_area.setText(arrayListToString(model.getText(tab_num,  1)));
             }catch(Exception e){
                 e.printStackTrace();
 
@@ -116,6 +117,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
                 right_status.setFileName(file.getName());
 
                 right_status.addStatusWithName("File open");
+                if(model.isOpen(tab_num,0)) left_text_area.setText(arrayListToString(model.getText(tab_num,  0)));
             }catch(Exception e){
                 e.printStackTrace();
 
