@@ -27,8 +27,7 @@ class ModelUnitCompareMerge {
         if(groupNum >= m.group[LCSClassEnum.find(LCSClassEnum.LCSGroup_sIncludingArrangedLineNum)][0].size()) throw new MergeLineIllegalException();
         if (groupNum % 2 == 1) {
 
-            m.codes[0].deleteblank();
-            m.codes[1].deleteblank();
+
             mergeTextFirst(groupNum, direction,m);
 
 
@@ -90,6 +89,8 @@ class ModelUnitCompareMerge {
 
     static protected void regrouping(ModelUnitData m)
     {
+        m.codes[0].deleteblank();
+        m.codes[1].deleteblank();
         LCSMethod(m);
         changeArrangedString(m);
         m.groupChange();

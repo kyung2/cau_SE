@@ -130,8 +130,8 @@ public class MainWindowTest extends GuiTest {
     @Test
     public void stage1_testOpenWindow(){
         String file = "test-load.txt";
-
         testOpenWindowHotKey(); // 단축키 test
+        assertNodeExists("#file_window");
         click("#cancel_button");
 
         click("#file_menu").click("Open");
@@ -216,6 +216,7 @@ public class MainWindowTest extends GuiTest {
         type("View").type(KeyCode.ENTER);
         type("Test").type(KeyCode.ENTER);
     }
+
     @Test
     public void stage2_testRightSaveMenuItem(){
         if(GuiTest.find("#right_save_button").isDisable()){
@@ -262,6 +263,7 @@ public class MainWindowTest extends GuiTest {
 
         initForSaveAs();
         click("#file_menu").click("Save As");
+        assertNodeExists("#file_window");
 
         click("#left_find_button");
         type("src").type(KeyCode.ENTER);

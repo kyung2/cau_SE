@@ -43,7 +43,7 @@ public class MainController implements Initializable, MainInterface {
     private ListView left_text_list, right_text_list;
     private TextArea left_text_area, right_text_area;
 
-    private StatusControll left_status, right_status;
+    private StatusController left_status, right_status;
 
     private ArrayList<String[]> toolbar_stage = new ArrayList<String[]>();
     private int tab_num, now_tab_num, tab_menu_item_num, close_tab_num;
@@ -991,7 +991,7 @@ public class MainController implements Initializable, MainInterface {
             AnchorPane left_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(0);
             SplitPane left_split_pane = (SplitPane) ((SplitPane) left_anchor_pane.getChildren().get(1));
 
-            left_status = new StatusControll((TextArea) (left_split_pane.getItems().get(1)));
+            left_status = new StatusController((TextArea) (left_split_pane.getItems().get(1)));
             left_status.setFileName(left_file.getName());
         }
         if(!right_edit.isDisable()){
@@ -1002,9 +1002,8 @@ public class MainController implements Initializable, MainInterface {
             AnchorPane right_anchor_pane = (AnchorPane) ((SplitPane) now_tab.getContent()).getItems().get(1);
             SplitPane right_split_pane = (SplitPane) ((SplitPane) right_anchor_pane.getChildren().get(1));
 
-            right_status = new StatusControll((TextArea) (right_split_pane.getItems().get(1)));
+            right_status = new StatusController((TextArea) (right_split_pane.getItems().get(1)));
             right_status.setFileName(right_file.getName());
-
         }
     }
     /*

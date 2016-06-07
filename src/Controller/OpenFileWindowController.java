@@ -27,18 +27,18 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
 	private Button left_load, left_edit, left_save, right_load, right_edit, right_save;
     private MenuItem open_menu_item, save_menu_item, save_right_file_menu_item, save_left_file_menu_item, compare_menu_item;
     private TextArea left_text_area, right_text_area;
-	private TextArea left_file_bottom_text_area, right_file_bottom_text_area;
+	private TextArea left_status_area, right_status_area;
 	private ListView left_list_view, right_list_view;
 
     private boolean item_flag = false;
 
-    private String fileRightname="";
-    private String fileLeftname="";
+    private String fileRightname = "";
+    private String fileLeftname = "";
 
+    private StatusController left_status, right_status;
 
     @FXML
     public void leftFileFindButtonOnAction(){
-
         if(!item_flag){
             getTabContent();
             item_flag = true;
@@ -90,7 +90,6 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
 
     @FXML
     public void okButtonOnAction() {
-
         /* 현재 탭의 구성요소들을 사용 가능하게 해 두고
         * 버튼들을 활성화시킨다
         */
@@ -113,16 +112,20 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
             left_file_label.setText(fileLeftname);
             super.changeTabName(tab, fileLeftname,"left");
 
+            left_status.setFileName(fileLeftname);
+            left_status.addStatusWithName("File open");
+            setClickableButtonsInFilePane("left","true","true","false");
         }
         if(!fileRightname.equals("")) {
             right_text_area.setText(arrayListToString(modelInterface.getText(tab_num, 1)));
             right_file_label.setText(fileRightname);
             super.changeTabName(tab, fileRightname,"right");
-        }
-        //스플릿 패널 활성화 설정
-        setClickableButtonsInFilePane("left","true","true","false");
-        setClickableButtonsInFilePane("right","true","true","false");
 
+            right_status.setFileName(fileRightname);
+            right_status.addStatusWithName("File open");
+            setClickableButtonsInFilePane("right","true","true","false");
+
+        }
         checkCompareButtonAndMenuItem();
 
         //창 종료
@@ -167,8 +170,8 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
         BorderPane main_center_pane = (BorderPane)((BorderPane)tab.getTabPane().getScene().getRoot()).getCenter();
         compare_button = (Button)((ToolBar)(main_center_pane.getTop())).getItems().get(11);
 
-        left_file_bottom_text_area = (TextArea)((SplitPane)left_pane.getChildren().get(1)).getItems().get(1);
-        right_file_bottom_text_area = (TextArea)((SplitPane)right_pane.getChildren().get(1)).getItems().get(1);
+        left_status_area = (TextArea)((SplitPane)left_pane.getChildren().get(1)).getItems().get(1);
+        right_status_area = (TextArea)((SplitPane)right_pane.getChildren().get(1)).getItems().get(1);
 
         AnchorPane left_file_pane = (AnchorPane)((SplitPane)left_pane.getChildren().get(1)).getItems().get(0);
         AnchorPane right_file_pane = (AnchorPane)((SplitPane)right_pane.getChildren().get(1)).getItems().get(0);
@@ -188,6 +191,8 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
         save_menu_item = menu.getItems().get(2);
         save_left_file_menu_item = menu.getItems().get(3);
         save_right_file_menu_item = menu.getItems().get(4);
+
+        initStatusControl();
     }
 
     /*
@@ -255,5 +260,10 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
             s += s1 + "\n";
         }
         return s;
+    }
+
+    private void initStatusControl(){
+        left_status = new StatusController(left_status_area);
+        right_status = new StatusController(right_status_area);
     }
 }
