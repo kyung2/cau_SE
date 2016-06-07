@@ -16,11 +16,17 @@ import java.io.IOException;
  * Abstract class for Open and Save file window
  * This class make stage with parameter ( title and controller file )
  * It is designed by FileWindow.fxml file in /View/Fxml package
- * It has two label, two text area, two button for open or save left and right file
+ * It has two label, two text area, two button for open or left and right file
  * Created by woojin on 2016-05-18.
  * @author woojin Jang
  */
 abstract class AbstractFileWindow extends Stage {
+
+    /**
+    * Constructure
+    * @param title Title for file window
+    * @param controllerFile controller object for file window
+    * */
     protected AbstractFileWindow(String title, Object controllerFile) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/FileWindow.fxml"));
         loader.setController(controllerFile);
@@ -38,6 +44,9 @@ abstract class AbstractFileWindow extends Stage {
         this.show();
     }
 
+    abstract protected void initLabel();
+
+    /* get component in file window */
     protected Label getWindowLabel(){
         return (Label)(((AnchorPane)this.getScene().getRoot()).getChildren().get(7));
     }
@@ -68,6 +77,4 @@ abstract class AbstractFileWindow extends Stage {
     protected Button getCancelButton(){
         return (Button)(((AnchorPane)this.getScene().getRoot()).getChildren().get(9));
     }
-
-    abstract protected void initLabel();
 }

@@ -13,6 +13,10 @@ import javafx.scene.control.Tab;
 public class OpenFileWindow extends AbstractFileWindow {
     private static boolean file_num = true;
 
+    /**
+    * Constructure with Tab
+    * @param tab : transfer tab to controller. tab is used for get component in tab
+    **/
     public OpenFileWindow(Tab tab) {
         super("Open Files", new OpenFileWindowController());
         if(file_num) {
@@ -28,6 +32,7 @@ public class OpenFileWindow extends AbstractFileWindow {
     }
 
     @Override
+    /* window label 에 값을 넣어준다.*/
     protected void initLabel(){
         getWindowLabel().setText("Select Directory / File");
     }
