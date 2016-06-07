@@ -12,7 +12,8 @@ import java.io.IOException;
 /**
  * Create Alarm window and show this to user.
  * this have buttons that action "Yes" and "NO"
- * boolen isYes() send messeage which button pressed.
+ * this class is designed with AlarmWindow.fxml file in /View/Fxml package
+ * this class is related on AlarmController class in /Controller package
  * Created by woojin on 2016-05-19.
  * @author Woonjin Jang
  */

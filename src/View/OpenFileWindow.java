@@ -5,6 +5,7 @@ import javafx.scene.control.Tab;
 
 /**
  * Open FileWindow
+ * this class is related on OpenFileWindowController in /Controller class
  * Created by woojin on 2016-05-16.
  * @author Woonjin Jang
  */
