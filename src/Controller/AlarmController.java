@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 public class AlarmController implements AlarmInterface {
     @FXML
     private AnchorPane alarm_anchor_pane;
+
     @FXML
     /*
     * do click yes button
@@ -28,6 +29,7 @@ public class AlarmController implements AlarmInterface {
 
         stage.close();
     }
+
     @FXML
     /*
     * do click no button

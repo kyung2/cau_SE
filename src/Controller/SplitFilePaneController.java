@@ -16,6 +16,10 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
+/**
+ * SplitFilePaneController
+ * Created by woojin on 2016-05-16.
+ */
 public class SplitFilePaneController implements Initializable, SplitFilePaneInterface {
     @FXML
     TextArea left_text_area, right_text_area;

@@ -14,6 +14,10 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
+
+/**
+ * Created by woojin on 2016-05-20.
+ */
 public class OpenFileWindowController extends FileWindowAbstractClass {
 	@FXML
 	private AnchorPane file_anchor_pane;
@@ -44,7 +48,7 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
             item_flag = true;
         }
         int tab_num = (int)tab.getUserData();
-        FileChooser fileChooser = super.loadFileChooser();
+        FileChooser fileChooser = super.customFileChooser();
         try {
             File file = fileChooser.showOpenDialog(null);
 
@@ -70,7 +74,7 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
             item_flag = true;
         }
         int tab_num = (int)tab.getUserData();
-        FileChooser fileChooser = super.loadFileChooser();
+        FileChooser fileChooser = super.customFileChooser();
         try {
             File file = fileChooser.showOpenDialog(null);
 

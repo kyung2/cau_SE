@@ -1,7 +1,9 @@
 package Controller;
 
 /**
+ * Interface for MainController
  * Created by woojin on 2016-05-31.
+ * @author woojin Jang
  */
 public interface MainInterface {
     /*

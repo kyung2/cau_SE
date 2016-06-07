@@ -12,6 +12,11 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * Controller for SaveFileWindow
+ * Created by woojin on 2016-05-20.
+ * @author woojin Jang
+ */
 public class SaveFileWindowController extends FileWindowAbstractClass{
     private boolean item_flag = false;
     private File left_file, right_file;
@@ -35,7 +40,7 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
             getTabContent();
             item_flag = true;
         }
-        FileChooser fileChooser = super.loadFileChooser();
+        FileChooser fileChooser = super.customFileChooser();
         try {
             left_file = fileChooser.showSaveDialog(null);
             left_file_text_area.setText(left_file.getAbsolutePath());
@@ -51,7 +56,7 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
             getTabContent();
             item_flag = true;
         }
-        FileChooser fileChooser = super.loadFileChooser();
+        FileChooser fileChooser = super.customFileChooser();
         try {
             right_file = fileChooser.showSaveDialog(null);
             right_file_text_area.setText(right_file.getAbsolutePath());

@@ -1,6 +1,11 @@
 package Controller;
 
 
+/**
+ * Interface for SplitFilePaneController
+ * Created by woojin on 2016-06-01.
+ * @author woojin Jang
+ */
 interface SplitFilePaneInterface {
     /*
     * load 버튼을 눌렀을 때

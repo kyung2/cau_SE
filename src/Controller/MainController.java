@@ -21,6 +21,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+/**
+ * MainController
+ * Created by woojin on 2016-05-16
+ * @author woojin Jang and soyoung Kim.
+ */
 public class MainController implements Initializable, MainInterface {
     @FXML
     private Button compare_button, copy_to_left_button, copy_to_right_button, copy_to_left_all_button, copy_to_right_all_button,
