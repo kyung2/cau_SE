@@ -114,8 +114,8 @@
                   <MenuItem id="first_difference_menu_item" fx:id="first_difference_menu_item"  mnemonicParsing="false" onAction="#firstDifferenceOnAction" text="First Difference" />
                   <MenuItem id="now_difference_menu_item" fx:id="now_difference_menu_item"  accelerator="Alt+N" mnemonicParsing="false" onAction="#nowDifferenceOnAction" text="Now Selected Difference" />
                   <MenuItem id="last_difference_menu_item" fx:id="last_difference_menu_item"  mnemonicParsing="false" onAction="#lastDifferenceOnAction" text="Last Difference" />
-                  <MenuItem id="copy_to_right_menu_item" fx:id="copy_to_right_menu_item"  accelerator="Ctrl+R" mnemonicParsing="false" onAction="#copyToRightOnAction" text="Copy to Right" />
-                  <MenuItem id="copy_to_left_menu_item" fx:id="copy_to_left_menu_item"  accelerator="Ctrl+L" mnemonicParsing="false" onAction="#copyToLeftOnAction" text="Copy to Left" />
+                  <MenuItem id="copy_to_right_menu_item" fx:id="copy_to_right_menu_item"  accelerator="Alt+R" mnemonicParsing="false" onAction="#copyToRightOnAction" text="Copy to Right" />
+                  <MenuItem id="copy_to_left_menu_item" fx:id="copy_to_left_menu_item"  accelerator="Alt+L" mnemonicParsing="false" onAction="#copyToLeftOnAction" text="Copy to Left" />
                   <MenuItem id="copy_to_right_all_menu_item" fx:id="copy_to_right_all_menu_item"  accelerator="Ctrl+Shift+R" mnemonicParsing="false" onAction="#copyToRightAllOnAction" text="Copy to Right All" />
                   <MenuItem id="copy_to_left_all_menu_item" fx:id="copy_to_left_all_menu_item" accelerator="Ctrl+Shift+L" mnemonicParsing="false" onAction="#copyToLeftAllOnAction" text="Copy to Left All" />
                   <MenuItem id="compare_menu_item" fx:id="compare_menu_item" accelerator="Alt+C" mnemonicParsing="false" onAction="#compareOnAction" text="Compare" />

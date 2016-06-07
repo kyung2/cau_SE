@@ -39,6 +39,7 @@ public class JMainControllerTest {
 
     }
 
+
     @After
     public void tearDown() throws Exception {
         model.closeModelAll();

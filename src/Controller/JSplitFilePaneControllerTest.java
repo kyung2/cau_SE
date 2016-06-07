@@ -21,9 +21,6 @@ public class JSplitFilePaneControllerTest {
     private SplitFilePaneInterface mockRight;
     SplitFilePaneController controller = new SplitFilePaneController();
 
-
-
-
     @Before
     public void setUp() throws Exception {
         mockLeft = createMock(SplitFilePaneInterface.class);
@@ -121,6 +118,7 @@ public class JSplitFilePaneControllerTest {
 
 
     }
+
     @Test
     public void testisDisableEdit() throws IllegalAccessException {
         EasyMock.expect(mockLeft.isDisableEdit("left")).andReturn((true));

@@ -73,6 +73,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * */
 
     @FXML
+
     public void leftLoadButtonOnAction() {
 
         checkTabNumAndCompareButtonAndMenuBar();
@@ -99,7 +100,6 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         invisibleListViewVisibleTextArea();
         checkCompareButton();
     }
-
     @FXML
     public void rightLoadButtonOnAction(){
 
@@ -288,6 +288,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         changeToolbarButtonByClickList(index);
         changeScrollbar(index);
     }
+
     @FXML
     public void onRightListViewMouseClicked(){
         int index = right_text_list.getSelectionModel().getSelectedIndex();
@@ -339,6 +340,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
 
         }
     }
+
     /*
     * listView 를 선택한 위치에 대한
     * previous 버튼과 next 버튼의 able / disable
@@ -389,6 +391,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             }
         }
     }
+
     /*
     *  file chooser 를 열어서 파일의 path 를 가져온다.
     *  tab num 이 -1 즉 초기값일 경우 tab num 을 할당해준다.
@@ -417,6 +420,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         }
         return selectedFile;
     }
+
     /*
    *  previous difference 의 able / disable
    * */
@@ -424,6 +428,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         previous_menu_item.setDisable(!pre);
         previous_difference_button.setDisable(!pre);
     }
+
     /*
     *  next difference 의 able / disable
     * */
@@ -431,6 +436,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         next_menu_item.setDisable(!next);
         next_difference_button.setDisable(!next);
     }
+
     /*
     * file pane 버튼의 able 과 disable 을 해준다.
     * position 에 left 와 right 를 통해서 위치를 선택
@@ -484,6 +490,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         }
         if(!left_save_button.isDisable() && !right_save_button.isDisable() && model.isOpen(tab_num,0) && model.isOpen(tab_num,1)) save_menu_item.setDisable(false);
     }
+
     /*
     * compare 버튼이 활성화 되도 되는지 체크
     * edit 버튼이 눌렸을 때 두 text area 가 수정 불가능 한 경우 활성화
