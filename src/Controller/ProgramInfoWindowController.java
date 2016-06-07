@@ -5,7 +5,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * Created by hyunkyung on 2016-05-20.
+ * Controller for programInformationWindow
+ * Created by woojin on 2016-05-20.
  */
 public class ProgramInfoWindowController implements programInfoInterface{
     @FXML

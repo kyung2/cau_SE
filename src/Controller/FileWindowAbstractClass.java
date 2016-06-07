@@ -11,7 +11,9 @@ import javafx.stage.Stage;
 import java.io.File;
 
 /**
+ * Abstract class for Open and Save FileWindowController class
  * Created by woojin on 2016-05-31.
+ * @author woojin Jang
  */
 abstract class FileWindowAbstractClass implements FileWindowInterface {
     @Override
@@ -23,6 +25,11 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
     @Override
     abstract public void cancelButtonOnAction();
 
+    /*
+    * initial action when click cancel button
+    * parameter title and content for make alarm window
+    * parameter stage for close file window
+    * */
     void initCancelButtonAction(String title, String content, Stage stage){
         AlarmWindow exitAlarmWindow = new AlarmWindow(title, content);
         exitAlarmWindow.showAndWait();
@@ -31,6 +38,7 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
         }
     }
 
+    /* Change tab's name when open or save file */
     void changeTabName(Tab tab, String name, String position){
         String tab_name = tab.getText();
         String left_file_name = null;
@@ -65,9 +73,10 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
         }
     }
 
-    FileChooser loadFileChooser(){
+    /* Make custom file chooser */
+    FileChooser customFileChooser(String title){
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("FileChooser");
+        fileChooser.setTitle(title);
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("All Files","*.txt", "*.java", "*.c", "*.cpp"),
                 new FileChooser.ExtensionFilter("Text Files", "*.txt"),

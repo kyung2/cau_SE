@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
+import org.easymock.internal.matchers.Null;
 
 import java.io.File;
 import java.net.URL;
@@ -16,6 +17,10 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
+/**
+ * SplitFilePaneController
+ * Created by woojin on 2016-05-16.
+ */
 public class SplitFilePaneController implements Initializable, SplitFilePaneInterface {
     @FXML
     TextArea left_text_area, right_text_area;
@@ -32,6 +37,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     private TextArea left_status_pane, right_status_pane;
 
     private int tab_num;
+    private boolean left_file_chooser_flag = true, right_file_chooser_flag = true;
     private Button compare_button, previous_difference_button, next_difference_button;
     private MenuBar menu_bar;
     private MenuItem previous_menu_item, next_menu_item, compare_menu_item, open_menu_item, save_menu_item, save_right_file_menu_item, save_left_file_menu_item;
@@ -75,57 +81,77 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * */
     @FXML
     public void leftLoadButtonOnAction() {
-        checkTabNumAndCompareButtonAndMenuBar();
-        File file = loadFileChooser();
-        Model.ModelInterface model = ModelRealize.getInstance();
-        if(file != null){
-            try {
-                model.readTextOuter(tab_num, file.getAbsolutePath(), 0);
-                left_text_area.setVisible(true);
-                left_text_area.setText(arrayListToString(model.getText(tab_num,0)));
-                setClickableButtons("left","true","true","false");
-                changeTabName(file.getName(),"left");
-                disableAllButtonInToolBarAndMenuItem();
-                left_file_label.setText(file.getName());
-                left_status.setFileName(file.getName());
+        if(left_file_chooser_flag) {
+            checkTabNumAndCompareButtonAndMenuBar();
 
-                left_status.addStatusWithName("File open");
-                if(model.isOpen(tab_num,1)) right_text_area.setText(arrayListToString(model.getText(tab_num,  1)));
-            }catch(Exception e){
-                e.printStackTrace();
+            FileChooser fileChooser = customFileChooser("Left File FileChooser");
+            left_file_chooser_flag = false;
+            File file = fileChooser.showOpenDialog(null);
+            left_file_chooser_flag = true;
 
-                left_status.addStatusWithName("ERR - "+e.getMessage());
+            Model.ModelInterface model = ModelRealize.getInstance();
+            if (file != null) {
+                try {
+                    model.readTextOuter(tab_num, file.getAbsolutePath(), 0);
+                    left_text_area.setVisible(true);
+                    left_text_area.setText(arrayListToString(model.getText(tab_num, 0)));
+                    setClickableButtons("left", "true", "true", "false");
+                    changeTabName(file.getName(), "left");
+                    disableAllButtonInToolBarAndMenuItem();
+                    left_file_label.setText(file.getName());
+                    left_status.setFileName(file.getName());
+
+                    left_status.addStatusWithName("File open");
+                    if (model.isOpen(tab_num, 1)) right_text_area.setText(arrayListToString(model.getText(tab_num, 1)));
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    left_status.addStatusWithName("ERR - " + e.getMessage());
+                }
             }
+            invisibleListViewVisibleTextArea();
+            checkCompareButton();
         }
-        invisibleListViewVisibleTextArea();
-        checkCompareButton();
+        else{
+            System.out.println("Left File FileChooser is already open!");
+        }
     }
     @FXML
     public void rightLoadButtonOnAction(){
-        checkTabNumAndCompareButtonAndMenuBar();
-        File file = loadFileChooser();
-        if(file != null){
-            Model.ModelInterface model = ModelRealize.getInstance();
-            try {
-                model.readTextOuter(tab_num, file.getAbsolutePath(), 1);
-                right_text_area.setVisible(true);
-                right_text_area.setText(arrayListToString(model.getText(tab_num,1)));
-                setClickableButtons("right","true","true","false");
-                changeTabName(file.getName(),"right");
-                disableAllButtonInToolBarAndMenuItem();
-                right_file_label.setText(file.getName());
-                right_status.setFileName(file.getName());
+        if(right_file_chooser_flag) {
+            checkTabNumAndCompareButtonAndMenuBar();
 
-                right_status.addStatusWithName("File open");
-                if(model.isOpen(tab_num,0)) left_text_area.setText(arrayListToString(model.getText(tab_num,  0)));
-            }catch(Exception e){
-                e.printStackTrace();
+            FileChooser fileChooser = customFileChooser("Light File FileChooser");
+            right_file_chooser_flag = false;
+            File file = fileChooser.showOpenDialog(null);
+            right_file_chooser_flag = true;
 
-                right_status.addStatusWithName("ERR - "+e.getMessage());
+            if (file != null) {
+                Model.ModelInterface model = ModelRealize.getInstance();
+                try {
+                    model.readTextOuter(tab_num, file.getAbsolutePath(), 1);
+                    right_text_area.setVisible(true);
+                    right_text_area.setText(arrayListToString(model.getText(tab_num, 1)));
+                    setClickableButtons("right", "true", "true", "false");
+                    changeTabName(file.getName(), "right");
+                    disableAllButtonInToolBarAndMenuItem();
+                    right_file_label.setText(file.getName());
+                    right_status.setFileName(file.getName());
+
+                    right_status.addStatusWithName("File open");
+                    if (model.isOpen(tab_num, 0)) left_text_area.setText(arrayListToString(model.getText(tab_num, 0)));
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    right_status.addStatusWithName("ERR - " + e.getMessage());
+                }
             }
+            invisibleListViewVisibleTextArea();
+            checkCompareButton();
         }
-        invisibleListViewVisibleTextArea();
-        checkCompareButton();
+        else{
+            System.out.println("Right File FileChooser is already open");
+        }
     }
 
     /*
@@ -412,19 +438,17 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         }
     }
 
-    /*
-    *  file chooser 를 열어서 파일의 path 를 가져온다.
-    *  tab num 이 -1 즉 초기값일 경우 tab num 을 할당해준다.
-    *  모델 객체를 받아온 뒤 해당하는 model 에 absoulte path를 넘겨주어 파일 입출력을 한다.
-    * */
-    private File loadFileChooser(){
+    /**
+     *  custome FileChooser 를 만든다.
+     * */
+    FileChooser customFileChooser(String title){
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("FileChooser");
+        fileChooser.setTitle(title);
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Files", "*.java", "*.c", "*.cpp", "*.txt"),
+                new FileChooser.ExtensionFilter("All Files","*.txt", "*.java", "*.c", "*.cpp"),
+                new FileChooser.ExtensionFilter("Text Files", "*.txt"),
                 new FileChooser.ExtensionFilter("Java Files", "*.java"),
-                new FileChooser.ExtensionFilter("C Files", "*.c","*.cpp"),
-                new FileChooser.ExtensionFilter("Text Files", "*.txt")
+                new FileChooser.ExtensionFilter("C Files", "*.c","*.cpp")
         );
 
         File currentDirFile = new File(".");
@@ -434,11 +458,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         //String init_path = System.getProperty("user.home")+File.separator+"Documents";
 
         fileChooser.setInitialDirectory(new File(init_path));
-        File selectedFile = fileChooser.showOpenDialog(null);
-        if(selectedFile == null) {
-            System.out.println("No Select FIle");
-        }
-        return selectedFile;
+        return fileChooser;
     }
 
     /*
