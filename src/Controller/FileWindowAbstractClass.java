@@ -74,9 +74,9 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
     }
 
     /* Make custom file chooser */
-    FileChooser customFileChooser(){
+    FileChooser customFileChooser(String title){
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("FileChooser");
+        fileChooser.setTitle(title);
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("All Files","*.txt", "*.java", "*.c", "*.cpp"),
                 new FileChooser.ExtensionFilter("Text Files", "*.txt"),

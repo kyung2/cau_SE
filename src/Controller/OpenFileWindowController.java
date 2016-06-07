@@ -34,7 +34,7 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
 	private TextArea left_status_area, right_status_area;
 	private ListView left_list_view, right_list_view;
 
-    private boolean item_flag = false;
+    private boolean item_flag = false, left_file_chooser_flag = true, right_file_chooser_flag = true;
 
     private String fileRightname = "";
     private String fileLeftname = "";
@@ -47,24 +47,31 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
             getTabContent();
             item_flag = true;
         }
-        int tab_num = (int)tab.getUserData();
-        FileChooser fileChooser = super.customFileChooser();
-        try {
-            File file = fileChooser.showOpenDialog(null);
+        if(left_file_chooser_flag) {
+            int tab_num = (int) tab.getUserData();
+            FileChooser fileChooser = super.customFileChooser("Left File FileChooser");
+            try {
+                left_file_chooser_flag = false;
+                File file = fileChooser.showOpenDialog(null);
+                left_file_chooser_flag = true;
 
-            Model.ModelInterface model = ModelRealize.getInstance();
-            model.readTextOuter(tab_num, file.getAbsolutePath(), 0);
+                Model.ModelInterface model = ModelRealize.getInstance();
+                model.readTextOuter(tab_num, file.getAbsolutePath(), 0);
 
-            //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
-            left_file_text_area.setText(file.getAbsolutePath());
-            fileLeftname = file.getName();
-            warning_info_text_area.setText("Select " + fileLeftname);
-        }catch (NullPointerException e){
-            warning_info_text_area.setText("Select No Left File");
-        }catch (IOException e){
-            e.printStackTrace();
+                //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
+                left_file_text_area.setText(file.getAbsolutePath());
+                fileLeftname = file.getName();
+                warning_info_text_area.setText("Select " + fileLeftname);
+            } catch (NullPointerException e) {
+                warning_info_text_area.setText("Select No Left File");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            tab_num = (int) tab.getUserData();
         }
-        tab_num = (int)tab.getUserData();
+        else{
+            System.out.println("Left File FileChooser is already open!");
+        }
     }
 
     @FXML
@@ -73,22 +80,29 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
             getTabContent();
             item_flag = true;
         }
-        int tab_num = (int)tab.getUserData();
-        FileChooser fileChooser = super.customFileChooser();
-        try {
-            File file = fileChooser.showOpenDialog(null);
+        if(right_file_chooser_flag) {
+            int tab_num = (int) tab.getUserData();
+            FileChooser fileChooser = super.customFileChooser("Right File FileChooser");
+            try {
+                right_file_chooser_flag = false;
+                File file = fileChooser.showOpenDialog(null);
+                right_file_chooser_flag = true;
 
-            Model.ModelInterface model = ModelRealize.getInstance();
-            model.readTextOuter(tab_num, file.getAbsolutePath(), 1);
+                Model.ModelInterface model = ModelRealize.getInstance();
+                model.readTextOuter(tab_num, file.getAbsolutePath(), 1);
 
-            //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
-            right_file_text_area.setText(file.getAbsolutePath());
-            fileRightname = file.getName();
-            warning_info_text_area.setText("Select " + fileRightname);
-        }catch (NullPointerException e){
-            warning_info_text_area.setText("Select No Right File");
-        }catch (IOException e){
-            e.printStackTrace();
+                //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
+                right_file_text_area.setText(file.getAbsolutePath());
+                fileRightname = file.getName();
+                warning_info_text_area.setText("Select " + fileRightname);
+            } catch (NullPointerException e) {
+                warning_info_text_area.setText("Select No Right File");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            System.out.println("Right File FileChooser is already open!");
         }
     }
 

@@ -18,7 +18,8 @@ import java.util.ArrayList;
  * @author woojin Jang
  */
 public class SaveFileWindowController extends FileWindowAbstractClass{
-    private boolean item_flag = false;
+
+    private boolean item_flag = false, left_file_chooser_flag = true, right_file_chooser_flag = true;
     private File left_file, right_file;
     private Tab tab;
     private Label left_file_label, right_file_label;
@@ -40,13 +41,21 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
             getTabContent();
             item_flag = true;
         }
-        FileChooser fileChooser = super.customFileChooser();
-        try {
-            left_file = fileChooser.showSaveDialog(null);
-            left_file_text_area.setText(left_file.getAbsolutePath());
-            warning_info_text_area.setText("Select " + left_file.getName());
-        }catch (NullPointerException e){
-            warning_info_text_area.setText("Select no Left File");
+        if(left_file_chooser_flag) {
+            FileChooser fileChooser = super.customFileChooser("Left File FileChooser");
+            try {
+                left_file_chooser_flag = false;
+                left_file = fileChooser.showSaveDialog(null);
+                left_file_chooser_flag = true;
+
+                left_file_text_area.setText(left_file.getAbsolutePath());
+                warning_info_text_area.setText("Select " + left_file.getName());
+            } catch (NullPointerException e) {
+                warning_info_text_area.setText("Select no Left File");
+            }
+        }
+        else{
+            System.out.println("Left File FileChooser is already open!");
         }
     }
 
@@ -56,13 +65,21 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
             getTabContent();
             item_flag = true;
         }
-        FileChooser fileChooser = super.customFileChooser();
-        try {
-            right_file = fileChooser.showSaveDialog(null);
-            right_file_text_area.setText(right_file.getAbsolutePath());
-            warning_info_text_area.setText("Select " + right_file.getName());
-        }catch (NullPointerException e){
-            warning_info_text_area.setText("Select no Right File");
+        if(right_file_chooser_flag) {
+            FileChooser fileChooser = super.customFileChooser("Right File FileChooser");
+            try {
+                right_file_chooser_flag = false;
+                right_file = fileChooser.showSaveDialog(null);
+                right_file_chooser_flag = true;
+
+                right_file_text_area.setText(right_file.getAbsolutePath());
+                warning_info_text_area.setText("Select " + right_file.getName());
+            } catch (NullPointerException e) {
+                warning_info_text_area.setText("Select no Right File");
+            }
+        }
+        else{
+            System.out.println("Right File FileChooser is already open!");
         }
     }
 
