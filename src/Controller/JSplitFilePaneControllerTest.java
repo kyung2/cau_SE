@@ -17,8 +17,8 @@ import Model.ModelRealize;
  * @author hyunkyung
  */
 public class JSplitFilePaneControllerTest {
-    private SplitFilePaneInterface mockLeft;
-    private SplitFilePaneInterface mockRight;
+    private SplitFilePaneInterface mockRight_area;
+    private SplitFilePaneInterface mockLeft_area;
     SplitFilePaneController controller = new SplitFilePaneController();
 
 
@@ -26,10 +26,10 @@ public class JSplitFilePaneControllerTest {
 
     @Before
     public void setUp() throws Exception {
-        mockLeft = createMock(SplitFilePaneInterface.class);
-        mockRight = createMock(SplitFilePaneInterface.class);
+        mockLeft_area= createMock(SplitFilePaneInterface.class);
+        mockRight_area = createMock(SplitFilePaneInterface.class);
         //ModelInterface modelInterface= createMock(ModelInterface.class);
-        if (mockLeft == null || mockRight == null) fail("NULL");
+        if (mockLeft_area == null || mockRight_area == null) fail("NULL");
 
     }
 
@@ -72,64 +72,41 @@ public class JSplitFilePaneControllerTest {
 
     }
 
-    @Test
-    public void testEdit() {
-        File path_file= new File(".");
 
-        //lath 알기 위하여 사용
-        String path = path_file.getAbsolutePath().substring(0,path_file.getAbsolutePath().length() - 1);
-        System.out.println(path);
-
-        ModelInterface modelInterface = ModelRealize.getInstance();
-        modelInterface.newModel(0);
-        //left
-        try {
-            modelInterface.readTextOuter(0,path+"src/Controller/ControllerTest/lefttest.txt",0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //right
-        try {
-            modelInterface.readTextOuter(0,path+"src/Controller/ControllerTest/righttest.txt",1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     @Test
     public void testisDisableLoad() throws IllegalAccessException {
         //behavior of Disable
-        EasyMock.expect(mockLeft.isDisableLoad("left")).andReturn((true));
-        EasyMock.expect(mockRight.isDisableLoad("right")).andReturn((true));
+        EasyMock.expect(mockLeft_area.isDisableLoad("left")).andReturn((true));
+        EasyMock.expect(mockRight_area.isDisableLoad("right")).andReturn((true));
 
-        replay(mockLeft, mockRight);
-        assertTrue(mockLeft.isDisableLoad("left"));
-        assertTrue(mockRight.isDisableLoad("right"));
-        verify(mockLeft,mockRight);
+        replay(mockLeft_area, mockRight_area);
+        assertTrue(mockLeft_area.isDisableLoad("left"));
+        assertTrue(mockRight_area.isDisableLoad("right"));
+        verify(mockLeft_area,mockRight_area);
     }
 
     @Test
     public void testisDisableSave() throws IllegalAccessException {
-        EasyMock.expect(mockLeft.isDisableSave("left")).andReturn((true));
-        EasyMock.expect(mockRight.isDisableSave("right")).andReturn((true));
+        EasyMock.expect(mockLeft_area.isDisableSave("left")).andReturn((true));
+        EasyMock.expect(mockRight_area.isDisableSave("right")).andReturn((true));
 
-        replay(mockLeft, mockRight);
-        assertTrue(mockLeft.isDisableSave("left"));
-        assertTrue(mockRight.isDisableSave("right"));
-        verify(mockLeft,mockRight);
+        replay(mockLeft_area, mockRight_area);
+        assertTrue(mockLeft_area.isDisableSave("left"));
+        assertTrue(mockRight_area.isDisableSave("right"));
+        verify(mockLeft_area,mockRight_area);
 
 
     }
     @Test
     public void testisDisableEdit() throws IllegalAccessException {
-        EasyMock.expect(mockLeft.isDisableEdit("left")).andReturn((true));
-        EasyMock.expect(mockRight.isDisableEdit("right")).andReturn((true));
+        EasyMock.expect(mockLeft_area.isDisableEdit("left")).andReturn((true));
+        EasyMock.expect(mockRight_area.isDisableEdit("right")).andReturn((true));
 
-        replay(mockLeft, mockRight);
-        assertTrue(mockLeft.isDisableEdit("left"));
-        assertTrue(mockRight.isDisableEdit("right"));
-        verify(mockLeft,mockRight);
+        replay(mockLeft_area, mockRight_area);
+        assertTrue(mockLeft_area.isDisableEdit("left"));
+        assertTrue(mockRight_area.isDisableEdit("right"));
+        verify(mockLeft_area,mockRight_area);
 
     }
 

@@ -158,7 +158,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             }
             checkCompareButton();
             setClickableButtons("left","true",null,null);
-            // hk - edit 비활성화 되시 원상태로 복귀
+            //hk - edit 비활성화 되시 원상태로 복귀
             left_edit_button.setStyle("-fx-background-color:transparent");
         }
         else{
@@ -171,7 +171,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             invisibleListViewVisibleTextArea();
             disableAllButtonInToolBarAndMenuItem();
             setClickableButtons("left","false",null,"true");
-            // hk - edit이 활성화 될 시 하이라이팅 (이미지바꿀려면 저 setStyle메소드 이용하면됨)
+            //hk - edit이 활성화 될 시 하이라이팅 (이미지바꿀려면 저 setStyle메소드 이용하면됨)
             left_edit_button.setStyle("-fx-background-color: #a6a6a6");
 
             left_status.addStatusWithName("Editable");
