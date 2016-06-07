@@ -273,8 +273,10 @@ public class MainController implements Initializable, MainInterface {
         Model.ModelInterface model = ModelRealize.getInstance();
         ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStringsForList(model.getArrangedText(now_tab_num,0), model.getArrangedGroupSpace(now_tab_num)));
         //맨 마지막이면 비활성화 되어야함
-        if(text_block_index+2<=left_list_item.size()-1) {
-            text_block_index = left_text_list.getSelectionModel().getSelectedIndex() + 2;
+
+        int clicked_index = left_text_list.getSelectionModel().getSelectedIndex();
+        if(clicked_index+2<=left_list_item.size()-1) {
+            text_block_index = clicked_index + 2;
             changeScrollbar(text_block_index);
 
             if(previous_difference_button.isDisable()) {
@@ -294,10 +296,11 @@ public class MainController implements Initializable, MainInterface {
     * 이전 차이점이 존재하지 않을 경우 비활성화
     * */
     public void previousDifferenceOnAction() {
+        int clicked_index = left_text_list.getSelectionModel().getSelectedIndex();
         //left_text_list.getSelectionModel().;      `
         //맨 처음이면 비활성화 되어야함
-        if(text_block_index-2>=0) {
-            text_block_index = left_text_list.getSelectionModel().getSelectedIndex() - 2;
+        if(clicked_index-2>=0) {
+            text_block_index = clicked_index - 2;
             changeScrollbar(text_block_index);
 
             if(next_difference_button.isDisable()) {
