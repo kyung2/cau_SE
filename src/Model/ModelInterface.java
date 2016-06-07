@@ -7,11 +7,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by User on 2016-05-19.
- */
+ * Model interface
+ * This class has interface of Model.
+ * This Class has functions about Binding model Unit for management.
+ * Each Model unit unique Identifier.
+ * @author 박찬우
+ * */
 /* 개개의 모델 유닛을 묶어 관리하는 클래스가 가져야 할 기능을 나열한 인터페이스이다.*/
 /* 각각의 모델 유닛은 고유의 식별자를 가진다.*/
 public interface ModelInterface {
+    /**
+     * Open new Tab.
+     * @exception IllegalArgumentException
+     * @param tabNum This is index about now working tab. if add tab tabNum++
+     * */
 
     void newModel(int tabNum) throws IllegalArgumentException;
     /*
@@ -22,21 +31,36 @@ public interface ModelInterface {
     /*
     모델 유닛을 하나 포함시키고 그 유닛의 식별자를 반환한다.
     */
+    /**
+     * close the now working tab.
+     * @param tabNum This is index about now working tab.
+     * @throws IllegalArgumentException
+     * */
     public void closeModel(int tabNum) throws IllegalArgumentException;
     /*
     tabNum을 식별자로 하는 모델 유닛을 닫는다.
     그러한 식별자를 가진 유닛이 없을 경우 IllegalArgumentException 발생.
     */
+    /**
+     * Close All Tab
+     */
     public void closeModelAll();
     /*
     가진 모든 모델 유닛을 닫는다.
     그러한 식별자를 가진 유닛이 없을 경우 IllegalArgumentException 발생.
     */
+    /**
+     * @throws IllegalArgumentException
+     * @param tabNum This is index about now working tab.
+     *
+     * */
     public ModelUnit getUnit(int tabNum) throws IllegalArgumentException;
     /*
     tabNum을 식별자로 하는 모델 유닛을 얻어온다.
     그러한 식별자를 가진 유닛이 없을 경우 IllegalArgumentException 발생.
     */
+    /**
+     * @return ArrayList<Integer> All index return list */
     public ArrayList<Integer> getTabNums();
     /*
     어떤어떤 식별자의 유닛이 저장되어 있는지에 대하여
@@ -45,27 +69,48 @@ public interface ModelInterface {
 
 
 
+
+    /**
+     * check tabNum -th i part file exist
+     * @param i left : 0 right : 1
+     * @param tabNum   This is index about specify tab.
+     */
     public boolean isOpen(int tabNum, int i) throws IllegalArgumentException;
     /*
     tabNum을 식별자로 하는 모델 유닛이 파일로부터 열려져 있는지를 체크한다.
     */
 
+    /**
+     * this bring text from tabnum-th if i == 0 left part i == 1 right part. ,
+     * @param i left : 0 right : 1
+     * @param tabNum   This is index about specify tab.
+     */
     public ArrayList<String> getText(int tabNum, int i) throws IndexOutOfBoundsException, IllegalArgumentException;
     /*
     tabNum을 식별자로 하는 모델 유닛의 i번째 텍스트를 가져온다.
     */
-
-    public ArrayList<String> getArrangedText(int tabNum, int i) throws IndexOutOfBoundsException, IllegalArgumentException;
+    /**
+     * this bring text from tabnum-th if i == 0 left part i == 1 right part.
+     * @throws IndexOutOfBoundsException
+     * @param i left : 0 right : 1
+     * @param tabNum   This is index about specify tab.
+     */public ArrayList<String> getArrangedText(int tabNum, int i) throws IndexOutOfBoundsException, IllegalArgumentException;
     /*
     tabNum을 식별자로 하는 모델 유닛의 i번째 재배치된 텍스트를 가져온다.
     */
-
+    /**tabnum을 식별자로 하는 모델 유닛의 재별열 된 텍스트의 줄 수 번째의 줄 수 번째의 줄이 어느 그룹에 속하는지에 대한 정보를 가져온다. 
+     * @throws IndexOutOfBoundsException
+     * @param tabNum   This is index about specify tab.
+     */
     public ArrayList<Integer> getArrangedGroupNum(int tabNum) throws IndexOutOfBoundsException, IllegalArgumentException;
     /*
     tabNum을 식별자로 하는 모델 유닛의
     재배열된 텍스트의 줄 수 번째의 줄이 어느 그룹에 속하는지에 대한 정보를 가져온다.
     */
-
+    /**
+     * @param i left : 0 right : 1
+     * @param tabNum   This is index about specify tab.
+     */
     public ArrayList<Integer> getArrangedGroupSpace(int tabNum) throws IllegalArgumentException;
     /*
     tabNum을 식별자로 하는 모델 유닛의
