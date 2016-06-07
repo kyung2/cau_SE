@@ -1,11 +1,13 @@
 package Model.ModelUnit.LCSsupport;
 
+
 import java.util.ArrayList;
 
 /**
  * Created by User on 2016-05-20.
  */
 public class LCSGrouping {
+
     int i;
     int j;
     int iBlank;
@@ -29,6 +31,8 @@ public class LCSGrouping {
             }
         }
     }
+
+
 
     public ArrayList<Integer>[][] start(boolean LCSBacktrack[][][], int x, int y)
     {
