@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 public class SplitFilePaneController implements Initializable, SplitFilePaneInterface {
     @FXML
-    private TextArea left_text_area, right_text_area;
+    TextArea left_text_area, right_text_area;
     @FXML
     private Button left_load_button,left_edit_button,left_save_button,
                     right_load_button,right_save_button,right_edit_button;
