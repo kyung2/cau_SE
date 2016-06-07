@@ -98,17 +98,18 @@ public interface ModelInterface {
     /*
     tabNum을 식별자로 하는 모델 유닛의 i번째 재배치된 텍스트를 가져온다.
     */
-    /**tabnum을 식별자로 하는 모델 유닛의 재별열 된 텍스트의 줄 수 번째의 줄 수 번째의 줄이 어느 그룹에 속하는지에 대한 정보를 가져온다. 
-     * @throws IndexOutOfBoundsException
+    /**tabnum을 식별자로 하는 모델 유닛의 재별열 된 텍스트의 줄 수 번째의 줄 수 번째의 줄이 어느 그룹에 속하는지에 대한 정보를 가져온다.
+     * @throws IndexOutOfBoundsException,IllegalArgumentException
      * @param tabNum   This is index about specify tab.
-     */
+     * @return ArrayList <Interger>
+     *
+     * /
     public ArrayList<Integer> getArrangedGroupNum(int tabNum) throws IndexOutOfBoundsException, IllegalArgumentException;
     /*
     tabNum을 식별자로 하는 모델 유닛의
     재배열된 텍스트의 줄 수 번째의 줄이 어느 그룹에 속하는지에 대한 정보를 가져온다.
     */
-    /**
-     * @param i left : 0 right : 1
+    /**  비교된 그룹의 앞에서 나오는 i번째 번의 그룹이 몇 개의 줄을 포함하는지에 대한 정보를 가져온다.
      * @param tabNum   This is index about specify tab.
      */
     public ArrayList<Integer> getArrangedGroupSpace(int tabNum) throws IllegalArgumentException;
@@ -116,37 +117,66 @@ public interface ModelInterface {
     tabNum을 식별자로 하는 모델 유닛의
     비교된 그룹의 앞에서부터 나오는 번째 번의 그룹이 몇 개의 줄을 포함하는지에 대한 정보를 가져온다.
     */
-
+    /**
+     * i번째 텍스트를 text의 내용으로 바꾼다.
+     * @param i i == 0 : left part i == 1 right part
+     * @param tabNum ...
+     * @param text  content of text
+     * @throws IndexOutOfBoundsException,IllegalArgumentException
+     *
+     *  */
     public void setText(int tabNum, ArrayList<String> text, int i) throws IndexOutOfBoundsException, IllegalArgumentException;
     /*
     tabNum을 식별자로 하는 모델 유닛의
     i번째 텍스트를 매개변수 text의 내용으로 바꾼다.
     */
 
+    /**
+     * i번째 텍스트를 filepath에 있는 파일로 바꾼다.
+     * @param tabNum
+     * @param i i==0 left i==1 right
+     * @param filepath filepath
+     * @throws IndexOutOfBoundsException,IOException,IllegalArgumentException
+     * */
     public void readTextOuter(int tabNum, String filepath, int i) throws IndexOutOfBoundsException, IOException, IllegalArgumentException;
     /*
      tabNum을 식별자로 하는 모델 유닛의
      i번째 텍스트를 filepath에 있는 파일로부터 읽어와 대체한다.
      */
-
+    /**
+     * i번째 텍스트를 filepath에 있는 파일로 바꾼다.
+     * @param tabNum
+     * @param i i==0 left i==1 right
+     * @param filepath filepath
+     * @throws IndexOutOfBoundsException,IOException,IllegalArgumentException
+     * */
     public void writeTextOuter(int tabNum, String filepath, int i) throws IndexOutOfBoundsException, IOException, IllegalArgumentException;
     /*
      tabNum을 식별자로 하는 모델 유닛의
      i번째 텍스트를 filepath에 있는 파일에 쓴다.
      */
-
+    /**
+     * i번째 텍스트를 filepath에 있는 파일에 적는다.
+     * @param tabNum
+     * @param i i==0 left i==1 right
+     * @throws IndexOutOfBoundsException,IOException,IllegalArgumentException
+     * */
     public void writeTextOuter(int tabNum, int i) throws IndexOutOfBoundsException, IOException, IllegalArgumentException;
     /*
      tabNum을 식별자로 하는 모델 유닛의
      i번째 텍스트를 그 텍스트가 파일로부터 내용을 읽어 올 때의 filepath에 있는 파일에 쓴다.
      */
-
     public void mergeByLine(int tabNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalArgumentException, MergeLineIllegalException;
     /*
     tabNum을 식별자로 하는 모델 유닛의
     재배열된 텍스트의 lineNum번째의 줄이 포함된 그룹을 병합한다.
     */
-
+    /**
+     * 선택된 부분을 merge 하는 부분.
+     * @param tabNum
+     * @param direction @@@ difrection이 몬지~~
+     * @param groupNum 맞거나 틀리거나 하는 그룹들의 num
+     * @throws IndexOutOfBoundsException,IllegalArgumentException*/
     public void mergeByGroup(int tabNum, int groupNum, boolean direction) throws IndexOutOfBoundsException, IllegalArgumentException, MergeLineIllegalException;
     /*
     tabNum을 식별자로 하는 모델 유닛의
