@@ -65,6 +65,7 @@ public class JSplitFilePaneControllerTest {
         right =modelInterface.getText(0,1).get(0);
 
         assertEquals("left",modelInterface.getText(0,0).get(0));
+
         assertEquals("righttext",right);
 
 
