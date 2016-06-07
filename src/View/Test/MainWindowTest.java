@@ -385,7 +385,6 @@ public class MainWindowTest extends GuiTest {
             initForCompare();
         }
         click("#compare_button");
-
     }
 
     @Test
@@ -457,7 +456,7 @@ public class MainWindowTest extends GuiTest {
     }
     private void testNowDifferenceHotKey(){
         System.out.println("Type Save As HotKey : Ctrl + N");
-        press(KeyCode.CONTROL).type(KeyCode.L).release(KeyCode.CONTROL);
+        press(KeyCode.CONTROL).type(KeyCode.N).release(KeyCode.CONTROL);
     }
 
     @Test
@@ -466,8 +465,8 @@ public class MainWindowTest extends GuiTest {
         ListView left_list = GuiTest.find("#left_list_view");
         ListView right_list = GuiTest.find("#right_list_view");
 
-        testNowDifferenceHotKey();
-        assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(5));
+        testLastDifferenceHotKey();
+        assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(7));
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(right_list.getSelectionModel().getSelectedIndices().get(0)));
 
         click("#left_edit_button").click("#left_edit_button").click("#compare_button");
@@ -521,7 +520,7 @@ public class MainWindowTest extends GuiTest {
         assertTrue(right_list.getItems().size() == 6);
 
         left_list.getSelectionModel().select(0);
-        assertTrue(left_list.getSelectionModel().getSelectedItems().get(0).toString().trim().equals("aa\nbb\ncc\ndd\nee\nff\ngg\nhh"));
+        assertTrue(left_list.getSelectionModel().getSelectedItems().get(0).toString().trim().equals("aa\nbb\nii\njj\nkk\ncc\ndd\nee\nff\ngg\nhh"));
 
         initForMerge();
         click("#copy_to_left_button");
@@ -543,11 +542,12 @@ public class MainWindowTest extends GuiTest {
         ListView right_list = GuiTest.find("#right_list_view");
 
         testCopyToRightAllHotKey();
-        assertTrue(left_list.getItems().size() == 6);
-        assertTrue(right_list.getItems().size() == 6);
+        assertTrue(left_list.getItems().size() == 1);
+        assertTrue(right_list.getItems().size() == 1);
 
         left_list.getSelectionModel().select(0);
-        assertTrue(left_list.getSelectionModel().getSelectedItems().get(0).toString().trim().equals("aa\nbb\ncc\ndd\nee\nff\ngg\nhh"));
+        assertTrue(left_list.getSelectionModel().getSelectedItems().get(0).toString().trim().equals("aa\nbb\ncc\ndd\nee\nff\ngg\nhh\nii\njj\nkk\nll\nmm" +
+                                                                                                     "\nnn\noo\npp\nqq\nrr\nss\ntt\nuu\nvv\nww\nxx\nyy\nzz"));
 
         initForMerge();
         click("#copy_to_right_all_button");
@@ -570,11 +570,13 @@ public class MainWindowTest extends GuiTest {
         ListView right_list = GuiTest.find("#right_list_view");
 
         testCopyToLeftAllHotKey();
-        assertTrue(left_list.getItems().size() == 6);
-        assertTrue(right_list.getItems().size() == 6);
+        assertTrue(left_list.getItems().size() == 1);
+        assertTrue(right_list.getItems().size() == 1);
 
         left_list.getSelectionModel().select(0);
-        assertTrue(left_list.getSelectionModel().getSelectedItems().get(0).toString().trim().equals("aa\nbb\ncc\ndd\nee\nff\ngg\nhh"));
+
+        assertTrue(left_list.getSelectionModel().getSelectedItems().get(0).toString().trim().equals("aa\nbb\nii\njj\nkk\ncc\ndd\nee\nff\ngg\nhh\nll\nmm\n" +
+                                                                                                    "vv\nww\nxx\nyy\nzz\nnn\noo\npp\nqq\nrr\nss\ntt\nuu"));
 
         initForMerge();
         click("#copy_to_left_all_button");
