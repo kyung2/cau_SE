@@ -59,6 +59,8 @@ public class ProgramInfoWindowTest extends GuiTest {
         click("#program_info");
         click("#info_btn");
     }
+
+    @Test
     public void testKeyCode(){
         type(KeyCode.F10);
         click("#info_btn");
