@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Created by User on 2016-05-19.
  */
 
+/*하나의 탭이 담고 있는 텍스트에 관한 정보이다.*/
 class SavedText
 {
     protected ArrayList<String> lines;
@@ -30,5 +31,6 @@ class SavedText
         }
         lines = newLines;
     }
+    /*텍스트의 모든 줄의 끝 부분 공백을 지우는 메소드이다.*/
 }
 

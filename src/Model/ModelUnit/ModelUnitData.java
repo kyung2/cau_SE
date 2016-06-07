@@ -5,12 +5,18 @@ import java.util.ArrayList;
 /**
  * Created by User on 2016-05-27.
  */
+
+/*ModelUnit 클래스의 데이터를 담은 클래스이다.*/
 class ModelUnitData {
 
     public static final int NUMOFTEXTS = 2;
+    /*이 클래스가 몇 개의 데이터를 담고 있는지에 대한 상수이다.*/
     protected SavedText[] codes;
+    /*이 클래스가 담고 있는 텍스트이다.*/
     protected ArrayList[][] group;
+    /*이 클래스가 담고 있는 그룹 관련 정보이다.*/
     protected ArrayList[] arrangedString;
+    /*이 클래스가 담고 있는 재배열된 텍스트이다.*/
 
     ModelUnitData()
     {
@@ -25,14 +31,8 @@ class ModelUnitData {
     {
         group = null;
         arrangedString = null;
-        groupChange();
     }
-    protected void textChange()
-    {
-        //todo - give notice that text change
-    }
-    protected void groupChange()
-    {
-        //todo - give notice that text change
-    }
+    /*만일 비교가 되지 않은 상태이면, group을 null로 하여 그 사실을 알아볼 수 있다.*/
+
+
 }

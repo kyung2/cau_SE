@@ -14,4 +14,10 @@ interface AlarmInterface {
     * user data 에 false 를 저장
     * */
     void noButtonOnAction();
+
+    /**
+     * Created by hyunkyung on 2016-06-07.
+     */
+    class LoadTest {
+    }
 }
