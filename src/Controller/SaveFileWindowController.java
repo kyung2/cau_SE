@@ -20,13 +20,14 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
     private Button left_load_button, left_edit_button, left_save_button, right_load_button, right_edit_button, right_save_button, compare_button;
     private MenuItem open_menu_item, save_menu_item, save_left_file_menu_item, save_right_file_menu_item, compare_menu_item;
     private TextArea left_text_area, right_text_area;
-    private TextArea left_file_bottom_text_area, right_file_bottom_text_area;
-    private ListView left_list_view, right_list_view;
+    private TextArea left_status_area, right_status_area;
 
     @FXML
     private AnchorPane file_anchor_pane;
     @FXML
     private TextField right_file_text_area, left_file_text_area, warning_info_text_area;
+
+    private StatusController left_status, right_status;
 
     @FXML
     public void leftFileFindButtonOnAction(){
@@ -74,6 +75,10 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
                 modelInterface.writeTextOuter(tab_num,left_file.getAbsolutePath(), 0);
                 super.changeTabName(tab, left_file.getName(),"left");
                 left_file_label.setText(left_file.getName());
+
+                left_status.setFileName(left_file.getName());
+                left_status.addStatusWithName("File open");
+
                 doActionBySave("left");
                 System.out.println("left");
             }
@@ -82,6 +87,10 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
                 modelInterface.writeTextOuter(tab_num,right_file.getAbsolutePath(), 1);
                 super.changeTabName(tab, right_file.getName(),"right");
                 right_file_label.setText(right_file.getName());
+
+                right_status.setFileName(right_file.getName());
+                right_status.addStatusWithName("File open");
+
                 doActionBySave("right");
                 System.out.println("right");
             }
@@ -126,16 +135,14 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         BorderPane main_center_pane = (BorderPane)((BorderPane)tab.getTabPane().getScene().getRoot()).getCenter();
         compare_button = (Button)((ToolBar)(main_center_pane.getTop())).getItems().get(11);
 
-        left_file_bottom_text_area = (TextArea)((SplitPane)left_pane.getChildren().get(1)).getItems().get(1);
-        right_file_bottom_text_area = (TextArea)((SplitPane)right_pane.getChildren().get(1)).getItems().get(1);
+        left_status_area = (TextArea)((SplitPane)left_pane.getChildren().get(1)).getItems().get(1);
+        right_status_area = (TextArea)((SplitPane)right_pane.getChildren().get(1)).getItems().get(1);
 
         AnchorPane left_file_pane = (AnchorPane)((SplitPane)left_pane.getChildren().get(1)).getItems().get(0);
         AnchorPane right_file_pane = (AnchorPane)((SplitPane)right_pane.getChildren().get(1)).getItems().get(0);
 
         left_text_area = (TextArea)left_file_pane.getChildren().get(0);
-        left_list_view = (ListView)left_file_pane.getChildren().get(1);
         right_text_area = (TextArea)right_file_pane.getChildren().get(0);
-        right_list_view = (ListView)right_file_pane.getChildren().get(1);
 
         MenuBar menu_bar = (MenuBar)((BorderPane)compare_button.getScene().getRoot()).getTop();
 
@@ -147,6 +154,8 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         save_menu_item = menu.getItems().get(2);
         save_left_file_menu_item = menu.getItems().get(3);
         save_right_file_menu_item = menu.getItems().get(4);
+
+        initStatus();
     }
 
     /*
@@ -192,5 +201,8 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         return arrayList;
     }
 
-
+    private void initStatus(){
+        left_status = new StatusController(left_status_area);
+        right_status = new StatusController(right_status_area);
+    }
 }

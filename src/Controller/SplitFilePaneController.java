@@ -6,6 +6,7 @@ import View.AlarmWindow;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 
@@ -34,7 +35,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     private Button compare_button, previous_difference_button, next_difference_button;
     private MenuBar menu_bar;
     private MenuItem previous_menu_item, next_menu_item, compare_menu_item, open_menu_item, save_menu_item, save_right_file_menu_item, save_left_file_menu_item;
-    private StatusControll left_status, right_status;
+    private StatusController left_status, right_status;
     /*
     * 기본적으로
     * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
@@ -61,9 +62,10 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         compare_button = null;
         menu_bar = null;
 
-        left_status = new StatusControll(left_status_pane);
-        right_status = new StatusControll(right_status_pane);
+        left_status = new StatusController(left_status_pane);
+        right_status = new StatusController(right_status_pane);
     }
+
     /*
     * compare 버튼을 할당되있지 않을 경우 할당
     * 파일을 읽어서 내용이 있을 경우 edit 버튼 활성화
@@ -71,11 +73,8 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * text area 를 visible 하게 바꾼다.
     * 이미 파일이 있을 경우는 덮어쓰기
     * */
-
     @FXML
-
     public void leftLoadButtonOnAction() {
-
         checkTabNumAndCompareButtonAndMenuBar();
         File file = loadFileChooser();
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -102,7 +101,6 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
     @FXML
     public void rightLoadButtonOnAction(){
-
         checkTabNumAndCompareButtonAndMenuBar();
         File file = loadFileChooser();
         if(file != null){
@@ -127,6 +125,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         invisibleListViewVisibleTextArea();
         checkCompareButton();
     }
+
     /*
     * 기본은 text area 수정 불가
     * edit 버튼을 클릭하면 수정 가능하게 바꾸고 text area 를 visible 하게 바꾼다.
@@ -134,12 +133,11 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     * 수정 가능한 상황에서 한 번 더 버튼을 누르면 다시 수정 불가
     * 그 후 비활성화 된 load 버튼을 활성화로
     * */
-
     @FXML
     public void leftEditButtonOnAction() {
-
         boolean edit_flag = left_text_area.isEditable();
         checkTabNumAndCompareButtonAndMenuBar();
+        initStatusControl();
         if(edit_flag){
             /*
             * 수정이 가능할 때 - 누르면 수정이 불가능해짐. 로드는 가능해짐. 모델에 있는 정보를 바꿈,
@@ -177,12 +175,11 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             left_status.addStatusWithName("Editable");
         }
     }
-
     @FXML
     public void rightEditButtonOnAction() {
-
         boolean edit_flag = right_text_area.isEditable();
         checkTabNumAndCompareButtonAndMenuBar();
+        initStatusControl();
         if(edit_flag){
             /*
             * 수정이 가능할 때 - 누르면 수정이 불가능해짐. 로드는 가능해짐. 모델에 있는 정보를 바꿈,
@@ -220,15 +217,15 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             right_status.addStatusWithName("Editable");
         }
     }
+
     /*
     * edit 버튼을 눌러서 수정이 가해진 상황 일 경우 save 버튼이 활성화 된다.
     * 수정 사항을 저장한 후에는 로드 가능, 수정 가늗, 저장 불가능으로 된다.
     * */
-
     @FXML
     public void leftSaveButtonOnAction(){
-
         checkTabNumAndCompareButtonAndMenuBar();
+        initStatusControl();
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
 
@@ -250,10 +247,10 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             }
         }
     }
-
     @FXML
     public void rightSaveButtonOnAction(){
         checkTabNumAndCompareButtonAndMenuBar();
+        initStatusControl();
         AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
         saveAlarmWindow.showAndWait();
 
@@ -279,7 +276,6 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     /*
     * 리스트 뷰를 클릭했을 때 일어나는 일
     * */
-
     @FXML
     public void onLeftListViewMouseClicked(){
         int index = left_text_list.getSelectionModel().getSelectedIndex();
@@ -288,7 +284,6 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         changeToolbarButtonByClickList(index);
         changeScrollbar(index);
     }
-
     @FXML
     public void onRightListViewMouseClicked(){
         int index = right_text_list.getSelectionModel().getSelectedIndex();
@@ -298,6 +293,29 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         changeScrollbar(index);
     }
 
+    /*
+    * status area 를 초기화 한다.
+    * */
+    private void initStatusControl(){
+        if (!left_edit_button.isDisable()) {
+            Model.ModelInterface model = ModelRealize.getInstance();
+
+            File left_file = new File(model.getUnit(tab_num).filepath(0));
+
+            left_status.setFileName(left_file.getName());
+        }
+        if(!right_edit_button.isDisable()){
+            Model.ModelInterface model = ModelRealize.getInstance();
+
+            File right_file = new File(model.getUnit(tab_num).filepath(1));
+
+            right_status.setFileName(right_file.getName());
+        }
+    }
+
+    /*
+    * list view 를 유저가 봐야 할 위치로 변경시킨다.
+    * */
     private void changeScrollbar(int index){
         ModelInterface model = ModelRealize.getInstance();
         ArrayList<Integer> arrangedGroupSpace = model.getArrangedGroupSpace(tab_num);
@@ -509,6 +527,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
                 e.printStackTrace();
         }
     }
+
     /*
     * Tab num 값을 확인한다.
     * -1 일 경우 초기값이므로 현재 tab 의 번호를 넣어준다.
@@ -540,6 +559,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             save_right_file_menu_item = menu.getItems().get(4);
         }
     }
+
     /*
     * copy 에 관련된 버튼과 menu item 을 disable 한다.
     * */
@@ -557,6 +577,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             }
         }
     }
+
     /*
     * copy 에 관련된 버튼과 menu item 을 disable 한다.
     * */
@@ -574,6 +595,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             }
         }
     }
+
     /*
     * Toolbar 에 있는 모든 버튼을 비활성화 시킨다.
     * file 을 수정할 경우 compare 를 다시 해야하기에 모든 버튼을 비활성화
@@ -591,6 +613,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             merge_menu.getItems().get(i).setDisable(true);
         }
     }
+
     /*
     * TabPane 에서 현재 선택 된 tab 을 가져온다.
     * */
@@ -604,6 +627,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         }
         return tab;
     }
+
     /*
     * ArrayList 로 들어온 문자를 \n 을 붙여 String 하나로 만든다.
     * */
@@ -614,6 +638,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         }
         return s;
     }
+
     /*
     * String 을 받아와서 \n 로 split 한 후 ArrayList 에 저장한다.
     * */
@@ -625,6 +650,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         }
         return arrayList;
     }
+
     /*
     * 모든 List view 를 invisible 하게
     * 모든 Text view 를 visible 하게 바꾼다.
@@ -637,6 +663,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         left_text_list.setVisible(false);
         left_text_list.setDisable(true);
     }
+
     /*
     * 파일 이름을 받아서 tab name 을 바꿔준다.
     * */

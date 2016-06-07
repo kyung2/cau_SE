@@ -5,7 +5,7 @@ import javafx.scene.control.TextArea;
 /**
  * Created by haro21 on 2016. 6. 4..
  */
-public class StatusControll  {
+public class StatusController {
     private TextArea area;
     private String name;
     private boolean meue_flag = false;
@@ -41,7 +41,7 @@ public class StatusControll  {
         this.name = str;
     }
 
-    public StatusControll (TextArea area){
+    public StatusController(TextArea area){
         this.area = area;
     }
 }

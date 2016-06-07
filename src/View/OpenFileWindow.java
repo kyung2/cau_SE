@@ -10,12 +10,20 @@ import javafx.scene.control.Tab;
  */
 
 public class OpenFileWindow extends AbstractFileWindow {
-
+    private static boolean file_num = true;
 
     public OpenFileWindow(Tab tab) {
-        super("Open Files",new OpenFileWindowController());
-        this.getScene().setUserData(tab);
-        initLabel();
+        super("Open Files", new OpenFileWindowController());
+        if(file_num) {
+            this.getScene().setUserData(tab);
+            initLabel();
+            file_num = false;
+            this.showAndWait();
+            file_num = true;
+        }
+        else{
+            System.out.println("Open file window is already open.");
+        }
     }
 
     @Override
