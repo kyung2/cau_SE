@@ -13,14 +13,14 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * AbstractFileWindow class for Open window and Save window
- * It make stage with title and controller file
+ * Abstract class for Open and Save file window
+ * This class make stage with parameter ( title and controller file )
  * It is designed by FileWindow.fxml file in /View/Fxml package
+ * It has two label, two text area, two button for open or save left and right file
  * Created by woojin on 2016-05-18.
- * @author Woojin Jang
+ * @author woojin Jang
  */
 abstract class AbstractFileWindow extends Stage {
-    /* title 과 controller class 를 받아 stage 를 구성해 주는 생성자*/
     protected AbstractFileWindow(String title, Object controllerFile) {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/FileWindow.fxml"));
         loader.setController(controllerFile);
@@ -35,12 +35,9 @@ abstract class AbstractFileWindow extends Stage {
         this.setTitle(title);
         this.setScene(scene);
         this.getIcons().add(new Image("/View/Image/mainIcon.png"));
+        this.show();
     }
 
-    /* 이 창이 어떤 일을 하는지 설명해 주는 부분을 반드시 만들어야 한다. */
-    abstract protected void initLabel();
-
-    /* 창을 구성하는 각종 구성요소들을 받아올 수 있는 method*/
     protected Label getWindowLabel(){
         return (Label)(((AnchorPane)this.getScene().getRoot()).getChildren().get(7));
     }
@@ -71,4 +68,6 @@ abstract class AbstractFileWindow extends Stage {
     protected Button getCancelButton(){
         return (Button)(((AnchorPane)this.getScene().getRoot()).getChildren().get(9));
     }
+
+    abstract protected void initLabel();
 }
