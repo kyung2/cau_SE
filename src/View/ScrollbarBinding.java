@@ -8,7 +8,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollBar;
 
 /**
- * Created by JRD on 03/03/2015. -> reuse ~~
+ * Created by JRD on 03/03/2015.
+ * reference : http://www.dskims.com/is-there-any-way-to-sync-the-scrollbars-in-a-javafx-1-2-listview/
  */
 public class ScrollbarBinding {
 

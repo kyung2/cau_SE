@@ -17,7 +17,7 @@ public class AlarmController implements AlarmInterface {
     private AnchorPane alarm_anchor_pane;
 
     @FXML
-    /*
+    /**
     * do click yes button
     * insert true value to stage's user data
     * */
@@ -31,7 +31,7 @@ public class AlarmController implements AlarmInterface {
     }
 
     @FXML
-    /*
+    /**
     * do click no button
     * insert false value to stage's user data
     * */

@@ -1121,14 +1121,14 @@ public class MainController implements Initializable, MainInterface {
 
     }
     /**
-     * @return now_tab_num 현재 tab_num을 알려준다.
+     * @return int now_tab_num 현재 tab_num을 알려준다.
      * */
     public int getNowTabNum(){
         return now_tab_num;
 
     }
     /**
-     * @return tab_num을 가져온다.*/
+     * @return int tab_num을 가져온다.*/
     public int getTabNum(){
         return tab_num;
     }
