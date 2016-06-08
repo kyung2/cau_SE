@@ -27,7 +27,6 @@ public class JSplitFilePaneControllerTest {
         mockRight_area = createMock(SplitFilePaneInterface.class);
         //ModelInterface modelInterface= createMock(ModelInterface.class);
         if (mockLeft_area == null || mockRight_area == null) fail("NULL");
-
     }
 
     @Test
@@ -41,7 +40,6 @@ public class JSplitFilePaneControllerTest {
         ModelInterface modelInterface = ModelRealize.getInstance();
         modelInterface.newModel(0);
         //left
-
         try {
             modelInterface.readTextOuter(0,path+"src/Controller/ControllerTest/lefttest.txt",0);
         } catch (IOException e) {
@@ -55,8 +53,6 @@ public class JSplitFilePaneControllerTest {
         }
 
         //getText(a,b) a= tab 번호 b 0 left 1 right get(0) 첫줄
-
-        //왼쪽
         String left, right;
         left = modelInterface.getText(0,0).get(0);
         right =modelInterface.getText(0,1).get(0);
@@ -64,9 +60,6 @@ public class JSplitFilePaneControllerTest {
         assertEquals("left",left);
         assertEquals("righttext",right);
     }
-
-
-
     @Test
     public void testisDisableLoad() throws IllegalAccessException {
         //behavior of Disable
@@ -96,7 +89,7 @@ public class JSplitFilePaneControllerTest {
         EasyMock.expect(mockRight_area.isDisableEdit("right")).andReturn((true));
 
         replay(mockLeft_area, mockRight_area);
-        //assertFalse(mockLeft_area.isDisableEdit("left")); //원래 기대값은 true인데 test를 위하여 false로바꿈
+        assertTrue(mockLeft_area.isDisableEdit("left")); //원래 기대값은 true인데 test를 위하여 false로바꿈
         assertTrue(mockRight_area.isDisableEdit("right"));
         verify(mockLeft_area,mockRight_area);
 
