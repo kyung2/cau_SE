@@ -32,8 +32,7 @@ public class JSplitFilePaneControllerTest {
     @Test
     public void testLoad()  {
         File path_file= new File(".");
-
-        //lath 알기 위하여 사용
+        //path 알기 위하여 사용
         String path = path_file.getAbsolutePath().substring(0,path_file.getAbsolutePath().length() - 1);
         System.out.println(path);
 
@@ -45,20 +44,18 @@ public class JSplitFilePaneControllerTest {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        //right
+        //right //getText(a,b) a= tab 번호 b 0 left 1 right get(0) 첫줄
         try {
             modelInterface.readTextOuter(0,path+"src/Controller/ControllerTest/righttest.txt",1);
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        //getText(a,b) a= tab 번호 b 0 left 1 right get(0) 첫줄
         String left, right;
         left = modelInterface.getText(0,0).get(0);
         right =modelInterface.getText(0,1).get(0);
 
         assertEquals("left",left);
-        assertEquals("righttext",right);
+        assertEquals("righttext",right); //righttext 가 있는 상태
     }
     @Test
     public void testisDisableLoad() throws IllegalAccessException {
@@ -89,7 +86,7 @@ public class JSplitFilePaneControllerTest {
         EasyMock.expect(mockRight_area.isDisableEdit("right")).andReturn((true));
 
         replay(mockLeft_area, mockRight_area);
-        assertTrue(mockLeft_area.isDisableEdit("left")); //원래 기대값은 true인데 test를 위하여 false로바꿈
+        assertTrue(mockLeft_area.isDisableEdit("left"));
         assertTrue(mockRight_area.isDisableEdit("right"));
         verify(mockLeft_area,mockRight_area);
 
