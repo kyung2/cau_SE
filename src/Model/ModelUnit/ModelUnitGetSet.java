@@ -7,7 +7,6 @@ import java.util.ArrayList;
  * @author Chanwoo park
  *
  */
-
 class ModelUnitGetSet {
 
     /**
