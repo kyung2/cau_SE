@@ -116,8 +116,8 @@ class ModelUnitFileIO {
     }
 
     /**
-     * 파일을 읽기위한 함수
-     * @param i 0 left 1 right
+     * 파일을 읽기기위한 함수
+    * @param i 0 left 1 right
      * @param m ModelUnitData
      * @param s string
      * @throws IOException
