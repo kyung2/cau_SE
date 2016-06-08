@@ -16,7 +16,7 @@ public interface ModelUnit {
       /**
       * @param i 변환할 index, 0 : left 1 : right
       * @return arraylist result
-      * @throws IndexOutOfBoundsException
+      * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
       * */
     public ArrayList<String> textReceive(int i) throws IndexOutOfBoundsException;
 
@@ -24,13 +24,13 @@ public interface ModelUnit {
     * i번째 텍스트를 매개변수 s의 내용으로 바꾼다. i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
     * @param i 0:left 1:right
     * @param s i번째 텍스트를 매개변수 s의 내용으로 바꾼다.
-     *@throws IndexOutOfBoundsException
+     *@throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
      */
     public void textSend(int i, ArrayList<String> s) throws IndexOutOfBoundsException;
 
     /**
      * @param i 재배열된 i번째 텍스트
-     * @throws  IndexOutOfBoundsException
+     * @throws  IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
      * @return result of Typecasting
      */
     public ArrayList<String> getArrangedText(int i) throws IndexOutOfBoundsException;

@@ -14,7 +14,7 @@ class ModelUnitGetSet {
      * i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
     * @param m ModelUnitData
     * @param i 0 left 1 right
-     * @throws IndexOutOfBoundsException
+     *  @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
     * @return Arraylist (left or right text Type Casting)
     */
     static public ArrayList<String> textReceive(int i, ModelUnitData m) throws IndexOutOfBoundsException
@@ -28,7 +28,7 @@ class ModelUnitGetSet {
      * @param m ModelUnitData
      * @param i 0 left 1 right
      * @return Arraylist content
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
      */
     static void textSend(int i, ArrayList<String> s, ModelUnitData m) throws IndexOutOfBoundsException
     {
@@ -42,7 +42,7 @@ class ModelUnitGetSet {
      * 만일 비교되지 않았다 한다면 그 즉시 regrouping을 사용하여 비교한다.
      * @param i 0 left 1 right
      * @param m ModelUnitData
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
      * @return Arraylist 재배열된 오른쪽또는왼쪽 텍스트의 type*/
     static ArrayList<String> getArrangedText(int i, ModelUnitData m) throws IndexOutOfBoundsException
     {
@@ -56,7 +56,7 @@ class ModelUnitGetSet {
      * 재배열된 텍스트의 줄 수 번째의 줄이 어느 그룹에 속하는지를 ArrayList<Integer>형으로 반환한다.
      * 만일 비교되지 않았다 한다면 그 즉시 regrouping을 사용하여 비교한다.
      * @param m ModelUnitData
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
      * @return Arraylist 어디 줄에 속하는지
      */
     static ArrayList<Integer> getArrangedGroup(ModelUnitData m) throws IndexOutOfBoundsException
@@ -71,7 +71,7 @@ class ModelUnitGetSet {
      * 비교된 그룹의 앞에서부터 나오는 오른쪽 또는 왼쪽의 그룹이 몇개의 줄을 포함하는지 arraylist(int)반환
      * 만일 비교되지 않았다 한다면 그 즉시 regrouping을 사용하여 비교한다.
      * @param m ModelUnitData
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
      * @return Arraylist 포함하는 줄의 갯수
      */
     static ArrayList<Integer> getArrangedGroupSpace(ModelUnitData m) throws IndexOutOfBoundsException
