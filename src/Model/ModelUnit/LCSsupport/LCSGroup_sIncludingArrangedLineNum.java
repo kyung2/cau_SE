@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by User on 2016-05-20.
  */
-public class LCSGroup_sIncludingArrangedLineNum implements LCSSupport {
+public class LCSGroup_sIncludingArrangedLineNum implements LCSSupportUnit {
 
     @Override
     public void groupStartingAction(ArrayList<Integer>[] aa) {

@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * LCS Algorithm
  * @author Chanwoo Park
  */
-public class LCSArrangeLine_sGroupNum implements LCSSupport {
+public class LCSArrangeLine_sGroupNum implements LCSSupportUnit {
 
     @Override
     public void groupStartingAction(ArrayList<Integer>[] aa) {

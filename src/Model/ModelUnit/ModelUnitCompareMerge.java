@@ -155,7 +155,7 @@ class ModelUnitCompareMerge {
 
 
     /**
-     * 백트래킹 행렬을 받아서 그룹 관련 정보를 산출하는 LCSsupport 패키지를 이용하기 위하여 백트래킹 행렬을 만드는 메소드
+     * 백트래킹 행렬을 받아서 그룹 관련 정보를 산출하는 LCSsupport 패키지를 이용하기 위하여, 사용될 백트래킹 행렬을 만드는 메소드
      * @param m  modelUnitData
      * @throws NullPointerException
      */
