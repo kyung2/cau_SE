@@ -536,22 +536,6 @@ public class JMainControllerTest {
 
 
     @Test
-    public void testSaveRightFileMenuItemOnAction() {
-        setCopyTestModel(4); // 초기값 "aaa,bbb,ccc"
-        //모델 getText() + filepath로 해당 파일 불러와서 내용 비교하기
-        //model.
-        //Assert.assertEquals(filepath,model.getText(0,1));
-    }
-
-    @Test
-    public void testSaveLeftFileMenuItemOnAction() {
-
-
-    }
-
-
-
-    @Test
     public void testTabCloseAction() {
         int tNum = controller.getTabNum();
         controller.tabCloseAction();
