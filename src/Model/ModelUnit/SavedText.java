@@ -6,7 +6,6 @@ import java.util.ArrayList;
  * 하나의 탭이 담고 있는 텍스트에 관한 정보이다
  * @author Chanwoo park
  */
-
 class SavedText
 {
     protected ArrayList<String> lines;

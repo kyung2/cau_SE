@@ -55,7 +55,7 @@ public class JSplitFilePaneControllerTest {
         right =modelInterface.getText(0,1).get(0);
 
         assertEquals("left",left);
-        assertEquals("righttext",right); //righttext 가 있는 상태
+        assertEquals("righttext",right); //righttest 가 있는 상태
     }
     @Test
     public void testisDisableLoad() throws IllegalAccessException {
