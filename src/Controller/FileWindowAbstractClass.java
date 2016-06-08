@@ -37,7 +37,6 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
             stage.close();
         }
     }
-
     /** Change tab's name when open or save file
      * @param position 0 : left 1:right
      * @param name adjust tab name to file name

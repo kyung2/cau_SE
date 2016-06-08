@@ -65,9 +65,8 @@ public class MainController implements Initializable, MainInterface {
     * 버튼과 관련된 menu item 들을 비활성화한다.
     * */
     /**
-     * @param location
-     * @paream resources
-     * */
+     * init
+     */
     public void initialize(URL location, ResourceBundle resources) {
         tab_num = 0;
         now_tab = tab;
@@ -118,13 +117,7 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * 조건에 따라 달라져야 함.
-    * 다른 부분이 하나도 없다면 모든 버튼 비활성화
-    * 현재 차이점이 선택되 있지 않다면 다음 차이점과 이전 차이점, 모든 copy 버튼은 비활성화
-    * 차이점이 선택 되었을 때 그 차이점이 처음 차이점과 같다면 처음 차이점 비활성화
-    * 차이점이 선택 되었을 때 그 차이점이 마지막 차이점과 같다면 마지막 차이점 비활성화
-    * */
+
     /**
      *조건에 따라 달라져야함.
      * 다른 부분이 하나도 없다면 모든 버튼 비활성화 처리가 된다.
@@ -438,12 +431,6 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * new tab 을 누르면 fxml 로 부터 정보를 읽어온 후
-    * tab을 하나 만들고 그 정보를 입력한다.
-    * user data는 현재 tab num 에서 1을 더한 값을 저장한다.
-    * tab 에 해당하는 새로운 모델을 하나 만든다
-    * */
     /**new tab or Ctrl + N -> fxml로 부터 정보를 읽어온다.
      * 새로운 tab이 생성되고 그 정보를 입력한다.
      * user data에는 현재 tab_num + 1을 더한 값을 저장, tab에 해당되는 새로운 모델을 만든다. */
@@ -603,7 +590,7 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
+    /**
     * tab 이 꺼지면 그에 해당하는 toolbar stage 의 값을 null 로 바꾼다.
     * 그 후 tab menu item 을 하나 없에고
     * 해당하는 모델을 닫는다.

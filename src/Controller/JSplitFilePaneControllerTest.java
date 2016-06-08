@@ -29,7 +29,6 @@ public class JSplitFilePaneControllerTest {
         if (mockLeft_area == null || mockRight_area == null) fail("NULL");
 
     }
-    /*
 
     @Test
     public void testLoad()  {
@@ -62,14 +61,10 @@ public class JSplitFilePaneControllerTest {
         left = modelInterface.getText(0,0).get(0);
         right =modelInterface.getText(0,1).get(0);
 
-        assertEquals("left",modelInterface.getText(0,0).get(0));
-
+        assertEquals("left",left);
         assertEquals("righttext",right);
-
-
-
     }
-*/
+
 
 
     @Test
@@ -93,8 +88,6 @@ public class JSplitFilePaneControllerTest {
         assertTrue(mockLeft_area.isDisableSave("left"));
         assertTrue(mockRight_area.isDisableSave("right"));
         verify(mockLeft_area,mockRight_area);
-
-
     }
 
     @Test

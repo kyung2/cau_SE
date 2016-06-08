@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
- * Created by User on 2016-05-19.
- */
+ * Model implements.
+ * @author Chanwoo Park
+ * */
 public class ModelRealize implements ModelInterface {
 
     private static ModelRealize instance = null;
