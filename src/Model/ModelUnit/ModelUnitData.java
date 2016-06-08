@@ -3,10 +3,10 @@ package Model.ModelUnit;
 import java.util.ArrayList;
 
 /**
- * Created by User on 2016-05-27.
+ *
+ * ModelUnit 클래스에서 사용할 데이터들을 담을 클래스
+ * @author Chanwoo Park
  */
-
-/*ModelUnit 클래스의 데이터를 담은 클래스이다.*/
 class ModelUnitData {
 
     public static final int NUMOFTEXTS = 2;
@@ -27,12 +27,15 @@ class ModelUnitData {
         arrangedString = null;
     }
 
+    /**
+     * 만일 비교가 되지 않은 상태이면, group을 null로 하여 그 사실을 알아볼 수 있다.
+     *  */
+
     protected void groupNull()
     {
         group = null;
         arrangedString = null;
     }
-    /*만일 비교가 되지 않은 상태이면, group을 null로 하여 그 사실을 알아볼 수 있다.*/
 
 
 }

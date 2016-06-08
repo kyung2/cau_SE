@@ -5,11 +5,11 @@ import Model.ModelException.MergeLineIllegalException;
 import Model.ModelUnit.LCSsupport.LCSGrouping;
 
 import java.util.ArrayList;
+
 /**
  *model unit 클래스의 compare & MERGE Role
  * @author Chanwoo Park
  */
-
 class ModelUnitCompareMerge {
 
     /**
