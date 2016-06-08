@@ -20,6 +20,7 @@ import java.util.ResourceBundle;
 /**
  * SplitFilePaneController
  * Created by woojin on 2016-05-16.
+ * @author Woojin
  */
 public class SplitFilePaneController implements Initializable, SplitFilePaneInterface {
     @FXML
@@ -42,7 +43,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     private MenuBar menu_bar;
     private MenuItem previous_menu_item, next_menu_item, compare_menu_item, open_menu_item, save_menu_item, save_right_file_menu_item, save_left_file_menu_item;
     private StatusController left_status, right_status;
-    /*
+    /**
     * 기본적으로
     * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
     * toolbar 의 버튼은 모두 비활성화
@@ -72,13 +73,14 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         right_status = new StatusController(right_status_pane);
     }
 
-    /*
-    * compare 버튼을 할당되있지 않을 경우 할당
-    * 파일을 읽어서 내용이 있을 경우 edit 버튼 활성화
-    * load 버튼을 누를 경우 파일을 읽어서 text area 에 파일 내용을 적는다.
-    * text area 를 visible 하게 바꾼다.
-    * 이미 파일이 있을 경우는 덮어쓰기
-    * */
+    /**
+     * left
+     * compare 버튼을 할당되있지 않을 경우 할당
+     * 파일을 읽어서 내용이 있을 경우 edit 버튼 활성화
+     * load 버튼을 누를 경우 파일을 읽어서 text area 에 파일 내용을 적는다.
+     * text area 를 visible 하게 바꾼다.
+     * 이미 파일이 있을 경우는 덮어쓰기
+     **/
     @FXML
     public void leftLoadButtonOnAction() {
         if(left_file_chooser_flag) {
@@ -116,6 +118,13 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             System.out.println("Left File FileChooser is already open!");
         }
     }
+    /**Load
+     * compare 버튼을 할당되있지 않을 경우 할당
+     * 파일을 읽어서 내용이 있을 경우 edit 버튼 활성화
+     * load 버튼을 누를 경우 파일을 읽어서 text area 에 파일 내용을 적는다.
+     * text area 를 visible 하게 바꾼다.
+     * 이미 파일이 있을 경우는 덮어쓰기
+     **/
     @FXML
     public void rightLoadButtonOnAction(){
         if(right_file_chooser_flag) {
@@ -154,13 +163,14 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         }
     }
 
-    /*
-    * 기본은 text area 수정 불가
-    * edit 버튼을 클릭하면 수정 가능하게 바꾸고 text area 를 visible 하게 바꾼다.
-    * edit 이 가능할 때는 edit 와 save 버튼 말고는 모두 비활성화
-    * 수정 가능한 상황에서 한 번 더 버튼을 누르면 다시 수정 불가
-    * 그 후 비활성화 된 load 버튼을 활성화로
-    * */
+    /**
+     * left
+     * 기본은 text area 수정 불가
+     * edit 버튼을 클릭하면 수정 가능하게 바꾸고 text area 를 visible 하게 바꾼다.
+     * edit 이 가능할 때는 edit 와 save 버튼 말고는 모두 비활성화
+     * 수정 가능한 상황에서 한 번 더 버튼을 누르면 다시 수정 불가
+     * 그 후 비활성화 된 load 버튼을 활성화로
+     * */
     @FXML
     public void leftEditButtonOnAction() {
         boolean edit_flag = left_text_area.isEditable();
@@ -203,6 +213,14 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             left_status.addStatusWithName("Editable");
         }
     }
+    /**
+     * right
+     * 기본은 text area 수정 불가
+     * edit 버튼을 클릭하면 수정 가능하게 바꾸고 text area 를 visible 하게 바꾼다.
+     * edit 이 가능할 때는 edit 와 save 버튼 말고는 모두 비활성화
+     * 수정 가능한 상황에서 한 번 더 버튼을 누르면 다시 수정 불가
+     * 그 후 비활성화 된 load 버튼을 활성화로
+     * */
     @FXML
     public void rightEditButtonOnAction() {
         boolean edit_flag = right_text_area.isEditable();
@@ -246,10 +264,11 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         }
     }
 
-    /*
-    * edit 버튼을 눌러서 수정이 가해진 상황 일 경우 save 버튼이 활성화 된다.
-    * 수정 사항을 저장한 후에는 로드 가능, 수정 가늗, 저장 불가능으로 된다.
-    * */
+    /**
+     * left
+     * edit 버튼을 눌러서 수정이 가해진 상황 일 경우 save 버튼이 활성화 된다.
+     * 수정 사항을 저장한 후에는 로드 가능, 수정 가늗, 저장 불가능으로 된다.
+     * */
     @FXML
     public void leftSaveButtonOnAction(){
         checkTabNumAndCompareButtonAndMenuBar();
@@ -275,6 +294,11 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             }
         }
     }
+    /**
+     * right
+     * edit 버튼을 눌러서 수정이 가해진 상황 일 경우 save 버튼이 활성화 된다.
+     * 수정 사항을 저장한 후에는 로드 가능, 수정 가늗, 저장 불가능으로 된다.
+     * */
     @FXML
     public void rightSaveButtonOnAction(){
         checkTabNumAndCompareButtonAndMenuBar();
@@ -301,9 +325,10 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         }
     }
 
-    /*
-    * 리스트 뷰를 클릭했을 때 일어나는 일
-    * */
+    /**
+     * left
+     * 리스트 뷰를 클릭했을 때 일어나는 일
+     * */
     @FXML
     public void onLeftListViewMouseClicked(){
         int index = left_text_list.getSelectionModel().getSelectedIndex();
@@ -321,9 +346,8 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         changeScrollbar(index);
     }
 
-    /*
-    * status area 를 초기화 한다.
-    * */
+    /**
+     * init Status.*/
     private void initStatusControl(){
         if (!left_edit_button.isDisable()) {
             Model.ModelInterface model = ModelRealize.getInstance();
@@ -341,9 +365,10 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         }
     }
 
-    /*
+    /**
     * list view 를 유저가 봐야 할 위치로 변경시킨다.
-    * */
+    * @param index loaction
+     */
     private void changeScrollbar(int index){
         ModelInterface model = ModelRealize.getInstance();
         ArrayList<Integer> arrangedGroupSpace = model.getArrangedGroupSpace(tab_num);
@@ -387,10 +412,10 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         }
     }
 
-    /*
+    /**
     * listView 를 선택한 위치에 대한
     * previous 버튼과 next 버튼의 able / disable
-    * */
+    * @param index index*/
     private void changeToolbarButtonByClickList(int index){
         checkTabNumAndCompareButtonAndMenuBar();
 
@@ -469,21 +494,25 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         previous_difference_button.setDisable(!pre);
     }
 
-    /*
+    /**
     *  next difference 의 able / disable
+     *  @param next
     * */
     private void nextDifferenceButtonAndMenuItem(boolean next){
         next_menu_item.setDisable(!next);
         next_difference_button.setDisable(!next);
     }
 
-    /*
+    /**
     * file pane 버튼의 able 과 disable 을 해준다.
     * position 에 left 와 right 를 통해서 위치를 선택
     * 각각 load, edit, save에 true || false 를 통해서 able 과 disable 을 한다.
     * null 일 경우 그 버튼은 현상 유지
     * 버튼들과 연관된 menu item 의 활성화와 비활성화를 조절
-    * */
+    * @param position
+     * @param load
+     * @param edit
+     * @param save */
     private void setClickableButtons(String position, String load, String edit, String save){
         boolean f_load, f_edit, f_save;
         f_load = load == "true" ? true : false;

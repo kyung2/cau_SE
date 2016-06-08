@@ -64,6 +64,10 @@ public class MainController implements Initializable, MainInterface {
     * tool bar의 버튼들을 모두 비활성화로 한다.
     * 버튼과 관련된 menu item 들을 비활성화한다.
     * */
+    /**
+     * @param location
+     * @paream resources
+     * */
     public void initialize(URL location, ResourceBundle resources) {
         tab_num = 0;
         now_tab = tab;
@@ -121,6 +125,13 @@ public class MainController implements Initializable, MainInterface {
     * 차이점이 선택 되었을 때 그 차이점이 처음 차이점과 같다면 처음 차이점 비활성화
     * 차이점이 선택 되었을 때 그 차이점이 마지막 차이점과 같다면 마지막 차이점 비활성화
     * */
+    /**
+     *조건에 따라 달라져야함.
+     * 다른 부분이 하나도 없다면 모든 버튼 비활성화 처리가 된다.
+     * 현재 차이점이 선택되 있지 않다면 ㄷ음차이점과 이전 차이점, 모든 copy 버튼은 비활성화 상태가 된다.
+     * 차이점이 선택 되었을 때 그 차이점이 처음 차이점과 같다면 처음 차이점 비활성화
+     * 차이점이 선택 되었을 때 그 차이점이 마지막 차이점과 같다면 마지막 차이점 비활성화
+     * */
     public void compareOnAction() {
         if (right_text_area == null || left_text_area == null || right_text_list == null || left_text_list == null) {
             initTextAreaAndListOnTab();
@@ -183,9 +194,10 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * 선택한 차이점의 내용을 왼쪽으로 복사
-    * */
+
+    /**
+     * selected difference block copy to Left
+     * */
     public void copyToLeftOnAction() {
         initStatusTextArea();
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -208,9 +220,10 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * 선택한 차이점의 내용을 오른쪽으로 복사
-    * */
+
+    /**
+     * selected difference block copy to Right
+     * */
     public void copyToRightOnAction() {
         initStatusTextArea();
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -232,9 +245,10 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * 전체 차이점을 왼쪽으로 복사
-    * */
+
+    /**
+     *오른쪽에 있는 내용을 copy to Left
+     * */
     public void copyToLeftAllOnAction() {
         initStatusTextArea();
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -251,9 +265,9 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * 전체 차이점을 오른쪽으로 복사
-    * */
+    /**
+     *왼쪽에 있는 내용을 copy to Right
+     * */
     public void copyToRightAllOnAction() {
         initStatusTextArea();
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -270,10 +284,10 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * 현재 선택된 차이점에서 다음 차이점으로 넘어감.
-    * 다음 차이점이 존재하지 않을 경우 비활성화
-    * */
+    /**
+     * 현재 선택된 차이점에서 다음 차이점으로 넘어감
+     * if selected block is last , next Diff Button is disabled.
+     * */
     public void nextDifferenceOnAction() {
         Model.ModelInterface model = ModelRealize.getInstance();
         ObservableList<String> left_list_item = FXCollections.observableArrayList(makeStringsForList(model.getArrangedText(now_tab_num,0), model.getArrangedGroupSpace(now_tab_num)));
@@ -296,10 +310,10 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * 현재 선택된 차이점에서 이전 차이점으로 넘어감.
-    * 이전 차이점이 존재하지 않을 경우 비활성화
-    * */
+    /**
+     * 현재 선택된 차이점에서 이전 차이점으로 넘어감
+     * if selected block is first , previous Diff Button is disabled.
+     * */
     public void previousDifferenceOnAction() {
         int clicked_index = left_text_list.getSelectionModel().getSelectedIndex();
         //left_text_list.getSelectionModel().;      `
@@ -320,9 +334,8 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * 처음 차이점으로 간다.
-    * */
+    /**
+     * Go to First diff blcok.*/
     public void firstDifferenceOnAction() {
         //처음 차이점으로;
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -346,12 +359,12 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * 현재 위치에서 가까운 차이점으로 간다.
-    * 차이점에 위치할 경우 그대로, 차이점이 아닐경우
-    * 보통은 바로 아래의 차이점으로 가지만
-    * 아래쪽에 차이점이 없을 경우 위로 간다..
-    * */
+    /**
+     * go to near diff block
+     * 현재 차이점에 있으면 그대로 그 블록에 있는다.
+     * 하지만 차이점이 없는 블록선택시 다음에 존재하는 차이점으로 이동된다.
+     * 보통 바로 아래의 차이점으로 간다.
+     * 다음에 차이점이 없는 경우는 그 전 차이점으로 간다. */
     public void nowDifferenceOnAction() {
         ModelInterface modelInterface = ModelRealize.getInstance();
         ArrayList<Integer> text_index = modelInterface.getArrangedGroupSpace(now_tab_num);
@@ -385,9 +398,9 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * 마지막 차이점으로 간다.
-    * */
+    /**
+     * go to last diff
+     * */
     public void lastDifferenceOnAction() {
         //마지막 차이점으로
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -431,6 +444,9 @@ public class MainController implements Initializable, MainInterface {
     * user data는 현재 tab num 에서 1을 더한 값을 저장한다.
     * tab 에 해당하는 새로운 모델을 하나 만든다
     * */
+    /**new tab or Ctrl + N -> fxml로 부터 정보를 읽어온다.
+     * 새로운 tab이 생성되고 그 정보를 입력한다.
+     * user data에는 현재 tab_num + 1을 더한 값을 저장, tab에 해당되는 새로운 모델을 만든다. */
     public void newTabMenuItemOnAction() {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/View/Fxml/SplitFilePane.fxml"));
@@ -454,64 +470,27 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * open file window 를 연다.
-    * */
+
+    /**
+     * 파일을 불러오는 window를 연다 .
+     * */
     public void openMenuItemOnAction() {
         OpenFileWindow openFileWindow = new OpenFileWindow(now_tab);
         System.out.println("Open");
     }
 
     @FXML
-    /*
-    * save file window 를 연다.
-    * */
+
+    /**
+     * 저장을 위한 window를 연다. */
     public void saveMenuItemOnAction() {
         SaveFileWindow saveFileWindow = new SaveFileWindow(now_tab);
         System.out.println("Save");
     }
-
     @FXML
-    /*
-    * 오늘쪽 파일을 저장한다.
-    * */
-    public void saveRightFileMenuItemOnAction() {
-        if (right_text_area == null || left_text_area == null || right_text_list == null || left_text_list == null) {
-            initTextAreaAndListOnTab();
-        }initStatusTextArea();
+    /**
+     * 왼쪽에 존재하는 파일을 저장한다. */
 
-        AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
-        saveAlarmWindow.showAndWait();
-        if((boolean)saveAlarmWindow.getUserData()) {
-            Model.ModelInterface model = ModelRealize.getInstance();
-            try {
-                model.setText(now_tab_num, stringToArrayList(right_text_area.getText()), 1);
-                model.writeTextOuter(now_tab_num, 1);
-                right_text_area.setEditable(false);
-                setClickableButtonsInFilePane("right","true", null,"false");
-
-            } catch (Exception e) {
-                e.printStackTrace();
-                right_status.addStatusWithName("ERR - "+e.getMessage());
-            }
-            try{
-                if(model.isOpen(now_tab_num,0) && model.isOpen(now_tab_num,1)) {
-                    if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
-                        compareButtonAndMenuItem(true);
-                    }
-                }
-            }catch (Exception e){
-                e.printStackTrace();
-                right_status.addStatusWithName("ERR - "+e.getMessage());
-            }
-            right_status.addStatusWithName("File save");
-        }
-    }
-
-    @FXML
-    /*
-    * 왼쪽 파일을 저장한다.
-    * */
     public void saveLeftFileMenuItemOnAction() {
         if (right_text_area == null || left_text_area == null || right_text_list == null || left_text_list == null) {
             initTextAreaAndListOnTab();
@@ -546,24 +525,56 @@ public class MainController implements Initializable, MainInterface {
         }
     }
 
+
     @FXML
-    /*
-    * main window 를 닫는다.
-    * */
+    /**
+     * 오른쪽에 있는 파일을 저장한다.
+     * */
+    public void saveRightFileMenuItemOnAction() {
+        if (right_text_area == null || left_text_area == null || right_text_list == null || left_text_list == null) {
+            initTextAreaAndListOnTab();
+        }initStatusTextArea();
+
+        AlarmWindow saveAlarmWindow = new AlarmWindow("Save File Alarm","Would you Save this file?");
+        saveAlarmWindow.showAndWait();
+        if((boolean)saveAlarmWindow.getUserData()) {
+            Model.ModelInterface model = ModelRealize.getInstance();
+            try {
+                model.setText(now_tab_num, stringToArrayList(right_text_area.getText()), 1);
+                model.writeTextOuter(now_tab_num, 1);
+                right_text_area.setEditable(false);
+                setClickableButtonsInFilePane("right","true", null,"false");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+                right_status.addStatusWithName("ERR - "+e.getMessage());
+            }
+            try{
+                if(model.isOpen(now_tab_num,0) && model.isOpen(now_tab_num,1)) {
+                    if (!right_text_area.isEditable() && !left_text_area.isEditable()) {
+                        compareButtonAndMenuItem(true);
+                    }
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+                right_status.addStatusWithName("ERR - "+e.getMessage());
+            }
+            right_status.addStatusWithName("File save");
+        }
+    }
+    @FXML
+    /**
+     * 창을 닫는다.
+     * */
     public void closeMenuItemOnAction() {
-        /*
-        여러가지 조건 필요
-        EX> 저장되지 않은 상태라면 저장하고 종료를 묻는다.
-            Compare 중 이라면 merge 하지않고 종료할 것인지 묻는다.
-        * */
+
         ((Stage) (main_pane.getScene().getWindow())).close();// 종료 method
         System.out.println("");
     }
 
     @FXML
-    /*
-    * help window 를 연다.
-    * */
+    /**
+     * open helpwindow F1*/
     public void helpMenuItemOnAction() {
         HelpWindow HelpWindow = new HelpWindow();
         try {
@@ -575,9 +586,9 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * program info window 를 연다.
-    * */
+
+    /**
+     * open Program info */
     public void programInformationMenuItemOnAction() {
         ProgramInformationWindow programInformationWindow = new ProgramInformationWindow();
         try {
@@ -608,11 +619,8 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * close tab 의 menu item 을 누르면 일어나는 일
-    * 현재 선택된 tab 을 지우고
-    * tab 이 닫힐 때 일어나는 일을 한다.
-    * */
+
+    /**close tab*/
     public void closeTabMenuItemOnAction() {
         close_tab_num = now_tab_num;
         tabCloseAction();
@@ -620,10 +628,10 @@ public class MainController implements Initializable, MainInterface {
     }
 
     @FXML
-    /*
-    * 모든 tab 을 닫는다.
-    * 모든 tab menu item 을 없에고 모든 toolbar stage 를 null 로 한다.
-    * */
+    /***
+     * close all tab
+     */
+
     public void closeTabAllMenuItemOnAction() {
         ((TabPane) now_tab.getTabPane()).getTabs().remove(0, tab_pane.getTabs().size());
         tab_menu.getItems().remove(2, tab_menu_item_num + 2);
@@ -635,17 +643,17 @@ public class MainController implements Initializable, MainInterface {
         }
     }
 
-    /*
-    * tab menu item 의 숫자에 맞게 tab 을 선택해 준다.
-    * */
+    /**
+     * @param index index means tab menu item
+     * 해당되는 tab을 열어준다. */
     private void tabMenuItemOnAction(int index) {
         tab_pane.getSelectionModel().select(index);
     }
 
-    /*
-    * save 버튼의 활성화와 비활성화를 조절
-    * save 버튼에 따라 menu item 도 활성화와 비활성화를 조절함
-    * */
+
+    /**
+     * @param position 0 left 1 right
+     * @param save save 버튼이 비활성화 활성화를 조절힌디. */
     private void saveButtonMenuItem(String position, boolean save){
         AnchorPane right_anchorPane = (AnchorPane) ((SplitPane) right_text_area.getParent().getParent().getParent()).getParent();
         AnchorPane right_button_area = (AnchorPane) right_anchorPane.getChildren().get(0);
@@ -673,30 +681,42 @@ public class MainController implements Initializable, MainInterface {
     /*
     *  compare 의 able / disable
     * */
+    /**
+     * @param compare compare버튼의 able disable을 조정한다.
+     * */
     private void compareButtonAndMenuItem(boolean compare){
         compare_menu_item.setDisable(!compare);
         compare_button.setDisable(!compare);
     }
-    /*
-    *  previous difference 의 able / disable
-    * */
+    /**
+     * @param pre previous 버튼의 disable/able 상태를 조정*/
     private void preDifferenceButtonAndMenuItem(boolean pre){
         previous_difference_menu_item.setDisable(!pre);
         previous_difference_button.setDisable(!pre);
     }
-    /*
-    *  next difference 의 able / disable
-    * */
+    /**
+     * @param next nextdiff 버튼의 disable/able 상태를 조정*/
     private void nextDifferenceButtonAndMenuItem(boolean next){
         next_difference_menu_item.setDisable(!next);
         next_difference_button.setDisable(!next);
     }
 
-    /*
+    /**
     * Toolbar 에 있는 버튼들의 활성화와 비활성화를 조절한다.
     * 버튼과 관련된 menu item 들의 활성화와 비활성화를 조절한다.
     * 아무 행동도 하지 않으려면 null 을 입력하면 된다.
-    * */
+     * @param next next 버튼의 disable/able 상태를 조정
+     * @param compare compare 버튼의 disable/able 상태를 조정
+     * @param ctol Copy to left 버튼의 disable/able 상태를 조정
+     * @param ctola copy to left all 버튼의 disable/able 상태를 조정
+     * @param ctora Copy to Right all 버튼의 disable/able 상태를 조정
+     * @param ctor Copy to Right 버튼의 disable/able 상태를 조정
+     * @param first First 버튼의 disable/able 상태를 조정
+     * @param last last 버튼의 disable/able 상태를 조정
+     * @param now now 버튼의 disable/able 상태를 조정
+     * @param previous previous 버튼의 disable/able 상태를 조정
+     *
+     * */
     private void setClickableButtonsAndMenuItems(String next, String previous, String first, String now, String last, String ctor, String ctol, String ctora, String ctola, String compare) {
         if (next != null) {
             if (next == "true") {
@@ -799,13 +819,16 @@ public class MainController implements Initializable, MainInterface {
             }
         }
     }
+     /**
+     * file pane 버튼의 able 과 disable 을 해준다.
+     *  position 에 left 와 right 를 통해서 위치를 선택
+     * 각각 load, edit, save에 true || false 를 통해서 able 과 disable 을 한다.
+     * null 일 경우 그 버튼은 현상 유지
+     * @param position 0 left 1:right
+     * @param edit edit 버튼의 disable/able 상태를 조정
+      * @param load load 버튼의 disable/able 상태를 조정
+      * @param save save 버튼의 disable/able 상태를 조정*/
 
-    /*
-    * file pane 버튼의 able 과 disable 을 해준다.
-    * position 에 left 와 right 를 통해서 위치를 선택
-    * 각각 load, edit, save에 true || false 를 통해서 able 과 disable 을 한다.
-    * null 일 경우 그 버튼은 현상 유지
-    * */
     private void setClickableButtonsInFilePane(String position, String load, String edit, String save){
         AnchorPane right_anchorPane = (AnchorPane) ((SplitPane) right_text_area.getParent().getParent().getParent()).getParent();
         AnchorPane right_button_area = (AnchorPane) right_anchorPane.getChildren().get(0);
@@ -859,9 +882,8 @@ public class MainController implements Initializable, MainInterface {
         if(!left_save.isDisable() && !right_save.isDisable()) save_menu_item.setDisable(false);
     }
 
-    /*
-    * 원하는 index 로 scrollbar 를 움직인다.
-    * */
+    /**
+     * @param index index에 해당되는 곳으로 스크롤바를 이동*/
     private void changeScrollbar(int index){
         ModelInterface model = ModelRealize.getInstance();
         ArrayList<Integer> arrangedGroupSpace = model.getArrangedGroupSpace(now_tab_num);
@@ -904,8 +926,9 @@ public class MainController implements Initializable, MainInterface {
         }
     }
 
-    /*
+    /**
     * 버튼들의 상태를 봐서 tool bar stage 를 만든다.
+    * @return string
     * */
     private String[] makeToolbarStage() {
         String[] stage = new String[10];
@@ -962,7 +985,7 @@ public class MainController implements Initializable, MainInterface {
         return stage;
     }
 
-    /*
+    /**
     * 현재 tab 을 통해서 현재 선택된 tab 의 text area 와 list view 를 가져온다.
     * */
     private void initTextAreaAndListOnTab() {
@@ -976,7 +999,7 @@ public class MainController implements Initializable, MainInterface {
         left_text_list = (ListView) ((AnchorPane) left_split_pane.getItems().get(0)).getChildren().get(1);
         right_text_list = (ListView) ((AnchorPane) right_split_pane.getItems().get(0)).getChildren().get(1);
     }
-    /*
+    /**
     * left, right status area 를 초기화 한다.
     * */
     private void initStatusTextArea() {
@@ -1011,9 +1034,11 @@ public class MainController implements Initializable, MainInterface {
             right_status.setFileName(right_file.getName());
         }
     }
-    /*
+    /**
     * String 을 저장한 array list 와 index를 저장한 array list 를 통해 list view 에 넣을 string 배열을 만든다.
-    * */
+    * @param index index의 정보가 있음.
+     *@param arrayList string 정보가 있음.
+     * @return string listview content*/
     private String[] makeStringsForList(ArrayList<String> arrayList, ArrayList<Integer> index) {
         String[] strings;
         int true_false_flag = 0;
@@ -1035,9 +1060,11 @@ public class MainController implements Initializable, MainInterface {
         return strings;
     }
 
-    /*
+    /**
     * ArrayList 로 들어온 문자를 \n 을 붙여 String 하나로 만든다.
-    * */
+    *
+     * @param arrayList content of arraylist
+     * @return string \n을 추가하여 string을 조절 */
     private String arrayListToString(ArrayList<String> arrayList) {
         String s = new String();
         for (String s1 : arrayList) {
@@ -1046,9 +1073,10 @@ public class MainController implements Initializable, MainInterface {
         return s;
     }
 
-    /*
+    /**
     * String 을 받아와서 \n 로 split 한 후 ArrayList 에 저장한다.
-    * */
+    * @param s string
+     * @return arraylist \n을 slpit 한 내용*/
     private ArrayList<String> stringToArrayList(String s) {
         ArrayList<String> arrayList = new ArrayList<String>();
         String[] strings = s.split("\n");
@@ -1058,10 +1086,23 @@ public class MainController implements Initializable, MainInterface {
         return arrayList;
     }
 
+    /**TextBlock의 index정보를 가져온다.
+     * @return int text_block_index
+     * */
+
     public int getTextBlockIndex(){
         return text_block_index;
     }
+
+    /**TextBlock의 index정보를 설정한다
+     * @param t_index t_index 해당 index
+     * */
+
+
     public void setTextBlockIndex(int t_index) { text_block_index = t_index; }
+    /**
+     * button들의 상태를 가져온다.
+     * @return boolean */
     public boolean[] getButtonDisabled(){
         boolean[] conditionButton = new boolean[10];
         conditionButton[0] = next_difference_button.isDisable();
@@ -1079,10 +1120,15 @@ public class MainController implements Initializable, MainInterface {
 
 
     }
+    /**
+     * @return now_tab_num 현재 tab_num을 알려준다.
+     * */
     public int getNowTabNum(){
         return now_tab_num;
 
     }
+    /**
+     * @return tab_num을 가져온다.*/
     public int getTabNum(){
         return tab_num;
     }
