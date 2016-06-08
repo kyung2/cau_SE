@@ -90,9 +90,9 @@ public interface ModelInterface {
 
     /**
      * 비교된 그룹의 앞에서 나오는 i번째 번의 그룹이 몇 개의 줄을 포함하는지에 대한 정보를 가져온다.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException 유효하지 않은 인자가 잘못 전달 시
      * @param tabNum   This is index about now working tab
-     * @return ArrayList<Integer> num of line
+     * @return ArrayList_Integer num of line
      */
     public ArrayList<Integer> getArrangedGroupSpace(int tabNum) throws IllegalArgumentException;
 
@@ -101,7 +101,8 @@ public interface ModelInterface {
      * @param i 0 left 1 right
      * @param tabNum This is index about now working tab
      * @param text  content of text
-     * @throws IndexOutOfBoundsException,IllegalArgumentException
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
+     * @throws IllegalArgumentException 유효하지 않은 인자가 잘못 전달 시
      **/
     public void setText(int tabNum, ArrayList<String> text, int i) throws IndexOutOfBoundsException, IllegalArgumentException;
 
@@ -110,7 +111,9 @@ public interface ModelInterface {
      * @param tabNum This is index about now working tab
      * @param i 0: left 1 :right
      * @param filepath location of file
-     * @throws IndexOutOfBoundsException,IOException,IllegalArgumentException
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
+     * @throws IOException 파일을 읽어오지 못한다.
+     * @throws IllegalArgumentException 유효하지 않은 인자가 잘못 전달 시
      * */
     public void readTextOuter(int tabNum, String filepath, int i) throws IndexOutOfBoundsException, IOException, IllegalArgumentException;
 
@@ -119,7 +122,7 @@ public interface ModelInterface {
      * @param tabNum
      * @param i 0 left 1 right
      * @param filepath filepath
-     * @throws IndexOutOfBoundsException,IOException,IllegalArgumentException
+     * @throws IndexOutOfBoundsException,IOException,IllegalArgumentException 유효하지 않은 인자가 잘못 전달 시
      * */
     public void writeTextOuter(int tabNum, String filepath, int i) throws IndexOutOfBoundsException, IOException, IllegalArgumentException;
 
@@ -127,7 +130,9 @@ public interface ModelInterface {
      * i번째 텍스트를 filepath에 있는 파일에 적는다.
      * @param tabNum This is index about now working tab
      * @param i i==0 left i==1 right
-     * @throws IndexOutOfBoundsException,IOException,IllegalArgumentException
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
+     * @throws IOException file이 존재하지 않을 시
+     * @throws IllegalArgumentException 유효하지 않은 인자가 잘못 전달 시
      */
     public void writeTextOuter(int tabNum, int i) throws IndexOutOfBoundsException, IOException, IllegalArgumentException;
 
@@ -145,7 +150,8 @@ public interface ModelInterface {
      * @param tabNum This is index about now working tab
      * @param direction true : left false : right
      * @param groupNum 맞거나 틀리거나 하는 그룹들의 index num
-     * @throws IndexOutOfBoundsException,IllegalArgumentException
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
+      * @throws IllegalArgumentException 유효하지 않은 인자가 잘못 전달 시
       */
     public void mergeByGroup(int tabNum, int groupNum, boolean direction) throws IndexOutOfBoundsException, IllegalArgumentException, MergeLineIllegalException;
 
