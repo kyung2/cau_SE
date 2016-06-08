@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * This class has interface of Model.
  * This Class has functions about Binding model Unit for management.
  * Each Model unit unique Identifier.
- * @author 박찬우
+ * @author Chanwoo Park
  * */
 /* 개개의 모델 유닛을 묶어 관리하는 클래스가 가져야 할 기능을 나열한 인터페이스이다.*/
 /* 각각의 모델 유닛은 고유의 식별자를 가진다.*/
@@ -174,7 +174,7 @@ public interface ModelInterface {
     /**
      * 선택된 부분을 merge 하는 부분.
      * @param tabNum
-     * @param direction @@@ difrection이 몬지~~
+     * @param direction Ture : left False : right
      * @param groupNum 맞거나 틀리거나 하는 그룹들의 num
      * @throws IndexOutOfBoundsException,IllegalArgumentException*/
     public void mergeByGroup(int tabNum, int groupNum, boolean direction) throws IndexOutOfBoundsException, IllegalArgumentException, MergeLineIllegalException;
