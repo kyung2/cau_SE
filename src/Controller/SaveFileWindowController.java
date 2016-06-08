@@ -134,7 +134,7 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         }
     }
 
-    /*
+    /**
     *  tab 에 포함된 내용물들을 가져온다
     * */
     private void getTabContent(){
@@ -180,7 +180,7 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         initStatus();
     }
 
-    /*
+    /**
     * compare 버튼의 조건을 검사하고 활성화 or 비활성화
     * */
     private void checkCompareButtonAndMenuItem(){
@@ -190,8 +190,9 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         }
     }
 
-    /*
+    /**
     * position 을 받아서 save 할 때의 action 을 한다.
+     * @param position left , right
     * */
     private void doActionBySave(String position){
         save_menu_item.setDisable(true);
@@ -211,9 +212,12 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         }
         if(!left_load_button.isDisable() && !right_load_button.isDisable()) open_menu_item.setDisable(false);
     }
-    /*
+
+    /**
     * String 을 받아와서 \n 로 split 한 후 ArrayList 에 저장한다.
-    * */
+     * @param s  string content that we want to change arraylist
+     * @return arrayList result TypeCasting
+     */
     private ArrayList<String> stringToArrayList(String s){
         ArrayList<String> arrayList = new ArrayList<String>();
         String[] strings = s.split("\n");
@@ -223,6 +227,8 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         return arrayList;
     }
 
+    /**
+     * make init status.*/
     private void initStatus(){
         left_status = new StatusController(left_status_area);
         right_status = new StatusController(right_status_area);

@@ -16,7 +16,9 @@ import java.util.ArrayList;
 
 
 /**
+ * Implement openfilewindows
  * Created by woojin on 2016-05-20.
+ * @author woonjin
  */
 public class OpenFileWindowController extends FileWindowAbstractClass {
 	@FXML
@@ -42,6 +44,10 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
     private StatusController left_status, right_status;
 
     @FXML
+    /**
+     * leftFileLoad button Actions
+     *update state after file load.
+     */
     public void leftFileFindButtonOnAction(){
         if(!item_flag){
             getTabContent();
@@ -75,6 +81,10 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
     }
 
     @FXML
+    /**
+     * RightFileLoad button Actions
+     *update state after file load.
+     */
     public void rightFileFindButtonOnAction(){
         if(!item_flag){
             getTabContent();
@@ -107,6 +117,10 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
     }
 
     @FXML
+    /**
+     * OKbutton
+     *update state about other components
+     */
     public void okButtonOnAction() {
         /* 현재 탭의 구성요소들을 사용 가능하게 해 두고
         * 버튼들을 활성화시킨다
@@ -152,6 +166,8 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
     }
 
     @FXML
+    /**
+     * load action cancel*/
     public void cancelButtonOnAction(){
         Stage stage = (Stage)file_anchor_pane.getScene().getWindow();
 
@@ -213,11 +229,15 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
         initStatusControl();
     }
 
-    /*
+    /**
     * file pane 버튼의 able 과 disable 을 해준다.
     * position 에 left 와 right 를 통해서 위치를 선택
     * 각각 load, edit, save에 true || false 를 통해서 able 과 disable 을 한다.
     * null 일 경우 그 버튼은 현상 유지
+     @param edit edit state
+     @param save save
+     @param load load
+     @param position left right
     * */
     private void setClickableButtonsInFilePane(String position, String load, String edit, String save){
         boolean f_load, f_edit, f_save;
@@ -269,8 +289,11 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
             compare_menu_item.setDisable(false);
         }
     }
-    /*
+
+    /**
     * array list 를 받아서 string 으로 만들어 준다.
+     * @param arrayList want to change string
+     * @return arraylist contenT
     * */
     private String arrayListToString(ArrayList<String> arrayList){
         String s = new String();
