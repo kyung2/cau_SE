@@ -7,16 +7,13 @@ import java.util.ArrayList;
 
 /**
  *서로 비교하여야 할 대상이 되는 두 텍스트를 담은 하나의 탭 단위로서의 기능을 요구하는 인터페이스이다.
+ *  텍스트를 비교하는 기능에서, 하나의 그룹은 매칭됨 여부가 동일한 연속된 더 큰 그룹에 속하지 않는 여러 줄을 의미하며,
+ *  나오는 순서에 따라 번호매겨지고 매칭에 의하여 텍스트가 재배열될 수 있다.
  * @author Chanwoo Park
  */
 public interface ModelUnit {
 
-    /**
-    텍스트를 비교하는 기능에서, 하나의 그룹은 매칭됨 여부가 동일한 연속된 더 큰 그룹에 속하지 않는 여러 줄을 의미하며,
-    나오는 순서에 따라 번호매겨지고 매칭에 의하여 텍스트가 재배열될 수 있다.
-    */
-
-     /**
+      /**
       * @param i 변환할 index, 0 : left 1 : right
       * @return arraylist result
       * @throws IndexOutOfBoundsException
