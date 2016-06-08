@@ -53,8 +53,8 @@ public interface ModelUnit {
      * 병합할 그룹이 이미 일치 상태일 경우 MergeLineIllegalException 발생.
      * @param direction true : left->right false right->left
      * @param lineNum index of line
-     * @throws IndexOutOfBoundsException
-     * @throws MergeLineIllegalException
+     * @throws IndexOutOfBoundsException i가 0 또는 1이 아닐 때
+     * @throws MergeLineIllegalException 이미 merge가됨
      */
     public void mergeBylineNum(int lineNum, boolean direction) throws IndexOutOfBoundsException, MergeLineIllegalException;
 
@@ -65,7 +65,7 @@ public interface ModelUnit {
      *병합할 그룹이 이미 일치 상태일 경우 MergeLineIllegalException 발생.
      * @param direction true : left->right false right->left
      * @param groupNum index of line
-     * @throws MergeLineIllegalException
+     * @throws MergeLineIllegalException 이미 merge가됨
      */
     public void mergeByGroupNum(int groupNum, boolean direction) throws MergeLineIllegalException;
 
@@ -76,19 +76,19 @@ public interface ModelUnit {
      *i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      * @param i 0 left 1 right
      * @param filepath file location
-     * @throws IOException
-     * @throws IndexOutOfBoundsException
+     * @throws IOException 유효하지 않은 인자가 잘못 전달 시
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
      */
     public void open(String filepath, int i) throws IOException, IndexOutOfBoundsException;
 
     /**
      * i번째 텍스트를 filepath에 있는 파일의 저장한다
-     *filepath에 있는 파일을 저장 할 수 없을 때 IOException 발생.
-     *i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
+     * filepath에 있는 파일을 저장 할 수 없을 때 IOException 발생.
+     * i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      * @param i 0 left 1 right
      * @param filepath file location
-     * @throws IOException
-     * @throws IndexOutOfBoundsException
+     * @throws IOException fileopen실패
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
      */
     public void save(String filepath, int i) throws IOException, IndexOutOfBoundsException;
 
@@ -98,7 +98,7 @@ public interface ModelUnit {
      *filepath에 있는 파일을 저장 할 수 없을 때 IOException 발생.
      *i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      * @param i 0 left 1 right
-     * @throws IOException
+     * @throws IOException 파일저장실패
      */
     public void save(int i) throws IOException;
 

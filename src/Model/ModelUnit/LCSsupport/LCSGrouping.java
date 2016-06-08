@@ -41,7 +41,7 @@ public class LCSGrouping {
      * @param LCSBacktrack 백트래킹 행렬
      * @param x 백트래킹 행렬의 가로크기
      * @param y 백트래킹 행렬의 세로크기
-     * @return ArrayList<Integer>[][] 그룹 관련 정보
+     * @return ArrayListInteger 2D 그룹 관련 정보
      * */
     public ArrayList<Integer>[][] start(boolean LCSBacktrack[][][], int x, int y)
     {
