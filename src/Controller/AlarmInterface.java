@@ -1,17 +1,27 @@
 package Controller;
 
 /**
+ * Interface for AlarmWindowController
  * Created by woojin on 2016-05-31.
+ * @author woojin Jang
  */
 interface AlarmInterface {
-    /*
-    * yes 버튼을 눌렀을 때
-    * user data 에 true 를 저장
-    * */
+
+    /**
+    * click yes button
+    * set true value in user data
+    */
     void yesButtonOnAction();
-    /*
-    * no 버튼을 눌렀을 때
-    * user data 에 false 를 저장
-    * */
+
+    /**
+    * click no button
+    * set false value in user data
+    */
     void noButtonOnAction();
+
+    /**
+     * Created by hyunkyung on 2016-06-07.
+     */
+    class LoadTest {
+    }
 }

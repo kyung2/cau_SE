@@ -8,16 +8,29 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollBar;
 
 /**
- * Created by JRD on 03/03/2015. -> reuse ~~
+ * Created by JRD on 03/03/2015.
+ * reference : http://www.dskims.com/is-there-any-way-to-sync-the-scrollbars-in-a-javafx-1-2-listview/
  */
 public class ScrollbarBinding {
 
+    /**
+     * The constant BIND_BIDIRECTIONAL.
+     */
     public static final int BIND_BIDIRECTIONAL = 3;
+    /**
+     * The constant BIND_RIGHT_TO_LEFT.
+     */
     public static final int BIND_RIGHT_TO_LEFT = 1;
+    /**
+     * The constant BIND_LEFT_TO_RIGHT.
+     */
     public static final int BIND_LEFT_TO_RIGHT = 2;
 
     /**
      * Bidirectional binding of 2 ListView's scrollbars.
+     *
+     * @param lv1 the lv 1
+     * @param lv2 the lv 2
      */
     public static void bind(ListView lv1, ListView lv2) {
         bind(lv1, lv2, BIND_BIDIRECTIONAL);
@@ -25,8 +38,9 @@ public class ScrollbarBinding {
 
     /**
      * Allows binding of 2 ListView's scrollbars.
-     * @param lv1 left list view
-     * @param lv2 right list view
+     *
+     * @param lv1      left list view
+     * @param lv2      right list view
      * @param bindType 3 binding possibilities : BIND_BIDIRECTIONAL=bidirectional, BIND_RIGHT_TO_LEFT and BIND_LEFT_TO_RIGHT
      */
     public static void bind(ListView lv1, ListView lv2, int bindType) {

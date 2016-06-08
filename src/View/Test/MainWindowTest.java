@@ -32,7 +32,13 @@ import static org.loadui.testfx.Assertions.assertNodeExists;
 public class MainWindowTest extends GuiTest {
     private static final SettableFuture<Stage> stageFuture = SettableFuture.create();
 
+    /**
+     * The type Test main window.
+     */
     protected static class TestMainWindow extends MainWindow {
+        /**
+         * Instantiates a new Test main window.
+         */
         public TestMainWindow() {
             super();
         }
@@ -63,6 +69,9 @@ public class MainWindowTest extends GuiTest {
         return stage.getScene().getRoot();
     }
 
+    /**
+     * Stage 0 test init tool bar button setting.
+     */
     @Test
     public void stage0_testInitToolBarButtonSetting(){
         assertTrue(GuiTest.find("#compare_button").isDisable());
@@ -79,6 +88,9 @@ public class MainWindowTest extends GuiTest {
         //버튼이 모두 disable 인지 test
     }
 
+    /**
+     * Stage 0 test init file menu test.
+     */
     @Test
     public void stage0_testInitFileMenuTest(){
         click("#file_menu");
@@ -99,6 +111,9 @@ public class MainWindowTest extends GuiTest {
         click("#file_menu");
     }
 
+    /**
+     * Stage 0 test init merge menu test.
+     */
     @Test
     public void stage0_testInitMergeMenuTest(){
         click("#merge_menu");
@@ -127,11 +142,14 @@ public class MainWindowTest extends GuiTest {
         click("#merge_menu");
     }
 
+    /**
+     * Stage 1 test open window.
+     */
     @Test
     public void stage1_testOpenWindow(){
         String file = "test-load.txt";
-
         testOpenWindowHotKey(); // 단축키 test
+        assertNodeExists("#file_window");
         click("#cancel_button");
 
         click("#file_menu").click("Open");
@@ -171,10 +189,13 @@ public class MainWindowTest extends GuiTest {
         assertEquals("Testing load button!\n",((TextArea)GuiTest.find("#right_text_area")).getText());
     }
     private void testOpenWindowHotKey(){
-        System.out.println("Type HotKey : Ctrl + L");
-        press(KeyCode.CONTROL).type(KeyCode.L).release(KeyCode.CONTROL);
+        System.out.println("Type HotKey : Ctrl + O");
+        press(KeyCode.CONTROL).type(KeyCode.O).release(KeyCode.CONTROL);
     }
 
+    /**
+     * Stage 2 test left save menu item.
+     */
     @Test
     public void stage2_testLeftSaveMenuItem(){
         if(GuiTest.find("#left_save_button").isDisable()){
@@ -216,6 +237,10 @@ public class MainWindowTest extends GuiTest {
         type("View").type(KeyCode.ENTER);
         type("Test").type(KeyCode.ENTER);
     }
+
+    /**
+     * Stage 2 test right save menu item.
+     */
     @Test
     public void stage2_testRightSaveMenuItem(){
         if(GuiTest.find("#right_save_button").isDisable()){
@@ -253,6 +278,9 @@ public class MainWindowTest extends GuiTest {
         type("test-load.txt").type(KeyCode.ENTER);
     }
 
+    /**
+     * Stage 2 test save as menu item.
+     */
     @Test
     public void stage2_testSaveAsMenuItem(){
 
@@ -262,6 +290,7 @@ public class MainWindowTest extends GuiTest {
 
         initForSaveAs();
         click("#file_menu").click("Save As");
+        assertNodeExists("#file_window");
 
         click("#left_find_button");
         type("src").type(KeyCode.ENTER);
@@ -322,12 +351,19 @@ public class MainWindowTest extends GuiTest {
             click("#right_edit_button");
         }
     }
+
+    /**
+     * Stage 2 test saved file.
+     */
     @Test
     public void stage2_testSavedFile(){
         assertTrue(((Label)GuiTest.find("#left_file_label")).getText().equals("test-save1.txt"));
         assertTrue(((Label)GuiTest.find("#right_file_label")).getText().equals("test-save2.txt"));
     }
 
+    /**
+     * Stage 3 test compare action.
+     */
     @Test
     public void stage3_testCompareAction() {
         initForCompare();
@@ -359,43 +395,50 @@ public class MainWindowTest extends GuiTest {
         loadRightFileForCompare();
     }
 
+    /**
+     * Stage 4 test next difference action.
+     */
     @Test
     public void stage4_testNextDifferenceAction() {
         initForDifference();
         ListView left_list = GuiTest.find("#left_list_view");
         ListView right_list = GuiTest.find("#right_list_view");
-        /*
+
         testNextDifferenceHotKey();
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(3));
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(right_list.getSelectionModel().getSelectedIndices().get(0)));
-        */
+
         click("#left_edit_button").click("#left_edit_button").click("#compare_button");
         click("#next_difference_button");
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(3));
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(right_list.getSelectionModel().getSelectedIndices().get(0)));
     }
     private void testNextDifferenceHotKey(){
+        System.out.println("Type Save As HotKey : Ctrl + D");
+        press(KeyCode.CONTROL).type(KeyCode.D).release(KeyCode.CONTROL);
     }
     private void initForDifference(){
         if(GuiTest.find("#compare_button").isDisable()) {
             initForCompare();
         }
         click("#compare_button");
-
     }
 
+    /**
+     * Stage 4 test previous difference action.
+     */
     @Test
     public void stage4_testPreviousDifferenceAction() {
         initForDifference();
         ListView left_list = GuiTest.find("#left_list_view");
         ListView right_list = GuiTest.find("#right_list_view");
-        /*
+
         left_list.getSelectionModel().select(3);
         click(left_list.getSelectionModel().getSelectedItems());
-        testPostDifferenceHotKey();
+        testPreviousDifferenceHotKey();
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(1));
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(right_list.getSelectionModel().getSelectedIndices().get(0)));
-        */
+
         click("#left_edit_button").click("#left_edit_button").click("#compare_button");
         left_list.getSelectionModel().select(3);
         click(left_list.getSelectionModel().getSelectedItems());
@@ -404,20 +447,25 @@ public class MainWindowTest extends GuiTest {
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(right_list.getSelectionModel().getSelectedIndices().get(0)));
     }
     private void testPreviousDifferenceHotKey(){
+        System.out.println("Type Save As HotKey : Ctrl + U");
+        press(KeyCode.CONTROL).type(KeyCode.U).release(KeyCode.CONTROL);
     }
 
+    /**
+     * Stage 4 test first difference action.
+     */
     @Test
     public void stage4_testFirstDifferenceAction() {initForDifference();
         initForDifference();
         ListView left_list = GuiTest.find("#left_list_view");
         ListView right_list = GuiTest.find("#right_list_view");
-        /*
+
         left_list.getSelectionModel().select(5);
         click(left_list.getSelectionModel().getSelectedItems());
         testFirstDifferenceHotKey();
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(1));
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(right_list.getSelectionModel().getSelectedIndices().get(0)));
-        */
+
         click("#left_edit_button").click("#left_edit_button").click("#compare_button");
         left_list.getSelectionModel().select(5);
         click(left_list.getSelectionModel().getSelectedItems());
@@ -426,20 +474,25 @@ public class MainWindowTest extends GuiTest {
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(right_list.getSelectionModel().getSelectedIndices().get(0)));
     }
     private void testFirstDifferenceHotKey(){
+        System.out.println("Type Save As HotKey : Ctrl + F");
+        press(KeyCode.CONTROL).type(KeyCode.F).release(KeyCode.CONTROL);
     }
 
+    /**
+     * Stage 4 test now difference action.
+     */
     @Test
     public void stage4_testNowDifferenceAction() {
         initForDifference();
         ListView left_list = GuiTest.find("#left_list_view");
         ListView right_list = GuiTest.find("#right_list_view");
-        /*
+
         left_list.getSelectionModel().select(4);
         click(left_list.getSelectionModel().getSelectedItems());
         testNowDifferenceHotKey();
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(5));
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(right_list.getSelectionModel().getSelectedIndices().get(0)));
-        */
+
         click("#left_edit_button").click("#left_edit_button").click("#compare_button");
         left_list.getSelectionModel().select(4);
         click(left_list.getSelectionModel().getSelectedItems());
@@ -448,32 +501,42 @@ public class MainWindowTest extends GuiTest {
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(right_list.getSelectionModel().getSelectedIndices().get(0)));
     }
     private void testNowDifferenceHotKey(){
+        System.out.println("Type Save As HotKey : Ctrl + N");
+        press(KeyCode.CONTROL).type(KeyCode.N).release(KeyCode.CONTROL);
     }
 
+    /**
+     * Stage 4 test last difference action.
+     */
     @Test
     public void stage4_testLastDifferenceAction() {
         initForDifference();
         ListView left_list = GuiTest.find("#left_list_view");
         ListView right_list = GuiTest.find("#right_list_view");
-        /*
-        testNowDifferenceHotKey();
-        assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(5));
+
+        testLastDifferenceHotKey();
+        assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(7));
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(right_list.getSelectionModel().getSelectedIndices().get(0)));
-        */
+
         click("#left_edit_button").click("#left_edit_button").click("#compare_button");
         click("#last_difference_button");
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(7));
         assertTrue(left_list.getSelectionModel().getSelectedIndices().get(0).equals(right_list.getSelectionModel().getSelectedIndices().get(0)));
     }
     private void testLastDifferenceHotKey(){
+        System.out.println("Type Save As HotKey : Ctrl + L");
+        press(KeyCode.CONTROL).type(KeyCode.L).release(KeyCode.CONTROL);
     }
 
+    /**
+     * Stage 5 test copy to right action.
+     */
     @Test
     public void stage5_testCopyToRightAction() {
         initForMerge();
         ListView left_list = GuiTest.find("#left_list_view");
         ListView right_list = GuiTest.find("#right_list_view");
-        /*
+
         testCopyToRightHotKey();
         assertTrue(left_list.getItems().size() == 6);
         assertTrue(right_list.getItems().size() == 6);
@@ -481,7 +544,7 @@ public class MainWindowTest extends GuiTest {
         left_list.getSelectionModel().select(0);
         assertTrue(left_list.getSelectionModel().getSelectedItems().get(0).toString().trim().equals("aa\nbb\ncc\ndd\nee\nff\ngg\nhh"));
 
-        initForMerge();*/
+        initForMerge();
         click("#copy_to_right_button");
         assertTrue(left_list.getItems().size() == 6);
         assertTrue(right_list.getItems().size() == 6);
@@ -494,23 +557,27 @@ public class MainWindowTest extends GuiTest {
         click("#compare_button");
     }
     private void testCopyToRightHotKey(){
-
+        System.out.println("Type Save As HotKey : Alt + R");
+        press(KeyCode.ALT).type(KeyCode.R).release(KeyCode.ALT);
     }
 
+    /**
+     * Stage 5 test copy to left action.
+     */
     @Test
     public void stage5_testCopyToLeftAction() {
         initForMerge();
         ListView left_list = GuiTest.find("#left_list_view");
         ListView right_list = GuiTest.find("#right_list_view");
-        /*
+
         testCopyToLeftHotKey();
         assertTrue(left_list.getItems().size() == 6);
         assertTrue(right_list.getItems().size() == 6);
 
         left_list.getSelectionModel().select(0);
-        assertTrue(left_list.getSelectionModel().getSelectedItems().get(0).toString().trim().equals("aa\nbb\ncc\ndd\nee\nff\ngg\nhh"));
+        assertTrue(left_list.getSelectionModel().getSelectedItems().get(0).toString().trim().equals("aa\nbb\nii\njj\nkk\ncc\ndd\nee\nff\ngg\nhh"));
 
-        initForMerge();*/
+        initForMerge();
         click("#copy_to_left_button");
         assertTrue(left_list.getItems().size() == 6);
         assertTrue(right_list.getItems().size() == 6);
@@ -519,23 +586,28 @@ public class MainWindowTest extends GuiTest {
         assertTrue(left_list.getSelectionModel().getSelectedItems().get(0).toString().trim().equals("aa\nbb\nii\njj\nkk\ncc\ndd\nee\nff\ngg\nhh"));
     }
     private void testCopyToLeftHotKey(){
-
+        System.out.println("Type Save As HotKey : Alt + L");
+        press(KeyCode.ALT).type(KeyCode.L).release(KeyCode.ALT);
     }
 
+    /**
+     * Stage 5 test copy to right all action.
+     */
     @Test
     public void stage5_testCopyToRightAllAction() {
         initForMerge();
         ListView left_list = GuiTest.find("#left_list_view");
         ListView right_list = GuiTest.find("#right_list_view");
-        /*
+
         testCopyToRightAllHotKey();
-        assertTrue(left_list.getItems().size() == 6);
-        assertTrue(right_list.getItems().size() == 6);
+        assertTrue(left_list.getItems().size() == 1);
+        assertTrue(right_list.getItems().size() == 1);
 
         left_list.getSelectionModel().select(0);
-        assertTrue(left_list.getSelectionModel().getSelectedItems().get(0).toString().trim().equals("aa\nbb\ncc\ndd\nee\nff\ngg\nhh"));
+        assertTrue(left_list.getSelectionModel().getSelectedItems().get(0).toString().trim().equals("aa\nbb\ncc\ndd\nee\nff\ngg\nhh\nii\njj\nkk\nll\nmm" +
+                                                                                                     "\nnn\noo\npp\nqq\nrr\nss\ntt\nuu\nvv\nww\nxx\nyy\nzz"));
 
-        initForMerge();*/
+        initForMerge();
         click("#copy_to_right_all_button");
         assertTrue(left_list.getItems().size() == 1);
         assertTrue(right_list.getItems().size() == 1);
@@ -545,23 +617,29 @@ public class MainWindowTest extends GuiTest {
                                                                                                     "\nnn\noo\npp\nqq\nrr\nss\ntt\nuu\nvv\nww\nxx\nyy\nzz"));
     }
     private void testCopyToRightAllHotKey(){
-
+        System.out.println("Type Save As HotKey : Ctrl + Shift + R");
+        press(KeyCode.CONTROL).press(KeyCode.SHIFT).type(KeyCode.R).release(KeyCode.CONTROL).release(KeyCode.SHIFT);
     }
 
+    /**
+     * Stage 5 test copy to left all action.
+     */
     @Test
     public void stage5_testCopyToLeftAllAction() {
         initForMerge();
         ListView left_list = GuiTest.find("#left_list_view");
         ListView right_list = GuiTest.find("#right_list_view");
-        /*
-        testCopyToRightAllHotKey();
-        assertTrue(left_list.getItems().size() == 6);
-        assertTrue(right_list.getItems().size() == 6);
+
+        testCopyToLeftAllHotKey();
+        assertTrue(left_list.getItems().size() == 1);
+        assertTrue(right_list.getItems().size() == 1);
 
         left_list.getSelectionModel().select(0);
-        assertTrue(left_list.getSelectionModel().getSelectedItems().get(0).toString().trim().equals("aa\nbb\ncc\ndd\nee\nff\ngg\nhh"));
 
-        initForMerge();*/
+        assertTrue(left_list.getSelectionModel().getSelectedItems().get(0).toString().trim().equals("aa\nbb\nii\njj\nkk\ncc\ndd\nee\nff\ngg\nhh\nll\nmm\n" +
+                                                                                                    "vv\nww\nxx\nyy\nzz\nnn\noo\npp\nqq\nrr\nss\ntt\nuu"));
+
+        initForMerge();
         click("#copy_to_left_all_button");
         assertTrue(left_list.getItems().size() == 1);
         assertTrue(right_list.getItems().size() == 1);
@@ -571,9 +649,13 @@ public class MainWindowTest extends GuiTest {
                                                                                                     "vv\nww\nxx\nyy\nzz\nnn\noo\npp\nqq\nrr\nss\ntt\nuu"));
     }
     private void testCopyToLeftAllHotKey(){
-
+        System.out.println("Type Save As HotKey : Ctrl + Shift + L");
+        press(KeyCode.CONTROL).press(KeyCode.SHIFT).type(KeyCode.L).release(KeyCode.CONTROL).release(KeyCode.SHIFT);
     }
 
+    /**
+     * Stage 6 test new tab menu item.
+     */
     @Test
     public void stage6_testNewTabMenuItem(){
         int tab_num = ((TabPane)GuiTest.find("#tab_pane")).getTabs().size();
@@ -584,10 +666,13 @@ public class MainWindowTest extends GuiTest {
         assertTrue(((TabPane)GuiTest.find("#tab_pane")).getTabs().size() == tab_num + 2);
     }
     private void testNewTabHotKey(){
-        System.out.println("Type Save As HotKey : Ctrl + N");
-        press(KeyCode.CONTROL).type(KeyCode.N).release(KeyCode.CONTROL);
+        System.out.println("Type Save As HotKey : Ctrl + T");
+        press(KeyCode.CONTROL).type(KeyCode.T).release(KeyCode.CONTROL);
     }
 
+    /**
+     * Stage 6 test chang tab menu item.
+     */
     @Test
     public void stage6_testChangTabMenuItem(){
         testNewTabHotKey();
@@ -604,6 +689,9 @@ public class MainWindowTest extends GuiTest {
         assertTrue(index == 1);
     }
 
+    /**
+     * Stage 7 test close tab menu item.
+     */
     @Test
     public void stage7_testCloseTabMenuItem(){
         testNewTabHotKey();
@@ -621,6 +709,9 @@ public class MainWindowTest extends GuiTest {
         press(KeyCode.CONTROL).type(KeyCode.W).release(KeyCode.CONTROL);
     }
 
+    /**
+     * Stage 8 test close tab all menu item.
+     */
     @Test
     public void stage8_testCloseTabAllMenuItem(){
         testNewTabHotKey();

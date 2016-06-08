@@ -3,9 +3,11 @@ package Model.ModelUnit.LCSsupport;
 import java.util.ArrayList;
 
 /**
- * Created by User on 2016-05-20.
+ * @see Model.ModelUnit.LCSsupport.LCSSupportUnit
+ * LCS Algorithm
+ * @author Chanwoo Park
  */
-public class LCSArrangeLine_sGroupNum implements LCSSupport {
+public class LCSArrangeLine_sGroupNum implements LCSSupportUnit {
 
     @Override
     public void groupStartingAction(ArrayList<Integer>[] aa) {

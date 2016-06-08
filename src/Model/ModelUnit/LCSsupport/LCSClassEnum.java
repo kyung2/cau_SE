@@ -1,7 +1,9 @@
 package Model.ModelUnit.LCSsupport;
 
 /**
- * Created by User on 2016-05-20.
+ * @see Model.ModelUnit.LCSsupport.LCSSupportUnit
+ * LCS Algorithm
+ * @author Chanwoo Park
  */
 public enum LCSClassEnum {
     LCSArrangeLine_sNonArrangeLineNum,

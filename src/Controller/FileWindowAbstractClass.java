@@ -3,6 +3,7 @@ package Controller;
 import Model.ModelInterface;
 import Model.ModelRealize;
 import View.AlarmWindow;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -10,7 +11,9 @@ import javafx.stage.Stage;
 import java.io.File;
 
 /**
+ * Abstract class for Open and Save FileWindowController class
  * Created by woojin on 2016-05-31.
+ * @author woojin Jang
  */
 abstract class FileWindowAbstractClass implements FileWindowInterface {
     @Override
@@ -22,6 +25,12 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
     @Override
     abstract public void cancelButtonOnAction();
 
+    /**
+     * initial action when click cancel button*@param title make alarm window
+     * @param content make alarm window
+     * @param stage stage for close file window
+     * @param title name
+     * */
     void initCancelButtonAction(String title, String content, Stage stage){
         AlarmWindow exitAlarmWindow = new AlarmWindow(title, content);
         exitAlarmWindow.showAndWait();
@@ -29,7 +38,11 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
             stage.close();
         }
     }
-
+    /** Change tab's name when open or save file
+     * @param position 0 : left 1:right
+     * @param name adjust tab name to file name
+     * @param tab which tab
+     * */
     void changeTabName(Tab tab, String name, String position){
         String tab_name = tab.getText();
         String left_file_name = null;
@@ -64,9 +77,13 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
         }
     }
 
-    FileChooser loadFileChooser(){
+    /** Make custom file chooser
+     * @param title filechooser namesetting
+     * @return filechooser
+     */
+    FileChooser customFileChooser(String title){
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("FileChooser");
+        fileChooser.setTitle(title);
         fileChooser.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("All Files","*.txt", "*.java", "*.c", "*.cpp"),
                 new FileChooser.ExtensionFilter("Text Files", "*.txt"),

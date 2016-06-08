@@ -1,28 +1,33 @@
 package Controller;
 
 /**
+ * Interface for FileWindowAbstractClass
  * Created by woojin on 2016-05-31.
  */
 interface FileWindowInterface {
-    /*
-    * left find 버튼 을 눌렀을 때
-    * left file 을 load or save
+
+    /**
+    * click left find button
+    * get file path and name for load or save left file
     * */
     void leftFileFindButtonOnAction();
-    /*
-    * right find 버튼을 눌렀을 때
-    * right file 을 load or save
+
+    /**
+    * click right find button
+    * get file path and name for load or save right file
     * */
     void rightFileFindButtonOnAction();
-    /*
-    * ok 버튼을 눌렀을 때
-    * 지금까지 찾은 file 을 바탕으로 save or load
+
+    /**
+    * click ok button
+    * save or load file with find value
     * */
     void okButtonOnAction();
-    /*
-    * cancel 버튼을 눌렀을 때
-    * 찾은 file 이 없으면 그대로 꺼지고
-    * 있을 경우 안내창의 띄워 물어본다.
+
+    /**
+    * click cancel button
+    * If it find no file just close the window
+    * If it find file make alarm window for ask one more
     * */
     void cancelButtonOnAction();
 }

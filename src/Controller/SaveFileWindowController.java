@@ -12,21 +12,28 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * Controller for SaveFileWindow
+ * Created by woojin on 2016-05-20.
+ * @author woojin Jang
+ */
 public class SaveFileWindowController extends FileWindowAbstractClass{
-    private boolean item_flag = false;
+
+    private boolean item_flag = false, left_file_chooser_flag = true, right_file_chooser_flag = true;
     private File left_file, right_file;
     private Tab tab;
     private Label left_file_label, right_file_label;
     private Button left_load_button, left_edit_button, left_save_button, right_load_button, right_edit_button, right_save_button, compare_button;
     private MenuItem open_menu_item, save_menu_item, save_left_file_menu_item, save_right_file_menu_item, compare_menu_item;
     private TextArea left_text_area, right_text_area;
-    private TextArea left_file_bottom_text_area, right_file_bottom_text_area;
-    private ListView left_list_view, right_list_view;
+    private TextArea left_status_area, right_status_area;
 
     @FXML
     private AnchorPane file_anchor_pane;
     @FXML
     private TextField right_file_text_area, left_file_text_area, warning_info_text_area;
+
+    private StatusController left_status, right_status;
 
     @FXML
     public void leftFileFindButtonOnAction(){
@@ -34,13 +41,21 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
             getTabContent();
             item_flag = true;
         }
-        FileChooser fileChooser = super.loadFileChooser();
-        try {
-            left_file = fileChooser.showSaveDialog(null);
-            left_file_text_area.setText(left_file.getAbsolutePath());
-            warning_info_text_area.setText("Select " + left_file.getName());
-        }catch (NullPointerException e){
-            warning_info_text_area.setText("Select no Left File");
+        if(left_file_chooser_flag) {
+            FileChooser fileChooser = super.customFileChooser("Left File FileChooser");
+            try {
+                left_file_chooser_flag = false;
+                left_file = fileChooser.showSaveDialog(null);
+                left_file_chooser_flag = true;
+
+                left_file_text_area.setText(left_file.getAbsolutePath());
+                warning_info_text_area.setText("Select " + left_file.getName());
+            } catch (NullPointerException e) {
+                warning_info_text_area.setText("Select no Left File");
+            }
+        }
+        else{
+            System.out.println("Left File FileChooser is already open!");
         }
     }
 
@@ -50,13 +65,21 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
             getTabContent();
             item_flag = true;
         }
-        FileChooser fileChooser = super.loadFileChooser();
-        try {
-            right_file = fileChooser.showSaveDialog(null);
-            right_file_text_area.setText(right_file.getAbsolutePath());
-            warning_info_text_area.setText("Select " + right_file.getName());
-        }catch (NullPointerException e){
-            warning_info_text_area.setText("Select no Right File");
+        if(right_file_chooser_flag) {
+            FileChooser fileChooser = super.customFileChooser("Right File FileChooser");
+            try {
+                right_file_chooser_flag = false;
+                right_file = fileChooser.showSaveDialog(null);
+                right_file_chooser_flag = true;
+
+                right_file_text_area.setText(right_file.getAbsolutePath());
+                warning_info_text_area.setText("Select " + right_file.getName());
+            } catch (NullPointerException e) {
+                warning_info_text_area.setText("Select no Right File");
+            }
+        }
+        else{
+            System.out.println("Right File FileChooser is already open!");
         }
     }
 
@@ -74,6 +97,10 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
                 modelInterface.writeTextOuter(tab_num,left_file.getAbsolutePath(), 0);
                 super.changeTabName(tab, left_file.getName(),"left");
                 left_file_label.setText(left_file.getName());
+
+                left_status.setFileName(left_file.getName());
+                left_status.addStatusWithName("File open");
+
                 doActionBySave("left");
                 System.out.println("left");
             }
@@ -82,6 +109,10 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
                 modelInterface.writeTextOuter(tab_num,right_file.getAbsolutePath(), 1);
                 super.changeTabName(tab, right_file.getName(),"right");
                 right_file_label.setText(right_file.getName());
+
+                right_status.setFileName(right_file.getName());
+                right_status.addStatusWithName("File open");
+
                 doActionBySave("right");
                 System.out.println("right");
             }
@@ -103,7 +134,7 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         }
     }
 
-    /*
+    /**
     *  tab 에 포함된 내용물들을 가져온다
     * */
     private void getTabContent(){
@@ -126,16 +157,14 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         BorderPane main_center_pane = (BorderPane)((BorderPane)tab.getTabPane().getScene().getRoot()).getCenter();
         compare_button = (Button)((ToolBar)(main_center_pane.getTop())).getItems().get(11);
 
-        left_file_bottom_text_area = (TextArea)((SplitPane)left_pane.getChildren().get(1)).getItems().get(1);
-        right_file_bottom_text_area = (TextArea)((SplitPane)right_pane.getChildren().get(1)).getItems().get(1);
+        left_status_area = (TextArea)((SplitPane)left_pane.getChildren().get(1)).getItems().get(1);
+        right_status_area = (TextArea)((SplitPane)right_pane.getChildren().get(1)).getItems().get(1);
 
         AnchorPane left_file_pane = (AnchorPane)((SplitPane)left_pane.getChildren().get(1)).getItems().get(0);
         AnchorPane right_file_pane = (AnchorPane)((SplitPane)right_pane.getChildren().get(1)).getItems().get(0);
 
         left_text_area = (TextArea)left_file_pane.getChildren().get(0);
-        left_list_view = (ListView)left_file_pane.getChildren().get(1);
         right_text_area = (TextArea)right_file_pane.getChildren().get(0);
-        right_list_view = (ListView)right_file_pane.getChildren().get(1);
 
         MenuBar menu_bar = (MenuBar)((BorderPane)compare_button.getScene().getRoot()).getTop();
 
@@ -147,9 +176,11 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         save_menu_item = menu.getItems().get(2);
         save_left_file_menu_item = menu.getItems().get(3);
         save_right_file_menu_item = menu.getItems().get(4);
+
+        initStatus();
     }
 
-    /*
+    /**
     * compare 버튼의 조건을 검사하고 활성화 or 비활성화
     * */
     private void checkCompareButtonAndMenuItem(){
@@ -159,8 +190,9 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         }
     }
 
-    /*
+    /**
     * position 을 받아서 save 할 때의 action 을 한다.
+     * @param position left , right
     * */
     private void doActionBySave(String position){
         save_menu_item.setDisable(true);
@@ -180,9 +212,12 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         }
         if(!left_load_button.isDisable() && !right_load_button.isDisable()) open_menu_item.setDisable(false);
     }
-    /*
+
+    /**
     * String 을 받아와서 \n 로 split 한 후 ArrayList 에 저장한다.
-    * */
+     * @param s  string content that we want to change arraylist
+     * @return arrayList result TypeCasting
+     */
     private ArrayList<String> stringToArrayList(String s){
         ArrayList<String> arrayList = new ArrayList<String>();
         String[] strings = s.split("\n");
@@ -192,5 +227,10 @@ public class SaveFileWindowController extends FileWindowAbstractClass{
         return arrayList;
     }
 
-
+    /**
+     * make init status.*/
+    private void initStatus(){
+        left_status = new StatusController(left_status_area);
+        right_status = new StatusController(right_status_area);
+    }
 }

@@ -8,12 +8,21 @@ import javafx.scene.image.Image;
 import java.io.IOException;
 
 /**
- *  About Program info simple!
+ * About Program info simple!
+ * This class has information about program name, author, licence and date that finished to make
+ * It is designed by ProgramInfoWindow.fxml file in /View/Fxml package
+ * It is related on ProgramInfoWindowController in /Controller package
  * Created by woojin on 2016-05-16.
- * @author Hyunkyung Choi
+ *
+ * @author Woojin Jang and Hyunkyung Choi
  */
 public class ProgramInformationWindow {
 
+    /**
+     * Programinformation window.
+     *
+     * @throws Exception the exception
+     */
     public void PrograminformationWindow() throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/ProgramInfoWindow.fxml"));
         Parent root;

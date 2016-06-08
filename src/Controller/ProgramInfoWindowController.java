@@ -5,12 +5,15 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * Created by hyunkyung on 2016-05-20.
+ * Controller for programInformationWindow
+ *@author woojin
  */
 public class ProgramInfoWindowController implements programInfoInterface{
     @FXML
     private AnchorPane info_window;
     @FXML
+    /**
+     * okaybutton close the info tab*/
     public void okButtonOnAction(){
         ((Stage)info_window.getScene().getWindow()).close();
     }

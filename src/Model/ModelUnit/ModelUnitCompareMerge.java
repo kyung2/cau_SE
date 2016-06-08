@@ -1,23 +1,39 @@
 package Model.ModelUnit;
 
 import Model.ModelUnit.LCSsupport.LCSClassEnum;
-import Model.ModelUnit.LCSsupport.LCSGrouping;
 import Model.ModelException.MergeLineIllegalException;
+import Model.ModelUnit.LCSsupport.LCSGrouping;
 
 import java.util.ArrayList;
 
 /**
- * Created by User on 2016-05-27.
+ *model unit 클래스의 compare & MERGE Role
+ * @author Chanwoo Park
  */
 class ModelUnitCompareMerge {
+
+    /**
+     * 재배열된 텍스트의 lineNum이 포함된 그룹을 병합
+     * @param lineNum 재벼열된 텍스트의 index
+     * @param direction  true : left->right false right ->left
+     * @param m  modelUnitData
+     * @throws IndexOutOfBoundsException,MergeLineIllegalException
+     * */
     static public void mergeBylineNum(int lineNum, boolean direction, ModelUnitData m) throws IndexOutOfBoundsException, MergeLineIllegalException
     {
         LCSGrouping g = new LCSGrouping();
         if(m.group==null) regrouping(m);
         mergeByGroupNum((Integer)(m.group[LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum)][0].get(lineNum)), direction,m);
-
-
     }
+
+    /**
+     * 재배열된 텍스트의 groupNum 포함된 그룹을 병합
+     * 텍스트를 update하고 recompare
+     *  @param groupNum 재배열된 텍스트의 group
+     * @param direction  true : left->right false right ->left
+     * @param m  modelUnitData
+     * @throws MergeLineIllegalException
+     * */
     static public void mergeByGroupNum(int groupNum, boolean direction, ModelUnitData m) throws MergeLineIllegalException
     {
         LCSGrouping g = new LCSGrouping();
@@ -26,13 +42,9 @@ class ModelUnitCompareMerge {
         if(groupNum < 0) throw new MergeLineIllegalException();
         if(groupNum >= m.group[LCSClassEnum.find(LCSClassEnum.LCSGroup_sIncludingArrangedLineNum)][0].size()) throw new MergeLineIllegalException();
         if (groupNum % 2 == 1) {
-            mergeTextFirst(groupNum, direction,m);
 
-
-            m.group = g.merge(m.group, groupNum, direction);
-            changeArrangedString(m);
-            m.groupChange();
-            m.textChange();
+            /*a*/mergeText(groupNum, direction,m);
+            regrouping(m);
         }
         else
         {
@@ -40,7 +52,13 @@ class ModelUnitCompareMerge {
         }
     }
 
-    static protected void mergeTextFirst(int groupNum, boolean direction, ModelUnitData m) //
+    /**
+     * merge하기 위해 먼저 해야할 일: 저장되어 있는 문자열을 새로운 문자열로 replace 행하는 메소드
+     * @param groupNum 재배열된 텍스트의 group
+     * @param direction  true : left->right false right ->left
+     * @param m  modelUnitData
+     */
+    static protected void mergeText(int groupNum, boolean direction, ModelUnitData m) //
     {
         int aToNonA = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sNonArrangeLineNum);
         int aToGNum = LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum);
@@ -54,8 +72,6 @@ class ModelUnitCompareMerge {
         oldS[1] = m.codes[1].lines;
         newS[0] = new ArrayList<String>();
         newS[1] = new ArrayList<String>();
-
-
 
         for(int i=0;i<m.group[aToGNum][0].size();i++) {
             if ((Integer) m.group[aToGNum][0].get(i) != groupNum) {
@@ -85,13 +101,11 @@ class ModelUnitCompareMerge {
 
     }
 
-    static protected void regrouping(ModelUnitData m)
-    {
-        LCSMethod(m);
-        changeArrangedString(m);
-        m.groupChange();
-    }
 
+    /**
+     * model unit 의 그룹 정보를 읽어서 replace 된 문자열을 계산하여 만드는 일을 행함
+     *@param m  modelUnitData
+     */
     static protected void changeArrangedString(ModelUnitData m) //
     {
         m.arrangedString = new ArrayList[2];
@@ -121,7 +135,31 @@ class ModelUnitCompareMerge {
             }
         }
     }
-    static private void LCSMethod(ModelUnitData m) throws NullPointerException // todo
+
+
+    /**
+     * 저장되어 있는 replace 된 문자열을 새로운 재배치된 문자열로 대체
+     * @param m  modelUnitData
+     */
+    static protected void regrouping(ModelUnitData m)
+    {
+        /* 여기서부터 */
+        m.codes[0].deleteblank();
+        m.codes[1].deleteblank();
+        /* 여기까지 끝의 공백을 지우는 일 */
+        compareMatrix(m);
+        /*재배치된 후의 정보를 얻고,*/
+        changeArrangedString(m);
+        /*그 정보로 문자열을 재배치한다.*/
+    }
+
+
+    /**
+     * 백트래킹 행렬을 받아서 그룹 관련 정보를 산출하는 LCSsupport 패키지를 이용하기 위하여, 사용될 백트래킹 행렬을 만드는 메소드
+     * @param m  modelUnitData
+     * @throws NullPointerException
+     */
+    static public void compareMatrix(ModelUnitData m) throws NullPointerException // todo
     {
         int x=m.codes[0].lines.size()+1,y=m.codes[1].lines.size()+1;
         int LCS[][] = new int[x][y];
@@ -156,12 +194,23 @@ class ModelUnitCompareMerge {
         m.group =  p.start(LCSBacktrack,x,y);
     }
 
-    static int getArrangeLine_sGroupNum()
+    /**
+     * 그룹 정보 모음에서 ArrangeLine_sGroupNum 정보가 위치한 칸을 반환한다.
+     * @return int groupnum에 대한 index
+     */
+    static int getArrangeLine_sGroupNumEnum()
     {
         return LCSClassEnum.find(LCSClassEnum.LCSArrangeLine_sGroupNum);
     }
-    static int getGroup_sIncludingArrangedLineNum()
+
+
+    /**
+     * 그룹 정보 모음에서 Group_sIncludingArrangedLineNum 정보가 위치한 칸을 반환한다.
+     * @return int 포함된 groupnum에 대한 index
+     */
+    static int getGroup_sIncludingArrangedLineNumEnum()
     {
         return LCSClassEnum.find(LCSClassEnum.LCSGroup_sIncludingArrangedLineNum);
     }
+
 }
