@@ -16,7 +16,8 @@ class ModelUnitFileIO {
      * @param m ModelUnitData
      * @param i 0 left 1 right
      * @param filepath filepath
-     * @throws IOException,IndexOutOfBoundsException
+     * @throws IOException filepath에 있는 파일을 열 수 없을 때 IOException 발생.
+     * @throws IndexOutOfBoundsException i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      */
     static public void open(String filepath, int i, ModelUnitData m) throws IOException, IndexOutOfBoundsException
     {
@@ -33,7 +34,8 @@ class ModelUnitFileIO {
      * @param m ModelUnitData
      * @param i 0 left 1 right
      * @param filepath filepath
-     * @throws IOException,IndexOutOfBoundsException
+     * @throws IOException file을 저장 할 수 없 을 때
+     * @throws IndexOutOfBoundsException i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      */
     static public void save(String filepath, int i, ModelUnitData m) throws IOException, IndexOutOfBoundsException
     {
@@ -47,7 +49,7 @@ class ModelUnitFileIO {
      * i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      * @param m ModelUnitData
      * @param i 0 left 1 right
-     * @throws IOException
+     * @throws IOException file을 저장 할 수 없을 떄
      */
     static public void save(int i, ModelUnitData m) throws IOException
     {
@@ -57,7 +59,8 @@ class ModelUnitFileIO {
     /**
      * UTF-8
      * @param f 현재 열려 있는 파일
-     * @return convertString(UTF-8)*/
+     * @return convertString(UTF-8)
+     * */
     static private String EncodingType(FileInputStream f) throws IOException {
         byte[] BOM = new byte[4];
         f.read(BOM, 0, 4);
@@ -101,7 +104,7 @@ class ModelUnitFileIO {
     * @param i 0 left 1 right
     * @param m ModelUnitData
     * @param s string
-    * @throws IOException
+    * @throws IOException file에 적을 수 없을 때
     */
     static private void WriteFromOuter(String s, int i, ModelUnitData m) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(s);
@@ -120,7 +123,7 @@ class ModelUnitFileIO {
     * @param i 0 left 1 right
      * @param m ModelUnitData
      * @param s string
-     * @throws IOException
+     * @throws IOException fie 읽을수 없을 때 
      */
     static private void ReadFromOuter(String s, int i, ModelUnitData m) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(s);

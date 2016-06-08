@@ -7,18 +7,19 @@ import Model.ModelUnit.LCSsupport.LCSGrouping;
 import java.util.ArrayList;
 
 /**
- *model unit 클래스의 compare & MERGE Role
+ * model unit comparemerge
  * @author Chanwoo Park
  */
 class ModelUnitCompareMerge {
 
     /**
      * 재배열된 텍스트의 lineNum이 포함된 그룹을 병합
-     * @param lineNum 재벼열된 텍스트의 index
-     * @param direction  true : left->right false right ->left
-     * @param m  modelUnitData
-     * @throws IndexOutOfBoundsException,MergeLineIllegalException
-     * */
+     * @param lineNum   재벼열된 텍스트의 index
+     * @param direction true : left to right false right to left
+     * @param m         modelUnitData
+     * @throws IndexOutOfBoundsException ,MergeLineIllegalException
+     * @throws MergeLineIllegalException the merge line illegal exception
+     */
     static public void mergeBylineNum(int lineNum, boolean direction, ModelUnitData m) throws IndexOutOfBoundsException, MergeLineIllegalException
     {
         LCSGrouping g = new LCSGrouping();
@@ -28,12 +29,12 @@ class ModelUnitCompareMerge {
 
     /**
      * 재배열된 텍스트의 groupNum 포함된 그룹을 병합
-     * 텍스트를 update하고 recompare
-     *  @param groupNum 재배열된 텍스트의 group
-     * @param direction  true : left->right false right ->left
-     * @param m  modelUnitData
-     * @throws MergeLineIllegalException
-     * */
+     * 텍스트를 update하고 recompare     *
+     * @param groupNum  재배열된 텍스트의 group
+     * @param direction true : left to right false right to left
+     * @param m         modelUnitData
+     * @throws MergeLineIllegalException the merge line illegal exception
+     */
     static public void mergeByGroupNum(int groupNum, boolean direction, ModelUnitData m) throws MergeLineIllegalException
     {
         LCSGrouping g = new LCSGrouping();
@@ -54,9 +55,9 @@ class ModelUnitCompareMerge {
 
     /**
      * merge하기 위해 먼저 해야할 일: 저장되어 있는 문자열을 새로운 문자열로 replace 행하는 메소드
-     * @param groupNum 재배열된 텍스트의 group
-     * @param direction  true : left->right false right ->left
-     * @param m  modelUnitData
+     * @param groupNum  재배열된 텍스트의 group
+     * @param direction true : left to right false right to left
+     * @param m         modelUnitData
      */
     static protected void mergeText(int groupNum, boolean direction, ModelUnitData m) //
     {
@@ -104,7 +105,7 @@ class ModelUnitCompareMerge {
 
     /**
      * model unit 의 그룹 정보를 읽어서 replace 된 문자열을 계산하여 만드는 일을 행함
-     *@param m  modelUnitData
+      * @param m modelUnitData
      */
     static protected void changeArrangedString(ModelUnitData m) //
     {
@@ -139,7 +140,8 @@ class ModelUnitCompareMerge {
 
     /**
      * 저장되어 있는 replace 된 문자열을 새로운 재배치된 문자열로 대체
-     * @param m  modelUnitData
+     *
+     * @param m modelUnitData
      */
     static protected void regrouping(ModelUnitData m)
     {
@@ -156,8 +158,9 @@ class ModelUnitCompareMerge {
 
     /**
      * 백트래킹 행렬을 받아서 그룹 관련 정보를 산출하는 LCSsupport 패키지를 이용하기 위하여, 사용될 백트래킹 행렬을 만드는 메소드
-     * @param m  modelUnitData
-     * @throws NullPointerException
+     *
+     * @param m modelUnitData
+     * @throws NullPointerException the null pointer exception
      */
     static public void compareMatrix(ModelUnitData m) throws NullPointerException // todo
     {
@@ -196,6 +199,7 @@ class ModelUnitCompareMerge {
 
     /**
      * 그룹 정보 모음에서 ArrangeLine_sGroupNum 정보가 위치한 칸을 반환한다.
+     *
      * @return int groupnum에 대한 index
      */
     static int getArrangeLine_sGroupNumEnum()
