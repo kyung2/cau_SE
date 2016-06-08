@@ -32,8 +32,8 @@ public class ModelUnitRealize implements ModelUnit{
      * i번째 텍스트를 ArrayList<String>형으로 반환한다
      * i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      * @param i 0 left 1 right
-     * @throws IndexOutOfBoundsException
-     * @return Arraylist<string> ModelUnitGet.set.textReceive(i,m)
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
+     * @return Arraylist_string ModelUnitGet.set.textReceive(i,m)
     */
     public ArrayList<String> textReceive(int i) throws IndexOutOfBoundsException {
         return ModelUnitGetSet.textReceive(i,m);
@@ -44,17 +44,17 @@ public class ModelUnitRealize implements ModelUnit{
      * i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      * @param i 0 left 1 right
      * @param s string
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
     */
     public void textSend(int i, ArrayList<String> s) throws IndexOutOfBoundsException {
         ModelUnitGetSet.textSend(i,s,m);
     }
 
     /**
-     * 재배열된 i번째 텍스트를 i번째 텍스트를 ArrayList<String>형으로 반환한다.
+     * 재배열된 i번째 텍스트를 i번째 텍스트를 ArrayList str형으로 반환한다.
      * i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      * @param i 0 left 1 right
-     * @throws IndexOutOfBoundsException
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
      * @return ArrayList ModelUnitGetSet
     */
     public ArrayList<String> getArrangedText(int i) throws IndexOutOfBoundsException {
@@ -62,17 +62,17 @@ public class ModelUnitRealize implements ModelUnit{
     }
 
     /**
-     *  재배열된 텍스트의 줄 수 번째의 줄이 어느 그룹에 속하는지를 ArrayList<Integer>형으로 반환한다.
-     *  @throws IndexOutOfBoundsException
-     *  @return arraylist<integer> ModelUnitGetSet.getArrangGroup(m)
+     *  재배열된 텍스트의 줄 수 번째의 줄이 어느 그룹에 속하는지를 ArrayList int 형으로 반환한다.
+     *  @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
+     *  @return arraylist_integerType  ModelUnitGetSet.getArrangGroup(m)
      */
     public ArrayList<Integer> getArrangedGroup() throws IndexOutOfBoundsException {
         return ModelUnitGetSet.getArrangedGroup(m);
     }
 
     /**
-     *  비교된 그룹의 앞에서부터 나오는 번째 번의 그룹이 몇 개의 줄을 포함하는지를 ArrayList<Integer>형으로 반환한다.
-     *  @throws IndexOutOfBoundsException
+     *  비교된 그룹의 앞에서부터 나오는 번째 번의 그룹이 몇 개의 줄을 포함하는지를 ArrayList int형으로 반환한다.
+     *  @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
      *  @return ModelUnitGetSet.getArrangedGroupSpace(m)
     */
     public ArrayList<Integer> getArrangedGroupSpace() throws IndexOutOfBoundsException {
@@ -86,20 +86,21 @@ public class ModelUnitRealize implements ModelUnit{
      * 병합할 그룹이 이미 일치 상태일 경우 MergeLineIllegalException 발생.
      * @param direction true left false right
      * @param lineNum lineNum 줄이 포함된 그룹을 병합.
-     * @throws IndexOutOfBoundsException,MergeLineIllegalException
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
+     * @throws MergeLineIllegalException 이미 merge가 된 상태
     */
     public void mergeBylineNum(int lineNum, boolean direction) throws IndexOutOfBoundsException, MergeLineIllegalException {
         ModelUnitCompareMerge.mergeBylineNum(lineNum,direction,m);
     }
 
     /**
-    *재배열된 텍스트의 groupNum번째의 그룹을 병합한다.
-    *direction이 true면 0번째에서 1번째 텍스트로, false면 그 반대 방향으로 병합한다.
-    *i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
-    *병합할 그룹이 이미 일치 상태일 경우 MergeLineIllegalException 발생.
+    * 재배열된 텍스트의 groupNum번째의 그룹을 병합한다.
+    * direction이 true면 0번째에서 1번째 텍스트로, false면 그 반대 방향으로 병합한다.
+    * i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
+    * 병합할 그룹이 이미 일치 상태일 경우 MergeLineIllegalException 발생.
      * @param direction true left false right
      * @param groupNum group의 index
-     * @throws MergeLineIllegalException
+     * @throws MergeLineIllegalException 이미 merge가 된 상태
     */
     public void mergeByGroupNum(int groupNum, boolean direction) throws MergeLineIllegalException {
         ModelUnitCompareMerge.mergeByGroupNum(groupNum,direction,m);
@@ -111,7 +112,8 @@ public class ModelUnitRealize implements ModelUnit{
      *  i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      *  @param i 0 left 1 right
      *  @param filepath file경로
-     *  @throws IOException,IndexOutOfBoundsException
+     *  @throws IOException file open fail
+     *  @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
     */
     public void open(String filepath, int i) throws IOException, IndexOutOfBoundsException {
         ModelUnitFileIO.open(filepath,i,m);
@@ -119,11 +121,12 @@ public class ModelUnitRealize implements ModelUnit{
 
     /**
      *  매개변수로 받은 filepath에 위치한 파일에 i번째 텍스트의 내용을 덮어쓴다.
-    *filepath에 있는 파일을 쓸 수 없을 때 IOException 발생.
-    *i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
+    * filepath에 있는 파일을 쓸 수 없을 때 IOException 발생.
+    * i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      * @param filepath filepath
      * @param i 0 left 1 right
-     * @throws IOException,IndexOutOfBoundsException
+     * @throws IOException file open fail
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
      * */
     public void save(String filepath, int i) throws IOException, IndexOutOfBoundsException {
         ModelUnitFileIO.save(filepath,i,m);
@@ -134,7 +137,7 @@ public class ModelUnitRealize implements ModelUnit{
      *  filepath에 있는 파일을 쓸 수 없을 때 IOException 발생.
      *  i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      * @param i 0 left 1 right
-     * @throws IOException
+     * @throws IOException file open fail
      */
     public void save(int i) throws IOException {
         ModelUnitFileIO.save(i,m);
