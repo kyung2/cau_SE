@@ -29,7 +29,7 @@ public class ModelUnitRealize implements ModelUnit{
 
 
     /**
-     * i번째 텍스트를 ArrayList<String>형으로 반환한다
+     * i번째 텍스트를 ArrayListString형으로 반환한다
      * i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      * @param i 0 left 1 right
      * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시

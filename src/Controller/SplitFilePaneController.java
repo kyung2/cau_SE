@@ -677,6 +677,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
 
     /**
      * get now selected Tab in TabPane
+     * @return tab
      * */
     private Tab getSelectedTab(){
         Tab tab = null;
@@ -705,7 +706,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     /**
      * make ArrayList to get String and split it with \n
      * @param s want to change ArrayList
-     * @return arrayList<String> result
+     * @return arrayList String result
      * */
     private ArrayList<String> stringToArrayList(String s){
         ArrayList<String> arrayList = new ArrayList<String>();
@@ -771,7 +772,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     /**
      * check Load state
      * @param position left pane right pane
-     * @throws IllegalAccessException
+     * @throws IllegalAccessException 잘못된 접근
      * @return boolean true when disable state
      */
     public boolean isDisableLoad(String position) throws IllegalAccessException {
@@ -789,7 +790,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     /**
      * check Edit state
      * @param position left pane right pane
-     * @throws IllegalAccessException
+     * @throws IllegalAccessException 잘못된 접근
      * @return boolean true when disable state
      */
     public boolean isDisableEdit(String position) throws IllegalAccessException {
@@ -808,7 +809,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     /**
      * check Save state
      * @param position left pane right pane
-     * @throws IllegalAccessException
+     * @throws IllegalAccessException 잘못된 접근
      * @return boolean true when disable state
      */
     public boolean isDisableSave(String position) throws IllegalAccessException {

@@ -81,7 +81,8 @@ public interface ModelInterface {
 
     /**
      * tabnum을 식별자로 하는 모델 유닛의 재별열 된 텍스트의 줄 수 번째의 줄 수 번째의 줄이 어느 그룹에 속하는지에 대한 정보를 가져온다.
-     * @throws IndexOutOfBoundsException,IllegalArgumentException 유효하지 않은 인자가 잘못 전달 시
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
+     * @throws IllegalArgumentException 유효하지 않은 인자가 잘못 전달 시
      * @param tabNum   This is index about now working tab
      * @return ArrayList_Interger
      *
@@ -122,7 +123,9 @@ public interface ModelInterface {
      * @param tabNum This is index about now working tab
      * @param i 0 left 1 right
      * @param filepath filepath
-     * @throws IndexOutOfBoundsException,IOException,IllegalArgumentException 유효하지 않은 인자가 잘못 전달 시
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
+     * @throws IOException 파일 입출력 에러
+     * @throws IllegalArgumentException 유효하지 않은 인자가 잘못 전달 시
      * */
     public void writeTextOuter(int tabNum, String filepath, int i) throws IndexOutOfBoundsException, IOException, IllegalArgumentException;
 
@@ -141,7 +144,8 @@ public interface ModelInterface {
      * @param direction true left false right
      * @param Index index line
      * @param tabNum now working tab
-     * @throws IndexOutOfBoundsException,IllegalArgumentException 유효하지 않은 인자가 잘못 전달 시
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
+     * @throws IllegalArgumentException 유효하지 않은 인자가 잘못 전달 시
      */
      public void mergeByLine(int tabNum, int Index, boolean direction) throws IndexOutOfBoundsException, IllegalArgumentException, MergeLineIllegalException;
 

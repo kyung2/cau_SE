@@ -51,7 +51,7 @@ public interface ModelUnit {
      * direction이 true면 0번째에서 1번째 텍스트로, false면 그 반대 방향으로 병합한다.
      * i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      * 병합할 그룹이 이미 일치 상태일 경우 MergeLineIllegalException 발생.
-     * @param direction true : left->right false right->left
+     * @param direction true : left t0 right false right to left
      * @param lineNum index of line
      * @throws IndexOutOfBoundsException i가 0 또는 1이 아닐 때
      * @throws MergeLineIllegalException 이미 merge가됨
@@ -63,7 +63,7 @@ public interface ModelUnit {
      *direction이 true면 0번째에서 1번째 텍스트로, false면 그 반대 방향으로 병합한다.
      *i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      *병합할 그룹이 이미 일치 상태일 경우 MergeLineIllegalException 발생.
-     * @param direction true : left->right false right->left
+     * @param direction true : left t0 right false right to left
      * @param groupNum index of line
      * @throws MergeLineIllegalException 이미 merge가됨
      */

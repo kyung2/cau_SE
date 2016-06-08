@@ -88,7 +88,7 @@ interface SplitFilePaneInterface {
     /**
      * load 버튼이 현재 disable상태인지 판단.
      * @param s left right
-     * @throws IllegalAccessException
+     * @throws IllegalAccessException 잘못된 접근
      * @return boolean
      * */
     boolean isDisableLoad(String s) throws IllegalAccessException;
@@ -96,14 +96,14 @@ interface SplitFilePaneInterface {
     /**
      * edit버튼이 현재 disable상태인지 판단.
      * @param s left right
-     * @throws IllegalAccessException
+     * @throws IllegalAccessException 잘못된 접근
      * @return boolean
      * */
     boolean isDisableEdit(String s) throws IllegalAccessException;
 
     /**
      * save 버튼이 현재 disable상태인지 판단.
-     * @throws IllegalAccessException
+     * @throws IllegalAccessException 잘못된 접근
      * @param s left right
      * @return boolean
      * */
