@@ -43,12 +43,12 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     private MenuBar menu_bar;
     private MenuItem previous_menu_item, next_menu_item, compare_menu_item, open_menu_item, save_menu_item, save_right_file_menu_item, save_left_file_menu_item;
     private StatusController left_status, right_status;
+
     /**
     * 기본적으로
     * file pane 의 버튼은 로드 활성화. 수정 비활성화, 저장 비활성화
     * toolbar 의 버튼은 모두 비활성화
     * */
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
@@ -118,7 +118,9 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             System.out.println("Left File FileChooser is already open!");
         }
     }
-    /**Right Load
+
+    /**
+     * Right Load
      * compare 버튼을 할당되있지 않을 경우 할당
      * 파일을 읽어서 내용이 있을 경우 edit 버튼 활성화
      * load 버튼을 누를 경우 파일을 읽어서 text area 에 파일 내용을 적는다.
@@ -213,6 +215,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
             left_status.addStatusWithName("Editable");
         }
     }
+
     /**
      * right edit
      * 기본은 text area 수정 불가
@@ -326,8 +329,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
 
     /**
-     * left
-     * 리스트 뷰를 클릭했을 때 일어나는 일
+     * left 리스트 뷰를 클릭했을 때 일어나는 일
      * */
     @FXML
     public void onLeftListViewMouseClicked(){
@@ -337,9 +339,9 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         changeToolbarButtonByClickList(index);
         changeScrollbar(index);
     }
+
     /**
-     * right
-     * 리스트 뷰를 클릭했을 때 일어나는 일
+     * right 리스트 뷰를 클릭했을 때 일어나는 일
      * */
     @FXML
     public void onRightListViewMouseClicked(){
@@ -351,7 +353,8 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
 
     /**
-     * init Status.*/
+     * init Status.
+     * */
     private void initStatusControl(){
         if (!left_edit_button.isDisable()) {
             Model.ModelInterface model = ModelRealize.getInstance();
@@ -468,8 +471,9 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
 
     /**
-     *  custome FileChooser 를 만든다.
+     *  make custome FileChooser
      *  @param title load / save
+     *  @return FileChooser customFileChooser
      * */
     FileChooser customFileChooser(String title){
         FileChooser fileChooser = new FileChooser();
@@ -510,16 +514,15 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
 
     /**
-    * file pane 버튼의 able 과 disable 을 해준다.
-    * position 에 left 와 right 를 통해서 위치를 선택
-    * 각각 load, edit, save에 true || false 를 통해서 able 과 disable 을 한다.
-    * null 일 경우 그 버튼은 현상 유지
-    * 버튼들과 연관된 menu item 의 활성화와 비활성화를 조절
-    * @param position left?right?
+     * control file pane buttons' able / disable condition.
+     * decide position left or right
+     * if it is null, do not change
+     * control related menu items' able / disable condition
+     * @param position left?right?
      * @param load load
      * @param edit save
      * @param save edit
-     */
+     * */
     private void setClickableButtons(String position, String load, String edit, String save){
         boolean f_load, f_edit, f_save;
         f_load = load == "true" ? true : false;
@@ -568,10 +571,10 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
 
     /**
-    * compare 버튼이 활성화 되도 되는지 체크
-    * edit 버튼이 눌렸을 때 두 text area 가 수정 불가능 한 경우 활성화
-    * save 버튼이 눌렸을 때 두 text area 가 수정 불가능 한 경우 활성화
-    * */
+     * check compare button is able / disable
+     * when click edit button, if two text area is disabled, able to compare button
+     * when click save button, if two text area is disabled, able to compare button
+     * */
     private void checkCompareButton(){
         Model.ModelInterface model = ModelRealize.getInstance();
         try{
@@ -587,9 +590,9 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
 
     /**
-    * Tab num 값을 확인한다.
-    * -1 일 경우 초기값이므로 현재 tab 의 번호를 넣어준다.
-    * */
+     * check Tab num value
+     * if it is -1, substitute the tab num value
+     * */
     private void checkTabNumAndCompareButtonAndMenuBar(){
         if(tab_num == -1){
             tab_num = (int)getSelectedTab().getUserData();
@@ -619,8 +622,8 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
 
     /**
-    * copy 에 관련된 버튼과 menu item 을 disable 한다.
-    * */
+     * disable buttons' related on copy and related on menu item
+     * */
     private void disableCopyButtonInToolBarAndMenuItem(){
         ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
         for(int i=0, n=toolBar.getItems().size(); i<n; i++){
@@ -655,10 +658,10 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
 
     /**
-    * Toolbar 에 있는 모든 버튼을 비활성화 시킨다.
-    * file 을 수정할 경우 compare 를 다시 해야하기에 모든 버튼을 비활성화
-    * MenuItem 중 필요 없는 것을 비활성화
-    * */
+     * disable all buttons in Toolbar
+     * If change file, it need to new compare action so every buttons are disabled
+     * disable MenuItem that don't need
+     * */
     private void disableAllButtonInToolBarAndMenuItem(){
         ToolBar toolBar = (ToolBar)compare_button.getParent().getParent();
         for(int i=0, n=toolBar.getItems().size(); i<n; i++){
@@ -673,8 +676,8 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
 
     /**
-    * TabPane 에서 현재 선택 된 tab 을 가져온다.
-    * */
+     * get now selected Tab in TabPane
+     * */
     private Tab getSelectedTab(){
         Tab tab = null;
         TabPane tabPane = (TabPane)split_pane.getParent().getParent();
@@ -687,9 +690,10 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
 
     /**
-    * ArrayList 로 들어온 문자를 \n 을 붙여 String 하나로 만든다.
-    * @param arrayList want to change string
-     * @return String result */
+     * make String with Arraylist add \n at the end of every ArrayList component
+     * @param arrayList want to change string
+     * @return String result
+     * */
     private String arrayListToString(ArrayList<String> arrayList){
         String s = new String();
         for (String s1 : arrayList) {
@@ -699,9 +703,10 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
 
     /**
-    * String 을 받아와서 \n 로 split 한 후 ArrayList 에 저장한다.
-    * @param s want to change ArrayList
-     * @return arrayList result*/
+     * make ArrayList to get String and split it with \n
+     * @param s want to change ArrayList
+     * @return arrayList<String> result
+     * */
     private ArrayList<String> stringToArrayList(String s){
         ArrayList<String> arrayList = new ArrayList<String>();
         String[] strings = s.split("\n");
@@ -712,9 +717,9 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
 
     /**
-    * 모든 List view 를 invisible 하게
-    * 모든 Text view 를 visible 하게 바꾼다.
-    * */
+     * Change every list view to invisible
+     * Change every text area to visible
+     * */
     private void invisibleListViewVisibleTextArea(){
         right_text_area.setVisible(true);
         right_text_list.setVisible(false);
@@ -725,7 +730,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
     }
 
     /**
-     * 파일 이름을 받아서 tab name 을 바꿔준다.
+     * get file name and change tab name.
      * @param position left,right
      * @param name file_name
      */
@@ -767,7 +772,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
      * check Load state
      * @param position left pane right pane
      * @throws IllegalAccessException
-     * @return true when disable state
+     * @return boolean true when disable state
      */
     public boolean isDisableLoad(String position) throws IllegalAccessException {
         if (position.equals("left")) {
@@ -785,7 +790,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
      * check Edit state
      * @param position left pane right pane
      * @throws IllegalAccessException
-     * @return true when disable state
+     * @return boolean true when disable state
      */
     public boolean isDisableEdit(String position) throws IllegalAccessException {
         if (position.equals("left")) {
@@ -804,7 +809,7 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
      * check Save state
      * @param position left pane right pane
      * @throws IllegalAccessException
-     * @return true when disable state
+     * @return boolean true when disable state
      */
     public boolean isDisableSave(String position) throws IllegalAccessException {
         if (position.equals("left")) {
