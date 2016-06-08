@@ -29,8 +29,7 @@ class ModelUnitData {
 
     /**
      * 만일 비교가 되지 않은 상태이면, group을 null로 하여 그 사실을 알아볼 수 있다.
-     *  */
-
+     */
     protected void groupNull()
     {
         group = null;

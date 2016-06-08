@@ -19,7 +19,7 @@ public interface ModelInterface {
 
     /**
      * Open new Tab.
-     * @exception IllegalArgumentException
+     * @exception IllegalArgumentException 유효하지 않은 인자가 잘못 전달 시
      * @param tabNum This is index about now working tab. if add tab tabNum++
      * */
     void newModel(int tabNum) throws IllegalArgumentException;
@@ -28,7 +28,7 @@ public interface ModelInterface {
     /**
      * close the now working tab.
      * @param tabNum This is index about we want close tab of index.
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException 유효하지 않은 인자가 잘못 전달  시
      * */
     public void closeModel(int tabNum) throws IllegalArgumentException;
 
@@ -39,7 +39,7 @@ public interface ModelInterface {
 
     /**
      * get now working tab info
-     * @throws IllegalArgumentException
+     * @throws IllegalArgumentException 유효하지 않은 인자가 잘못 전달  시
      * @param tabNum This is index about now working tab.
      * @return Modelunit
      * */
@@ -47,12 +47,12 @@ public interface ModelInterface {
 
     /**
      * bring tabnum
-     * @return ArrayList<Integer> All index return list */
+     * @return ArrayList innteger  All index return list */
     public ArrayList<Integer> getTabNums();
 
     /**
      * check tabNum -th i part file open
-     * @throws  IllegalArgumentException
+     * @throws  IllegalArgumentException 유효하지 않은 인자가 잘못 전달  시
      * @param i left : 0 right : 1
      * @param tabNum   This is index about now working tab
      * @return true if is open
@@ -61,19 +61,21 @@ public interface ModelInterface {
 
     /**
      * this bring text from tabnum-th if i == 0 left part i == 1 right part.
-     * @throws IndexOutOfBoundsException,IllegalArgumentException
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달  시
+     * @throws IllegalArgumentException 유효하지 않은 인자가 잘못 전달  시
      * @param i left : 0 right : 1
      * @param tabNum   This is index about now working tab
-     * @return ArrayList<String> text
+     * @return ArrayList_text
      */
     public ArrayList<String> getText(int tabNum, int i) throws IndexOutOfBoundsException, IllegalArgumentException;
 
     /**
      * this bring text from tabnum-th if i == 0 left part i == 1 right part.
-     * @throws IndexOutOfBoundsException,IllegalArgumentException
+     * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달  시
+     * @throws IllegalArgumentException 유효하지 않은 인자가 잘못 전달  시
      * @param i left : 0 right : 1
      * @param tabNum   This is index about now working tab
-     * @return ArrayList<String>
+     * @return ArrayList txt
      */
     public ArrayList<String> getArrangedText(int tabNum, int i) throws IndexOutOfBoundsException, IllegalArgumentException;
 

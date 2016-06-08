@@ -59,6 +59,7 @@ class ModelUnitFileIO {
     /**
      * UTF-8
      * @param f 현재 열려 있는 파일
+     * @throws IOException file에 관한 에러
      * @return convertString(UTF-8)
      * */
     static private String EncodingType(FileInputStream f) throws IOException {
@@ -123,7 +124,7 @@ class ModelUnitFileIO {
     * @param i 0 left 1 right
      * @param m ModelUnitData
      * @param s string
-     * @throws IOException fie 읽을수 없을 때 
+     * @throws IOException fie 읽을수 없을 때
      */
     static private void ReadFromOuter(String s, int i, ModelUnitData m) throws IOException {
         FileInputStream fileInputStream = new FileInputStream(s);
