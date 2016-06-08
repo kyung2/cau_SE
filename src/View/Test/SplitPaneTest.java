@@ -36,13 +36,20 @@ import static org.loadui.testfx.Assertions.assertNodeExists;
 /**
  * Gui Test for split pane
  * Created by woojin on 2016-05-17.
+ *
  * @author woojin Jang
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class SplitPaneTest extends GuiTest {
     private static final SettableFuture<Stage> stageFuture = SettableFuture.create();
 
+    /**
+     * The type Test split pane.
+     */
     protected static class TestSplitPane extends MainWindow {
+        /**
+         * Instantiates a new Test split pane.
+         */
         public TestSplitPane() {
             super();
         }
@@ -73,6 +80,9 @@ public class SplitPaneTest extends GuiTest {
         return stage.getScene().getRoot();
     }
 
+    /**
+     * Stage 0 test init button test.
+     */
     @Test
     /**
      * test for button initial stage
@@ -88,6 +98,9 @@ public class SplitPaneTest extends GuiTest {
         assertTrue(GuiTest.find("#right_save_button").isDisable());
     }
 
+    /**
+     * Stage 0 test init text area and list view.
+     */
     @Test
     /**
      * test for text area and list view initial stage
@@ -119,6 +132,9 @@ public class SplitPaneTest extends GuiTest {
         return false;
     }
 
+    /**
+     * Stage 1 test left load button.
+     */
     @Test
     /**
      * test left load button
@@ -136,6 +152,9 @@ public class SplitPaneTest extends GuiTest {
         assertFalse(GuiTest.find("#left_edit_button").isDisable());
     }
 
+    /**
+     * Stage 1 test right load button.
+     */
     @Test
     /**
      * test right load button
@@ -153,6 +172,9 @@ public class SplitPaneTest extends GuiTest {
         assertFalse(GuiTest.find("#right_edit_button").isDisable());
     }
 
+    /**
+     * Stage 2 test left edit button.
+     */
     @Test
     /**
      * test left edit button
@@ -169,6 +191,9 @@ public class SplitPaneTest extends GuiTest {
         assertFalse(GuiTest.find("#left_save_button").isDisable());
     }
 
+    /**
+     * Stage 2 test right edit button.
+     */
     @Test
     /**
      * test right edit button
@@ -185,6 +210,9 @@ public class SplitPaneTest extends GuiTest {
         assertFalse(GuiTest.find("#right_save_button").isDisable());
     }
 
+    /**
+     * Stage 3 test left save button.
+     */
     @Test
     /**
      * test left save button
@@ -211,6 +239,9 @@ public class SplitPaneTest extends GuiTest {
         assertTrue(GuiTest.find("#left_save_button").isDisable());
     }
 
+    /**
+     * Stage 3 test right save button.
+     */
     @Test
     /**
      * test right save button
@@ -237,6 +268,9 @@ public class SplitPaneTest extends GuiTest {
         assertTrue(GuiTest.find("#right_save_button").isDisable());
     }
 
+    /**
+     * Stage 4 test binding list view scroll bar.
+     */
     @Test
     /**
      * test list view scroll
@@ -289,6 +323,9 @@ public class SplitPaneTest extends GuiTest {
         click("#compare_button");
     }
 
+    /**
+     * Stage 4 test list view clicked.
+     */
     @Test
     /**
      * test list view click

@@ -15,14 +15,16 @@ import java.io.IOException;
  * this class is designed with AlarmWindow.fxml file in /View/Fxml package
  * this class is related on AlarmController class in /Controller package
  * Created by woojin on 2016-05-19.
+ *
  * @author Woonjin Jang
  */
 public class AlarmWindow extends Stage {
     /**
      * Constructure
+     *
      * @param title Title for alarm
      * @param label Content for alarm,
-     **/
+     */
     public AlarmWindow(String title, String label) {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/Fxml/AlarmWindow.fxml"));

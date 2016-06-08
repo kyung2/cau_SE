@@ -11,12 +11,12 @@ import javafx.stage.Stage;
  * MainWindow
  * this class is the main class for our application
  * It is designed by MainWindow.fxml file in /View/Fxml package
- *                              and MainWindow.css file in /View/Css package
+ * and MainWindow.css file in /View/Css package
  * It is related on MainController in /Controller package
  * Created by woojin on 2016-05-16.
+ *
  * @author Woonjin Jang
  */
-
 public class MainWindow extends Application {
 
     @Override
@@ -30,6 +30,11 @@ public class MainWindow extends Application {
 
     }
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         launch(args);
     }

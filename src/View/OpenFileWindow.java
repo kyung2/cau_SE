@@ -7,16 +7,17 @@ import javafx.scene.control.Tab;
  * Open FileWindow
  * this class is related on OpenFileWindowController in /Controller class
  * Created by woojin on 2016-05-16.
+ *
  * @author Woonjin Jang
  */
-
 public class OpenFileWindow extends AbstractFileWindow {
     private static boolean file_num = true;
 
     /**
-    * Constructure with Tab
-    * @param tab : transfer tab to controller. tab is used for get component in tab
-    **/
+     * Constructure with Tab
+     *
+     * @param tab : transfer tab to controller. tab is used for get component in tab
+     */
     public OpenFileWindow(Tab tab) {
         super("Open Files", new OpenFileWindowController());
         if(file_num) {

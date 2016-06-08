@@ -199,8 +199,8 @@ public class MainController implements Initializable, MainInterface {
             model.mergeByGroup(now_tab_num, text_block_index+(model.getArrangedGroupSpace(now_tab_num).get(0)==0?1:0), false);
             left_status.addStatus("Copy to left");
             right_status.addStatus("Copy to left");
-            left_status.setMeueFlag();
-            right_status.setMeueFlag();
+            left_status.setMenuFlag();
+            right_status.setMenuFlag();
             saveButtonMenuItem("left",true);
         }
          catch (MergeLineIllegalException e) {
@@ -224,8 +224,8 @@ public class MainController implements Initializable, MainInterface {
             model.mergeByGroup(now_tab_num, text_block_index+(model.getArrangedGroupSpace(now_tab_num).get(0)==0?1:0), true);
             left_status.addStatus("Copy to right");
             right_status.addStatus("Copy to right");
-            left_status.setMeueFlag();
-            right_status.setMeueFlag();
+            left_status.setMenuFlag();
+            right_status.setMenuFlag();
             saveButtonMenuItem("right",true);
         }
         catch (MergeLineIllegalException e) {
@@ -247,8 +247,8 @@ public class MainController implements Initializable, MainInterface {
 
         left_status.addStatus("Copy to left All");
         right_status.addStatus("Copy to left All");
-        left_status.setMeueFlag();
-        right_status.setMeueFlag();
+        left_status.setMenuFlag();
+        right_status.setMenuFlag();
         saveButtonMenuItem("left",true);
 
         left_text_area.setText(arrayListToString(model.getText(now_tab_num, 1)));
@@ -266,8 +266,8 @@ public class MainController implements Initializable, MainInterface {
 
         left_status.addStatus("Copy to right All");
         right_status.addStatus("Copy to right All");
-        left_status.setMeueFlag();
-        right_status.setMeueFlag();
+        left_status.setMenuFlag();
+        right_status.setMenuFlag();
         saveButtonMenuItem("right",true);
 
         right_text_area.setText(arrayListToString(model.getText(now_tab_num, 0)));

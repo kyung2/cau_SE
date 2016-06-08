@@ -22,7 +22,13 @@ import static org.loadui.testfx.GuiTest.targetWindow;
 public class ProgramInfoWindowTest extends GuiTest {
     private static final SettableFuture<Stage> stageFuture = SettableFuture.create();
 
+    /**
+     * The type Test program info window.
+     */
     protected static class TestProgramInfoWindow extends MainWindow {
+        /**
+         * Instantiates a new Test program info window.
+         */
         public TestProgramInfoWindow() {
             super();
         }
@@ -53,6 +59,9 @@ public class ProgramInfoWindowTest extends GuiTest {
         return stage.getScene().getRoot();
     }
 
+    /**
+     * Test open program info window.
+     */
     @Test
     public void testOpenProgramInfoWindow(){
         click("#help_and_info_menu");
@@ -60,6 +69,9 @@ public class ProgramInfoWindowTest extends GuiTest {
         click("#info_btn");
     }
 
+    /**
+     * Test key code.
+     */
     @Test
     public void testKeyCode(){
         type(KeyCode.F10);

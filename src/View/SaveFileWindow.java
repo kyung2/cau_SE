@@ -7,15 +7,17 @@ import javafx.scene.control.Tab;
  * SaveFileWindow
  * this class is related on SaveFileWindowController in /Controller package
  * Created by woojin on 2016-05-16.
+ *
  * @author Woonjin Jang
  */
 public class SaveFileWindow extends AbstractFileWindow {
     private static boolean file_num = true;
 
-   /**
-   * Constructure with Tab.
-   * @param tab : transfer tab to controller. tab is used for get component in tab
-   * */
+    /**
+     * Constructure with Tab.
+     *
+     * @param tab : transfer tab to controller. tab is used for get component in tab
+     */
     public SaveFileWindow(Tab tab) {
         super("Save Files", new SaveFileWindowController());
 

@@ -29,6 +29,7 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
      * initial action when click cancel button*@param title make alarm window
      * @param content make alarm window
      * @param stage stage for close file window
+     * @param title name
      * */
     void initCancelButtonAction(String title, String content, Stage stage){
         AlarmWindow exitAlarmWindow = new AlarmWindow(title, content);
@@ -40,7 +41,8 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
     /** Change tab's name when open or save file
      * @param position 0 : left 1:right
      * @param name adjust tab name to file name
-     * @param tab which tab*/
+     * @param tab which tab
+     * */
     void changeTabName(Tab tab, String name, String position){
         String tab_name = tab.getText();
         String left_file_name = null;
@@ -76,6 +78,8 @@ abstract class FileWindowAbstractClass implements FileWindowInterface {
     }
 
     /** Make custom file chooser
+     * @param title filechooser namesetting
+     * @return filechooser
      */
     FileChooser customFileChooser(String title){
         FileChooser fileChooser = new FileChooser();

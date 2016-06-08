@@ -32,7 +32,13 @@ import static org.loadui.testfx.Assertions.assertNodeExists;
 public class MainWindowTest extends GuiTest {
     private static final SettableFuture<Stage> stageFuture = SettableFuture.create();
 
+    /**
+     * The type Test main window.
+     */
     protected static class TestMainWindow extends MainWindow {
+        /**
+         * Instantiates a new Test main window.
+         */
         public TestMainWindow() {
             super();
         }
@@ -63,6 +69,9 @@ public class MainWindowTest extends GuiTest {
         return stage.getScene().getRoot();
     }
 
+    /**
+     * Stage 0 test init tool bar button setting.
+     */
     @Test
     public void stage0_testInitToolBarButtonSetting(){
         assertTrue(GuiTest.find("#compare_button").isDisable());
@@ -79,6 +88,9 @@ public class MainWindowTest extends GuiTest {
         //버튼이 모두 disable 인지 test
     }
 
+    /**
+     * Stage 0 test init file menu test.
+     */
     @Test
     public void stage0_testInitFileMenuTest(){
         click("#file_menu");
@@ -99,6 +111,9 @@ public class MainWindowTest extends GuiTest {
         click("#file_menu");
     }
 
+    /**
+     * Stage 0 test init merge menu test.
+     */
     @Test
     public void stage0_testInitMergeMenuTest(){
         click("#merge_menu");
@@ -127,6 +142,9 @@ public class MainWindowTest extends GuiTest {
         click("#merge_menu");
     }
 
+    /**
+     * Stage 1 test open window.
+     */
     @Test
     public void stage1_testOpenWindow(){
         String file = "test-load.txt";
@@ -175,6 +193,9 @@ public class MainWindowTest extends GuiTest {
         press(KeyCode.CONTROL).type(KeyCode.O).release(KeyCode.CONTROL);
     }
 
+    /**
+     * Stage 2 test left save menu item.
+     */
     @Test
     public void stage2_testLeftSaveMenuItem(){
         if(GuiTest.find("#left_save_button").isDisable()){
@@ -217,6 +238,9 @@ public class MainWindowTest extends GuiTest {
         type("Test").type(KeyCode.ENTER);
     }
 
+    /**
+     * Stage 2 test right save menu item.
+     */
     @Test
     public void stage2_testRightSaveMenuItem(){
         if(GuiTest.find("#right_save_button").isDisable()){
@@ -254,6 +278,9 @@ public class MainWindowTest extends GuiTest {
         type("test-load.txt").type(KeyCode.ENTER);
     }
 
+    /**
+     * Stage 2 test save as menu item.
+     */
     @Test
     public void stage2_testSaveAsMenuItem(){
 
@@ -324,12 +351,19 @@ public class MainWindowTest extends GuiTest {
             click("#right_edit_button");
         }
     }
+
+    /**
+     * Stage 2 test saved file.
+     */
     @Test
     public void stage2_testSavedFile(){
         assertTrue(((Label)GuiTest.find("#left_file_label")).getText().equals("test-save1.txt"));
         assertTrue(((Label)GuiTest.find("#right_file_label")).getText().equals("test-save2.txt"));
     }
 
+    /**
+     * Stage 3 test compare action.
+     */
     @Test
     public void stage3_testCompareAction() {
         initForCompare();
@@ -361,6 +395,9 @@ public class MainWindowTest extends GuiTest {
         loadRightFileForCompare();
     }
 
+    /**
+     * Stage 4 test next difference action.
+     */
     @Test
     public void stage4_testNextDifferenceAction() {
         initForDifference();
@@ -387,6 +424,9 @@ public class MainWindowTest extends GuiTest {
         click("#compare_button");
     }
 
+    /**
+     * Stage 4 test previous difference action.
+     */
     @Test
     public void stage4_testPreviousDifferenceAction() {
         initForDifference();
@@ -411,6 +451,9 @@ public class MainWindowTest extends GuiTest {
         press(KeyCode.CONTROL).type(KeyCode.U).release(KeyCode.CONTROL);
     }
 
+    /**
+     * Stage 4 test first difference action.
+     */
     @Test
     public void stage4_testFirstDifferenceAction() {initForDifference();
         initForDifference();
@@ -435,6 +478,9 @@ public class MainWindowTest extends GuiTest {
         press(KeyCode.CONTROL).type(KeyCode.F).release(KeyCode.CONTROL);
     }
 
+    /**
+     * Stage 4 test now difference action.
+     */
     @Test
     public void stage4_testNowDifferenceAction() {
         initForDifference();
@@ -459,6 +505,9 @@ public class MainWindowTest extends GuiTest {
         press(KeyCode.CONTROL).type(KeyCode.N).release(KeyCode.CONTROL);
     }
 
+    /**
+     * Stage 4 test last difference action.
+     */
     @Test
     public void stage4_testLastDifferenceAction() {
         initForDifference();
@@ -479,6 +528,9 @@ public class MainWindowTest extends GuiTest {
         press(KeyCode.CONTROL).type(KeyCode.L).release(KeyCode.CONTROL);
     }
 
+    /**
+     * Stage 5 test copy to right action.
+     */
     @Test
     public void stage5_testCopyToRightAction() {
         initForMerge();
@@ -509,6 +561,9 @@ public class MainWindowTest extends GuiTest {
         press(KeyCode.ALT).type(KeyCode.R).release(KeyCode.ALT);
     }
 
+    /**
+     * Stage 5 test copy to left action.
+     */
     @Test
     public void stage5_testCopyToLeftAction() {
         initForMerge();
@@ -535,6 +590,9 @@ public class MainWindowTest extends GuiTest {
         press(KeyCode.ALT).type(KeyCode.L).release(KeyCode.ALT);
     }
 
+    /**
+     * Stage 5 test copy to right all action.
+     */
     @Test
     public void stage5_testCopyToRightAllAction() {
         initForMerge();
@@ -563,6 +621,9 @@ public class MainWindowTest extends GuiTest {
         press(KeyCode.CONTROL).press(KeyCode.SHIFT).type(KeyCode.R).release(KeyCode.CONTROL).release(KeyCode.SHIFT);
     }
 
+    /**
+     * Stage 5 test copy to left all action.
+     */
     @Test
     public void stage5_testCopyToLeftAllAction() {
         initForMerge();
@@ -592,6 +653,9 @@ public class MainWindowTest extends GuiTest {
         press(KeyCode.CONTROL).press(KeyCode.SHIFT).type(KeyCode.L).release(KeyCode.CONTROL).release(KeyCode.SHIFT);
     }
 
+    /**
+     * Stage 6 test new tab menu item.
+     */
     @Test
     public void stage6_testNewTabMenuItem(){
         int tab_num = ((TabPane)GuiTest.find("#tab_pane")).getTabs().size();
@@ -606,6 +670,9 @@ public class MainWindowTest extends GuiTest {
         press(KeyCode.CONTROL).type(KeyCode.T).release(KeyCode.CONTROL);
     }
 
+    /**
+     * Stage 6 test chang tab menu item.
+     */
     @Test
     public void stage6_testChangTabMenuItem(){
         testNewTabHotKey();
@@ -622,6 +689,9 @@ public class MainWindowTest extends GuiTest {
         assertTrue(index == 1);
     }
 
+    /**
+     * Stage 7 test close tab menu item.
+     */
     @Test
     public void stage7_testCloseTabMenuItem(){
         testNewTabHotKey();
@@ -639,6 +709,9 @@ public class MainWindowTest extends GuiTest {
         press(KeyCode.CONTROL).type(KeyCode.W).release(KeyCode.CONTROL);
     }
 
+    /**
+     * Stage 8 test close tab all menu item.
+     */
     @Test
     public void stage8_testCloseTabAllMenuItem(){
         testNewTabHotKey();

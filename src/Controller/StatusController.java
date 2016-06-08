@@ -3,17 +3,24 @@ package Controller;
 import javafx.scene.control.TextArea;
 
 /**
- * Created by haro21 on 2016. 6. 4..
+ * Logging user Actions.
+ * Created by hyunkyung on 2016. 6. 4..
+ * @author hyunkyung
  */
+
 public class StatusController {
     private TextArea area;
     private String name;
-    private boolean meue_flag = false;
+    private boolean menu_flag = false;
 
 
+    /**
+     * add status
+     * @param str action component name
+     * */
     public void addStatus(String str){
-        if(meue_flag) {
-            meue_flag = false;
+        if(menu_flag) {
+            menu_flag = false;
             return;
         }
         String txt = area.getText();
@@ -22,13 +29,19 @@ public class StatusController {
         area.setText(txt);
     }
 
-    public void setMeueFlag(){
-        this.meue_flag = true;
+    /**
+     * setting menuFlag
+     */
+    public void setMenuFlag(){
+        this.menu_flag = true;
     }
 
+    /**
+     * addStatuswithname
+     * @param str action component name*/
     public void addStatusWithName(String str){
-        if(meue_flag) {
-            meue_flag = false;
+        if(menu_flag) {
+            menu_flag = false;
             return;
         }
         String txt = area.getText();
@@ -37,6 +50,8 @@ public class StatusController {
         area.setText(txt);
     }
 
+    /**
+     * @param str */
     public void setFileName(String str){
         this.name = str;
     }
