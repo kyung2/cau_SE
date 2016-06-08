@@ -3,6 +3,7 @@ package Model.ModelUnit.LCSsupport;
 import java.util.ArrayList;
 
 /**
+ * @see Model.ModelUnit.LCSsupport.LCSSupportUnit
  * LCS Algorithm
  * @author Chanwoo Park
  */

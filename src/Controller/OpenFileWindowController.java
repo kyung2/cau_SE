@@ -280,7 +280,7 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
         if(!left_save.isDisable() && !right_save.isDisable()) save_menu_item.setDisable(false);
     }
 
-    /*
+    /**
     * compare 버튼의 조건을 검사하고 활성화 or 비활성화
     * */
     private void checkCompareButtonAndMenuItem(){

@@ -45,6 +45,7 @@ public interface LCSSupportUnit {
      * @param aaa 기존의 그룹 관련 정보
      * @param index 병합되는 줄
      * @param dir 병합 방향, true : left->right false right->left
+     *  @return 그룹 정보 단위를 반환
      * */
     public ArrayList<Integer>[] whenMerge(ArrayList<Integer>[][] aaa, int index, boolean dir);
 }

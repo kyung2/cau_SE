@@ -3,9 +3,6 @@ package Model.ModelUnit.LCSsupport;
 
 import java.util.ArrayList;
 
-/**
- * Created by User on 2016-05-20.
- */
 
 /**
  * 두 텍스트의 비교만을 위하여 만들어진, 백트래킹 행렬에서 그룹 관련 정보를 얻어내기 위한 패키지의
