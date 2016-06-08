@@ -494,21 +494,25 @@ public class SplitFilePaneController implements Initializable, SplitFilePaneInte
         previous_difference_button.setDisable(!pre);
     }
 
-    /*
+    /**
     *  next difference 의 able / disable
+     *  @param next
     * */
     private void nextDifferenceButtonAndMenuItem(boolean next){
         next_menu_item.setDisable(!next);
         next_difference_button.setDisable(!next);
     }
 
-    /*
+    /**
     * file pane 버튼의 able 과 disable 을 해준다.
     * position 에 left 와 right 를 통해서 위치를 선택
     * 각각 load, edit, save에 true || false 를 통해서 able 과 disable 을 한다.
     * null 일 경우 그 버튼은 현상 유지
     * 버튼들과 연관된 menu item 의 활성화와 비활성화를 조절
-    * */
+    * @param position
+     * @param load
+     * @param edit
+     * @param save */
     private void setClickableButtons(String position, String load, String edit, String save){
         boolean f_load, f_edit, f_save;
         f_load = load == "true" ? true : false;
