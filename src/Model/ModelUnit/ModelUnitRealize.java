@@ -51,7 +51,7 @@ public class ModelUnitRealize implements ModelUnit{
     }
 
     /**
-     * 재배열된 i번째 텍스트를 i번째 텍스트를 ArrayList<String>형으로 반환한다.
+     * 재배열된 i번째 텍스트를 i번째 텍스트를 ArrayList str형으로 반환한다.
      * i가 0 또는 1이 아닐 때 IndexOutOfBoundsException 발생.
      * @param i 0 left 1 right
      * @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
@@ -62,7 +62,7 @@ public class ModelUnitRealize implements ModelUnit{
     }
 
     /**
-     *  재배열된 텍스트의 줄 수 번째의 줄이 어느 그룹에 속하는지를 ArrayList<Integer>형으로 반환한다.
+     *  재배열된 텍스트의 줄 수 번째의 줄이 어느 그룹에 속하는지를 ArrayList int 형으로 반환한다.
      *  @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
      *  @return arraylist_integerType  ModelUnitGetSet.getArrangGroup(m)
      */
@@ -71,7 +71,7 @@ public class ModelUnitRealize implements ModelUnit{
     }
 
     /**
-     *  비교된 그룹의 앞에서부터 나오는 번째 번의 그룹이 몇 개의 줄을 포함하는지를 ArrayList<Integer>형으로 반환한다.
+     *  비교된 그룹의 앞에서부터 나오는 번째 번의 그룹이 몇 개의 줄을 포함하는지를 ArrayList int형으로 반환한다.
      *  @throws IndexOutOfBoundsException 유효하지 않은 인자가 잘못 전달 시
      *  @return ModelUnitGetSet.getArrangedGroupSpace(m)
     */
