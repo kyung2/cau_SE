@@ -3,7 +3,8 @@ package Model.ModelUnit.LCSsupport;
 import java.util.ArrayList;
 
 /**
- * Created by User on 2016-05-20.
+ * LCS Algorithm
+ * @author Chanwoo Park
  */
 public class LCSArrangeLine_sGroupNum implements LCSSupport {
 
