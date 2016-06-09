@@ -51,8 +51,9 @@ public class MainController implements Initializable, MainInterface {
     private StatusController left_status, right_status;
 
     private ArrayList<String[]> toolbar_stage = new ArrayList<String[]>();
+    private ArrayList<boolean[]> file_menu_stage = new ArrayList<boolean[]>();
     private int tab_num, now_tab_num, tab_menu_item_num, close_tab_num;
-
+    private boolean tab_num_change_flag = false;
     private int text_block_index;
     ImageIcon img = new ImageIcon("/View/Image/sampleIcon.jpg");
 
@@ -81,7 +82,7 @@ public class MainController implements Initializable, MainInterface {
 
         setClickableButtonsAndMenuItems("false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
         toolbar_stage.add(new String[]{"false", "false", "false", "false", "false", "false", "false", "false", "false", "false"});
-
+        file_menu_stage.add(new boolean[]{true,false,false,false});
         left_text_list = null;
         right_text_list = null;
         left_text_area = null;
@@ -101,13 +102,18 @@ public class MainController implements Initializable, MainInterface {
                         String[] stage = makeToolbarStage();
                         now_tab = t1;
                         toolbar_stage.set(now_tab_num, stage);
+                        file_menu_stage.set(now_tab_num, new boolean[]{!open_menu_item.isDisable(), !save_menu_item.isDisable(), !save_left_file_menu_item.isDisable(), !save_right_file_menu_item.isDisable()});
                         close_tab_num = now_tab_num;
+                        tab_num_change_flag = true;
                         now_tab_num = (int) now_tab.getUserData();
                         System.out.println("Change now tab num "+ close_tab_num +" to " + now_tab_num);
                         setClickableButtonsAndMenuItems(toolbar_stage.get(now_tab_num)[0], toolbar_stage.get(now_tab_num)[1], toolbar_stage.get(now_tab_num)[2],
                                 toolbar_stage.get(now_tab_num)[3], toolbar_stage.get(now_tab_num)[4], toolbar_stage.get(now_tab_num)[5],
                                 toolbar_stage.get(now_tab_num)[6], toolbar_stage.get(now_tab_num)[7], toolbar_stage.get(now_tab_num)[8], toolbar_stage.get(now_tab_num)[9]);
-
+                        open_menu_item.setDisable(!file_menu_stage.get(now_tab_num)[0]);
+                        save_menu_item.setDisable(!file_menu_stage.get(now_tab_num)[1]);
+                        save_left_file_menu_item.setDisable(!file_menu_stage.get(now_tab_num)[2]);
+                        save_right_file_menu_item.setDisable(!file_menu_stage.get(now_tab_num)[3]);
                         initTextAreaAndListOnTab();
                     } else {
                         setClickableButtonsAndMenuItems("false", "false", "false", "false", "false", "false", "false", "false", "false", "false");
@@ -442,6 +448,7 @@ public class MainController implements Initializable, MainInterface {
             new_tab.setUserData(++tab_num);
             new_tab.setOnClosed(e -> tabCloseAction());
             toolbar_stage.add(new String[]{"false", "false", "false", "false", "false", "false", "false", "false", "false", "false"});
+            file_menu_stage.add(new boolean[]{true,false,false,false});
             tab_pane.getTabs().add(new_tab);
             MenuItem tab_menuitem = new MenuItem("Tab " + ++tab_menu_item_num);
             tab_menu.getItems().add(tab_menuitem);
@@ -556,9 +563,7 @@ public class MainController implements Initializable, MainInterface {
      * 창을 닫는다.
      * */
     public void closeMenuItemOnAction() {
-
         ((Stage) (main_pane.getScene().getWindow())).close();// 종료 method
-        System.out.println("");
     }
 
     @FXML
@@ -596,8 +601,13 @@ public class MainController implements Initializable, MainInterface {
     * 해당하는 모델을 닫는다.
     * */
     public void tabCloseAction() {
+        if(!tab_num_change_flag){
+            close_tab_num = now_tab_num;
+        }
+        tab_num_change_flag = false;
         System.out.println("Close tab num " + (close_tab_num));
         toolbar_stage.set(close_tab_num, null);
+        file_menu_stage.set(close_tab_num, null);
         tab_menu.getItems().remove(tab_menu_item_num + 1);
         tab_menu_item_num--;
         Model.ModelInterface model = ModelRealize.getInstance();
@@ -616,6 +626,14 @@ public class MainController implements Initializable, MainInterface {
         close_tab_num = now_tab_num;
         tabCloseAction();
         ((TabPane) now_tab.getTabPane()).getTabs().remove(now_tab);
+        System.out.println(tab_pane.getTabs().size());
+        if(tab_pane.getTabs().size() == 0){
+            setClickableButtonsAndMenuItems("false","false","false","false","false","false","false","false","false","false");
+            open_menu_item.setDisable(true);
+            save_menu_item.setDisable(true);
+            save_left_file_menu_item.setDisable(true);
+            save_right_file_menu_item.setDisable(true);
+        }
     }
 
     @FXML
