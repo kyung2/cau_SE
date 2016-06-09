@@ -12,10 +12,9 @@ import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2016-06-01.
+ * @author Soyong
  */
-
 //사이즈에 문제있으면 left_list_item size 얻어오는 get함수 이용할 것
-
 
 public class JMainControllerTest {
 
