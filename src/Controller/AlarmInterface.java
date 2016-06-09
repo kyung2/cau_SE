@@ -2,7 +2,7 @@ package Controller;
 
 /**
  * Interface for AlarmWindowController
- * Created by woojin on 2016-05-31.
+ * Created by woojin on 2016-05-13.
  * @author woojin Jang
  */
 interface AlarmInterface {

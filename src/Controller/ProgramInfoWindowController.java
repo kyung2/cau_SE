@@ -6,7 +6,8 @@ import javafx.stage.Stage;
 
 /**
  * Controller for programInformationWindow
- *@author woojin
+ * Created by woojin on 2016-05-16.
+ * @author woojin
  */
 public class ProgramInfoWindowController implements programInfoInterface{
     @FXML

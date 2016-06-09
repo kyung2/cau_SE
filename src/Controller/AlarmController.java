@@ -9,7 +9,7 @@ import javafx.stage.Stage;
  * Alarm window's controller
  * If click yes button it has true value in user data
  * If click no button it has false value in user data
- * Created by woojin on 2016-05-19.
+ * Created by woojin on 2016-05-18.
  * @author woojin Jang
  */
 public class AlarmController implements AlarmInterface {
