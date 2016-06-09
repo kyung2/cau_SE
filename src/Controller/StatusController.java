@@ -7,7 +7,6 @@ import javafx.scene.control.TextArea;
  * Created by hyunkyung on 2016. 6. 4..
  * @author hyunkyung
  */
-
 public class StatusController {
     private TextArea area;
     private String name;

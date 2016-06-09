@@ -26,7 +26,9 @@ import static org.junit.Assume.assumeTrue;
 import static org.loadui.testfx.Assertions.assertNodeExists;
 
 /**
+ * test MainWindow.
  * Created by woojin on 2016-05-17.
+ * @author Woongjin
  */
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class MainWindowTest extends GuiTest {

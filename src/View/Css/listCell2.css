@@ -1,7 +1,4 @@
-/**
-    * CSS Change background color when USER all mouse action for compare result.
-    *
-    */
+/*CSS Change background color when USER all mouse action for compare result.*/
 /*compare 하고 나서의 text 창 색깔 */
 .list-cell {
     -fx-alignment: top_left;

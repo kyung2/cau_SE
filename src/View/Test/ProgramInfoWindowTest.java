@@ -18,6 +18,7 @@ import static org.loadui.testfx.GuiTest.targetWindow;
 
 /**
  * Created by woojin on 2016-06-02.
+ * @author woongin
  */
 public class ProgramInfoWindowTest extends GuiTest {
     private static final SettableFuture<Stage> stageFuture = SettableFuture.create();
