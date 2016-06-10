@@ -48,7 +48,7 @@ public class SplitPaneTest extends GuiTest {
      */
     protected static class TestSplitPane extends MainWindow {
         /**
-         * Instantiates a new Test split pane.
+         * Instantia9tes a new Test split pane.
          */
         public TestSplitPane() {
             super();

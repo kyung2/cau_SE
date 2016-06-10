@@ -60,9 +60,9 @@
     -fx-background-image: url("/View/Image/copy_left.png");
 }
 #copy_to_right_all_button {
-    -fx-background-image: url("/View/Image/copy_all_Right.png");
+    -fx-background-image: url("/View/Image/copy_all_right.png");
 }
 #copy_to_left_all_button {
-    -fx-background-image: url("/View/Image/copy_all_Left.png");
+    -fx-background-image: url("/View/Image/copy_all_left.png");
 }
 
