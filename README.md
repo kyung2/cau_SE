@@ -1,4 +1,6 @@
 # swproject
+Making Simple Merge Program like Winmerge
+
 ## Program Environment
 * OS : Window 10.1
 * Language : JAVA , FXML , CSS
@@ -8,8 +10,6 @@
 * Support Tool : WinChm
 * Testing Tool : EasyMock, JUnit, TestFX
             
-
-
 ##Team Member 
 * 장우진 20145736
 * 김소영 20146420
