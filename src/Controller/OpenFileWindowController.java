@@ -38,9 +38,8 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
 
     private boolean item_flag = false, left_file_chooser_flag = true, right_file_chooser_flag = true;
 
-    private String fileRightname = "";
-    private String fileLeftname = "";
-
+    private File right_file, left_file;
+    private boolean right_file_flag = false, left_file_flag = false;
     private StatusController left_status, right_status;
 
     @FXML
@@ -56,22 +55,16 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
         if(left_file_chooser_flag) {
             int tab_num = (int) tab.getUserData();
             FileChooser fileChooser = super.customFileChooser("Left File FileChooser");
+
             try {
                 left_file_chooser_flag = false;
-                File file = fileChooser.showOpenDialog(null);
+                left_file = fileChooser.showOpenDialog(null);
                 left_file_chooser_flag = true;
-
-                Model.ModelInterface model = ModelRealize.getInstance();
-                model.readTextOuter(tab_num, file.getAbsolutePath(), 0);
-
-                //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
-                left_file_text_area.setText(file.getAbsolutePath());
-                fileLeftname = file.getName();
-                warning_info_text_area.setText("Select " + fileLeftname);
+                left_file_flag = true;
+                left_file_text_area.setText(left_file.getAbsolutePath());
+                warning_info_text_area.setText("Select " + left_file.getName());
             } catch (NullPointerException e) {
                 warning_info_text_area.setText("Select No Left File");
-            } catch (IOException e) {
-                e.printStackTrace();
             }
             tab_num = (int) tab.getUserData();
         }
@@ -95,20 +88,13 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
             FileChooser fileChooser = super.customFileChooser("Right File FileChooser");
             try {
                 right_file_chooser_flag = false;
-                File file = fileChooser.showOpenDialog(null);
+                right_file = fileChooser.showOpenDialog(null);
                 right_file_chooser_flag = true;
-
-                Model.ModelInterface model = ModelRealize.getInstance();
-                model.readTextOuter(tab_num, file.getAbsolutePath(), 1);
-
-                //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
-                right_file_text_area.setText(file.getAbsolutePath());
-                fileRightname = file.getName();
-                warning_info_text_area.setText("Select " + fileRightname);
+                right_file_flag = true;
+                right_file_text_area.setText(right_file.getAbsolutePath());
+                warning_info_text_area.setText("Select " + right_file.getName());
             } catch (NullPointerException e) {
                 warning_info_text_area.setText("Select No Right File");
-            } catch (IOException e) {
-                e.printStackTrace();
             }
         }
         else{
@@ -139,23 +125,46 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
         right_list_view.setDisable(true);
         ModelInterface modelInterface = ModelRealize.getInstance();
         //탭의 패널 이름 변경
-        if(!fileLeftname.equals("")) {
-            left_text_area.setText(arrayListToString(modelInterface.getText(tab_num, 0)));
-            left_file_label.setText(fileLeftname);
-            super.changeTabName(tab, fileLeftname,"left");
+        if(left_file_flag) {
+            try {
+                Model.ModelInterface model = ModelRealize.getInstance();
+                model.readTextOuter(tab_num, left_file.getAbsolutePath(), 0);
 
-            left_status.setFileName(fileLeftname);
-            left_status.addStatusWithName("File open");
-            setClickableButtonsInFilePane("left","true","true","false");
+                //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
+                left_file_text_area.setText(left_file.getAbsolutePath());
+                String fileLeftname = left_file.getName();
+
+                left_text_area.setText(arrayListToString(modelInterface.getText(tab_num, 0)));
+                left_file_label.setText(fileLeftname);
+                super.changeTabName(tab, fileLeftname, "left");
+
+                left_status.setFileName(fileLeftname);
+                left_status.addStatusWithName("File open");
+                setClickableButtonsInFilePane("left", "true", "true", "false");
+            }catch (IOException e){
+                e.printStackTrace();
+            }
         }
-        if(!fileRightname.equals("")) {
-            right_text_area.setText(arrayListToString(modelInterface.getText(tab_num, 1)));
-            right_file_label.setText(fileRightname);
-            super.changeTabName(tab, fileRightname,"right");
+        if(right_file_flag) {
+            try{
+                Model.ModelInterface model = ModelRealize.getInstance();
+                model.readTextOuter(tab_num, right_file.getAbsolutePath(), 1);
 
-            right_status.setFileName(fileRightname);
-            right_status.addStatusWithName("File open");
-            setClickableButtonsInFilePane("right","true","true","false");
+                //파일을 찾았으면 파일을 열어두고 표시창에 파일의 이름을 표시한다
+                right_file_text_area.setText(right_file.getAbsolutePath());
+                String fileRightname = right_file.getName();
+
+                right_text_area.setText(arrayListToString(modelInterface.getText(tab_num, 1)));
+                right_file_label.setText(fileRightname);
+                super.changeTabName(tab, fileRightname,"right");
+
+                right_status.setFileName(fileRightname);
+                right_status.addStatusWithName("File open");
+                setClickableButtonsInFilePane("right","true","true","false");
+
+            } catch (IOException e){
+                e.printStackTrace();
+            }
 
         }
         checkCompareButtonAndMenuItem();
@@ -171,7 +180,7 @@ public class OpenFileWindowController extends FileWindowAbstractClass {
     public void cancelButtonOnAction(){
         Stage stage = (Stage)file_anchor_pane.getScene().getWindow();
 
-        if(!fileLeftname.equals("") || !fileRightname.equals("")) {
+        if(left_file_flag || right_file_flag) {
            super.initCancelButtonAction("Open File Alarm", "Wouldn't you open this file?", stage);
         }
         else{
