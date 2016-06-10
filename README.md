@@ -4,12 +4,9 @@
 * Language : JAVA , FXML , CSS
 * JAVA JDK Version : JDK v.1.8.0_91
 * IDE : IntelliJ IDEA
-* GUI TOOL : BooTStrap 3.0
-             Scene Builder 2.0
-* Support Tool : WinChm (Making Helper)
-* Testing Tool : EasyMock
-                 JUnit
-                 TestFX
+* GUI TOOL : BooTStrap 3.0, Scene Builder 2.0
+* Support Tool : WinChm
+* Testing Tool : EasyMock, JUnit, TestFX
             
 
 
